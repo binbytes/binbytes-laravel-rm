@@ -37,7 +37,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users'
+        ]);
+
+        Client::create($request->all());
+
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
+        return redirect('/clients');
     }
 
     /**

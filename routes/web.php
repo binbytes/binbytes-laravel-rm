@@ -21,4 +21,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/clients', 'ClientController@index');
+    Route::post('/clients', 'ClientController@store');
 });

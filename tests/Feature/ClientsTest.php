@@ -27,4 +27,16 @@ class ClientsTest extends TestCase
             ->assertSee($client->name)
             ->assertSee($client->email);
     }
+
+    /** @test */
+    // Allow all users to create client for now, later on we will decide role
+    public function an_user_can_create_client()
+    {
+        $this->be($user = factory('App\User')->create());
+
+        $client = factory('App\Client')->raw();
+
+        $this->json('POST', '/clients', $client)
+            ->assertStatus(200);
+    }
 }
