@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -35,13 +36,8 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'avatar' => 'image'
-        ]);
-
         $data = $request->all();
         if(request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
@@ -81,13 +77,24 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  ClientRequest  $request
+     * @param  Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, Client $client)
     {
-        //
+        $data = $request->all();
+        if(request()->hasFile('avatar')) {
+            $data['avatar'] = $this->uploadFile();
+        }
+
+        $client->fill($data)->save();
+
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
+        return redirect('/clients');
     }
 
     /**
