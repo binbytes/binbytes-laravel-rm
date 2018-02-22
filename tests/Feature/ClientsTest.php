@@ -26,7 +26,7 @@ class ClientsTest extends TestCase
         $client = factory('App\Client')->create();
 
         $this->get('/clients')
-            ->assertSee($client->name)
+            ->assertSee(htmlentities($client->name))
             ->assertSee($client->email);
     }
 

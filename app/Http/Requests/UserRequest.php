@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'avatar' => 'image',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:3',
-            'dob' => 'required',
+            'dob' => 'required|date',
             'address' => 'required',
             'mobile_no' => 'required',
             'role' => 'required'
