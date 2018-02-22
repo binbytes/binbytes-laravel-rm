@@ -5,9 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">
-                        Clients
-                        <a href="/clients/create" class="btn btn-primary">Add</a>
+                    <div class="card-header d-flex">
+                        <h4>Clients</h4>
+
+                        <a href="/clients/create" class="btn btn-primary ml-auto">
+                            Add
+                        </a>
                     </div>
 
                     <div class="card-body">
