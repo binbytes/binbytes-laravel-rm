@@ -77,6 +77,9 @@ class ClientsTest extends TestCase
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(200);
+
+        $this->get('/clients')
+            ->assertSee($client['name']);
     }
 
     /** @test */
@@ -93,5 +96,8 @@ class ClientsTest extends TestCase
             ->assertStatus(200);
 
         Storage::disk('public')->assertExists('clients/' . $file->hashName());
+
+        $this->get('/clients')
+            ->assertSee($client['name']);
     }
 }
