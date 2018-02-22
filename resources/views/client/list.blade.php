@@ -19,12 +19,16 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Skype</th>
+                                <th>Action</th>
                             </tr>
                             @foreach($clients as $client)
                                 <tr>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->skype }}</td>
+                                    <td>
+                                        <a href="/clients/{{ $client->id }}">View</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
