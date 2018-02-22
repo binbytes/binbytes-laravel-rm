@@ -3,6 +3,6 @@
 return [
     'roles' => [
         'owner', // admin
-        'employee'
+        'employee' // developers
     ]
 ];

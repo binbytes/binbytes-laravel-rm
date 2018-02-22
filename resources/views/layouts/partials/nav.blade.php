@@ -14,6 +14,9 @@
                     <li>
                         <a class="nav-link" href="/clients">Clients</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="/users">Users</a>
+                    </li>
                 </ul>
             @endif
 

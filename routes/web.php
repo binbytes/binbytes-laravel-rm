@@ -21,4 +21,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('/clients', 'ClientController')->except(['edit', 'update', 'delete']);
+    Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
 });
