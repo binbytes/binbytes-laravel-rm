@@ -38,10 +38,16 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'avatar' => 'image'
         ]);
 
-        Client::create($request->all());
+        $data = $request->all();
+        if(request()->hasFile('avatar')) {
+            $data['avatar'] = $this->uploadFile();
+        }
+
+        Client::create($data);
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -93,5 +99,10 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function uploadFile()
+    {
+        return request('avatar')->store('clients', 'public');
     }
 }
