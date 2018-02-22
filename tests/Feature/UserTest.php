@@ -38,6 +38,41 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    public function validation_test_for_create_user()
+    {
+        $this->be(factory('App\User')->create());
+
+        $user = factory('App\User')->raw([
+            'name' => null,
+            'email' => null,
+            'mobile_no' => null,
+            'address' => null,
+            'dob' => null,
+            'role' => null
+        ]);
+
+        $this->json('POST', '/users', $user)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['name', 'email', 'mobile_no', 'address', 'dob', 'role']);
+
+        $userWitIncorrectMail = factory('App\User')->raw([
+            'email' => 'foobar'
+        ]);
+
+        $this->json('POST', '/users', $userWitIncorrectMail)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('email');
+
+        $userWitIncorrectDob = factory('App\User')->raw([
+            'dob' => 'test'
+        ]);
+
+        $this->json('POST', '/users', $userWitIncorrectDob)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('dob');
+    }
+
+    /** @test */
     public function it_can_create_user_with_out_avatar()
     {
         $this->be(factory('App\User')->create());
