@@ -17,6 +17,9 @@
                     <li>
                         <a class="nav-link" href="/users">Users</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="/projects">Projects</a>
+                    </li>
                 </ul>
             @endif
 

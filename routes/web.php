@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('/clients', 'ClientController')->except(['edit', 'update', 'delete']);
     Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
+    Route::resource('/projects', 'ProjectController')->except(['edit', 'update', 'delete']);
 });
