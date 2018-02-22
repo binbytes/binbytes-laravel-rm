@@ -21,19 +21,19 @@ class ClientTest extends TestCase
     /** @test */
     public function a_authenticated_user_can_see_clients()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
 
-        $client = factory('App\Client')->create();
+        $client = create('App\Client');
 
         $this->get('/clients')
-            ->assertSee(htmlentities($client->name))
+            ->assertSee($client->name)
             ->assertSee($client->email);
     }
 
     /** @test */
     public function a_guest_can_not_create_client()
     {
-        $client = factory('App\Client')->raw();
+        $client = raw('App\Client');
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(401);
@@ -42,9 +42,9 @@ class ClientTest extends TestCase
     /** @test */
     public function validation_test_for_client_create()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
 
-        $client = factory('App\Client')->raw([
+        $client = raw('App\Client', [
             'name' => null
         ]);
 
@@ -53,14 +53,7 @@ class ClientTest extends TestCase
             ->assertJsonValidationErrors('name');
 
         // avatar must be image file
-        $this->json('post', '/clients', factory('App\Client')->raw([
-            'avatar' => 'test'
-        ]))
-        ->assertStatus(422)
-        ->assertJsonValidationErrors(['avatar']);
-
-        // avatar must be image file
-        $this->json('post', '/clients', factory('App\Client')->raw([
+        $this->json('post', '/clients', raw('App\Client', [
             'avatar' => 'test'
         ]))
         ->assertStatus(422)
@@ -71,9 +64,9 @@ class ClientTest extends TestCase
     // Allow all users to create client for now, later on we will decide role
     public function a_user_can_create_client_without_image()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
 
-        $client = factory('App\Client')->raw();
+        $client = raw('App\Client');
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(200);
@@ -85,10 +78,10 @@ class ClientTest extends TestCase
     /** @test */
     public function a_user_can_create_client_with_image()
     {
+        $this->logIn();
         Storage::fake('public');
-        $this->be($user = factory('App\User')->create());
 
-        $client = factory('App\Client')->raw([
+        $client = raw('App\Client', [
             'avatar' => $file = UploadedFile::fake()->image('client.jpg')
         ]);
 

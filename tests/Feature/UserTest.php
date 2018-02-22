@@ -21,7 +21,9 @@ class UserTest extends TestCase
     /** @test */
     public function a_user_can_see_users()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
+
+        $user = create('App\User');
 
         $this->get('/users')
             ->assertSee($user->name)
@@ -31,7 +33,7 @@ class UserTest extends TestCase
     /** @test */
     public function guest_cannot_create_user()
     {
-        $user = factory('App\User')->raw();
+        $user = raw('App\User');
 
         $this->post('/users', $user)
             ->assertRedirect('/login');
@@ -40,9 +42,9 @@ class UserTest extends TestCase
     /** @test */
     public function validation_test_for_create_user()
     {
-        $this->be(factory('App\User')->create());
+        $this->logIn();
 
-        $user = factory('App\User')->raw([
+        $user = raw('App\User', [
             'name' => null,
             'email' => null,
             'mobile_no' => null,
@@ -55,7 +57,7 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors(['name', 'email', 'mobile_no', 'address', 'dob', 'role']);
 
-        $userWitIncorrectMail = factory('App\User')->raw([
+        $userWitIncorrectMail = raw('App\User', [
             'email' => 'foobar'
         ]);
 
@@ -63,7 +65,7 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors('email');
 
-        $userWitIncorrectDob = factory('App\User')->raw([
+        $userWitIncorrectDob = raw('App\User', [
             'dob' => 'test'
         ]);
 
@@ -75,9 +77,9 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_create_user_with_out_avatar()
     {
-        $this->be(factory('App\User')->create());
+        $this->logIn();
 
-        $user = factory('App\User')->raw();
+        $user = raw('App\User');
 
         $this->json('POST', '/users', $user)
             ->assertStatus(200);
@@ -90,11 +92,11 @@ class UserTest extends TestCase
     /** @test */
     public function it_can_create_user_with_avatar()
     {
+        $this->logIn();
+
         Storage::fake('public');
 
-        $this->be(factory('App\User')->create());
-
-        $user = factory('App\User')->raw([
+        $user = raw('App\User', [
             'avatar' => $file = UploadedFile::fake()->image('user.jpg')
         ]);;
 

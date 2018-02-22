@@ -19,34 +19,34 @@ class ProjectTest extends TestCase
     /** @test */
     public function a_authenticated_user_can_see_projects()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
 
-        $project = factory('App\Project')->create();
+        $project = create('App\Project');
 
         $this->get('/projects')
-            ->assertSee(htmlentities($project->title));
+            ->assertSee($project->title);
     }
 
     /** @test */
     public function a_guest_can_not_create_project()
     {
-        $project = factory('App\Project')->raw();
+        $project = make('App\Project');
 
-        $this->json('POST', '/projects', $project)
+        $this->json('POST', '/projects', $project->toArray())
             ->assertStatus(401);
     }
 
     /** @test */
     public function validation_test_for_client_create()
     {
-        $this->be($user = factory('App\User')->create());
+        $this->logIn();
 
-        $client = factory('App\Project')->raw([
+        $client = make('App\Project', [
             'title' => null,
             'client_id' => null
         ]);
 
-        $this->json('POST', '/projects', $client)
+        $this->json('POST', '/projects', $client->toArray())
             ->assertStatus(422)
             ->assertJsonValidationErrors(['title', 'client_id']);
 
