@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('client', 'users')->latest()->get();
+        $projects = Project::with('client', 'users')->latest()->paginate();
 
         return view('project.list', compact('projects'));
     }

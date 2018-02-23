@@ -10,7 +10,6 @@
             </a>
         </div>
 
-
         @foreach($projects->chunk(3) as $chunkProjects)
             <div class="card-deck">
                 @foreach($chunkProjects as $project)
@@ -31,5 +30,7 @@
                 @endforeach
             </div>
         @endforeach
+
+        {{ $projects->links() }}
     </div>
 @endsection
