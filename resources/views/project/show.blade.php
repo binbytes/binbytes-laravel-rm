@@ -19,7 +19,7 @@
                             @if($project->users)
                                 <tr>
                                     <th>Users</th>
-                                    <th>{{ $project->users->pluck('name')->implode(', ') }}</th>
+                                    <td>{!! $project->users->pluck('name')->implode('<br>') !!}</td>
                                 </tr>
                             @endif
                         </table>
