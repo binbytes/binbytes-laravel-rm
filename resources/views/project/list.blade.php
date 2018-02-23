@@ -16,7 +16,7 @@
                     <div class="col-sm-4">
                         <div class="card bg-light mb-3">
                             <div class="card-body">
-                                <a href="/projects/{{ $project->id }}">
+                                <a href="{{ $project->path() }}">
                                     <h4 class="card-title">{{ $project->title }}</h4>
                                 </a>
                                 <p class="card-text">{{ $project->description }}</p>

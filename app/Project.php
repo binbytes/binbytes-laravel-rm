@@ -10,6 +10,11 @@ class Project extends Model
         'title', 'description', 'client_id', 'is_completed', 'remarks'
     ];
 
+    public function path()
+    {
+        return '/projects/' . $this->id;
+    }
+
     public function client()
     {
         return $this->belongsTo('App\Client');

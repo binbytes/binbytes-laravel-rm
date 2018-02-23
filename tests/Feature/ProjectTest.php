@@ -97,4 +97,16 @@ class ProjectTest extends TestCase
             ->assertSee($userA->name)
             ->assertSee($userB->name);
     }
+
+    /** @test */
+    public function it_can_see_project_detail_page()
+    {
+        $this->logIn();
+
+        $project = factory('App\Project')->create();
+
+        $this->get($project->path())
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+    }
 }
