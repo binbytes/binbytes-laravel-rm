@@ -19,6 +19,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile Number</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($users as $user)
@@ -26,6 +27,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->mobile_no }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>
                                         <a href="/users/{{ $user->id }}">View</a>
                                     </td>

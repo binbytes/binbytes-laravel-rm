@@ -97,6 +97,7 @@ class UserTest extends TestCase
         Storage::fake('public');
 
         $user = raw('App\User', [
+            'name' => 'Dr. Pedro\'s Homenick PhD',
             'avatar' => $file = UploadedFile::fake()->image('user.jpg')
         ]);;
 
