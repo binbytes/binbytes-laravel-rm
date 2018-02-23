@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card card-default">
                     <div class="card-header d-flex">
                         <h4>Clients</h4>
@@ -19,6 +19,8 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Skype</th>
+                                <th>Linkedin</th>
+                                <th>Twitter</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($clients as $client)
@@ -26,6 +28,8 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->skype }}</td>
+                                    <td>{{ $client->linkedin }}</td>
+                                    <td>{{ $client->twitter }}</td>
                                     <td>
                                         <a href="/clients/{{ $client->id }}">View</a>
                                     </td>
