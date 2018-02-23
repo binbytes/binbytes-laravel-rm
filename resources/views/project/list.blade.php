@@ -18,18 +18,22 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Is Competed?</th>
                                 <th>Client</th>
+                                <th>User</th>
+                                <th>Competed?</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($projects as $project)
                                 <tr>
                                     <td>{{ $project->title }}</td>
                                     <td>{{ $project->description }}</td>
-                                    <td>{{ $project->is_completed ? 'Yes' : '' }}</td>
                                     <td>
                                         <a href="/client/{{ $project->client_id }}">{{ $project->client->name }}</a>
                                     </td>
+                                    <td>
+                                        {{ $project->users->pluck('name')->implode(', ') }}
+                                    </td>
+                                    <td>{{ $project->is_completed ? 'Yes' : '' }}</td>
                                     <td>
                                         <a href="/projects/{{ $project->id }}">View</a>
                                     </td>

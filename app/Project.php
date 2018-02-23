@@ -14,4 +14,9 @@ class Project extends Model
     {
         return $this->belongsTo('App\Client');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

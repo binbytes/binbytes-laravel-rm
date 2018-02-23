@@ -37,7 +37,7 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function validation_test_for_client_create()
+    public function validation_test_for_project_create()
     {
         $this->logIn();
 
@@ -56,5 +56,45 @@ class ProjectTest extends TestCase
         ]))
         ->assertStatus(422)
         ->assertJsonValidationErrors(['client_id']);
+    }
+
+    /** @test */
+    public function it_can_create_project_without_user()
+    {
+        $this->logIn();
+
+        $project = raw('App\Project');
+
+        $this->json('POST', '/projects', $project)
+            ->assertStatus(200);
+
+        $this->get('/projects')
+            ->assertSee($project['title'])
+            ->assertSee($project['description']);
+    }
+
+    /** @test */
+    public function it_can_create_project_with_user()
+    {
+        $this->logIn();
+
+        $userA = factory('App\User')->create();
+        $userB = factory('App\User')->create();
+
+        $project = raw('App\Project', [
+            'users' => [
+                $userA->id,
+                $userB->id
+            ]
+        ]);
+
+        $this->json('POST', '/projects', $project)
+            ->assertStatus(200);
+
+        $this->get('/projects')
+            ->assertSee($project['title'])
+            ->assertSee($project['description'])
+            ->assertSee($userA->name)
+            ->assertSee($userB->name);
     }
 }

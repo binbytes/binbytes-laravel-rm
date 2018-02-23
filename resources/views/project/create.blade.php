@@ -43,7 +43,7 @@
                                 <label for="client_id" class="col-md-4 col-form-label text-md-right">Client</label>
 
                                 <div class="col-md-6">
-                                    <select name="client_id" id="role" class="form-control{{ $errors->has('client_id') ? ' is-invalid' : '' }}" required>
+                                    <select name="client_id" id="client_id" class="form-control{{ $errors->has('client_id') ? ' is-invalid' : '' }}" required>
                                         <option value="">---Select Client--</option>
                                         @foreach($clients as $id => $client)
                                             <option value="{{ $id }}">{{ $client }}</option>
@@ -53,6 +53,25 @@
                                     @if ($errors->has('client_id'))
                                         <span class="invalid-feedback">
                                         <strong>{{ $errors->first('client_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="users" class="col-md-4 col-form-label text-md-right">Users</label>
+
+                                <div class="col-md-6">
+                                    <select multiple name="users[]" id="users[]" class="form-control{{ $errors->has('users') ? ' is-invalid' : '' }}" required>
+                                        <option value="">---Select Client--</option>
+                                        @foreach($users as $id => $user)
+                                            <option value="{{ $id }}">{{ $user }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('users'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('users') }}</strong>
                                     </span>
                                     @endif
                                 </div>

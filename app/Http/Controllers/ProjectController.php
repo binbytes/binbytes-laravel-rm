@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Project;
 use App\Http\Requests\ProjectRequest;
+use App\User;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('client')->latest()->get();
+        $projects = Project::with('client', 'users')->latest()->get();
 
         return view('project.list', compact('projects'));
     }
@@ -28,8 +29,9 @@ class ProjectController extends Controller
     public function create()
     {
         $clients = Client::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
 
-        return view('project.create', compact('clients'));
+        return view('project.create', compact('clients', 'users'));
     }
 
     /**
@@ -44,7 +46,11 @@ class ProjectController extends Controller
 
         $data['is_completed'] = $request->has('is_completed');
 
-        Project::create($data);
+        $project = Project::create($data);
+
+        if($request->has('users')) {
+            $project->users()->attach(request('users'));
+        }
 
         if(request()->wantsJson()) {
             return response([], 200);
