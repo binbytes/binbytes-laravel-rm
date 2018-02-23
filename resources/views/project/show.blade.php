@@ -15,6 +15,13 @@
                                     <td>{{ $value }}</td>
                                 </tr>
                             @endforeach
+
+                            @if($project->users)
+                                <tr>
+                                    <th>Users</th>
+                                    <th>{{ $project->users->pluck('name')->implode(', ') }}</th>
+                                </tr>
+                            @endif
                         </table>
 
                         <a href="/projects" class="btn btn-link">Back</a>
