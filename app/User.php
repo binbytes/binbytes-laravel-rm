@@ -19,6 +19,11 @@ class User extends Authenticatable
         'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin'
     ];
 
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

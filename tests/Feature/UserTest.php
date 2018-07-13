@@ -45,17 +45,17 @@ class UserTest extends TestCase
         $this->logIn();
 
         $user = raw('App\User', [
-            'name' => null,
+            'first_name' => null,
+            'last_name' => null,
             'email' => null,
             'mobile_no' => null,
             'address' => null,
-            'dob' => null,
-            'role' => null
+            'dob' => null
         ]);
 
         $this->json('POST', '/users', $user)
             ->assertStatus(422)
-            ->assertJsonValidationErrors(['name', 'email', 'mobile_no', 'address', 'dob', 'role']);
+            ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'mobile_no', 'address', 'dob']);
 
         $userWitIncorrectMail = raw('App\User', [
             'email' => 'foobar'
@@ -65,13 +65,25 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors('email');
 
-        $userWitIncorrectDob = raw('App\User', [
+        $userWithIncorrectDob = raw('App\User', [
             'dob' => 'test'
         ]);
 
-        $this->json('POST', '/users', $userWitIncorrectDob)
+        $this->json('POST', '/users', $userWithIncorrectDob)
             ->assertStatus(422)
             ->assertJsonValidationErrors('dob');
+
+        // Uniqueness
+        $user = create('App\User');
+
+        $newUser = raw('App\User', [
+            'email' => $user->email,
+            'username' => $user->username
+        ]);
+
+        $this->json('POST', '/users', $newUser)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['email', 'username']);
     }
 
     /** @test */
@@ -85,7 +97,7 @@ class UserTest extends TestCase
             ->assertStatus(200);
 
         $this->get('/users')
-            ->assertSee($user['name'])
+            ->assertSee($user['first_name'])
             ->assertSee($user['email']);
     }
 
@@ -106,7 +118,7 @@ class UserTest extends TestCase
         Storage::disk('public')->assertExists('users/' . $file->hashName());
 
         $this->get('/users')
-            ->assertSee($user['name'])
+            ->assertSee($user['first_name'])
             ->assertSee($user['email']);
     }
 }
