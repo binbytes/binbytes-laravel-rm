@@ -20,6 +20,7 @@ $factory->define(App\Project::class, function (Faker $faker) {
         'client_id' => function () {
             return factory(App\Client::class)->create()->id;
         },
+        'started_at' => $faker->date(),
         'is_completed' => false,
         'remarks' => $faker->paragraph
     ];
