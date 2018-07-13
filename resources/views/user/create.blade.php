@@ -185,6 +185,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <textarea name="remarks" placeholder="Remarks" id="remarks" class="form-control{{ $errors->has('remarks') ? ' is-invalid' : '' }}">{{ old('remarks') }}</textarea>
+
+                                    @if ($errors->has('remarks'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('remarks') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
