@@ -29,7 +29,7 @@ class ProjectController extends Controller
     public function create()
     {
         $clients = Client::pluck('name', 'id');
-        $users = User::pluck('name', 'id');
+        $users = User::select('first_name', 'last_name', 'id')->get();
 
         return view('project.create', compact('clients', 'users'));
     }

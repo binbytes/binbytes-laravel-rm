@@ -65,7 +65,7 @@
                                     <select multiple name="users[]" id="users[]" class="form-control{{ $errors->has('users') ? ' is-invalid' : '' }}" required>
                                         <option value="">---Select Client--</option>
                                         @foreach($users as $id => $user)
-                                            <option value="{{ $id }}">{{ $user }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
 
