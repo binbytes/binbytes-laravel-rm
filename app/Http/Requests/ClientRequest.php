@@ -25,6 +25,8 @@ class ClientRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'dob' => 'date',
+            'email' => 'email',
             'avatar' => 'image'
         ];
     }
