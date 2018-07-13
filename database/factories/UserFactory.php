@@ -15,13 +15,15 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'middle_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'username' => $faker->unique()->userName,
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('secret'), // secret
         'remember_token' => str_random(10),
         'mobile_no' => $faker->phoneNumber,
         'address' => $faker->address,
         'dob' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'), // :D
-        'role' => $faker->randomElement(config('enums.roles'))
     ];
 });

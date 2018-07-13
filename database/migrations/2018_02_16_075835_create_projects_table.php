@@ -16,11 +16,13 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('description', 3000)->nullable();
+            $table->string('description', 5000)->nullable();
             $table->unsignedInteger('client_id');
+            $table->date('started_at');
             $table->boolean('is_completed')->default();
+            $table->string('slug')->unique();
             //
-            $table->text('remarks')->nullable();
+            $table->string('remarks', 3000)->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')
