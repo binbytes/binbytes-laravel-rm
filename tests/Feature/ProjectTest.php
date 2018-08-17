@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Project;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -21,7 +23,7 @@ class ProjectTest extends TestCase
     {
         $this->logIn();
 
-        $project = create('App\Project');
+        $project = create(Project::class);
 
         $this->get('/projects')
             ->assertSee($project->title);
@@ -30,7 +32,7 @@ class ProjectTest extends TestCase
     /** @test */
     public function a_guest_can_not_create_project()
     {
-        $project = make('App\Project');
+        $project = make(Project::class);
 
         $this->json('POST', '/projects', $project->toArray())
             ->assertStatus(401);
@@ -41,7 +43,7 @@ class ProjectTest extends TestCase
     {
         $this->logIn();
 
-        $client = make('App\Project', [
+        $client = make(Project::class, [
             'title' => null,
             'client_id' => null
         ]);
@@ -51,7 +53,7 @@ class ProjectTest extends TestCase
             ->assertJsonValidationErrors(['title', 'client_id']);
 
         // client_id must be valid client id
-        $this->json('post', '/projects', factory('App\Project')->raw([
+        $this->json('post', '/projects', factory(Project::class)->raw([
             'client_id' => 9999
         ]))
         ->assertStatus(422)
@@ -63,7 +65,7 @@ class ProjectTest extends TestCase
     {
         $this->logIn();
 
-        $project = raw('App\Project');
+        $project = raw(Project::class);
 
         $this->json('POST', '/projects', $project)
             ->assertStatus(200);
@@ -78,10 +80,10 @@ class ProjectTest extends TestCase
     {
         $this->logIn();
 
-        $userA = factory('App\User')->create();
-        $userB = factory('App\User')->create();
+        $userA = factory(User::class)->create();
+        $userB = factory(User::class)->create();
 
-        $project = raw('App\Project', [
+        $project = raw(Project::class, [
             'users' => [
                 $userA->id,
                 $userB->id
@@ -103,7 +105,7 @@ class ProjectTest extends TestCase
     {
         $this->logIn();
 
-        $project = factory('App\Project')->create();
+        $project = factory(Project::class)->create();
 
         $this->get($project->path())
             ->assertSee($project->title)

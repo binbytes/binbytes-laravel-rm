@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Client;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +24,7 @@ class ClientTest extends TestCase
     {
         $this->logIn();
 
-        $client = create('App\Client');
+        $client = create(Client::class);
 
         $this->get('/clients')
             ->assertSee($client->name)
@@ -33,7 +34,7 @@ class ClientTest extends TestCase
     /** @test */
     public function a_guest_can_not_create_client()
     {
-        $client = raw('App\Client');
+        $client = raw(Client::class);
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(401);
@@ -44,7 +45,7 @@ class ClientTest extends TestCase
     {
         $this->logIn();
 
-        $client = raw('App\Client', [
+        $client = raw(Client::class, [
             'name' => null
         ]);
 
@@ -53,7 +54,7 @@ class ClientTest extends TestCase
             ->assertJsonValidationErrors('name');
 
         // avatar must be image file
-        $this->json('post', '/clients', raw('App\Client', [
+        $this->json('post', '/clients', raw(Client::class, [
             'avatar' => 'test'
         ]))
         ->assertStatus(422)
@@ -66,7 +67,7 @@ class ClientTest extends TestCase
     {
         $this->logIn();
 
-        $client = raw('App\Client');
+        $client = raw(Client::class);
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(200);
@@ -81,7 +82,7 @@ class ClientTest extends TestCase
         $this->logIn();
         Storage::fake('public');
 
-        $client = raw('App\Client', [
+        $client = raw(Client::class, [
             'avatar' => $file = UploadedFile::fake()->image('client.jpg')
         ]);
 

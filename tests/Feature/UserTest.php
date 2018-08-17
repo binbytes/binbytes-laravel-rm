@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -23,7 +24,7 @@ class UserTest extends TestCase
     {
         $this->logIn();
 
-        $user = create('App\User');
+        $user = create(User::class);
 
         $this->get('/users')
             ->assertSee($user->name)
@@ -33,7 +34,7 @@ class UserTest extends TestCase
     /** @test */
     public function guest_cannot_create_user()
     {
-        $user = raw('App\User');
+        $user = raw(User::class);
 
         $this->post('/users', $user)
             ->assertRedirect('/login');
@@ -44,7 +45,7 @@ class UserTest extends TestCase
     {
         $this->logIn();
 
-        $user = raw('App\User', [
+        $user = raw(User::class, [
             'first_name' => null,
             'last_name' => null,
             'email' => null,
@@ -57,7 +58,7 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'mobile_no', 'address', 'dob']);
 
-        $userWitIncorrectMail = raw('App\User', [
+        $userWitIncorrectMail = raw(User::class, [
             'email' => 'foobar'
         ]);
 
@@ -65,7 +66,7 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors('email');
 
-        $userWithIncorrectDob = raw('App\User', [
+        $userWithIncorrectDob = raw(User::class, [
             'dob' => 'test'
         ]);
 
@@ -74,9 +75,9 @@ class UserTest extends TestCase
             ->assertJsonValidationErrors('dob');
 
         // Uniqueness
-        $user = create('App\User');
+        $user = create(User::class);
 
-        $newUser = raw('App\User', [
+        $newUser = raw(User::class, [
             'email' => $user->email,
             'username' => $user->username
         ]);
@@ -91,7 +92,7 @@ class UserTest extends TestCase
     {
         $this->logIn();
 
-        $user = raw('App\User');
+        $user = raw(User::class);
 
         $this->json('POST', '/users', $user)
             ->assertStatus(200);
@@ -108,7 +109,7 @@ class UserTest extends TestCase
 
         Storage::fake('public');
 
-        $user = raw('App\User', [
+        $user = raw(User::class, [
             'avatar' => $file = UploadedFile::fake()->image('user.jpg')
         ]);;
 
