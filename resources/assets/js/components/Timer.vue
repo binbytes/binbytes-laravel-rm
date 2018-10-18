@@ -15,7 +15,7 @@
         name: 'timer',
         data () {
             return {
-                time: 3400
+                time: 0
             }
         },
         mounted() {
