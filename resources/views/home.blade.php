@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="timer-block">
+                        <timer></timer>
+                    </div>
                 </div>
             </div>
         </div>
