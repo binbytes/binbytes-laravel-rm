@@ -4,9 +4,7 @@ namespace Tests\Feature;
 
 use App\Events\UserSignIn;
 use App\User;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
