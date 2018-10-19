@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class AttendanceSession extends Model
@@ -11,6 +12,14 @@ class AttendanceSession extends Model
      */
     protected $fillable = [
         'user_id', 'attendance_id', 'start_time', 'end_time', 'total_times',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'start_time',
+        'end_time',
     ];
 
     /**

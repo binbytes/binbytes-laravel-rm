@@ -54,4 +54,26 @@ class UserAttendance extends Model
                 'end_time' => now(),
             ]);
     }
+
+    /**
+     * @return Model|\Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder|null|object
+     */
+    public function incrementSession()
+    {
+        $session = $this->sessions()->latest('start_time')
+            ->first();
+
+        $endTime = now();
+        $session->fill([
+            'end_time' => $endTime,
+            'total_times' => $endTime->diffInSeconds($session->start_time)
+        ])->save();
+
+        $this->fill([
+            'total_times' => $this->totalTime
+        ])->save();
+
+        return $session;
+    }
+
 }
