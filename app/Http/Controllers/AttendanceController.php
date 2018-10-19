@@ -14,6 +14,8 @@ class AttendanceController extends Controller
         $attendance = auth()->user()->today_attendance;
         $attendance->incrementSession();
 
-        return view('home');
+        return response()->json([
+            'success' => true
+        ]);
     }
 }
