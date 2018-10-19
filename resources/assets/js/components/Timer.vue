@@ -1,5 +1,5 @@
 <template>
-    <div class="timer">
+    <div class="timer text-primary font-weight-bold">
         <span class="hours" v-text="hours"></span>
         :
         <span class="minutes" v-text="minutes"></span>
@@ -29,12 +29,3 @@
         }
     }
 </script>
-
-<style>
-    .hours {
-        font-size: 23px;
-    }
-    .minutes {
-        font-size: 20px;
-    }
-</style>

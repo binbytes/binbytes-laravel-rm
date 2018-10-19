@@ -14,9 +14,7 @@
                         </div>
                     @endif
 
-                    <div class="timer-block">
-                        <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}"></timer>
-                    </div>
+                    Welcome...
                 </div>
             </div>
         </div>
