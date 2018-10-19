@@ -21,7 +21,8 @@ class CreateAttendanceSessionsTable extends Migration
                 ->nullable();
             $table->timestamp('end_time')
                 ->nullable();
-            $table->time('total_hours')
+            $table->unsignedInteger('total_times')
+                ->description('time in second format')
                 ->default(0);
             $table->timestamps();
 

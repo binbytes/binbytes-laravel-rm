@@ -17,7 +17,8 @@ class CreateUserAttendancesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->date('date');
-            $table->time('total_hours')
+            $table->unsignedInteger('total_times')
+                ->description('time in second format')
                 ->default(0);
             $table->boolean('is_on_leave')
                 ->default(false);

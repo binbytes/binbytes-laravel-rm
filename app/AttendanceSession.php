@@ -10,7 +10,7 @@ class AttendanceSession extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'attendance_id', 'start_time', 'end_time', 'total_hours',
+        'user_id', 'attendance_id', 'start_time', 'end_time', 'total_times',
     ];
 
     /**

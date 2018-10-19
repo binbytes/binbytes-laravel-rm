@@ -11,6 +11,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //to get total hours for today.
+        $totalTodayTimes = auth()->user()->today_attendance->totaltime;
+
         return view('home');
     }
 }

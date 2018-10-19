@@ -32,4 +32,36 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attendance()
+    {
+        return $this->hasMany(UserAttendance::class);
+    }
+
+    /**
+     * @return UserAttendance|object|null
+     */
+    public function getTodayAttendanceAttribute()
+    {
+        return $this->attendance()
+            ->where('date', today())
+            ->first();
+    }
+
+    /**
+     * @return UserAttendance|\Illuminate\Database\Eloquent\Model
+     */
+    public function firstOrCreateAttendance()
+    {
+        if ($attendance = $this->today_attendance) {
+            return $attendance;
+        }
+
+        return $this->attendance()->create([
+            'date' => today()
+        ]);
+    }
 }

@@ -3,14 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
+/**
+ * @property Collection sessions
+ */
 class UserAttendance extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
-        'date', 'total_hours', 'is_on_leave', 'is_absent',
+        'date', 'total_times', 'is_on_leave', 'is_absent',
     ];
 
     /**
@@ -27,5 +31,27 @@ class UserAttendance extends Model
     public function sessions()
     {
         return $this->hasMany(AttendanceSession::class, 'attendance_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalTimeAttribute()
+    {
+        return $this->sessions->sum('total_times');
+    }
+
+    /**
+     * @param User $user
+     * @return Model
+     */
+    public function createSession(User $user)
+    {
+        return $this->sessions()
+            ->create([
+                'user_id' => $user->getKey(),
+                'start_time' => now(),
+                'end_time' => now(),
+            ]);
     }
 }
