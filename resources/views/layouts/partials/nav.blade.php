@@ -1,56 +1,47 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            @if(auth()->check())
-                <ul class="navbar-nav mr-auto">
-                    <li>
-                        <a class="nav-link" href="/clients">Clients</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="/users">Users</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="/projects">Projects</a>
-                    </li>
-                </ul>
-            @endif
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    {{--<li><a class="nav-link" href="{{ route('register') }}">Register</a></li>--}}
-                @else
-                    <li>
-                        <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
+<aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+    <div class="main-navbar">
+        <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
+            <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
+                <div class="d-table m-auto">
+                    <img class="d-inline-block align-top mr-1" src="{{ asset('images/logo.png') }}" height="25">
+                    <span class="d-none d-md-inline ml-1">{{ config('app.name', 'BinBytes') }}</span>
+                </div>
+            </a>
+            <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                <i class="material-icons"></i>
+            </a>
+        </nav>
     </div>
-</nav>
+    {{--<form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">--}}
+        {{--<div class="input-group input-group-seamless ml-3">--}}
+            {{--<div class="input-group-prepend">--}}
+                {{--<div class="input-group-text">--}}
+                    {{--<i class="fas fa-search"></i>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">--}}
+        {{--</div>--}}
+    {{--</form>--}}
+    <div class="nav-wrapper">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link " href="/clients">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Clients</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/users">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/projects">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Projects</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

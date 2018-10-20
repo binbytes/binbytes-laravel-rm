@@ -1,28 +1,30 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'pageTitle' => 'Clients'
+])
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card card-default">
-                    <div class="card-header d-flex">
-                        <h4>Clients</h4>
-
-                        <a href="/clients/create" class="btn btn-primary ml-auto">
-                            Add
-                        </a>
-                    </div>
-
-                    <div class="card-body">
-                        <table class="table table-bordered">
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <a href="/clients/create" class="btn btn-primary pull-right">
+                        <i class="fa fa-plus mr-2"></i>
+                        Add Client
+                    </a>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Skype</th>
-                                <th>Linkedin</th>
-                                <th>Twitter</th>
-                                <th>Action</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Skype</th>
+                                <th scope="col">Linkedin</th>
+                                <th scope="col">Twitter</th>
+                                <th scope="col">Action</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             @foreach($clients as $client)
                                 <tr>
                                     <td>{{ $client->name }}</td>
@@ -35,10 +37,10 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </table>
+                        </tbody>
+                    </table>
 
-                        {{ $clients->links() }}
-                    </div>
+                    {{ $clients->links() }}
                 </div>
             </div>
         </div>
