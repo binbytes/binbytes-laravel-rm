@@ -62,7 +62,14 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                <input id="mobile_no" type="text" placeholder="Mobile Number" class="form-control{{ $errors->has('mobile_no') ? ' is-invalid' : '' }}" name="mobile_no" value="{{ old('mobile_no') }}" required>
+                                <div class="input-group input-group-seamless">
+                                    <input id="mobile_no" type="text" placeholder="Mobile Number" class="form-control{{ $errors->has('mobile_no') ? ' is-invalid' : '' }}" name="mobile_no" value="{{ old('mobile_no') }}" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('mobile_no'))
                                     <span class="invalid-feedback">
@@ -71,7 +78,14 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                <input id="dob" placeholder="Date of birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
+                                <div class="input-group input-group-seamless">
+                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('dob'))
                                     <span class="invalid-feedback">
