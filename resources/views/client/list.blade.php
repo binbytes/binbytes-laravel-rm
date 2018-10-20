@@ -12,7 +12,7 @@
                         Add Client
                     </a>
                 </div>
-                <div class="card-body p-0 pb-3 text-center">
+                <div class="card-body p-0 text-center">
                     <table class="table mb-0">
                         <thead class="bg-light">
                             <tr>
@@ -39,7 +39,8 @@
                             @endforeach
                         </tbody>
                     </table>
-
+                </div>
+                <div class="card-footer">
                     {{ $clients->links() }}
                 </div>
             </div>

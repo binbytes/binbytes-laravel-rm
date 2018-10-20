@@ -34,7 +34,8 @@
                             @endforeach
                         </div>
                     @endforeach
-
+                </div>
+                <div class="card-footer">
                     {{ $projects->links() }}
                 </div>
             </div>
