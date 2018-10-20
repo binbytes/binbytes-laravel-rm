@@ -13,6 +13,15 @@
 
                         <strong class="text-muted d-block my-2">Personal Detail</strong>
                         <div class="form-group row">
+                            <div class="col-md-4 offset-md-8">
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" name="avatar" id="avatar">
+                                    <label class="custom-file-label" for="avatar">Client avatar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-md-4">
                                 <input id="name" type="text" placeholder="Name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
