@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <select id="timezone" placeholder="Timezone" class="form-control{{ $errors->has('timezone') ? ' is-invalid' : '' }}" name="timezone">
+                                <select id="timezone" placeholder="Timezone" class="custom-select {{ $errors->has('timezone') ? ' is-invalid' : '' }}" name="timezone">
                                     @foreach(timeZoneList() as $timezone)
                                         <option>{{ $timezone }}</option>
                                     @endforeach

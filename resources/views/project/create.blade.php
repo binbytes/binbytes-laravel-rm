@@ -43,7 +43,7 @@
                             <label for="client_id" class="col-md-2 col-form-label text-md-right">Client</label>
 
                             <div class="col-md-6">
-                                <select name="client_id" id="client_id" class="form-control{{ $errors->has('client_id') ? ' is-invalid' : '' }}" required>
+                                <select name="client_id" id="client_id" class="custom-select{{ $errors->has('client_id') ? ' is-invalid' : '' }}" required>
                                     <option value="">---Select Client--</option>
                                     @foreach($clients as $id => $client)
                                         <option value="{{ $id }}">{{ $client }}</option>
