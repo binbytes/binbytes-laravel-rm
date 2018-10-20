@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\AttendanceSession;
 use App\User;
-use App\UserAttendance;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -43,7 +41,7 @@ class AttendanceTest extends TestCase
      */
     public function when_we_ping_it_must_increment_total_times()
     {
-        $this->userLogin();
+        $this->logIn();
 
         $totalTime = auth()->user()->today_attendance->totalTime;
         sleep(1);
@@ -58,20 +56,5 @@ class AttendanceTest extends TestCase
             $totalTime,
             auth()->user()->today_attendance->totalTime
         );
-    }
-
-    protected function userLogin()
-    {
-        $user = create(User::class);
-        $attendance = create(UserAttendance::class, [
-            'user_id' => $user->getKey()
-        ]);
-
-        create(AttendanceSession::class, [
-            'user_id' => $user->getKey(),
-            'attendance_id' => $attendance->getKey(),
-        ]);
-
-        $this->be($user);
     }
 }
