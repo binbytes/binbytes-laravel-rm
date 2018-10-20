@@ -25,20 +25,20 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " href="/clients">
-                    <i class="material-icons">vertical_split</i>
+                <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}" href="/clients">
+                    <i class="fas fa-users"></i>
                     <span>Clients</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/users">
-                    <i class="material-icons">vertical_split</i>
+                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">
+                    <i class="fas fa-users"></i>
                     <span>Users</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/projects">
-                    <i class="material-icons">vertical_split</i>
+                <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="/projects">
+                    <i class="fa fa-tasks"></i>
                     <span>Projects</span>
                 </a>
             </li>
