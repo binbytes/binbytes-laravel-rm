@@ -34,6 +34,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get avatar url
+     *
+     * @return string
+     */
+    public function getAvatarUrlAttribute()
+    {
+        return asset($this->avatar);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function attendance()

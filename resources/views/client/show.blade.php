@@ -14,7 +14,7 @@
                 <div class="card-body">
                     @if($client->avatar)
                         <div class="text-center">
-                            <img src="{{ \Storage::url($client->avatar) }}" height="200" width="200">
+                            <img src="{{ $client->avatar_url }}" width="100" class="img-thumbnail">
                         </div>
                     @endif
 
