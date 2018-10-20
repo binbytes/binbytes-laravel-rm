@@ -22,7 +22,7 @@
             <div class="row">
                 @include('layouts.partials.nav')
 
-                <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                <main class="main-content col-lg-11 col-md-9 col-sm-12 p-0 offset-lg-1 offset-md-3">
                     @include('layouts.partials.top-nav')
 
                     <div class="main-content-container container-fluid px-4">
