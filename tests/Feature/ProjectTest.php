@@ -96,8 +96,8 @@ class ProjectTest extends TestCase
         $this->get('/projects')
             ->assertSee($project['title'])
             ->assertSee($project['description'])
-            ->assertSee($userA->name)
-            ->assertSee($userB->name);
+            ->assertSee(substr($userA->name, 0, 2)) // We are only showing initial
+            ->assertSee(substr($userB->name, 0, 2));
     }
 
     /** @test */
