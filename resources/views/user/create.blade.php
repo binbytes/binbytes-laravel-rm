@@ -46,7 +46,14 @@
 
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="personal_email" type="text" placeholder="Personal Mail" class="form-control{{ $errors->has('personal_email') ? ' is-invalid' : '' }}" name="personal_email" value="{{ old('personal_email') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="personal_email" type="text" placeholder="Personal Mail" class="form-control{{ $errors->has('personal_email') ? ' is-invalid' : '' }}" name="personal_email" value="{{ old('personal_email') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="far fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('personal_email'))
                                     <span class="invalid-feedback">
@@ -99,7 +106,14 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="email" placeholder="Email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <div class="input-group input-group-seamless">
+                                    <input id="email" placeholder="Email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="far fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -122,7 +136,14 @@
                         <strong class="text-muted d-block my-2">Social Detail</strong>
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="skype" placeholder="Skype" type="text" class="form-control{{ $errors->has('skype') ? ' is-invalid' : '' }}" name="skype" value="{{ old('skype') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="skype" placeholder="Skype" type="text" class="form-control{{ $errors->has('skype') ? ' is-invalid' : '' }}" name="skype" value="{{ old('skype') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-skype"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('skype'))
                                     <span class="invalid-feedback">
@@ -132,7 +153,14 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="trello" placeholder="Trello" type="text" class="form-control{{ $errors->has('trello') ? ' is-invalid' : '' }}" name="trello" value="{{ old('trello') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="trello" placeholder="Trello" type="text" class="form-control{{ $errors->has('trello') ? ' is-invalid' : '' }}" name="trello" value="{{ old('trello') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-trello"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('trello'))
                                     <span class="invalid-feedback">
@@ -142,7 +170,14 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="slack" placeholder="Slack" type="password" class="form-control{{ $errors->has('slack') ? ' is-invalid' : '' }}" name="slack" value="{{ old('slack') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="slack" placeholder="Slack" type="password" class="form-control{{ $errors->has('slack') ? ' is-invalid' : '' }}" name="slack" value="{{ old('slack') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-slack"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('slack'))
                                     <span class="invalid-feedback">
@@ -154,7 +189,14 @@
 
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="github" placeholder="Github" type="text" class="form-control{{ $errors->has('github') ? ' is-invalid' : '' }}" name="github" value="{{ old('github') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="github" placeholder="Github" type="text" class="form-control{{ $errors->has('github') ? ' is-invalid' : '' }}" name="github" value="{{ old('github') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-github"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('github'))
                                     <span class="invalid-feedback">
@@ -164,7 +206,14 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="twitter" placeholder="Twitter" type="text" class="form-control{{ $errors->has('twitter') ? ' is-invalid' : '' }}" name="twitter" value="{{ old('twitter') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="twitter" placeholder="Twitter" type="text" class="form-control{{ $errors->has('twitter') ? ' is-invalid' : '' }}" name="twitter" value="{{ old('twitter') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-twitter"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('twitter'))
                                     <span class="invalid-feedback">
@@ -174,7 +223,14 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="linkedin" placeholder="Linkedin" type="password" class="form-control{{ $errors->has('linkedin') ? ' is-invalid' : '' }}" name="linkedin" value="{{ old('linkedin') }}">
+                                <div class="input-group input-group-seamless">
+                                    <input id="linkedin" placeholder="Linkedin" type="password" class="form-control{{ $errors->has('linkedin') ? ' is-invalid' : '' }}" name="linkedin" value="{{ old('linkedin') }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fab fa-linkedin"></i>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @if ($errors->has('slack'))
                                     <span class="invalid-feedback">
