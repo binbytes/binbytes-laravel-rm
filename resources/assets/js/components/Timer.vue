@@ -1,5 +1,6 @@
 <template>
-    <div class="timer text-primary font-weight-bold">
+    <div class="timer font-weight-bold text-center">
+        <i class="fa fa-clock"></i>
         <span class="hours" v-text="hours"></span>
         :
         <span class="minutes" v-text="minutes"></span>
@@ -29,3 +30,10 @@
         }
     }
 </script>
+
+<style>
+.timer {
+    background: #f5f6f8;
+    padding: 10px;
+}
+</style>

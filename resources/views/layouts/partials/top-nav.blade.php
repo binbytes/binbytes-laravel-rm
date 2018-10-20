@@ -3,10 +3,10 @@
     <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
         <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"></div>
         <ul class="navbar-nav border-left flex-row pl-2">
-            <li class="nav-item">
+            <li class="nav-item align-self-center">
                 <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown align-self-center">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <span class="d-none d-md-inline-block">{{ auth()->user()->name }}</span>
                 </a>
