@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                <input id="dob" placeholder="Date of birth" type="date" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
+                                <input id="dob" placeholder="Date of birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
 
                                 @if ($errors->has('dob'))
                                     <span class="invalid-feedback">

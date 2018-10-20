@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="dob" placeholder="Date of birth" type="date" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}">
+                                <input id="dob" placeholder="Date of birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}">
 
                                 @if ($errors->has('dob'))
                                     <span class="invalid-feedback">
@@ -72,8 +72,8 @@
 
                                 @if ($errors->has('city'))
                                     <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('city') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
                                 @endif
                             </div>
 
@@ -82,8 +82,8 @@
 
                                 @if ($errors->has('timezone'))
                                     <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('timezone') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('timezone') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
