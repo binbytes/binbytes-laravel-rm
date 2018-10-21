@@ -25,6 +25,12 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
+                <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}" href="/clients">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
