@@ -1,7 +1,11 @@
 <div class="col-md-8">
     <div class="card">
-        <div class="card-header border-bottom pb-0">
+        <div class="card-header border-bottom pb-0 d-flex justify-content-between">
             <h6 class="font-weight-bold">This week</h6>
+
+            <h6 class="badge badge-outline-primary">
+                {{ $weekAttendances->sum('hours') }}
+            </h6>
         </div>
         <div class="card-body p-0 pb-3 text-center">
             <table class="table">
