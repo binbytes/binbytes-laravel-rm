@@ -25,7 +25,12 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>
+                                    @if($user->avatar)
+                                        <img src="{{ $user->avatar_url }}" class="avatar mr-1">
+                                    @endif
+                                    {{ $user->name }}
+                                </td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->mobile_no }}</td>
                                 <td>

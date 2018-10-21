@@ -16,7 +16,7 @@
                     <table class="table mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th scope="col">Name</th>
+                                <th scope="col">Client</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Skype</th>
                                 <th scope="col">Linkedin</th>
@@ -27,7 +27,12 @@
                         <tbody>
                             @foreach($clients as $client)
                                 <tr>
-                                    <td>{{ $client->name }}</td>
+                                    <td>
+                                        @if($client->avatar)
+                                            <img src="{{ $client->avatar_url }}" class="avatar mr-1">
+                                        @endif
+                                        {{ $client->name }}
+                                    </td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->skype }}</td>
                                     <td>{{ $client->linkedin }}</td>
