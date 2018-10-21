@@ -21,8 +21,7 @@ class AttendanceTest extends TestCase
         $this->json('POST', '/login', [
             'email' => 'random@email.com',
             'password' => '12345678'
-        ])
-            ->assertRedirect('/home');
+        ])->assertRedirect('/home');
 
         $this->assertDatabaseHas('user_attendances', [
             'user_id' => $user->getKey(),
@@ -31,8 +30,8 @@ class AttendanceTest extends TestCase
 
         $this->assertDatabaseHas('attendance_sessions', [
             'user_id' => $user->getKey(),
-            'start_time' => now(),
-            'end_time' => now()
+            'start_time' => now()->toDateTimeString(),
+            'end_time' => now()->toDateTimeString()
         ]);
     }
 
