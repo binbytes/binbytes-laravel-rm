@@ -66,7 +66,7 @@ class User extends Authenticatable
     public function attendanceOfTheDay($date)
     {
         return $this->attendance()
-            ->where('date', today())
+            ->where('date', $date)
             ->first();
     }
 

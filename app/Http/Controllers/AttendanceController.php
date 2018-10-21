@@ -28,8 +28,6 @@ class AttendanceController extends Controller
         $user = auth()->user();
         $attendance = $user->attendanceOfTheDay($date);
 
-        $attendance->load('sessions');
-
         return view('attendance.day', compact('user', 'attendance'));
     }
 }
