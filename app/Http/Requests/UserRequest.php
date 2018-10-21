@@ -28,12 +28,17 @@ class UserRequest extends FormRequest
             'last_name' => 'required',
             'avatar' => 'image',
             'email' => 'required|email|unique:users',
-            'personal_email' => 'email|unique:users',
+            'personal_email' => 'nullable|email|unique:users',
             'username' => 'required|min:2|unique:users',
             'password' => 'required|min:3',
-            'dob' => 'required|date',
+            'dob' => 'date',
             'address' => 'required',
-            'mobile_no' => 'required'
+            'mobile_no' => 'required',
+            'joining_date' => 'required|date',
+            'leaving_date' => 'date',
+            'is_active' => 'boolean',
+            'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)
+            'base_salary' => 'nullable|numeric'
         ];
     }
 }

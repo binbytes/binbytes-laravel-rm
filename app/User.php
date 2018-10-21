@@ -9,6 +9,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $dates = [
+        'dob', 'joining_date', 'leaving_date'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar', 'address',
-        'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin'
+        'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin', 'weekly_hours_credit', 'base_salary',
+        'joining_date', 'leaving_date', 'is_active'
     ];
 
     public function getNameAttribute()

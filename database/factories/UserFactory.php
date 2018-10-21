@@ -24,6 +24,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'mobile_no' => $faker->phoneNumber,
         'address' => $faker->address,
+        'joining_date' => $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d'),
         'dob' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'), // :D
     ];
 });

@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
+                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fa fa-birthday-cake" aria-hidden="true"></i>
@@ -260,6 +260,51 @@
                             </div>
                         </div>
 
+                        <strong class="text-muted d-block my-2">Organizational</strong>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input id="joining_date" placeholder="Joining Date" type="text" class="form-control input-date{{ $errors->has('joining_date') ? ' is-invalid' : '' }}" name="joining_date" value="{{ old('joining_date') }}" required>
+
+                                @if ($errors->has('joining_date'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('joining_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <input id="leaving_date" placeholder="Leaving Date (If left)" type="text" class="form-control input-date{{ $errors->has('leaving_date') ? ' is-invalid' : '' }}" name="leaving_date" value="{{ old('leaving_date') }}">
+
+                                @if ($errors->has('leaving_date'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('leaving_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input id="base_salary" placeholder="Base Salary (Per Month)" type="text" class="form-control{{ $errors->has('base_salary') ? ' is-invalid' : '' }}" name="base_salary" value="{{ old('base_salary') }}">
+
+                                @if ($errors->has('base_salary'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('base_salary') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <input id="weekly_hours_credit" placeholder="Weekly Hours Credit" type="number" class="form-control{{ $errors->has('weekly_hours_credit') ? ' is-invalid' : '' }}" name="weekly_hours_credit" value="{{ old('weekly_hours_credit') }}">
+
+                                @if ($errors->has('weekly_hours_credit'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('weekly_hours_credit') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <textarea name="remarks" placeholder="Remarks" id="remarks" class="form-control{{ $errors->has('remarks') ? ' is-invalid' : '' }}">{{ old('remarks') }}</textarea>
@@ -269,6 +314,13 @@
                                         <strong>{{ $errors->first('remarks') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="is_active" name="is_active" {{ old('is_active', true) ? 'checked' : '' }}>
+                                <label class="custom-control-label" for="is_active">Is Active <span class="text-light">(Only active users will be allowed to login)</span></label>
                             </div>
                         </div>
 
