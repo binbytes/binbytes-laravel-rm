@@ -50,13 +50,12 @@ class UserTest extends TestCase
             'last_name' => null,
             'email' => null,
             'mobile_no' => null,
-            'address' => null,
-            'dob' => null
+            'address' => null
         ]);
 
         $this->json('POST', '/users', $user)
             ->assertStatus(422)
-            ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'mobile_no', 'address', 'dob']);
+            ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'mobile_no', 'address']);
 
         $userWitIncorrectMail = raw(User::class, [
             'email' => 'foobar'
@@ -66,13 +65,25 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors('email');
 
-        $userWithIncorrectDob = raw(User::class, [
-            'dob' => 'test'
+        $userWithIncorrectDates = raw(User::class, [
+            'dob' => 'test',
+            'joining_date' => 'date',
+            'leaving_date' => 'date',
         ]);
 
-        $this->json('POST', '/users', $userWithIncorrectDob)
+        $this->json('POST', '/users', $userWithIncorrectDates)
             ->assertStatus(422)
-            ->assertJsonValidationErrors('dob');
+            ->assertJsonValidationErrors(['dob', 'joining_date', 'leaving_date']);
+
+
+        $userWithIncorrectNumbers = raw(User::class, [
+            'weekly_hours_credit' => 'test',
+            'base_salary' => 'test'
+        ]);
+
+        $this->json('POST', '/users', $userWithIncorrectNumbers)
+            ->assertStatus(422)
+            ->assertJsonValidationErrors(['weekly_hours_credit', 'base_salary']);
 
         // Uniqueness
         $user = create(User::class);
