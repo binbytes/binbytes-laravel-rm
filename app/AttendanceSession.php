@@ -22,6 +22,16 @@ class AttendanceSession extends Model
     ];
 
     /**
+     * Get total times in hours
+     *
+     * @return float
+     */
+    public function getHoursAttribute()
+    {
+        return hoursFromSeconds($this->total_times);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

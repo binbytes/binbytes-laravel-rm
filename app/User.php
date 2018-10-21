@@ -56,6 +56,15 @@ class User extends Authenticatable
      */
     public function getTodayAttendanceAttribute()
     {
+        return $this->attendanceOfTheDay(today());
+    }
+
+    /**
+     * @param $date
+     * @return UserAttendance|null|object
+     */
+    public function attendanceOfTheDay($date)
+    {
         return $this->attendance()
             ->where('date', today())
             ->first();

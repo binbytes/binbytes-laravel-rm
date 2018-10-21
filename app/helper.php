@@ -18,3 +18,15 @@ if(!function_exists('timeZoneList')) {
         });
     }
 }
+
+if(!function_exists('hoursFromSeconds')) {
+    /**
+     * Get readable hours from seconds
+     *
+     * @param $seconds
+     * @return float
+     */
+    function hoursFromSeconds($seconds) {
+        return number_format($seconds / 3600, 2);
+    }
+}

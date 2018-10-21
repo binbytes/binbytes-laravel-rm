@@ -6,7 +6,7 @@
 <div class="container pg-dashboard">
     <div class="row justify-content-center">
         @include('dashboard._today')
-        @include('dashboard._week', compact('weekAttendances'))
+        @include('dashboard._week')
     </div>
 </div>
 @endsection

@@ -26,7 +26,7 @@
                                 {{ $attendance->is_on_leave ? 'Yes' : '' }}
                             </td>
                             <td>
-                                <a href="#" aria-label="View">
+                                <a href="{{ route('day-attendance', $attendance->date) }}" aria-label="View">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>

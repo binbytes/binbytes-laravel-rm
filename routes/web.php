@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/projects', 'ProjectController')->except(['edit', 'update', 'delete']);
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
+    Route::get('/attendance/day/{date}', 'AttendanceController@dailyView')->name('day-attendance');
 });

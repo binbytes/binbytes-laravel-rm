@@ -13,7 +13,8 @@ class HomeController extends Controller
     {
         // Get all attendances log for week
         $weekAttendances = auth()->user()->week_attendances;
+        $todayAttendance = auth()->user()->today_attendance;
 
-        return view('home', compact('weekAttendances'));
+        return view('home', compact('weekAttendances', 'todayAttendance'));
     }
 }
