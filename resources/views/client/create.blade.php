@@ -41,7 +41,7 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}" required>
+                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fa fa-birthday-cake" aria-hidden="true"></i>
@@ -119,7 +119,7 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="email" placeholder="Email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" placeholder="Email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="far fa-envelope"></i>
