@@ -62,6 +62,16 @@ class User extends Authenticatable
     }
 
     /**
+     * @return UserAttendance|object|null
+     */
+    public function getWeekAttendancesAttribute()
+    {
+        return $this->attendance()
+            ->where('date', '>=', today()->startOfWeek())
+            ->get();
+    }
+
+    /**
      * @return UserAttendance|\Illuminate\Database\Eloquent\Model
      */
     public function firstOrCreateAttendance()

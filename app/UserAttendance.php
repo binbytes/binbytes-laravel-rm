@@ -34,6 +34,16 @@ class UserAttendance extends Model
     }
 
     /**
+     * Get total times in hours
+     *
+     * @return string
+     */
+    public function getHoursAttribute()
+    {
+        return number_format($this->total_times / 3600, 2);
+    }
+
+    /**
      * @return mixed
      */
     public function getTotalTimeAttribute()

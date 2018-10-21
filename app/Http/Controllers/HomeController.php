@@ -11,9 +11,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //to get total hours for today.
-        $totalTodayTimes = auth()->user()->today_attendance->totaltime;
+        // Get all attendances log for week
+        $weekAttendances = auth()->user()->week_attendances;
 
-        return view('home');
+        return view('home', compact('weekAttendances'));
     }
 }
