@@ -40,7 +40,7 @@ class LoginTest extends TestCase
             'email' => 'random@email.com',
             'password' => '12345678'
         ])
-            ->assertRedirect('/home');
+            ->assertRedirect('/dashboard');
 
         $this->assertTrue(auth()->id() == $user->getKey());
     }
@@ -60,7 +60,7 @@ class LoginTest extends TestCase
             'email' => 'random@email.com',
             'password' => '12345678'
         ])
-            ->assertRedirect('/home');
+            ->assertRedirect('/dashboard');
 
         Event::assertDispatched(UserSignIn::class, function ($e) use ($user) {
             return $e->user->id === $user->id;

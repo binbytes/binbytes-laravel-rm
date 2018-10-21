@@ -21,7 +21,7 @@ class AttendanceTest extends TestCase
         $this->json('POST', '/login', [
             'email' => 'random@email.com',
             'password' => '12345678'
-        ])->assertRedirect('/home');
+        ])->assertRedirect('/dashboard');
 
         $this->assertDatabaseHas('user_attendances', [
             'user_id' => $user->getKey(),
