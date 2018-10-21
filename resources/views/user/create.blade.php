@@ -285,7 +285,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input id="base_salary" placeholder="Base Salary (Per Month)" type="text" class="form-control{{ $errors->has('base_salary') ? ' is-invalid' : '' }}" name="base_salary" value="{{ old('base_salary') }}">
+                                <input id="base_salary" placeholder="Base Salary (Per Month)" type="number" class="form-control{{ $errors->has('base_salary') ? ' is-invalid' : '' }}" name="base_salary" value="{{ old('base_salary') }}">
 
                                 @if ($errors->has('base_salary'))
                                     <span class="invalid-feedback">
