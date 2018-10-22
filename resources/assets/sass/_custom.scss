@@ -2,6 +2,15 @@
   height: 100vh;
 }
 
+.login-form {
+  max-width: 330px;
+  .card-body {
+    overflow: hidden;
+    box-shadow: inset 0 4px 0 0 $binbytes-primray;
+    border-radius: 0.50rem;
+  }
+}
+
 .user-placeholder {
   height: 40px;
   width: 40px;

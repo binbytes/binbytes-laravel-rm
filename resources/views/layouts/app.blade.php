@@ -17,31 +17,31 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-100">
-    <div class="container-fluid" id="app">
-        @auth
-            <div class="row">
+    <div class="container-fluid h-100" id="app">
+        <div class="row h-100">
+            @auth
                 @include('layouts.partials.nav')
+            @endauth
 
-                <main class="main-content col-lg-11 col-md-9 col-sm-12 p-0 offset-lg-1 offset-md-3">
+            <main class="main-content {{ auth()->guest() ? 'col' : 'col-lg-11 col-md-9 col-sm-12 p-0 offset-lg-1 offset-md-3' }}">
+                @auth
                     @include('layouts.partials.top-nav')
+                @endauth
 
-                    <div class="main-content-container container-fluid px-4">
+                <div class="main-content-container container-fluid px-4 h-100">
+                    @auth
                         <div class="page-header row no-gutters py-4">
                             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                                 <span class="text-uppercase page-subtitle">{{ $subTitle ?? '' }}</span>
                                 <h3 class="page-title">{{ $pageTitle ?? '' }}</h3>
                             </div>
                         </div>
+                    @endauth
 
-                        @yield('content')
-                    </div>
-                </main>
-            </div>
-        @else
-            <div class="d-flex full-height w-100 justify-content-center align-items-center">
-                @yield('content')
-            </div>
-        @endauth
+                    @yield('content')
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Scripts -->
