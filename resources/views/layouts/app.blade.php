@@ -14,7 +14,7 @@
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-100">
     <div class="container-fluid h-100" id="app">
@@ -23,7 +23,7 @@
                 @include('layouts.partials.nav')
             @endauth
 
-            <main class="main-content {{ auth()->guest() ? 'col' : 'col-lg-11 col-md-9 col-sm-12 p-0 offset-lg-1 offset-md-3' }}">
+            <main class="main-content {{ auth()->guest() ? 'col' : 'col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3' }}">
                 @auth
                     @include('layouts.partials.top-nav')
                 @endauth
@@ -45,6 +45,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Leave;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -51,6 +52,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
+        Route::model('leaf', Leave::class);
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));

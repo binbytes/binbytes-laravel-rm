@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/clients', 'ClientController')->except(['edit', 'update', 'delete']);
     Route::resource('/users', 'UserController')->except(['edit', 'update', 'delete']);
     Route::resource('/projects', 'ProjectController')->except(['edit', 'update', 'delete']);
+    Route::resource('/holidays', 'HolidayController')->except(['edit', 'update', 'delete']);
+    Route::resource('/leaves', 'LeaveController')->except(['edit', 'update', 'delete']);
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{date}', 'AttendanceController@dailyView')->name('day-attendance');

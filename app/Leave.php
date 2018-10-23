@@ -19,4 +19,9 @@ class Leave extends Model
         'user_id', 'subject', 'description', 'start_date', 'start_date_partial_hours', 'end_date', 'end_date_partial_hours',
         'is_approved', 'approved_on', 'approved_by', 'approved_note'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

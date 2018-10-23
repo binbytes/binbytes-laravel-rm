@@ -1,4 +1,4 @@
-<aside class="main-sidebar col-12 col-md-3 col-lg-1 px-0">
+<aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
     <div class="main-navbar">
         <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
             <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
@@ -46,6 +46,18 @@
                 <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="/projects">
                     <i class="fa fa-tasks"></i>
                     <span>Projects</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('holidays*') ? 'active' : '' }}" href="/holidays">
+                    <i class="fa fa-calendar-alt"></i>
+                    <span>Holidays</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('leaves*') ? 'active' : '' }}" href="/leaves">
+                    <i class="fa fa-calendar-alt"></i>
+                    <span>Leaves</span>
                 </a>
             </li>
         </ul>
