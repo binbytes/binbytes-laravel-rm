@@ -8,7 +8,9 @@
         <div class="col-lg-9 col-md-12">
             <div class="card card-small mb-3">
                 <div class="card-body">
-                    {{ html()->form('POST', encrypt('multipart/form-data'), route('projects.store'))->open() }}
+                    {{ html()->form('POST', route('projects.store'))
+                        ->acceptsFiles()
+                        ->open() }}
                         @csrf
 
                         <div class="form-group row">

@@ -8,7 +8,9 @@
         <div class="col-lg-9 col-md-12">
             <div class="card card-small mb-3">
                 <div class="card-body">
-                    {{ html()->form('POST', encrypt('multipart/form-data'), route('users.store'))->open() }}
+                    {{ html()->form('POST', route('users.store'))
+                        ->acceptsFiles()
+                        ->open() }}
                         @csrf
 
                         <strong class="text-muted d-block my-2">Personal Detail</strong>
