@@ -22,7 +22,9 @@ class LeaveTest extends TestCase
     {
         $this->logIn();
 
-        $leave = create(Leave::class);
+        $leave = create(Leave::class, [
+            'user_id' => auth()->id()
+        ]);
 
         $this->get('/leaves')
             ->assertSee($leave->subject)
@@ -46,6 +48,10 @@ class LeaveTest extends TestCase
         $leave = raw(Leave::class);
 
         $this->json('POST', '/leaves', $leave)
-            ->assertStatus(403);
+            ->assertStatus(200);
+
+        $this->get('/leaves')
+            ->assertSee($leave['subject'])
+            ->assertSee(auth()->user()->name);
     }
 }

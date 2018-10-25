@@ -3,7 +3,10 @@
 namespace Tests\Feature;
 
 use App\Holiday;
+use App\Notifications\HolidayAdded;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Notifications\Notification;
 use Tests\TestCase;
 
 class HolidayTest extends TestCase
@@ -46,5 +49,22 @@ class HolidayTest extends TestCase
 
         $this->json('POST', '/holidays', $holiday)
             ->assertStatus(403);
+    }
+
+    /** @test */
+    public function a_admin_user_can_create_holiday()
+    {
+        \Event::fake();
+        $this->logIn(true);
+
+        $holiday = raw(Holiday::class);
+
+        $this->json('POST', '/holidays', $holiday)
+            ->assertStatus(200);
+
+        \Event::assertDispatched(\App\Events\HolidayAdded::class);
+
+        $this->get('/holidays')
+            ->assertSee($holiday['title']);
     }
 }

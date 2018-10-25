@@ -11,9 +11,13 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function logIn()
+    public function logIn($isAdmin = false)
     {
-        $user = create(User::class);
+        // For now
+        $user = create(User::class, $isAdmin ? [
+            'email' => array_first(config('rm.admin'))
+        ] : []);
+
         $attendance = create(UserAttendance::class, [
             'user_id' => $user->getKey()
         ]);
