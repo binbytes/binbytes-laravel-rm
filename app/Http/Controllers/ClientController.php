@@ -4,17 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\ClientRequest;
+use Yajra\Datatables\Datatables;
 
 class ClientController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
     public function index()
     {
-        $clients = Client::latest()->paginate();
+        if(request()->ajax()) {
+            return Datatables::of(Client::query())
+                ->addColumn('action', function (Client $client) {
+                    return view('shared.dtAction', [
+                        'updateUrl' => route('clients.show', $client),
+                        'deleteUrl' => route('clients.destroy', $client)
+                    ]);
+                })
+                ->make(true);
+        }
 
         return view('client.list', compact('clients'));
     }
