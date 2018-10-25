@@ -8,7 +8,7 @@
         <div class="col-lg-9 col-md-12">
             <div class="card card-small mb-3">
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('clients.store') }}">
+                    {{ html()->form('POST', encrypt('multipart/form-data'), route('clients.store'))->open() }}
                         @csrf
 
                         <strong class="text-muted d-block my-2">Personal Detail</strong>
@@ -20,7 +20,12 @@
 
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="name" type="text" placeholder="Name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                {{ html()->text('name')
+                                        ->placeholder('Name')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('name')])
+                                        ->required()
+                                        ->autofocus()
+                                }}
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
@@ -30,7 +35,10 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="company_name" type="text" placeholder="Company Name" class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" name="company_name" value="{{ old('company_name') }}">
+                                {{ html()->text('company_name')
+                                        ->placeholder('Company Name')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('company_name')])
+                                 }}
 
                                 @if ($errors->has('company_name'))
                                     <span class="invalid-feedback">
@@ -41,7 +49,10 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="dob" placeholder="Date of Birth" type="text" class="form-control input-date{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}">
+                                    {{ html()->text('dob')
+                                            ->placeholder('Date of Birth')
+                                            ->class(['form-control input-date', 'is-invalid' => $errors->has('dob')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fa fa-birthday-cake" aria-hidden="true"></i>
@@ -59,7 +70,10 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <textarea id="address" placeholder="Address" type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address">{{ old('address') }}</textarea>
+                                {{ html()->textarea('address')
+                                        ->placeholder('Address')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('address')])
+                                }}
 
                                 @if ($errors->has('address'))
                                     <span class="invalid-feedback">
@@ -71,7 +85,10 @@
 
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="country" type="text" placeholder="Country" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}">
+                                {{ html()->text('country')
+                                            ->placeholder('Country')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('country')])
+                                }}
 
                                 @if ($errors->has('country'))
                                     <span class="invalid-feedback">
@@ -81,7 +98,10 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="city" type="text" placeholder="City" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" value="{{ old('city') }}">
+                                {{ html()->text('city')
+                                            ->placeholder('City')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('city')])
+                                }}
 
                                 @if ($errors->has('city'))
                                     <span class="invalid-feedback">
@@ -91,11 +111,11 @@
                             </div>
 
                             <div class="col-md-4">
-                                <select id="timezone" placeholder="Timezone" class="custom-select {{ $errors->has('timezone') ? ' is-invalid' : '' }}" name="timezone">
-                                    @foreach(timeZoneList() as $timezone)
-                                        <option>{{ $timezone }}</option>
-                                    @endforeach
-                                </select>
+                                {{ html()->select('timezone')
+                                        ->placeholder('Timezone')
+                                        ->class(['custom-select', 'is-invalid' => $errors->has('timezone')])
+                                        ->options(timeZoneList())
+                                }}
 
                                 @if ($errors->has('timezone'))
                                     <span class="invalid-feedback">
@@ -108,7 +128,10 @@
                         <strong class="text-muted d-block my-2">Account Detail</strong>
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="mobile_no" type="text" placeholder="Mobile Number" class="form-control{{ $errors->has('mobile_no') ? ' is-invalid' : '' }}" name="mobile_no" value="{{ old('mobile_no') }}">
+                                {{ html()->text('mobile_no')
+                                        ->placeholder('Mobile Number')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('mobile_no')])
+                                }}
 
                                 @if ($errors->has('mobile_no'))
                                     <span class="invalid-feedback">
@@ -119,7 +142,11 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="email" placeholder="Email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
+                                    {{ html()->email('email')
+                                        ->placeholder('Email')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('email')])
+                                        ->required()
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="far fa-envelope"></i>
@@ -139,7 +166,10 @@
                         <div class="form-group row">
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="skype" placeholder="Skype" type="text" class="form-control{{ $errors->has('skype') ? ' is-invalid' : '' }}" name="skype" value="{{ old('skype') }}">
+                                    {{ html()->text('skype')
+                                            ->placeholder('Skype')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('skype')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-skype"></i>
@@ -156,7 +186,10 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="trello" placeholder="Trello" type="text" class="form-control{{ $errors->has('trello') ? ' is-invalid' : '' }}" name="trello" value="{{ old('trello') }}">
+                                    {{ html()->text('trello')
+                                            ->placeholder('Trello')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('trello')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-trello"></i>
@@ -173,7 +206,10 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="slack" placeholder="Slack" type="password" class="form-control{{ $errors->has('slack') ? ' is-invalid' : '' }}" name="slack" value="{{ old('slack') }}">
+                                    {{ html()->text('slack')
+                                            ->placeholder('Slack')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('slack')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-slack"></i>
@@ -192,7 +228,10 @@
                         <div class="form-group row">
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="github" placeholder="Github" type="text" class="form-control{{ $errors->has('github') ? ' is-invalid' : '' }}" name="github" value="{{ old('github') }}">
+                                    {{ html()->text('github')
+                                            ->placeholder('Github')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('github')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-github"></i>
@@ -209,7 +248,10 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="twitter" placeholder="Twitter" type="text" class="form-control{{ $errors->has('twitter') ? ' is-invalid' : '' }}" name="twitter" value="{{ old('twitter') }}">
+                                    {{ html()->text('twitter')
+                                            ->placeholder('Twitter')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('twitter')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-twitter"></i>
@@ -226,7 +268,10 @@
 
                             <div class="col-md-4">
                                 <div class="input-group input-group-seamless">
-                                    <input id="linkedin" placeholder="Linkedin" type="password" class="form-control{{ $errors->has('linkedin') ? ' is-invalid' : '' }}" name="linkedin" value="{{ old('linkedin') }}">
+                                    {{ html()->text('linkedin')
+                                            ->placeholder('Linkedin')
+                                            ->class(['form-control', 'is-invalid' => $errors->has('linkedin')])
+                                    }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fab fa-linkedin"></i>
@@ -244,7 +289,10 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <textarea name="remarks" placeholder="Remarks" id="remarks" class="form-control{{ $errors->has('remarks') ? ' is-invalid' : '' }}">{{ old('remarks') }}</textarea>
+                                {{ html()->textarea('remarks')
+                                        ->placeholder('Remarks')
+                                        ->class(['form-control', 'is-invalid' => $errors->has('remarks')])
+                                }}
 
                                 @if ($errors->has('remarks'))
                                     <span class="invalid-feedback">
@@ -256,16 +304,19 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Save
-                                </button>
+                                {{ html()->button('Save')
+                                        ->type('submit')
+                                        ->class('btn btn-primary')
+                                 }}
 
-                                <a class="btn btn-link" href="/users">
-                                    Cancel
-                                </a>
+                                {{ html()->a()
+                                       ->href('/clients')
+                                       ->text('Cancel')
+                                       ->class('btn btn-link')
+                                 }}
                             </div>
                         </div>
-                    </form>
+                    {{ html()->form()->close() }}
                 </div>
             </div>
         </div>
