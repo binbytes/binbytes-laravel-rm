@@ -21,7 +21,6 @@ class HolidayPolicy
      * Determine whether the user can view the holiday.
      *
      * @param  \App\User  $user
-     * @param  \App\Holiday  $holiday
      * @return mixed
      */
     public function view(User $user)

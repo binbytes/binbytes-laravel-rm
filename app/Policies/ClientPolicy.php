@@ -22,6 +22,17 @@ class ClientPolicy
      * @param  \App\User  $user
      * @return mixed
      */
+    public function index(User $user)
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view the client.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
     public function view(User $user)
     {
         return false;

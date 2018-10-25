@@ -29,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::resource('clients', \App\Client::class);
+        Gate::resource('users', \App\User::class);
+        Gate::resource('projects', \App\Project::class);
+        Gate::resource('holidays', \App\Holiday::class);
+        Gate::resource('leaves', \App\Leave::class);
     }
 }

@@ -20,7 +20,6 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
      * @return mixed
      */
     public function view(User $user)
@@ -43,7 +42,6 @@ class UserPolicy
      * Determine whether the user can show the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
      * @return mixed
      */
     public function show(User $user)
@@ -55,7 +53,6 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
      * @return mixed
      */
     public function update(User $user)
