@@ -3,6 +3,22 @@
     <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
         <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"></div>
         <ul class="navbar-nav border-left flex-row pl-2">
+            <li class="nav-item border-right dropdown notifications">
+                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link-icon__wrapper">
+                        <i class="material-icons"></i>
+                        <span class="badge badge-pill badge-danger">{{ auth()->user()->unreadNotifications()->count() }}</span>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                    @forelse(auth()->user()->getRecentNotifications() as $notification)
+                        @include('notification')
+                    @empty
+                        <a class="dropdown-item text-center" href="#"> No Notifications </a>
+                    @endforelse
+                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                </div>
+            </li>
             <li class="nav-item align-self-center">
                 <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
             </li>

@@ -98,4 +98,14 @@ class User extends Authenticatable
             'date' => today()
         ]);
     }
+
+    /**
+     * Get recent notifications
+     *
+     * @return mixed
+     */
+    public function getRecentNotifications()
+    {
+        return $this->notifications()->take(5)->get();
+    }
 }
