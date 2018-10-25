@@ -41,15 +41,15 @@
                                 <td>
                                     <div class="row justify-content-center">
                                         @can('show', App\User::class)
-                                            <a href="/users/{{ $user->id }}">
+                                            <a class="btn btn-white" href="/users/{{ $user->id }}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('delete', App\User::class)
                                             {{ html()->form('DELETE', route('users.destroy', $user->id))->open() }}
-                                            <button type="submit" class="btn pt-1">
-                                                <i class="fas fa-trash-alt" style="color: red"></i>
-                                            </button>
+                                                <button type="submit" class="btn btn-white">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
                                             {{ html()->form()->close() }}
                                         @endcan
                                     </div>

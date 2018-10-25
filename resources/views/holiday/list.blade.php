@@ -35,14 +35,14 @@
                                 <td>{{ $holiday->end_date }}</td>
                                 <td>
                                     <div class="row justify-content-center">
-                                        <a href="/holidays/{{ $holiday->id }}">
+                                        <a class="btn btn-white" href="/holidays/{{ $holiday->id }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         @can('delete', App\Holiday::class)
                                             {{ html()->form('DELETE', route('holidays.destroy', $holiday->id))->open() }}
-                                            <button type="submit" class="btn pt-1">
-                                                <i class="fas fa-trash-alt" style="color: red"></i>
-                                            </button>
+                                                <button type="submit" class="btn btn-white">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
                                             {{ html()->form()->close() }}
                                         @endcan
                                     </div>

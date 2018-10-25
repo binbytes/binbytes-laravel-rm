@@ -40,12 +40,12 @@
                                     <td>{{ $client->twitter }}</td>
                                     <td>
                                         <div class="row justify-content-center">
-                                            <a href="/clients/{{ $client->id }}">
+                                            <a class="btn btn-white" href="/clients/{{ $client->id }}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             {{ html()->form('DELETE', route('clients.destroy', $client->id))->open() }}
-                                                <button type="submit" class="btn pt-1">
-                                                    <i class="fas fa-trash-alt" style="color: red"></i>
+                                                <button type="submit" class="btn btn-white">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             {{ html()->form()->close() }}
                                         </div>
