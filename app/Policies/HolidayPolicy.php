@@ -18,6 +18,17 @@ class HolidayPolicy
     }
 
     /**
+     * Determine whether the user can view the holidays
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function index(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can view the holiday.
      *
      * @param  \App\User  $user

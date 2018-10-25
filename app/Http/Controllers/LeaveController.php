@@ -10,6 +10,14 @@ use App\Http\Requests\LeaveRequest;
 class LeaveController extends Controller
 {
     /**
+     * LeaveController constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Leave::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

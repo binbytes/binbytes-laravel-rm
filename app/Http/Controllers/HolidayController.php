@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 class HolidayController extends Controller
 {
     /**
+     * HolidayController constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Holiday::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

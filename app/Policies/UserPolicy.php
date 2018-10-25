@@ -17,6 +17,17 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can view the projects.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function index(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user

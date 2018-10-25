@@ -14,9 +14,10 @@ use Faker\Generator as Faker;
 */
 
 
-$factory->define(App\Holiday::class, function (Faker $faker) {
+$factory->define(App\Leave::class, function (Faker $faker) {
     return array(
-        'title' => $faker->text(10),
+        'user_id' => factory(\App\User::class)->create()->id,
+        'subject' => $faker->text(10), //
         'description' => $faker->paragraph,
         'start_date' => today()->addDay(rand(1, 10)),
         'end_date' => today()->addDay(rand(11, 20)),
