@@ -24,6 +24,9 @@
             </li>
             <li class="nav-item dropdown align-self-center">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    @if(auth()->user()->avatar)
+                        <img src="{{ auth()->user()->avatar_url }}" alt="user-avatar">
+                    @endif
                     <span class="d-none d-md-inline-block">{{ auth()->user()->name }}</span>
                 </a>
 
