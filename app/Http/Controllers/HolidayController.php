@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\HolidayAdded;
 use App\Holiday;
 use App\Http\Requests\HolidayRequest;
 use Carbon\Carbon;
@@ -44,7 +45,8 @@ class HolidayController extends Controller
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
 
-        Holiday::create($data);
+        $holiday = Holiday::create($data);
+        event(new HolidayAdded($holiday));
 
         if(request()->wantsJson()) {
             return response([], 200);

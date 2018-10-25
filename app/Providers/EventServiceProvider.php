@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\HolidayAdded;
 use App\Events\UserSignIn;
+use App\Listeners\HolidayAddedListener;
 use App\Listeners\UserLoggedInListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         UserSignIn::class => [
             UserLoggedInListener::class,
+        ],
+        HolidayAdded::class => [
+            HolidayAddedListener::class,
         ],
     ];
 
