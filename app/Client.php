@@ -8,7 +8,8 @@ class Client extends Model
 {
     protected $fillable = [
         'name', 'company_name', 'avatar', 'timezone', 'address', 'city', 'country', 'dob',
-        'mobile_no', 'email', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin'
+        'mobile_no', 'email', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
+        'remarks'
     ];
 
     /**
