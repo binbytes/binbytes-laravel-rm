@@ -11,7 +11,7 @@ if(!function_exists('timeZoneList')) {
             $optionsArray = timezone_identifiers_list();
             $timezones = [];
             foreach ($optionsArray as $key => $timezone) {
-                $timezones[$key] = $timezone;
+                $timezones[$timezone] = $timezone;
             }
 
             return $timezones;
