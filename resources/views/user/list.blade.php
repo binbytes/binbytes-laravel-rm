@@ -5,13 +5,16 @@
 @section('content')
     <div class="row">
         <div class="col">
+            @include('shared.alert')
             <div class="card card-small mb-4">
-                <div class="card-header border-bottom">
-                    <a href="/users/create" class="btn btn-primary pull-right">
-                        <i class="fa fa-plus mr-2"></i>
-                        Add User
-                    </a>
-                </div>
+                @can('create', App\User::class)
+                    <div class="card-header border-bottom">
+                        <a href="/users/create" class="btn btn-primary pull-right">
+                            <i class="fa fa-plus mr-2"></i>
+                            Add User
+                        </a>
+                    </div>
+                @endcan
                 <div class="card-body p-0 pb-3 text-center">
                     <table class="table mb-0">
                         <thead class="bg-light">
@@ -19,7 +22,9 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Mobile Number</th>
-                                <th scope="col">Action</th>
+                                @can('show', App\User::class)
+                                    <th scope="col">Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +39,20 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->mobile_no }}</td>
                                 <td>
-                                    <a href="/users/{{ $user->id }}">View</a>
+                                    <div class="row justify-content-center">
+                                        @can('show', App\User::class)
+                                            <a href="/users/{{ $user->id }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('delete', App\User::class)
+                                            {{ html()->form('DELETE', route('users.destroy', $user->id))->open() }}
+                                            <button type="submit" class="btn pt-1">
+                                                <i class="fas fa-trash-alt" style="color: red"></i>
+                                            </button>
+                                            {{ html()->form()->close() }}
+                                        @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

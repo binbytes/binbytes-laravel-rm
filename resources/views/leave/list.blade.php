@@ -5,6 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col">
+            @include('shared.alert')
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <a href="/leaves/create" class="btn btn-primary pull-right">
@@ -38,7 +39,20 @@
                                 <td>{{ $leave->start_date }}</td>
                                 <td>{{ $leave->end_date }}</td>
                                 <td>
-                                    <a href="/leaves/{{ $leave->id }}">View</a>
+                                    <div class="row justify-content-center">
+                                        @can('show', $leave)
+                                            <a href="/leaves/{{ $leave->id }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('delete', $leave)
+                                            {{ html()->form('DELETE', route('leaves.destroy', $leave->id))->open() }}
+                                            <button type="submit" class="btn pt-1">
+                                                <i class="fas fa-trash-alt" style="color: red"></i>
+                                            </button>
+                                            {{ html()->form()->close() }}
+                                        @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

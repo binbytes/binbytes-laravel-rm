@@ -5,13 +5,16 @@
 @section('content')
     <div class="row">
         <div class="col">
+            @include('shared.alert')
             <div class="card card-small mb-4">
-                <div class="card-header border-bottom">
-                    <a href="/holidays/create" class="btn btn-primary pull-right">
-                        <i class="fa fa-plus mr-2"></i>
-                        Add Holiday
-                    </a>
-                </div>
+                @can('create', App\Holiday::class)
+                    <div class="card-header border-bottom">
+                        <a href="/holidays/create" class="btn btn-primary pull-right">
+                            <i class="fa fa-plus mr-2"></i>
+                            Add Holiday
+                        </a>
+                    </div>
+                @endcan
                 <div class="card-body p-0 text-center">
                     <table class="table mb-0">
                         <thead class="bg-light">
@@ -31,7 +34,18 @@
                                 <td>{{ $holiday->start_date }}</td>
                                 <td>{{ $holiday->end_date }}</td>
                                 <td>
-                                    <a href="/holidays/{{ $holiday->id }}">View</a>
+                                    <div class="row justify-content-center">
+                                        <a href="/holidays/{{ $holiday->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        @can('delete', App\Holiday::class)
+                                            {{ html()->form('DELETE', route('holidays.destroy', $holiday->id))->open() }}
+                                            <button type="submit" class="btn pt-1">
+                                                <i class="fas fa-trash-alt" style="color: red"></i>
+                                            </button>
+                                            {{ html()->form()->close() }}
+                                        @endcan
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -5,6 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col">
+            @include('shared.alert')
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <a href="/clients/create" class="btn btn-primary pull-right">
@@ -38,7 +39,16 @@
                                     <td>{{ $client->linkedin }}</td>
                                     <td>{{ $client->twitter }}</td>
                                     <td>
-                                        <a href="/clients/{{ $client->id }}">View</a>
+                                        <div class="row justify-content-center">
+                                            <a href="/clients/{{ $client->id }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            {{ html()->form('DELETE', route('clients.destroy', $client->id))->open() }}
+                                                <button type="submit" class="btn pt-1">
+                                                    <i class="fas fa-trash-alt" style="color: red"></i>
+                                                </button>
+                                            {{ html()->form()->close() }}
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

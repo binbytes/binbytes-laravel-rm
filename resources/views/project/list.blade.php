@@ -5,12 +5,16 @@
 @section('content')
     <div class="row">
         <div class="col">
-            <div class="mb-5">
-                <a href="/projects/create" class="btn btn-primary pull-right">
-                    <i class="fa fa-plus mr-2"></i>
-                    Add Project
-                </a>
-            </div>
+            @include('shared.alert')
+
+            @can('create', App\Project::class)
+                <div class="mb-5">
+                    <a href="/projects/create" class="btn btn-primary pull-right">
+                        <i class="fa fa-plus mr-2"></i>
+                        Add Project
+                    </a>
+                </div>
+            @endcan
 
             @foreach($projects->chunk(3) as $chunkProjects)
                 <div class="row">

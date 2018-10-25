@@ -108,4 +108,9 @@ class User extends Authenticatable
     {
         return $this->notifications()->take(5)->get();
     }
+
+    public function isAdmin()
+    {
+        return in_array($this->email, config('rm.admin'));;
+    }
 }

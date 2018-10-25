@@ -52,6 +52,8 @@ class HolidayController extends Controller
             return response([], 200);
         }
 
+        session()->flash('alert-success', 'Holiday has been created.');
+
         return redirect('/holidays');
     }
 
@@ -92,11 +94,16 @@ class HolidayController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Holiday $holiday
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Holiday $holiday)
     {
-        //
+        $holiday->delete();
+
+        session()->flash('alert-danger', 'Holiday has been deleted.');
+
+        return back();
     }
 }

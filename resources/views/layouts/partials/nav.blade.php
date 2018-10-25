@@ -30,12 +30,14 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            @can('view', App\Client::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}" href="/clients">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
                 </a>
             </li>
+            @endcan
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">
                     <i class="fas fa-users"></i>

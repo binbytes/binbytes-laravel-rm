@@ -48,6 +48,8 @@ class UserController extends Controller
             return response([], 200);
         }
 
+        session()->flash('alert-success', 'User has been created.');
+
         return redirect('/users');
     }
 
@@ -99,12 +101,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        session()->flash('alert-danger', 'User has been deleted.');
+
+        return back();
     }
 
     protected function uploadFile()

@@ -50,6 +50,8 @@ class LeaveController extends Controller
             return response([], 200);
         }
 
+        session()->flash('alert-success', 'Leave has been created.');
+
         return redirect('/leaves');
     }
 
@@ -90,11 +92,16 @@ class LeaveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Leave $leave
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Leave $leave)
     {
-        //
+        $leave->delete();
+
+        session()->flash('alert-danger', 'Client has been deleted.');
+
+        return back();
     }
 }

@@ -48,6 +48,8 @@ class ClientController extends Controller
             return response([], 200);
         }
 
+        session()->flash('alert-success', 'Client has been created.');
+
         return redirect('/clients');
     }
 
@@ -99,12 +101,17 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Client $client
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        session()->flash('alert-danger', 'Client has been deleted.');
+
+        return back();
     }
 
     protected function uploadFile()
