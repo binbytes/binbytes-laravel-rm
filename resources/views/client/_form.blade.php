@@ -7,95 +7,39 @@
 
 <div class="form-group row">
     <div class="col-md-4">
-        {{ html()->text('first_name')
-                ->placeholder('First Name')
-                ->class(['form-control', 'is-invalid' => $errors->has('first_name')])
+        {{ html()->text('name')
+                ->placeholder('Name')
+                ->class(['form-control', 'is-invalid' => $errors->has('name')])
                 ->required()
                 ->autofocus()
         }}
 
-        @if ($errors->has('first_name'))
+        @if ($errors->has('name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
         @endif
     </div>
 
     <div class="col-md-4">
-        {{ html()->text('middle_name')
-                ->placeholder('Middle Name')
-                ->class(['form-control', 'is-invalid' => $errors->has('middle_name')])
-                ->required()
-        }}
+        {{ html()->text('company_name')
+                ->placeholder('Company Name')
+                ->class(['form-control', 'is-invalid' => $errors->has('company_name')])
+         }}
 
-        @if ($errors->has('middle_name'))
+        @if ($errors->has('company_name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
+                                        <strong>{{ $errors->first('company_name') }}</strong>
                                     </span>
         @endif
     </div>
 
-    <div class="col-md-4">
-        {{ html()->text('last_name')
-                ->placeholder('Last Name')
-                ->class(['form-control', 'is-invalid' => $errors->has('last_name')])
-                ->required()
-        }}
-
-        @if ($errors->has('last_name'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-        @endif
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-4">
-        <div class="input-group input-group-seamless">
-            {{ html()->email('personal_email')
-                ->placeholder('Personal Email')
-                ->class(['form-control', 'is-invalid' => $errors->has('personal_email')])
-            }}
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <i class="far fa-envelope"></i>
-                </div>
-            </div>
-        </div>
-
-        @if ($errors->has('personal_email'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('personal_email') }}</strong>
-                                    </span>
-        @endif
-    </div>
-    <div class="col-md-4">
-        <div class="input-group input-group-seamless">
-            {{ html()->text('mobile_no')
-                ->placeholder('Mobile Number')
-                ->class(['form-control', 'is-invalid' => $errors->has('mobile_no')])
-                ->required()
-            }}
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <i class="fa fa-phone"></i>
-                </div>
-            </div>
-        </div>
-
-        @if ($errors->has('mobile_no'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('mobile_no') }}</strong>
-                                    </span>
-        @endif
-    </div>
     <div class="col-md-4">
         <div class="input-group input-group-seamless">
             {{ html()->text('dob')
                     ->placeholder('Date of Birth')
                     ->class(['form-control input-date', 'is-invalid' => $errors->has('dob')])
-             }}
+            }}
             <div class="input-group-append">
                 <div class="input-group-text">
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i>
@@ -112,12 +56,11 @@
 </div>
 
 <div class="form-group row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         {{ html()->textarea('address')
                 ->placeholder('Address')
                 ->class(['form-control', 'is-invalid' => $errors->has('address')])
-                ->required()
-         }}
+        }}
 
         @if ($errors->has('address'))
             <span class="invalid-feedback">
@@ -127,18 +70,59 @@
     </div>
 </div>
 
+<div class="form-group row">
+    <div class="col-md-4">
+        {{ html()->text('country')
+                    ->placeholder('Country')
+                    ->class(['form-control', 'is-invalid' => $errors->has('country')])
+        }}
+
+        @if ($errors->has('country'))
+            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('country') }}</strong>
+                                        </span>
+        @endif
+    </div>
+
+    <div class="col-md-4">
+        {{ html()->text('city')
+                    ->placeholder('City')
+                    ->class(['form-control', 'is-invalid' => $errors->has('city')])
+        }}
+
+        @if ($errors->has('city'))
+            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+        @endif
+    </div>
+
+    <div class="col-md-4">
+        {{ html()->select('timezone')
+                ->placeholder('Timezone')
+                ->class(['custom-select', 'is-invalid' => $errors->has('timezone')])
+                ->options(timeZoneList())
+        }}
+
+        @if ($errors->has('timezone'))
+            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('timezone') }}</strong>
+                                    </span>
+        @endif
+    </div>
+</div>
+
 <strong class="text-muted d-block my-2">Account Detail</strong>
 <div class="form-group row">
     <div class="col-md-4">
-        {{ html()->text('username')
-                ->placeholder('Username')
-                ->class(['form-control', 'is-invalid' => $errors->has('username')])
-                ->required()
+        {{ html()->text('mobile_no')
+                ->placeholder('Mobile Number')
+                ->class(['form-control', 'is-invalid' => $errors->has('mobile_no')])
         }}
 
-        @if ($errors->has('username'))
+        @if ($errors->has('mobile_no'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('mobile_no') }}</strong>
                                     </span>
         @endif
     </div>
@@ -160,20 +144,6 @@
         @if ($errors->has('email'))
             <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-        @endif
-    </div>
-
-    <div class="col-md-4">
-        {{ html()->password('password')
-                ->placeholder('Password')
-                ->class(['form-control', 'is-invalid' => $errors->has('password')])
-                ->value('')
-        }}
-
-        @if ($errors->has('password'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
         @endif
     </div>
@@ -296,68 +266,9 @@
             </div>
         </div>
 
-        @if ($errors->has('linkedin'))
+        @if ($errors->has('slack'))
             <span class="invalid-feedback">
                                         <strong>{{ $errors->first('linkedin') }}</strong>
-                                    </span>
-        @endif
-    </div>
-</div>
-
-<strong class="text-muted d-block my-2">Organizational</strong>
-<div class="form-group row">
-    <div class="col-md-6">
-        {{ html()->text('joining_date')
-                    ->placeholder('Joining Date')
-                    ->class(['form-control input-date', 'is-invalid' => $errors->has('joining_date')])
-        }}
-
-        @if ($errors->has('joining_date'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('joining_date') }}</strong>
-                                    </span>
-        @endif
-    </div>
-
-    <div class="col-md-6">
-        {{ html()->text('leaving_date')
-                    ->placeholder('Leaving Date (If left)')
-                    ->class(['form-control input-date', 'is-invalid' => $errors->has('leaving_date')])
-        }}
-
-        @if ($errors->has('leaving_date'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('leaving_date') }}</strong>
-                                    </span>
-        @endif
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-6">
-        {{ html()->text('base_salary')
-                ->placeholder('Base Salary (Per Month)')
-                ->type('number')
-                ->class(['form-control', 'is-invalid' => $errors->has('base_salary')])
-        }}
-
-        @if ($errors->has('base_salary'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('base_salary') }}</strong>
-                                    </span>
-        @endif
-    </div>
-
-    <div class="col-md-6">
-        {{ html()->text('weekly_hours_credit')
-                ->placeholder('Weekly Hours Credit')
-                ->type('number')
-                ->class(['form-control', 'is-invalid' => $errors->has('weekly_hours_credit')])
-        }}
-
-        @if ($errors->has('weekly_hours_credit'))
-            <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('weekly_hours_credit') }}</strong>
                                     </span>
         @endif
     </div>
@@ -368,29 +279,13 @@
         {{ html()->textarea('remarks')
                 ->placeholder('Remarks')
                 ->class(['form-control', 'is-invalid' => $errors->has('remarks')])
-         }}
+        }}
 
         @if ($errors->has('remarks'))
             <span class="invalid-feedback">
                                         <strong>{{ $errors->first('remarks') }}</strong>
                                     </span>
         @endif
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="custom-control custom-checkbox">
-        {{ html()->checkbox('is_active')
-                ->id('is_active')
-                ->class('custom-control-input')
-        }}
-        {{ html()->label('Is Active')
-                ->for('is_active')
-                ->class('custom-control-label')
-        }}
-        {{ html()->span('(Only active users will be allowed to login)')
-                ->class('text-light')
-        }}
     </div>
 </div>
 
@@ -402,7 +297,7 @@
          }}
 
         {{ html()->a()
-               ->href('/users')
+               ->href('/clients')
                ->text('Cancel')
                ->class('btn btn-link')
          }}

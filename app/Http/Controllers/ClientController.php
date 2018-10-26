@@ -8,6 +8,11 @@ use Yajra\Datatables\Datatables;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Client::class);
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
@@ -18,14 +23,15 @@ class ClientController extends Controller
             return Datatables::of(Client::query())
                 ->addColumn('action', function (Client $client) {
                     return view('shared.dtAction', [
-                        'updateUrl' => route('clients.show', $client),
-                        'deleteUrl' => route('clients.destroy', $client)
+                        'showUrl' => route('clients.show', $client),
+                        'deleteUrl' => route('clients.destroy', $client),
+                        'editUrl' => route('clients.edit', $client)
                     ]);
                 })
                 ->make(true);
         }
 
-        return view('client.list', compact('clients'));
+        return view('client.list');
     }
 
     /**
@@ -76,12 +82,12 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        //
+        return view('client.update', compact('client'));
     }
 
     /**
@@ -103,6 +109,8 @@ class ClientController extends Controller
         if(request()->wantsJson()) {
             return response([], 200);
         }
+
+        session()->flash('alert-success', 'Client has been updated.');
 
         return redirect('/clients');
     }

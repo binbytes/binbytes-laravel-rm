@@ -7,6 +7,8 @@ use App\Holiday;
 use App\Http\Requests\HolidayRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use Gate;
 
 class HolidayController extends Controller
 {
@@ -22,12 +24,28 @@ class HolidayController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function index()
     {
-        $holidays = Holiday::latest()->paginate();
+        if(request()->ajax()) {
+            return Datatables::of(Holiday::query())
+                ->addColumn('action', function (Holiday $holiday) {
+                    $data = [];
+                    $data['showUrl'] = route('holidays.show', $holiday);
+                    if(Gate::allows('delete', $holiday)) {
+                        $data['deleteUrl'] = route('holidays.destroy', $holiday);
+                    }
+                    if(Gate::allows('update', $holiday)) {
+                        $data['editUrl'] = route('holidays.edit', $holiday);
+                    }
 
-        return view('holiday.list', compact('holidays'));
+                    return view('shared.dtAction', $data);
+                })
+                ->make(true);
+        }
+
+        return view('holiday.list');
     }
 
     /**
@@ -79,24 +97,38 @@ class HolidayController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Holiday $holiday
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Holiday $holiday)
     {
-        //
+        return view('holiday.update', compact('holiday'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Holiday $holiday
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Holiday $holiday)
     {
-        //
+        $data = $request->all();
+
+        $data['start_date'] = Carbon::parse($data['start_date']);
+        $data['end_date'] = Carbon::parse($data['end_date']);
+
+        $holiday->fill($data)->save();
+        event(new HolidayAdded($holiday));
+
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
+        session()->flash('alert-success', 'Holiday has been updated.');
+
+        return redirect('/holidays');
     }
 
     /**

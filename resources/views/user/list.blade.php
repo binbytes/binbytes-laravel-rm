@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col">
             @include('shared.alert')
+
             <div class="card card-small mb-4">
                 @can('create', App\User::class)
                     <div class="card-header border-bottom">
@@ -15,50 +16,43 @@
                         </a>
                     </div>
                 @endcan
-                <div class="card-body p-0 pb-3 text-center">
-                    <table class="table mb-0">
-                        <thead class="bg-light">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Mobile Number</th>
-                                <th scope="col">Action</th>
-                            </tr>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered" id="users-table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile Number</th>
+                            <th>Skype</th>
+                            <th>Twitter</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
-                        <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>
-                                    @if($user->avatar)
-                                        <img src="{{ $user->avatar_url }}" class="avatar mr-1">
-                                    @endif
-                                    {{ $user->name }}
-                                </td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->mobile_no }}</td>
-                                <td class="d-flex">
-                                    @can('show', $user)
-                                        <a class="btn btn-white" href="/users/{{ $user->id }}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    @endcan
-                                    @can('delete', App\User::class)
-                                        {{ html()->form('DELETE', route('users.destroy', $user->id))->open() }}
-                                            <button type="submit" class="btn btn-white">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        {{ html()->form()->close() }}
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
                     </table>
-                </div>
-                <div class="card-footer">
-                    {{ $users->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('#users-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('users.index') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'username', name: 'username' },
+                    { data: 'email', name: 'email' },
+                    { data: 'mobile_no', name: 'mobile_no' },
+                    { data: 'skype', name: 'skype' },
+                    { data: 'twitter', name: 'twitter' },
+                    { data: 'action', name: 'action', sortable: false },
+                ]
+            });
+        });
+    </script>
+@endpush

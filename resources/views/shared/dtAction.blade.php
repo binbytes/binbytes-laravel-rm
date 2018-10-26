@@ -1,7 +1,12 @@
 <div class="d-flex">
-    @isset($updateUrl)
-        <a class="btn btn-white" href="{{ $updateUrl }}">
+    @isset($showUrl)
+        <a class="btn btn-white" href="{{ $showUrl }}">
             <i class="fas fa-eye"></i>
+        </a>
+    @endisset
+    @isset($editUrl)
+        <a class="btn btn-white" href="{{ $editUrl }}">
+            <i class="fas fa-edit"></i>
         </a>
     @endisset
     @isset($deleteUrl)

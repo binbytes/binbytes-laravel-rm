@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->method('PUT') && $this->id === auth()->id();
+        return $this->method('PUT') && \Gate::allows('update', User::find($this->id));
     }
 
     /**

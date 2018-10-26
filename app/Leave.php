@@ -10,6 +10,10 @@ class Leave extends Model
         'start_date', 'end_date'
     ];
 
+    public $casts = [
+        'is_approved' => 'boolean'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

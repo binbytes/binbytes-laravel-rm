@@ -86,4 +86,15 @@ class LeavePolicy
     {
         return $user->id == $leave->user_id;
     }
+
+    /**
+     * Determine whether the user can approve leave.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function approval(User $user)
+    {
+        return false;
+    }
 }

@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col">
             @include('shared.alert')
+
             <div class="card card-small mb-4">
                 @can('create', App\Holiday::class)
                     <div class="card-header border-bottom">
@@ -15,47 +16,41 @@
                         </a>
                     </div>
                 @endcan
-                <div class="card-body p-0 text-center">
-                    <table class="table mb-0">
-                        <thead class="bg-light">
+                <div class="card-body">
+                    <table class="table table-striped table-bordered" id="holiday-table">
+                        <thead>
                         <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Action</th>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        @foreach($holidays as $holiday)
-                            <tr>
-                                <td>{{ $holiday->title }}</td>
-                                <td>{{ $holiday->description }}</td>
-                                <td>{{ $holiday->start_date }}</td>
-                                <td>{{ $holiday->end_date }}</td>
-                                <td>
-                                    <div class="row justify-content-center">
-                                        <a class="btn btn-white" href="/holidays/{{ $holiday->id }}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        @can('delete', App\Holiday::class)
-                                            {{ html()->form('DELETE', route('holidays.destroy', $holiday->id))->open() }}
-                                                <button type="submit" class="btn btn-white">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            {{ html()->form()->close() }}
-                                        @endcan
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
                     </table>
-                </div>
-                <div class="card-footer">
-                    {{ $holidays->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('#holiday-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('holidays.index') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'title', name: 'title' },
+                    { data: 'description', name: 'description' },
+                    { data: 'start_date', name: 'start_date' },
+                    { data: 'end_date', name: 'end_date' },
+                    { data: 'action', name: 'action', sortable: false },
+                ]
+            });
+        });
+    </script>
+@endpush

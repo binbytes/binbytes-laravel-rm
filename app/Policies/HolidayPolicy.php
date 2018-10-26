@@ -51,6 +51,17 @@ class HolidayPolicy
     }
 
     /**
+     * Determine whether the user can show the model.
+     *
+     * @param  \App\User $user
+     * @return mixed
+     */
+    public function show(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can update the holiday.
      *
      * @param  \App\User  $user
@@ -59,17 +70,15 @@ class HolidayPolicy
      */
     public function update(User $user, Holiday $holiday)
     {
-        return true;
+        return false;
     }
 
     /**
      * Determine whether the user can delete the holiday.
      *
-     * @param  \App\User  $user
-     * @param  \App\Holiday  $holiday
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete()
     {
         return false;
     }

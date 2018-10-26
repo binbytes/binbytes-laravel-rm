@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use Yajra\Datatables\Datatables;
+use Gate;
 
 class UserController extends Controller
 {
@@ -16,12 +18,31 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function index()
     {
-        $users = User::latest()->paginate();
+        if(request()->ajax()) {
+            return Datatables::of(User::query())
+                ->addColumn('action', function (User $user) {
+                    $data = [];
+                    if(Gate::allows('show', $user)) {
+                        $data['showUrl'] = route('users.show', $user);
+                    }
 
-        return view('user.list', compact('users'));
+                    if(Gate::allows('update', $user)) {
+                        $data['editUrl'] = route('users.edit', $user);
+                    }
+
+                    if(Gate::allows('delete', $user)) {
+                        $data['deleteUrl'] = route('users.destroy', $user);
+                    }
+                    return view('shared.dtAction', $data);
+                })
+                ->make(true);
+        }
+
+        return view('user.list');
     }
 
     /**
@@ -46,6 +67,8 @@ class UserController extends Controller
         if(request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
         }
+
+        $data['password'] = bcrypt($data['password']);
 
         User::create($data);
 
@@ -72,12 +95,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('user.update', compact('user'));
     }
 
     /**
@@ -104,6 +127,12 @@ class UserController extends Controller
         $data = $request->all();
         if(request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
+        }
+
+        if($data['password']) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
         }
 
         $user->fill($data)->save();

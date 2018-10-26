@@ -13,56 +13,45 @@
                         Add Leave
                     </a>
                 </div>
-                <div class="card-body p-0 text-center">
-                    <table class="table mb-0">
-                        <thead class="bg-light">
+                <div class="card-body">
+                    <table class="table table-striped table-bordered" id="leave-table">
+                        <thead>
                         <tr>
-                            <th scope="col">User</th>
-                            <th scope="col">Subject</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Action</th>
+                            <th>Id</th>
+                            <th>User</th>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Approved Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        @foreach($leaves as $leave)
-                            <tr>
-                                <td>
-                                    @if($leave->user->avatar)
-                                        <img src="{{ $leave->user->avatar_url }}" class="avatar mr-1">
-                                    @endif
-                                    {{ $leave->user->name }}
-                                </td>
-                                <td>{{ $leave->subject }}</td>
-                                <td>{{ $leave->description }}</td>
-                                <td>{{ $leave->start_date }}</td>
-                                <td>{{ $leave->end_date }}</td>
-                                <td>
-                                    <div class="row justify-content-center">
-                                        @can('show', $leave)
-                                            <a class="btn btn-white" href="/leaves/{{ $leave->id }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        @endcan
-                                        @can('delete', $leave)
-                                            {{ html()->form('DELETE', route('leaves.destroy', $leave->id))->open() }}
-                                                <button type="submit" class="btn btn-white">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            {{ html()->form()->close() }}
-                                        @endcan
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
                     </table>
-                </div>
-                <div class="card-footer">
-                    {{ $leaves->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('#leave-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('leaves.index') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'user.username', name: 'user.username'},
+                    { data: 'subject', name: 'subject' },
+                    { data: 'description', name: 'description' },
+                    { data: 'start_date', name: 'start_date' },
+                    { data: 'end_date', name: 'end_date' },
+                    { data: 'approved', name: 'approved', sortable: false },
+                    { data: 'action', name: 'action', sortable: false }
+                ]
+            });
+        });
+    </script>
+@endpush
