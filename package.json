@@ -17,7 +17,9 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "datatables.net": "^1.10.19",
+        "datatables.net-bs4": "^1.10.19"
     },
     "dependencies": {
         "laravel-echo": "^1.4.0",
