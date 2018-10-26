@@ -76,6 +76,18 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editMe()
+    {
+        $user = auth()->user();
+
+        return view('user.update', compact('user'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  UserRequest  $request

@@ -1,6 +1,6 @@
 @extends('layouts.app', [
-    'subTitle' => 'Users',
-    'pageTitle' => 'Add New User'
+    'subTitle' => $user->isMe() ? '' : 'Users',
+    'pageTitle' => $user->isMe() ? 'My Profile' : 'Update User'
 ])
 
 @section('content')
@@ -8,9 +8,9 @@
         <div class="col-lg-9 col-md-12">
             <div class="card card-small mb-3">
                 <div class="card-body">
-                    {{ html()->form('POST', route('users.store'))
-                        ->acceptsFiles()
-                        ->open() }}
+                    {{ html()->modelForm($user, 'PUT', route('users.update', $user))
+                         ->acceptsFiles()
+                         ->open() }}
 
                     @include('user._form')
 

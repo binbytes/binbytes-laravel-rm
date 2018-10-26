@@ -109,6 +109,14 @@ class User extends Authenticatable
         return $this->notifications()->take(5)->get();
     }
 
+    /**
+     * Detect is user object is mine
+     */
+    public function isMe()
+    {
+        return $this->id == auth()->id();
+    }
+
     public function isAdmin()
     {
         return in_array($this->email, config('rm.admin'));;
