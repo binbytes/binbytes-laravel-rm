@@ -22,9 +22,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Mobile Number</th>
-                                @can('show', App\User::class)
-                                    <th scope="col">Action</th>
-                                @endcan
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,21 +36,19 @@
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->mobile_no }}</td>
-                                <td>
-                                    <div class="row justify-content-center">
-                                        @can('show', App\User::class)
-                                            <a class="btn btn-white" href="/users/{{ $user->id }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        @endcan
-                                        @can('delete', App\User::class)
-                                            {{ html()->form('DELETE', route('users.destroy', $user->id))->open() }}
-                                                <button type="submit" class="btn btn-white">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            {{ html()->form()->close() }}
-                                        @endcan
-                                    </div>
+                                <td class="d-flex">
+                                    @can('show', $user)
+                                        <a class="btn btn-white" href="/users/{{ $user->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @endcan
+                                    @can('delete', App\User::class)
+                                        {{ html()->form('DELETE', route('users.destroy', $user->id))->open() }}
+                                            <button type="submit" class="btn btn-white">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        {{ html()->form()->close() }}
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
