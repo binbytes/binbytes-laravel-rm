@@ -12,6 +12,8 @@
                          ->acceptsFiles()
                          ->open() }}
 
+                    {{ html()->hidden('id', $user->id) }}
+
                     @include('user._form')
 
                     {{ html()->form()->close() }}

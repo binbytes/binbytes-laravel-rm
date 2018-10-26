@@ -31,10 +31,10 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-small">
-                    {{--<a class="dropdown-item" href="/profile">--}}
-                        {{--<i class="material-icons"></i> Profile--}}
-                    {{--</a>--}}
-                    {{--<div class="dropdown-divider"></div>--}}
+                    <a class="dropdown-item" href="/my-profile">
+                        <i class="material-icons"></i> My Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="material-icons text-danger"></i> Logout

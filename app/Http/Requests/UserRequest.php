@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->method('PUT') && $this->id === auth()->id();
     }
 
     /**
@@ -23,22 +24,35 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return array_merge([
             'first_name' => 'required',
             'last_name' => 'required',
             'avatar' => 'image',
-            'email' => 'required|email|unique:users',
-            'personal_email' => 'nullable|email|unique:users',
-            'username' => 'required|min:2|unique:users',
-            'password' => 'required|min:3',
-            'dob' => 'date',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($this->id)
+            ],
+            'personal_email' => [
+                'nullable',
+                'email',
+                Rule::unique('users')->ignore($this->id)
+            ],
+            'username' => [
+                'required',
+                'min:2',
+                Rule::unique('users')->ignore($this->id)
+            ],
+            'dob' => 'nullable|date',
             'address' => 'required',
             'mobile_no' => 'required',
             'joining_date' => 'required|date',
-            'leaving_date' => 'date',
+            'leaving_date' => 'nullable|date',
             'is_active' => 'boolean',
             'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)
             'base_salary' => 'nullable|numeric'
-        ];
+        ], $this->method() == 'POST' ? [
+            'password' => 'required|min:3',
+        ] : []);
     }
 }
