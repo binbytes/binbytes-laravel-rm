@@ -21,18 +21,20 @@
                     @forelse($weekAttendances as $attendance)
                         <tr>
                             <td>
-                                {{ $attendance->date }}
+                                {{ array_get($attendance, 'date') }}
                             </td>
                             <td>
-                                {{ $attendance->hours }}
+                                {{ array_get($attendance, 'hours') }}
                             </td>
                             <td>
-                                {{ $attendance->is_on_leave ? 'Yes' : '' }}
+                                {{ array_get($attendance, 'is_on_leave') ? 'Yes' : '' }}
                             </td>
                             <td>
-                                <a href="{{ route('day-attendance', $attendance->date) }}" aria-label="View">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                                @if(array_get($attendance, 'id'))
+                                    <a href="{{ route('day-attendance', array_get($attendance, 'date')) }}" aria-label="View">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @empty

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -80,9 +81,21 @@ class User extends Authenticatable
      */
     public function getWeekAttendancesAttribute()
     {
-        return $this->attendance()
+        $days = generateDateRange(today()->startOfWeek(), today()->endOfWeek(), '1 day');
+        $attandances = $this->attendance()
             ->where('date', '>=', today()->startOfWeek())
             ->get();
+
+        return collect($days)->map(function (Carbon $day) use($attandances) {
+            $attendance = $attandances->where('date', $day->format('Y-m-d'))->first();
+
+            return [
+                'id' => $attendance ? $attendance->getKey() : null,
+                'date' => $day->format('Y-m-d'),
+                'hours' => $attendance ? $attendance->hours : 0,
+                'is_on_leave' => $attendance && $attendance->is_on_leave,
+            ];
+        });
     }
 
     /**
@@ -121,4 +134,6 @@ class User extends Authenticatable
     {
         return in_array($this->email, config('rm.admin'));;
     }
+
+
 }
