@@ -1,5 +1,9 @@
 $(function() {
-    $('.input-date').datepicker({})
+    $('.input-date').datepicker({
+        format: "yyyy-mm-dd"
+    })
 
-    $('.input-date-range').datepicker({})
+    $('.input-date-range').datepicker({
+        format: "yyyy-mm-dd"
+    })
 })
