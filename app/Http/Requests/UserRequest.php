@@ -15,7 +15,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->method('PUT') && \Gate::allows('update', User::find($this->id));
+        return $this->method('POST') || \Gate::allows('update', User::find($this->id));
     }
 
     /**
