@@ -160,6 +160,11 @@ class UserController extends Controller
         return back();
     }
 
+    /**
+     * Upload user avatar
+     *
+     * @return mixed
+     */
     protected function uploadFile()
     {
         return request('avatar')->store('users', 'public');
