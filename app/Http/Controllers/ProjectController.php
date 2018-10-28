@@ -73,12 +73,15 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        $clients = Client::pluck('name', 'id');
+        $users = User::select('first_name', 'last_name', 'id')->get();
+
+        return view('project.update', compact('project', 'clients', 'users'));
     }
 
     /**
@@ -92,7 +95,11 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
+        $data['is_completed'] = $request->has('is_completed');
+
         $project->fill($data)->save();
+
+        $project->users()->sync(request('users'));
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -104,11 +111,14 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return back();
     }
 }

@@ -21,16 +21,30 @@
                     @foreach($chunkProjects as $project)
                         <div class="col-sm-4">
                             <div class="card mb-3">
-                                <div class="card-header pb-0 border-bottom">
+                                <div class="card-header pb-0 border-bottom d-flex justify-content-between">
                                     <a href="{{ $project->path() }}">
                                         <h4 class="card-title">{{ $project->title }}</h4>
                                     </a>
+                                    <div class="d-flex">
+                                        @can('update', $project)
+                                            <a class="btn btn-white" href="/projects/{{ $project->id }}/edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('delete', $project)
+                                            {{ html()->form('DELETE', route('projects.destroy', $project))->open() }}
+                                            <button type="submit" class="btn btn-white">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                            {{ html()->form()->close() }}
+                                        @endcan
+                                    </div>
                                 </div>
                                 <div class="card-body py-4 border-bottom">
                                     <p class="card-text">{{ $project->description }}</p>
                                 </div>
-                                @if($project->users->count())
-                                    <div class="card-footer">
+                                <div class="card-footer">
+                                    @if($project->users->count())
                                         <div class="d-flex">
                                             @foreach($project->users as $user)
                                                 @if($user->avatar)
@@ -40,8 +54,8 @@
                                                 @endif
                                             @endforeach
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach

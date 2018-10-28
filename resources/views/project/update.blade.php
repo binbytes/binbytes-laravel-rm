@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'subTitle' => 'Projects',
-    'pageTitle' => 'Add New Project'
+    'pageTitle' => 'Update Project'
 ])
 
 @section('content')
@@ -8,9 +8,9 @@
         <div class="col-lg-9 col-md-12">
             <div class="card card-small mb-3">
                 <div class="card-body">
-                    {{ html()->form('POST', route('projects.store'))
-                        ->acceptsFiles()
-                        ->open() }}
+                    {{ html()->modelForm($project, 'PUT', route('projects.update', $project))
+                         ->acceptsFiles()
+                         ->open() }}
 
                     @include('project._form')
 
