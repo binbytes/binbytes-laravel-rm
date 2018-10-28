@@ -31,4 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{date}', 'AttendanceController@dailyView')->name('day-attendance');
+
+    Route::get('/notifications/recent', 'NotificationController@getRecentNotifications');
+    Route::get('/notifications/mark-read/{notificationId}', 'NotificationController@markRead');
 });

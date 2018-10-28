@@ -10,6 +10,10 @@ class Project extends Model
 {
     use HasSlug;
 
+    protected $casts = [
+        'is_completed' => 'boolean'
+    ];
+
     protected $fillable = [
         'title', 'description', 'client_id', 'started_at', 'is_completed', 'slug', 'remarks'
     ];

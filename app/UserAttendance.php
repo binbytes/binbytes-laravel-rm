@@ -10,6 +10,18 @@ use Illuminate\Support\Collection;
  */
 class UserAttendance extends Model
 {
+    protected $dates = [
+        'date'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'is_on_leave' => 'boolean',
+        'is_absent' => 'boolean'
+    ];
+
     /**
      * @var array
      */

@@ -25,7 +25,6 @@ class HolidayAdded extends Notification
      */
     public function __construct(Holiday $holiday)
     {
-
         $this->holiday = $holiday;
     }
 

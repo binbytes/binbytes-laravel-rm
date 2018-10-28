@@ -10,9 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-//    public $dates = [
-//        'dob', 'joining_date', 'leaving_date'
-//    ];
+    public $dates = [
+        'dob', 'joining_date', 'leaving_date'
+    ];
 
     /**
      * The attributes that are mass assignable.
