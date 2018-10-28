@@ -24,6 +24,18 @@ class Leave extends Model
         'is_approved', 'approved_on', 'approved_by', 'approved_note'
     ];
 
+    public function getApprovalStatusAttribute()
+    {
+        switch ($this->is_approved) {
+            case true:
+                return 'Approved';
+            case false:
+                return 'Declined';
+        }
+
+        return 'Pending';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

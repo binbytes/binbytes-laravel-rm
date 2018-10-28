@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LeaveApproval;
+use App\Events\LeaveRequested;
 use App\Leave;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -30,13 +32,7 @@ class LeaveController extends Controller
         if(request()->ajax()) {
             return Datatables::of(Leave::with('user')->newQuery())
                 ->addColumn('approved', function (Leave $leave) {
-                    if($leave->is_approved == true) {
-                        return 'Approved';
-                    } else if($leave->is_approved === false) {
-                        return 'Not Approved';
-                    }
-
-                    if(Gate::allows('approval', $leave)) {
+                    if($leave->is_approved === null && Gate::allows('approval', $leave)) {
                         $data = [];
                         $data['approvedUrl'] = url("leave-approval/{$leave->id}/1");
                         $data['notApprovedUrl'] = url("leave-approval/{$leave->id}/0");
@@ -44,11 +40,11 @@ class LeaveController extends Controller
                         return view('shared.approved', $data);
                     }
 
-                    return 'Pending';
+                    return $leave->approval_status;
                 })
                 ->addColumn('action', function (Leave $leave) {
                     $data = [];
-                    if (Gate::allows('show', $leave)) {
+                    if(Gate::allows('show', $leave)) {
                         $data['showUrl'] = route('leaves.show', $leave);
                     }
 
@@ -92,13 +88,15 @@ class LeaveController extends Controller
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
 
-        Leave::create($data);
+        $leave = Leave::create($data);
+
+        event(new LeaveRequested($leave));
 
         if(request()->wantsJson()) {
             return response([], 200);
         }
 
-        session()->flash('alert-success', 'Leave has been created.');
+        session()->flash('alert-success', 'Leave request has been created.');
 
         return redirect('/leaves');
     }
@@ -161,7 +159,7 @@ class LeaveController extends Controller
     {
         $leave->delete();
 
-        session()->flash('alert-danger', 'Client has been deleted.');
+        session()->flash('alert-danger', 'Leave has been deleted.');
 
         return back();
     }
@@ -182,6 +180,8 @@ class LeaveController extends Controller
         $data['approved_on'] = now();
 
         $leave->fill($data)->save();
+
+        event(new LeaveApproval($leave));
 
         return back();
     }

@@ -72,7 +72,7 @@ class LeavePolicy
      */
     public function update(User $user, Leave $leave)
     {
-        return $user->id == $leave->user_id;
+        return $user->id === $leave->user_id;
     }
 
     /**
@@ -84,7 +84,7 @@ class LeavePolicy
      */
     public function delete(User $user, Leave $leave)
     {
-        return $user->id == $leave->user_id;
+        return $user->id === $leave->user_id;
     }
 
     /**

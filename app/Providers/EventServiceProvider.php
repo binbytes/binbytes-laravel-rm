@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Events\HolidayAdded;
+use App\Events\LeaveApproval;
+use App\Events\LeaveRequested;
 use App\Events\UserSignIn;
 use App\Listeners\HolidayAddedListener;
+use App\Listeners\LeaveApprovalListener;
+use App\Listeners\LeaveRequestedListener;
 use App\Listeners\UserLoggedInListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -22,6 +26,12 @@ class EventServiceProvider extends ServiceProvider
         HolidayAdded::class => [
             HolidayAddedListener::class,
         ],
+        LeaveRequested::class => [
+            LeaveRequestedListener::class,
+        ],
+        LeaveApproval::class => [
+            LeaveApprovalListener::class,
+        ]
     ];
 
     /**
