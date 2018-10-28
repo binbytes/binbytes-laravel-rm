@@ -90,12 +90,12 @@ class User extends Authenticatable
     public function getWeekAttendancesAttribute()
     {
         $days = generateDateRange(today()->startOfWeek(), today()->endOfWeek(), '1 day');
-        $attandances = $this->attendance()
+        $attendances = $this->attendance()
             ->where('date', '>=', today()->startOfWeek())
             ->get();
 
-        return collect($days)->map(function (Carbon $day) use($attandances) {
-            $attendance = $attandances->where('date', $day->format('Y-m-d'))->first();
+        return collect($days)->map(function (Carbon $day) use($attendances) {
+            $attendance = $attendances->where('date', $day->format('Y-m-d'))->first();
 
             return [
                 'id' => $attendance ? $attendance->getKey() : null,
