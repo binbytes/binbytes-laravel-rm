@@ -67,7 +67,7 @@ class LeaveRequested extends Notification
         return [
             'id' => $this->leave->id,
             'user_id' => $this->leave->user_id,
-            'requested_by' => $this->leave->name,
+            'requested_by' => $this->leave->user->name,
             'subject' => $this->leave->subject,
             'description' => $this->leave->description,
             'start_date'=> $this->leave->start_date->toDateString(),
