@@ -26,8 +26,14 @@ class LeaveRequest extends FormRequest
         return [
             'subject' => 'required',
             'description' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date',
+            'start_date' => [
+                'required', 'date',
+                new FutureDate
+            ],
+            'end_date' => [
+                'nullable', 'date',
+                new FutureDate
+            ],
             'start_date_partial_hours' => 'nullable|numeric|max:10',
             'end_date_partial_hours' => 'nullable|numeric|max:10'
         ];
