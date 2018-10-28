@@ -10,13 +10,25 @@ use App\User;
 class ProjectController extends Controller
 {
     /**
+     * ProjectController constructor.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Project::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $projects = Project::with('client', 'users')->latest()->paginate();
+        if(auth()->user()->isAdmin()) {
+            $projects = Project::with('client', 'users')->latest()->paginate();
+        } else {
+            $projects = auth()->user()->projects()->with('users')->latest()->paginate();
+        }
 
         return view('project.list', compact('projects'));
     }

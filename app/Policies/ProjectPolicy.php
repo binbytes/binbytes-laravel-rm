@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Project;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -33,9 +34,9 @@ class ProjectPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, Project $project)
     {
-        return true;
+        return $user->projects()->where('projects.id', $project->id)->exists();
     }
 
     /**

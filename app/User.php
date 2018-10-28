@@ -58,6 +58,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    /**
      * @return UserAttendance|object|null
      */
     public function getTodayAttendanceAttribute()
@@ -134,6 +142,4 @@ class User extends Authenticatable
     {
         return in_array($this->email, config('rm.admin'));;
     }
-
-
 }
