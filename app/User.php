@@ -20,9 +20,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar', 'address',
-        'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin', 'weekly_hours_credit', 'base_salary',
-        'joining_date', 'leaving_date', 'is_active', 'remarks'
+        'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar',
+        'address', 'designation', 'about', 'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
+        'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'remarks'
     ];
 
     public function getNameAttribute()
@@ -107,6 +107,22 @@ class User extends Authenticatable
     }
 
     /**
+     * @return int
+     */
+    public function getRemainingHrsPercentage()
+    {
+        $weekHours = $this->week_attendances->sum('hours');
+
+        if(!$weekHours) {
+            return 100;
+        } elseif ($weekHours >= $this->weekly_hours_credit) {
+            return 100;
+        }
+
+        return number_format(($weekHours * 100) / $this->weekly_hours_credit, 2);
+    }
+
+    /**
      * @return UserAttendance|\Illuminate\Database\Eloquent\Model
      */
     public function firstOrCreateAttendance()
@@ -138,6 +154,11 @@ class User extends Authenticatable
         return $this->id == auth()->id();
     }
 
+    /**
+     * Determine if user is admin
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
         return in_array($this->email, config('rm.admin'));;

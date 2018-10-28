@@ -10,10 +10,6 @@ use Illuminate\Support\Collection;
  */
 class UserAttendance extends Model
 {
-    protected $dates = [
-        'date'
-    ];
-
     /**
      * @var array
      */

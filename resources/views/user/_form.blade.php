@@ -16,8 +16,8 @@
 
         @if ($errors->has('first_name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('first_name') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -30,8 +30,8 @@
 
         @if ($errors->has('middle_name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('middle_name') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -44,8 +44,8 @@
 
         @if ($errors->has('last_name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('last_name') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -66,8 +66,8 @@
 
         @if ($errors->has('personal_email'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('personal_email') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('personal_email') }}</strong>
+            </span>
         @endif
     </div>
     <div class="col-md-4">
@@ -86,8 +86,8 @@
 
         @if ($errors->has('mobile_no'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('mobile_no') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('mobile_no') }}</strong>
+            </span>
         @endif
     </div>
     <div class="col-md-4">
@@ -105,15 +105,28 @@
 
         @if ($errors->has('dob'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('dob') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('dob') }}</strong>
+            </span>
         @endif
     </div>
 </div>
 
 <div class="form-group row">
+    <div class="col-md-4">
+        {{ html()->text('designation')
+                ->placeholder('Designation')
+                ->class(['form-control', 'is-invalid' => $errors->has('designation')])
+                ->required()
+        }}
+
+        @if ($errors->has('designation'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('designation') }}</strong>
+            </span>
+        @endif
+    </div>
     <div class="col-md-8">
-        {{ html()->textarea('address')
+        {{ html()->text('address')
                 ->placeholder('Address')
                 ->class(['form-control', 'is-invalid' => $errors->has('address')])
                 ->required()
@@ -121,8 +134,24 @@
 
         @if ($errors->has('address'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('address') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-8">
+        {{ html()->textarea('about')
+                ->placeholder('About')
+                ->class(['form-control', 'is-invalid' => $errors->has('about')])
+                ->required()
+         }}
+
+        @if ($errors->has('about'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('about') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -138,8 +167,8 @@
 
         @if ($errors->has('username'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('username') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -159,8 +188,8 @@
 
         @if ($errors->has('email'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -173,8 +202,8 @@
 
         @if ($errors->has('password'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -196,8 +225,8 @@
 
         @if ($errors->has('skype'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('skype') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('skype') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -216,8 +245,8 @@
 
         @if ($errors->has('trello'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('trello') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('trello') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -236,8 +265,8 @@
 
         @if ($errors->has('slack'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('slack') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('slack') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -258,8 +287,8 @@
 
         @if ($errors->has('github'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('github') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('github') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -278,8 +307,8 @@
 
         @if ($errors->has('twitter'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('twitter') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('twitter') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -298,8 +327,8 @@
 
         @if ($errors->has('linkedin'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('linkedin') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('linkedin') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -314,8 +343,8 @@
 
         @if ($errors->has('joining_date'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('joining_date') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('joining_date') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -327,8 +356,8 @@
 
         @if ($errors->has('leaving_date'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('leaving_date') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('leaving_date') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -343,8 +372,8 @@
 
         @if ($errors->has('base_salary'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('base_salary') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('base_salary') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -357,8 +386,8 @@
 
         @if ($errors->has('weekly_hours_credit'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('weekly_hours_credit') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('weekly_hours_credit') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -372,8 +401,8 @@
 
         @if ($errors->has('remarks'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('remarks') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('remarks') }}</strong>
+            </span>
         @endif
     </div>
 </div>
