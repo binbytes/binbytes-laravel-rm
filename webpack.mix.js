@@ -17,7 +17,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .copy('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css', 'public/css/dt-bs4.css')
     .styles([
         'public/css/bootstrap.css',
-        'public/css/app.css',
         'public/css/dt-bs4.css',
-    ], 'public/css/all.css')
+    ], 'public/css/vendor.css')
     .copyDirectory('resources/assets/images', 'public/images');

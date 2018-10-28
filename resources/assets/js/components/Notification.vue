@@ -1,5 +1,5 @@
 <template>
-    <a v-if="notification.type == 'App\\Notifications\\HolidayAdded'" class="dropdown-item" @click="markAsRead" :href="`/holidays/${notification.data.id}`">
+    <a v-if="notification.type == 'App\\Notifications\\HolidayAdded'" :class="cssClass" :href="`/holidays/${notification.data.id}`">
         <div class="notification__icon-wrapper">
             <div class="notification__icon">
                 <i class="far fa-snowflake"></i>
@@ -13,7 +13,7 @@
             </p>
         </div>
     </a>
-    <a v-else-if="notification.type == 'App\\Notifications\\LeaveRequested'" class="dropdown-item" @click="markAsRead" :href="`/leaves/${notification.data.id}`">
+    <a v-else-if="notification.type == 'App\\Notifications\\LeaveRequested'" :class="cssClass" @click="markAsRead" :href="`/leaves/${notification.data.id}`">
         <div class="notification__icon-wrapper">
             <div class="notification__icon">
                 <i class="far fa-snowflake"></i>
@@ -26,7 +26,7 @@
             </p>
         </div>
     </a>
-    <a v-else-if="notification.type == 'App\\Notifications\\LeaveApproval'" class="dropdown-item" @click="markAsRead" :href="`/leaves/${notification.data.id}`">
+    <a v-else-if="notification.type == 'App\\Notifications\\LeaveApproval'" :class="cssClass" @click="markAsRead" :href="`/leaves/${notification.data.id}`">
         <div class="notification__icon-wrapper">
             <div class="notification__icon">
                 <i class="far fa-snowflake"></i>
@@ -52,6 +52,11 @@ export default {
     props: [
         'notification'
     ],
+    computed: {
+        cssClass() {
+            return ['dropdown-item', this.notification.read_at === null ? 'unread-notification' : '']
+        }
+    },
     methods: {
         markAsRead() {
             axios.get('/notifications/mark-read/' + this.notification.id).then(() => {
