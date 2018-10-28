@@ -29,7 +29,7 @@ class HolidayController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Holiday::query())
+            return Datatables::of(Holiday::upcoming())
                 ->addColumn('action', function (Holiday $holiday) {
                     $data = [];
                     $data['showUrl'] = route('holidays.show', $holiday);
