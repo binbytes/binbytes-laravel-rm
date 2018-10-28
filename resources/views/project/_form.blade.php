@@ -73,7 +73,7 @@
                 ->placeholder('---Select Users--')
                 ->class(['form-control', 'is-invalid' => $errors->has('users')])
                 ->options($users->pluck('name', 'id'))
-                ->value($project->users->pluck('id'))
+                ->value(old('users[]', isset($project) ? $project->users->pluck('id') : []))
         }}
 
         @if ($errors->has('users'))
