@@ -2,10 +2,23 @@
 
 namespace App;
 
+use App\Notifications\LeaveApproval;
+use App\Notifications\LeaveRequested;
 use Illuminate\Database\Eloquent\Model;
 
 class Leave extends Model
 {
+    use NotificationHandler;
+
+    /**
+     * Notifications related to Leave
+     * @var array
+     */
+    public static $notifications = [
+        LeaveApproval::class,
+        LeaveRequested::class
+    ];
+
     public $dates = [
         'start_date', 'end_date'
     ];
