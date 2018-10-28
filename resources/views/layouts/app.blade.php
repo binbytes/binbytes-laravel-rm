@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/all.css') }}" rel="stylesheet">
 </head>
 <body class="h-100">
     <div class="container-fluid h-100" id="app">
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     <!-- App scripts -->
     @stack('scripts')
 </body>
