@@ -30,6 +30,14 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            @can('view', App\User::class)
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+            @endcan
             @can('view', App\Client::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}" href="/clients">
@@ -38,30 +46,30 @@
                 </a>
             </li>
             @endcan
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
-                </a>
-            </li>
+            @can('view', App\Project::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('projects*') ? 'active' : '' }}" href="/projects">
                     <i class="fa fa-tasks"></i>
                     <span>Projects</span>
                 </a>
             </li>
+            @endcan
+            @can('view', App\Holiday::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('holidays*') ? 'active' : '' }}" href="/holidays">
                     <i class="fa fa-calendar-alt"></i>
                     <span>Holidays</span>
                 </a>
             </li>
+            @endcan
+            @can('view', App\Leave::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('leaves*') ? 'active' : '' }}" href="/leaves">
                     <i class="fa fa-calendar-alt"></i>
                     <span>Leaves</span>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </aside>
