@@ -11,7 +11,7 @@
                     <div class="card-body pb-0">
                         <ul class="list-unstyled">
                             @foreach($values as $notification)
-                                <li>
+                                <li class="py-2 border-bottom">
                                     @include('notification')
                                 </li>
                             @endforeach

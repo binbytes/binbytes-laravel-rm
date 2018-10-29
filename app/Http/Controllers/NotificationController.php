@@ -50,7 +50,7 @@ class NotificationController extends Controller
     public function viewAll()
     {
         $notifications = auth()->user()->notifications->groupBy(function ($notification, $key) {
-            return $notification->created_at->format('y-m-d');
+            return $notification->created_at->toDateString();
         });
 
         // Mark as read if unread
