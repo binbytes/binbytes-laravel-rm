@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
+use Carbon\Carbon;
+
 class NotificationController extends Controller
 {
     /**
@@ -37,5 +40,22 @@ class NotificationController extends Controller
         return response()->json([
             'success' => false
         ]);
+    }
+
+    /**
+     * View all notifications
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function viewAll()
+    {
+        $notifications = auth()->user()->notifications->groupBy(function ($notification, $key) {
+            return $notification->created_at->format('y-m-d');
+        });
+
+        // Mark as read if unread
+        $notifications->each->markAsRead();
+
+        return view('notification.all', compact('notifications'));
     }
 }

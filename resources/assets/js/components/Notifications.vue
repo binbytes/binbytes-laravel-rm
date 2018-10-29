@@ -12,7 +12,7 @@
                           :key="notification.id"
                           :notification="notification"/>
 
-            <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+            <a class="dropdown-item notification__all text-center" href="/all-notifications"> View all Notifications </a>
         </div>
     </div>
 </template>
