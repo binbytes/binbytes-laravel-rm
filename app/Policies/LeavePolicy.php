@@ -32,10 +32,9 @@ class LeavePolicy
      * Determine whether the user can view the leave.
      *
      * @param  \App\User  $user
-     * @param  \App\Leave  $leave
      * @return mixed
      */
-    public function view(User $user, Leave $leave)
+    public function view(User $user)
     {
         return true;
     }
@@ -58,8 +57,9 @@ class LeavePolicy
      * @param  \App\Leave  $leave
      * @return mixed
      */
-    public function show(User $user, Leave $leave)
+    public function show(User $user)
     {
+        return true;
         return $user->id == $leave->user_id;
     }
 

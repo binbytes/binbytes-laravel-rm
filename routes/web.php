@@ -24,7 +24,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('/projects', 'ProjectController');
     Route::resource('/holidays', 'HolidayController');
-    Route::resource('/leaves', 'LeaveController');
+    Route::resource('/leaves', 'LeaveController')->parameters([
+        'leaves' => 'leave'
+    ]);
     Route::get('/leave-approval/{leave}/{approve}', 'LeaveController@approved');
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
