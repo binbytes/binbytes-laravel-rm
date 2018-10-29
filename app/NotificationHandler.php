@@ -29,7 +29,8 @@ trait NotificationHandler {
      */
     public function notifications()
     {
-        return $this->hasMany(\App\Notification::class, 'data->id');
+        return $this->hasMany(\App\Notification::class, 'data->id')
+                    ->whereIn('type', self::$notifications);
     }
 
     /**
