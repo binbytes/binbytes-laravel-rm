@@ -109,12 +109,12 @@ class User extends Authenticatable
     /**
      * @return int
      */
-    public function getRemainingHrsPercentage()
+    public function getWeeklyWorksHrsPercentage()
     {
         $weekHours = $this->week_attendances->sum('hours');
 
         if(!$weekHours) {
-            return 100;
+            return 0;
         } elseif ($weekHours >= $this->weekly_hours_credit) {
             return 100;
         }
