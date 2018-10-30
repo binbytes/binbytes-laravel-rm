@@ -30,7 +30,12 @@ class LeaveController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Leave::with('user')->newQuery())
+            return Datatables::of(Leave::with('user')
+                    ->when(auth()->user()->isAdmin() === false, function ($query) {
+                        $query->where('user_id', auth()->id());
+                    })
+                    ->newQuery()
+                )
                 ->addColumn('approved', function (Leave $leave) {
                     if($leave->is_approved === null && Gate::allows('approval', $leave)) {
                         $data = [];
