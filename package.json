@@ -22,6 +22,7 @@
         "datatables.net-bs4": "^1.10.19"
     },
     "dependencies": {
+        "chart.js": "^2.7.3",
         "laravel-echo": "^1.4.0",
         "pusher-js": "^4.3.1",
         "shards-ui": "^2.1.0",
