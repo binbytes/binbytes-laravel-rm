@@ -145,7 +145,6 @@
         {{ html()->textarea('about')
                 ->placeholder('About')
                 ->class(['form-control', 'is-invalid' => $errors->has('about')])
-                ->required()
          }}
 
         @if ($errors->has('about'))

@@ -82,4 +82,13 @@ class UserPolicy
     {
         return false;
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function showTab(User $user)
+    {
+        return false;
+    }
 }

@@ -5,22 +5,64 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-9 col-md-12">
-            <div class="card card-small mb-3">
-                <div class="card-header border-bottom">
-                    <h6 class="m-0">{{ $leave->user->name }}</h6>
+        <div class="col-lg-4">
+            <div class="card card-small mb-4 pt-3">
+                <div class="card-header border-bottom text-center">
+                    @if($leave->user->avatar)
+                        <div class="mb-3 mx-auto">
+                            <img class="rounded-circle" src="{{ $leave->user->avatar_url }}" alt="{{ $leave->user->name }}" width="90" height="90">
+                        </div>
+                    @endif
+                    <h4 class="mb-0">{{ $leave->user->name }}</h4>
                 </div>
-
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        @foreach($leave->toArray() as $key => $value)
-                            <tr>
-                                <th>{{ $key }}</th>
-                                <td>{{ $value }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <a href="/leaves" class="btn btn-link">Back</a>
+                <div class="border-top border-bottom p-4">
+                    <div class="mb-3">
+                        <h6 class="mb-0">Email <i class="fas fa-envelope-open"></i></h6>
+                        <span class="text-muted">{{ $leave->user->email }}</span>
+                    </div>
+                    <div>
+                        <h6 class="mb-0">Phone <i class="fas fa-phone"></i></h6>
+                        <span class="text-muted">{{ $leave->user->mobile_no }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card card-small mb-3">
+                <div class="card-header border-bottom mx-2 pb-1">
+                    <h4>{{ $leave->subject }}</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row px-3">
+                        <p> {{ $leave->description }} </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h6>Duration:</h6>
+                        </div>
+                        <div class="col-10 px-0">
+                            <span class="text-muted">{{ $leave->start_date->toDateString() }}
+                                {{ $leave->start_date_partial_hours ? '('.$leave->start_date_partial_hours. 'hours)' : ''}}
+                                <strong> To </strong>
+                                {{ $leave->end_date->toDateString() }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mt-2">
+                        @if($leave->is_approved === null && Gate::allows('approval', $leave))
+                            <a class="btn btn-success mr-3" href="/leave-approval/{{$leave->id}}/1">
+                                Approved
+                            </a>
+                            <a class="btn btn-danger" href="/leave-approval/{{$leave->id}}/0">
+                                Declined
+                            </a>
+                        @else
+                            <h6>Approval Status:</h6>
+                            <span class="{{$leave->approval_status == 'Approved' ? 'text-success' : 'text-danger'}} ml-2">
+                                {{ $leave->approval_status }}
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

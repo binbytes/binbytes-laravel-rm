@@ -39,13 +39,11 @@ class Leave extends Model
 
     public function getApprovalStatusAttribute()
     {
-        switch ($this->is_approved) {
-            case true:
-                return 'Approved';
-            case false:
-                return 'Declined';
+        if($this->is_approved === true) {
+            return 'Approved';
+        } elseif ($this->is_approved === false) {
+            return 'Declined';
         }
-
         return 'Pending';
     }
 
