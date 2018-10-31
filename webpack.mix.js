@@ -19,4 +19,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         'public/css/bootstrap.css',
         'public/css/dt-bs4.css',
     ], 'public/css/vendor.css')
+    .scripts([
+        'node_modules/chart.js/dist/Chart.bundle.js'
+    ], 'public/js/chart.js')
     .copyDirectory('resources/assets/images', 'public/images');

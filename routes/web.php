@@ -36,3 +36,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/notifications/mark-read/{notificationId}', 'NotificationController@markRead');
     Route::get('/all-notifications', 'NotificationController@viewAll');
 });
+
+Route::get('chart', function () {
+    return view('chart');
+});
