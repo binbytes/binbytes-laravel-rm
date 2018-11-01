@@ -29,6 +29,9 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
     Route::get('/leave-approval/{leave}/{approve}', 'LeaveController@approved');
 
+    Route::resource('/departments', 'DepartmentController');
+    Route::resource('/designations', 'DesignationController');
+
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{date}', 'AttendanceController@dailyView')->name('day-attendance');
 

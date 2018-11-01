@@ -51,14 +51,26 @@
                     <div class="row ml-0 mt-2">
                         @if($leave->is_approved === null && Gate::allows('approval', $leave))
                             <a class="btn btn-success mr-3" href="/leave-approval/{{$leave->id}}/1">
+                                <i class="fas fa-check"> </i>
                                 Approved
                             </a>
                             <a class="btn btn-danger" href="/leave-approval/{{$leave->id}}/0">
+                                <i class="fas fa-times"></i>
                                 Declined
                             </a>
                         @else
                             <h6>Approval Status:</h6>
-                            <span class="{{$leave->approval_status == 'Approved' ? 'text-success' : 'text-danger'}} ml-2">
+                            <?php
+                                $color = '';
+                                if($leave->approval_status == 'Approved') {
+                                    $color = "text-success";
+                                } elseif ($leave->approval_status == 'Declined') {
+                                    $color = "text-danger";
+                                } else {
+                                    $color = "text-warning";
+                                }
+                            ?>
+                            <span class="{{$color}} ml-2">
                                 {{ $leave->approval_status }}
                             </span>
                         @endif

@@ -100,6 +100,7 @@ class User extends Authenticatable
             return [
                 'id' => $attendance ? $attendance->getKey() : null,
                 'date' => $day->format('Y-m-d'),
+                'day' => $day->format('D'),
                 'hours' => $attendance ? $attendance->hours : 0,
                 'is_on_leave' => $attendance && $attendance->is_on_leave,
             ];

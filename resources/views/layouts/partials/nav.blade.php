@@ -70,6 +70,22 @@
                 </a>
             </li>
             @endcan
+            @can('index', App\Department::class)
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('departments*') ? 'active' : '' }}" href="/departments">
+                        <i class="fas fa-building"></i>
+                        <span>Departments</span>
+                    </a>
+                </li>
+            @endcan
+            @can('index', App\Designation::class)
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('designations*') ? 'active' : '' }}" href="/designations">
+                    <i class="fas fa-building"></i>
+                    <span>Designations</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </aside>

@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered" id="leave-table">
+                    <table class="table table-striped table-bordered text-center" id="leave-table">
                         <thead>
                         <tr>
                             <th>Id</th>

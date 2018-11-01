@@ -45,6 +45,7 @@ class UserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->id)
             ],
             'dob' => 'nullable|date',
+            'designation' => 'required',
             'address' => 'required',
             'mobile_no' => 'required',
             'joining_date' => 'required|date',

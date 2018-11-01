@@ -9,4 +9,17 @@
             <i class="far fa-window-close"></i>
         </a>
     @endisset
+    @isset($approval)
+        <?php
+            $color = '';
+            if($approval == 'Approved') {
+                $color = "text-success";
+            } elseif ($approval == 'Declined') {
+                $color = "text-danger";
+            } else {
+                $color = "text-warning";
+            }
+        ?>
+        <span class="{{ $color }}">{{ $approval }}</span>
+    @endisset
 </div>

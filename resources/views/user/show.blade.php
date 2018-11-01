@@ -217,6 +217,17 @@
                     </div>
                 </div>
             </div>
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Weekly Performance Report</h6>
+                    <div class="block-handle"></div>
+                </div>
+                <div class="card-body pt-0">
+                    <canvas height="130" id="myChart" class="mt-3"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
+
+@include('shared.chart')
