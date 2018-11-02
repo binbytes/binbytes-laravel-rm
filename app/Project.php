@@ -9,6 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 class Project extends Model
 {
     use HasSlug;
+    use \Spatie\Tags\HasTags;
 
     protected $casts = [
         'is_completed' => 'boolean'

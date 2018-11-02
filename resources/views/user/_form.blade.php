@@ -406,6 +406,16 @@
     </div>
 </div>
 
+<div class="form-group row">
+    <div class="col-md-12">
+        {{ html()->text('tag')
+                ->class('form-control')
+                ->attribute('data-role','tagsinput')
+                ->value(old('tag', (isset($user->tags) ? implode(',', $user->tags->pluck('name')->toArray()) : '')))
+         }}
+    </div>
+</div>
+
 <div class="form-group">
     <div class="custom-control custom-checkbox">
         {{ html()->checkbox('is_active')

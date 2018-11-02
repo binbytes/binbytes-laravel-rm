@@ -2,7 +2,7 @@
     <script src="{{ mix('js/chart.js') }}"></script>
     <script>
         let day = '{!! json_encode($weekAttendances->pluck('day')->toArray()) !!}';
-        let attendance = '{!! json_encode($weekAttendances->pluck('hours')->toArray()) !!}';
+        let attendance = '{!! json_encode($weekAttendances->pluck('second')->toArray()) !!}';
 
         let barChartData = {
             labels: $.parseJSON(day),

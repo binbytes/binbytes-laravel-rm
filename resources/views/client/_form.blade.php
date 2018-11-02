@@ -16,8 +16,8 @@
 
         @if ($errors->has('name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -29,8 +29,8 @@
 
         @if ($errors->has('company_name'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('company_name') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('company_name') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -49,8 +49,8 @@
 
         @if ($errors->has('dob'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('dob') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('dob') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -64,8 +64,8 @@
 
         @if ($errors->has('address'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('address') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -79,8 +79,8 @@
 
         @if ($errors->has('country'))
             <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('country') }}</strong>
-                                        </span>
+                <strong>{{ $errors->first('country') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -92,8 +92,8 @@
 
         @if ($errors->has('city'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('city') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -106,8 +106,8 @@
 
         @if ($errors->has('timezone'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('timezone') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('timezone') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -122,8 +122,8 @@
 
         @if ($errors->has('mobile_no'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('mobile_no') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('mobile_no') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -143,8 +143,8 @@
 
         @if ($errors->has('email'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -166,8 +166,8 @@
 
         @if ($errors->has('skype'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('skype') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('skype') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -186,8 +186,8 @@
 
         @if ($errors->has('trello'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('trello') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('trello') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -206,8 +206,8 @@
 
         @if ($errors->has('slack'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('slack') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('slack') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -228,8 +228,8 @@
 
         @if ($errors->has('github'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('github') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('github') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -248,8 +248,8 @@
 
         @if ($errors->has('twitter'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('twitter') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('twitter') }}</strong>
+            </span>
         @endif
     </div>
 
@@ -268,8 +268,8 @@
 
         @if ($errors->has('slack'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('linkedin') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('linkedin') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -283,9 +283,30 @@
 
         @if ($errors->has('remarks'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('remarks') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('remarks') }}</strong>
+            </span>
         @endif
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-4">
+        {{ html()->select('priority')
+                ->placeholder('priority')
+                ->class('custom-select')
+                ->options(priority())
+        }}
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-12">
+        {{ html()->text('tag')
+                ->placeholder('tags')
+                ->class('form-control')
+                ->attribute('data-role','tagsinput')
+                ->value(old('tag', (isset($client->tags) ? implode(',', $client->tags->pluck('name')->toArray()) : '')))
+         }}
     </div>
 </div>
 

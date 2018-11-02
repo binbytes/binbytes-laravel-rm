@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    public $dates = [
-        'dob'
-    ];
+    use \Spatie\Tags\HasTags;
+
+//    public $dates = [
+//        'dob'
+//    ];
 
     protected $fillable = [
         'name', 'company_name', 'avatar', 'timezone', 'address', 'city', 'country', 'dob',

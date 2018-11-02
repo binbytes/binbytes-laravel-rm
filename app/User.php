@@ -9,10 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use \Spatie\Tags\HasTags;
 
-    public $dates = [
-        'dob', 'joining_date', 'leaving_date'
-    ];
+//    public $dates = [
+//        'dob', 'joining_date', 'leaving_date'
+//    ];
 
     /**
      * The attributes that are mass assignable.
@@ -102,6 +103,7 @@ class User extends Authenticatable
                 'date' => $day->format('Y-m-d'),
                 'day' => $day->format('D'),
                 'hours' => $attendance ? $attendance->hours : 0,
+                'second' => $attendance ? $attendance->total_times : 0,
                 'is_on_leave' => $attendance && $attendance->is_on_leave,
             ];
         });
@@ -112,15 +114,14 @@ class User extends Authenticatable
      */
     public function getWeeklyWorksHrsPercentage()
     {
-        $weekHours = $this->week_attendances->sum('hours');
-
-        if(!$weekHours) {
+        $weekSeconds = $this->week_attendances->sum('second');
+        if(!$weekSeconds) {
             return 0;
-        } elseif ($weekHours >= $this->weekly_hours_credit) {
+        } elseif ($weekSeconds >= $this->weekly_hours_credit * 3600) {
             return 100;
         }
 
-        return number_format(($weekHours * 100) / $this->weekly_hours_credit, 2);
+        return number_format(($weekSeconds * 100) / ($this->weekly_hours_credit * 3600), 2);
     }
 
     /**

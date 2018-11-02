@@ -25,7 +25,7 @@ class ProjectController extends Controller
     public function index()
     {
         if(auth()->user()->isAdmin()) {
-            $projects = Project::with('client', 'users')->latest()->paginate();
+            $projects = Project::with('client', 'users')->orderBy('priority', 'asc')->paginate();
         } else {
             $projects = auth()->user()->projects()->with('users')->latest()->paginate();
         }
@@ -58,7 +58,11 @@ class ProjectController extends Controller
 
         $data['is_completed'] = $request->has('is_completed');
 
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
+
         $project = Project::create($data);
+
+        $project->attachTags($tags);
 
         if($request->has('users')) {
             $project->users()->attach(request('users'));
@@ -109,8 +113,11 @@ class ProjectController extends Controller
 
         $data['is_completed'] = $request->has('is_completed');
 
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
+
         $project->fill($data)->save();
 
+        $project->syncTags($tags);
         $project->users()->sync(request('users'));
 
         if(request()->wantsJson()) {

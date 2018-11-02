@@ -104,6 +104,34 @@
     </div>
 </div>
 
+<div class="form-group row">
+    {{ html()->label('Priority')
+                ->for('priority')
+                ->class('col-sm-2 col-form-label text-md-right')
+    }}
+
+    <div class="col-md-6">
+        {{ html()->select('priority')
+                ->class('custom-select')
+                ->options(priority())
+        }}
+    </div>
+</div>
+
+<div class="form-group row">
+    {{ html()->label('Tags')
+                ->for('tag')
+                ->class('col-sm-2 col-form-label text-md-right')
+    }}
+    <div class="col-md-6">
+        {{ html()->text('tag')
+                ->class('form-control')
+                ->attribute('data-role','tagsinput')
+                ->value(old('tag', (isset($project->tags) ? implode(',', $project->tags->pluck('name')->toArray()) : '')))
+         }}
+    </div>
+</div>
+
 <div class="form-group row mb-0">
     <div class="col-md-8 offset-md-4">
         {{ html()->button('Save')

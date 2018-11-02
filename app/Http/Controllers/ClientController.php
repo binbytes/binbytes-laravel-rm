@@ -20,7 +20,7 @@ class ClientController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Client::query())
+            return Datatables::of(Client::query()->orderBy('priority', 'asc'))
                 ->addColumn('action', function (Client $client) {
                     return view('shared.dtAction', [
                         'showUrl' => route('clients.show', $client),
@@ -57,7 +57,9 @@ class ClientController extends Controller
             $data['avatar'] = $this->uploadFile();
         }
 
-        Client::create($data);
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
+        $client = Client::create($data);
+        $client->attachTags($tags);
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -104,7 +106,9 @@ class ClientController extends Controller
             $data['avatar'] = $this->uploadFile();
         }
 
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
         $client->fill($data)->save();
+        $client->syncTags($tags);
 
         if(request()->wantsJson()) {
             return response([], 200);

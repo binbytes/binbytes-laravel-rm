@@ -4,7 +4,8 @@
             <h6 class="font-weight-bold">This week</h6>
 
             <h6 class="badge badge-outline-primary">
-                {{ $weekAttendances->sum('hours') }}
+                {{ hoursFromSeconds($weekAttendances->sum('second')) }}
+
             </h6>
         </div>
         <div class="card-body p-0 pb-3 text-center">

@@ -49,12 +49,12 @@
                             <strong class="text-muted d-block mb-2">Current Week Hours</strong>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-primary" role="progressbar"
-                                     aria-valuenow="{{ $user->week_attendances->sum('hours') }}"
+                                     aria-valuenow="{{ $user->week_attendances->sum('second') }}"
                                      aria-valuemin="0"
-                                     aria-valuemax="{{ $user->weekly_hours_credit }}"
+                                     aria-valuemax="{{ $user->weekly_hours_credit * 3600 }}"
                                      style="width: {{ $user->getWeeklyWorksHrsPercentage() }}%">
                                     <span class="progress-value text-semibold">
-                                        {{ $user->week_attendances->sum('hours') }} Hrs
+                                        {{ hoursFromSeconds($user->week_attendances->sum('second')) }} Hrs
                                     </span>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-8">
                                         <span class="text-muted">
-                                            {{ $user->dob->toDateString() ?? '---' }}
+                                            {{ $user->dob ?? '---' }}
                                             <i class="fas fa-birthday-cake ml-2"></i>
                                         </span>
                                     </div>
@@ -178,7 +178,7 @@
                                         <h6>Joining Date</h6>
                                     </div>
                                     <div class="col-7">
-                                        <span class="text-muted">{{ $user->joining_date->toDateString() ?? '---' }}</span>
+                                        <span class="text-muted">{{ $user->joining_date ?? '---' }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -187,7 +187,7 @@
                                             <h6>Leaving Date</h6>
                                         </div>
                                         <div class="col-7">
-                                            <span class="text-muted">{{ $user->leaving_date->toDateString() }}</span>
+                                            <span class="text-muted">{{ $user->leaving_date }}</span>
                                         </div>
                                     @endif
                                 </div>

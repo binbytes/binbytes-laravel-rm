@@ -37,15 +37,16 @@ class LeaveController extends Controller
                     ->newQuery()
                 )
                 ->addColumn('approved', function (Leave $leave) {
-                    if($leave->is_approved === null && Gate::allows('approval', $leave)) {
-                        $data = [];
-                        $data['approvedUrl'] = url("leave-approval/{$leave->id}/1");
-                        $data['notApprovedUrl'] = url("leave-approval/{$leave->id}/0");
+//                    if($leave->is_approved === null && Gate::allows('approval', $leave)) {
+//                        $data = [];
+//                        $data['approvedUrl'] = url("leave-approval/{$leave->id}/1");
+//                        $data['notApprovedUrl'] = url("leave-approval/{$leave->id}/0");
+//
+//                        return view('shared.approved', $data);
+//                    }
 
-                        return view('shared.approved', $data);
-                    }
-
-                    return $leave->approval_status;
+                    $data['approval'] = $leave->approval_status;
+                    return view('shared.approved', $data);
                 })
                 ->addColumn('action', function (Leave $leave) {
                     $data = [];

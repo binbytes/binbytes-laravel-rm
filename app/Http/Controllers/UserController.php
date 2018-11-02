@@ -68,9 +68,15 @@ class UserController extends Controller
             $data['avatar'] = $this->uploadFile();
         }
 
-        $data['password'] = bcrypt($data['password']);
+        if($data['password']) {
+            $data['password'] = bcrypt($data['password']);
+        }
 
-        User::create($data);
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
+
+        $user = User::create($data);
+
+        $user->attachTags($tags);
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -90,7 +96,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $weekAttendances = $user->week_attendances;
-
+        //dd($weekAttendances);
         return view('user.show', compact('user', 'weekAttendances'));
     }
 
@@ -102,6 +108,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        //dd($user->tags->pluck('name'));
         return view('user.update', compact('user'));
     }
 
@@ -137,7 +144,11 @@ class UserController extends Controller
             unset($data['password']);
         }
 
+        $tags = $data['tag'] = explode(',', $request->get('tag'));
+
         $user->fill($data)->save();
+
+        $user->syncTags($tags);
 
         if(request()->wantsJson()) {
             return response([], 200);

@@ -21,6 +21,16 @@ if(!function_exists('timeZoneList')) {
     }
 }
 
+if(!function_exists('priority')) {
+    function priority() {
+        $priority = [];
+        for($a = 0; $a<10; $a++) {
+            $priority[$a] = $a;
+        }
+        return $priority;
+    }
+}
+
 if(!function_exists('hoursFromSeconds')) {
     /**
      * Get readable hours from seconds
@@ -29,7 +39,11 @@ if(!function_exists('hoursFromSeconds')) {
      * @return float
      */
     function hoursFromSeconds($seconds) {
-        return number_format($seconds / 3600, 2);
+
+        $hours = floor($seconds/3600);
+        $minute = floor(($seconds/60)%60);
+
+        return $hours.":".$minute;
     }
 }
 

@@ -44,7 +44,7 @@ class Leave extends Model
         } elseif ($this->is_approved === false) {
             return 'Declined';
         }
-        return 'Pending';
+       return 'Pending';
     }
 
     public function user()
