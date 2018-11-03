@@ -66,6 +66,10 @@
                             {{ $user->about }}
                         </span>
                     </li>
+                    <li class="list-group-item p-4">
+                        <a class="btn btn-primary" href="/exp-latter/{{$user->id}}">Experience</a>
+                        <a class="btn btn-primary" href="/payslip/{{$user->id}}">Payslip</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -15,6 +15,8 @@ class HomeController extends Controller
         $weekAttendances = auth()->user()->week_attendances;
         $todayAttendance = auth()->user()->today_attendance;
 
+        //dd($weekAttendances);
+
         return view('home', compact('weekAttendances', 'todayAttendance'));
     }
 }

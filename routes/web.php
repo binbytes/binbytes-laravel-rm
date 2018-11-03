@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/clients', 'ClientController');
     Route::resource('/users', 'UserController');
     Route::get('/my-profile', 'UserController@editMe');
+    Route::get('/exp-latter/{user}', 'UserController@latter');
+    Route::get('/payslip/{user}', 'UserController@payslip');
 
     Route::resource('/projects', 'ProjectController');
     Route::resource('/holidays', 'HolidayController');
@@ -38,8 +40,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/notifications/recent', 'NotificationController@getRecentNotifications');
     Route::get('/notifications/mark-read/{notificationId}', 'NotificationController@markRead');
     Route::get('/all-notifications', 'NotificationController@viewAll');
-});
-
-Route::get('chart', function () {
-    return view('chart');
 });

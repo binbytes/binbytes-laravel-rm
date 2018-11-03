@@ -96,7 +96,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $weekAttendances = $user->week_attendances;
-        //dd($weekAttendances);
+
         return view('user.show', compact('user', 'weekAttendances'));
     }
 
@@ -108,7 +108,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //dd($user->tags->pluck('name'));
         return view('user.update', compact('user'));
     }
 
@@ -181,5 +180,19 @@ class UserController extends Controller
     protected function uploadFile()
     {
         return request('avatar')->store('users', 'public');
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function latter(User $user)
+    {
+        return view('latter.experience', compact('user'));
+    }
+
+    public function payslip(User $user)
+    {
+        return view('latter.payslip', compact('user'));
     }
 }

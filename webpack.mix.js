@@ -25,4 +25,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .scripts([
         'node_modules/chart.js/dist/Chart.bundle.js'
     ], 'public/js/chart.js')
-    .copyDirectory('resources/assets/images', 'public/images');
+    .copyDirectory('resources/assets/images', 'public/images')
+    .version();
