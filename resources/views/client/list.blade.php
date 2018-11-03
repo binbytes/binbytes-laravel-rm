@@ -19,7 +19,6 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Priority</th>
                             <th>Client</th>
                             <th>Email</th>
                             <th>Skype</th>
@@ -44,7 +43,6 @@
                 ajax: '{!! route('clients.index') !!}',
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'priority', name: 'priority'},
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'skype', name: 'skype' },

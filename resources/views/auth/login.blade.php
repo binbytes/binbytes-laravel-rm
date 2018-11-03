@@ -3,6 +3,7 @@
 @section('content')
     <div class="row no-gutters h-100">
         <div class="col-lg-3 col-md-5 login-form mx-auto my-auto">
+            @include('shared.alert')
             <div class="card">
                 <div class="card-body">
                     <img src="/images/logo.png" height="50" class="d-table mx-auto mb-3">
