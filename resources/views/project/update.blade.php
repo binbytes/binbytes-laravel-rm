@@ -3,10 +3,6 @@
     'pageTitle' => 'Update Project'
 ])
 
-@push('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
-@endpush
-
 @section('content')
     <div class="row">
         <div class="col-lg-9 col-md-12">
@@ -26,5 +22,5 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+    <script src="{{ mix('js/tag.js') }}"></script>
 @endpush

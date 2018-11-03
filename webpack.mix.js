@@ -20,6 +20,9 @@ mix.js('resources/assets/js/app.js', 'public/js')
         'public/css/dt-bs4.css',
     ], 'public/css/vendor.css')
     .scripts([
+        'resources/assets/js/vendor/bootstrap-tagsinput.min.js'
+    ], 'public/js/tag.js')
+    .scripts([
         'node_modules/chart.js/dist/Chart.bundle.js'
     ], 'public/js/chart.js')
     .copyDirectory('resources/assets/images', 'public/images');
