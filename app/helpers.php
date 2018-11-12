@@ -41,7 +41,14 @@ if(!function_exists('hoursFromSeconds')) {
     function hoursFromSeconds($seconds) {
 
         $hours = floor($seconds/3600);
+        if ($hours < 10) {
+            $hours = '0'.$hours;
+        }
+
         $minute = floor(($seconds/60)%60);
+        if ($minute < 10) {
+            $minute = '0'.$minute;
+        }
 
         return $hours.":".$minute;
     }
