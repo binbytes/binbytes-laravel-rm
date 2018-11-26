@@ -10,14 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/download/{user}', function ($id) {
-//    //return Mail::to($user)->send(new \App\Mail\letter($user));
-//    $salary = App\Salary::with('user')->findOrFail($id);
-//
-//    $pdf = PDF::loadView('letter.payslip', compact('salary'));
-//
-//    return $pdf->stream();
-//});
 
 Route::redirect('/', '/dashboard');
 

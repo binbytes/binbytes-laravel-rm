@@ -35,6 +35,6 @@ class Salary extends Model
 
     public function paySlipFileName()
     {
-        return "payslip-{$this->user_id}-{$this->paid_for}.pdf";
+        return "payslip{$this->user_id}-{$this->paid_for->format('F Y')}.pdf";
     }
 }

@@ -46,10 +46,13 @@ class SalaryPaid extends Notification
      */
     public function toMail($notifiable)
     {
+
+        $url = url('/salaries/'. $this->salary->user_id);
         return (new MailMessage)
             ->subject('Your salary has been paid')
             ->markdown('mail.salary.paid', [
                 'salary' => $this->salary,
+                'url' => $url
             ])
             ->attach(storage_path('app/public/download/'.$this->fileName));
     }
