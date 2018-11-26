@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Designation;
+use App\Leave;
+use App\Notifications\HolidayAdded;
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserDesignationRequest;
+use PDF;
 use Yajra\Datatables\Datatables;
 use Gate;
 
@@ -52,7 +57,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $designations = Designation::pluck('title', 'id');
+
+        return view('user.create', compact('designations'));
     }
 
     /**
@@ -78,6 +85,10 @@ class UserController extends Controller
 
         $user->attachTags($tags);
 
+        if($request->has('designation_id')) {
+            $user->designations()->attach(request('designation_id'));
+        }
+
         if(request()->wantsJson()) {
             return response([], 200);
         }
@@ -96,8 +107,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $weekAttendances = $user->week_attendances;
+        $leaves = Leave::orderBy('start_date', 'desc')
+                ->where('user_id', $user->id)
+                ->get();
 
-        return view('user.show', compact('user', 'weekAttendances'));
+        return view('user.show', compact('user', 'weekAttendances', 'leaves'));
     }
 
     /**
@@ -108,7 +122,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.update', compact('user'));
+        $designations = Designation::pluck('title', 'id');
+
+        return view('user.update', compact('user', 'designations'));
+
     }
 
     /**
@@ -120,7 +137,12 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        return view('user.update', compact('user'));
+        $weekAttendances = $user->week_attendances;
+        $leaves = Leave::orderBy('start_date', 'desc')
+            ->where('user_id', $user->id)
+            ->get();
+
+        return view('user.show', compact('user', 'weekAttendances', 'leaves'));
     }
 
     /**
@@ -148,6 +170,7 @@ class UserController extends Controller
         $user->fill($data)->save();
 
         $user->syncTags($tags);
+        $user->designations()->sync(request('designation_id'));
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -186,13 +209,66 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function latter(User $user)
+    public function experienceLetter(User $user)
     {
-        return view('latter.experience', compact('user'));
+        return view('letter.experience', compact('user'));
     }
 
-    public function payslip(User $user)
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function joiningLetter(User $user)
     {
-        return view('latter.payslip', compact('user'));
+        return view('letter.joining', compact('user'));
+    }
+
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function promote(User $user)
+    {
+        $designations = Designation::where('id', '<>', $user->designation->id)
+                            ->pluck('title', 'id');
+
+        return view('user.promote', compact('user', 'designations'));
+    }
+
+    /**
+     * @param UserDesignationRequest $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storePromote(UserDesignationRequest $request, User $user)
+    {
+        $user->designations()
+            ->attach(request('designation_id'), [
+                'remarks' => request('remarks')
+            ]);
+
+        return redirect('/users');
+    }
+
+    /**
+     * @param $letter
+     * @param User $user
+     * @return
+     */
+    public function download($letter, User $user)
+    {
+        //dd($letter);
+        if($letter == "joiningLetter"){
+            $pdf = PDF::loadView('letter.joining', compact('user'));
+
+            return $pdf->download($user->username.'-joiningLatter.pdf');
+        }
+
+        if($letter == "promoteLetter") {
+            $pdf = PDF::loadView('letter.promoteletter', compact('user'));
+
+            return $pdf->download($user->username.'promoteLatter.pdf');
+        }
     }
 }

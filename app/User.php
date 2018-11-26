@@ -75,6 +75,18 @@ class User extends Authenticatable
     }
 
     /**
+     * @param $startDate
+     * @param $endDate
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\HasMany|null|object
+     */
+    public function attendanceFromDates($startDate, $endDate)
+    {
+        return $this->attendance()
+            ->whereBetween('date', array($startDate, $endDate))
+            ->get();
+    }
+
+    /**
      * @param $date
      * @return UserAttendance|null|object
      */
@@ -163,6 +175,26 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        return in_array($this->email, config('rm.admin'));;
+        return in_array($this->email, config('rm.admin'));
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function designations()
+    {
+        return $this->belongsToMany(Designation::class)
+                    ->withTimestamps()
+                    ->orderByDesc('pivot_created_at');
+    }
+
+    /**
+     * Get user's current designation
+     *
+     * @return string
+     */
+    public function getDesignationAttribute()
+    {
+        return $this->designations->first();
     }
 }

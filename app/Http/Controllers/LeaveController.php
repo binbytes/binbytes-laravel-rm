@@ -34,17 +34,13 @@ class LeaveController extends Controller
                     ->when(auth()->user()->isAdmin() === false, function ($query) {
                         $query->where('user_id', auth()->id());
                     })
+                    ->when(\request('filter') <> 'all', function ($query) {
+                        \request('filter') == 'upcoming' ? $query->upcoming() : $query->past();
+                    })
+                    ->latest('id')
                     ->newQuery()
                 )
                 ->addColumn('approved', function (Leave $leave) {
-//                    if($leave->is_approved === null && Gate::allows('approval', $leave)) {
-//                        $data = [];
-//                        $data['approvedUrl'] = url("leave-approval/{$leave->id}/1");
-//                        $data['notApprovedUrl'] = url("leave-approval/{$leave->id}/0");
-//
-//                        return view('shared.approved', $data);
-//                    }
-
                     $data['approval'] = $leave->approval_status;
                     return view('shared.approved', $data);
                 })
@@ -63,6 +59,12 @@ class LeaveController extends Controller
                     }
 
                     return view('shared.dtAction', $data);
+                })
+                ->editColumn('start_date', function (Leave $leave) {
+                    return $leave->start_date->format('Y-m-d');
+                })
+                ->editColumn('end_date', function (Leave $leave) {
+                    return $leave->end_date->format('Y-m-d');
                 })
                 ->rawColumns(['approved', 'action'])
                 ->make(true);

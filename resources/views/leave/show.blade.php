@@ -74,6 +74,13 @@
                                 {{ $leave->approval_status }}
                             </span>
                         @endif
+                        @if($leave->start_date >= today())
+                            {{ html()->form('DELETE', route('leaves.destroy', $leave))->open() }}
+                            <button type="submit" class="btn btn-primary ml-3">
+                                <i class="fas fa-trash-alt"> </i> Delete
+                            </button>
+                            {{ html()->form()->close() }}
+                        @endif
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+
 class AttendanceController extends Controller
 {
     /**
@@ -20,14 +22,25 @@ class AttendanceController extends Controller
     }
 
     /**
-     * @param $date
+     * @param User $user
+     * @param $startDate
+     * @param null $endDate
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function dailyView($date)
+    public function dailyView(User $user, $startDate, $endDate = null)
     {
-        $user = auth()->user();
-        $attendance = $user->attendanceOfTheDay($date);
+        if($this->authorize('seeWeeklyAttendance', $user)) {
+            if($startDate === $endDate) {
+                $attendance = $user->attendanceOfTheDay($startDate);
+                if(empty($attendance)) {
+                    $attendance = null;
+                }
+            } else {
+                $weekAttendances = $user->attendanceFromDates($startDate, $endDate);
+            }
 
-        return view('attendance.day', compact('user', 'attendance'));
+            return view('attendance.day', compact('user', 'attendance', 'weekAttendances', 'startDate', 'endDate'));
+        }
     }
 }

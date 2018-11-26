@@ -41,4 +41,16 @@ class Holiday extends Model
     {
         return $query->where('start_date', '>=', today());
     }
+
+    /**
+     * Get past holiday
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopePast($query)
+    {
+        return $query->where('start_date', '<=', today());
+    }
 }

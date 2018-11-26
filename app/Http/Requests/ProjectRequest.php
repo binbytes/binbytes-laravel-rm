@@ -23,10 +23,12 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'title' => 'required',
             'client_id' => 'required|exists:clients,id',
-            'is_completed' => 'boolean'
+            'is_completed' => 'nullable|boolean'
         ];
+
     }
 }

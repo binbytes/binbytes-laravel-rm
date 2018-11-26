@@ -29,7 +29,15 @@ class HolidayController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Holiday::upcoming())
+            $query = Holiday::query()->latest('id');
+
+            if (\request('filter') == 'upcoming') {
+                $query = Holiday::upcoming();
+            }
+            if(\request('filter') == 'past') {
+                $query = Holiday::past();
+            }
+            return Datatables::of($query)
                 ->addColumn('action', function (Holiday $holiday) {
                     $data = [];
                     $data['showUrl'] = route('holidays.show', $holiday);
@@ -41,6 +49,12 @@ class HolidayController extends Controller
                     }
 
                     return view('shared.dtAction', $data);
+                })
+                ->editColumn('start_date', function (Holiday $holiday) {
+                    return $holiday->start_date->format('Y-m-d');
+                })
+                ->editColumn('end_date', function (Holiday $holiday) {
+                    return $holiday->end_date->format('Y-m-d');
                 })
                 ->make(true);
         }

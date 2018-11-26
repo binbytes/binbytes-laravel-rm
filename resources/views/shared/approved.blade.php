@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex justify-content-center">
     @isset($approvedUrl)
         <a class="btn" href="{{ $approvedUrl }}">
             <i class="far fa-check-square"></i>

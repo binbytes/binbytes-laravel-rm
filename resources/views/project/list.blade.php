@@ -7,14 +7,31 @@
         <div class="col">
             @include('shared.alert')
 
-            @can('create', App\Project::class)
-                <div class="mb-5">
-                    <a href="/projects/create" class="btn btn-primary pull-right">
+            <div class="row mb-3">
+                <div class="btn-group ml-3">
+                    <a href="/projects/filter/all" class="btn btn-info">All</a>
+                    <a href="/projects/filter/completed" class="btn btn-info">Completed</a>
+                    <a href="/projects/filter/running" class="btn btn-info">Running</a>
+                </div>
+                <div class="d-flex ml-3">
+                    <select id="type" class="mr-1">
+                        @foreach($clients as $client)
+                            <option value="{{ $client }}">{{ $client }}</option>
+                        @endforeach
+                    </select>
+                    <select id="type">
+                        @foreach($users as $user)
+                            <option value="{{ $user->name }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @can('create', App\Project::class)
+                    <a href="/projects/create" class="btn btn-primary ml-auto mr-3">
                         <i class="fa fa-plus mr-2"></i>
                         Add Project
                     </a>
-                </div>
-            @endcan
+                @endcan
+            </div>
 
             <div class="card-columns">
                 @forelse($projects as $project)
@@ -25,9 +42,9 @@
                                 <span class="text-reagent-gray">For <strong>{{ $project->client->name }}</strong></span>
                             </a>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pb-3">
                             @if($project->users->count())
-                                <div class="d-flex">
+                                <div class="d-flex mb-2">
                                     @foreach($project->users as $user)
                                         <a href="/users/{{ $user->id }}">
                                             @if($user->avatar)
@@ -39,6 +56,9 @@
                                     @endforeach
                                 </div>
                             @endif
+                            @foreach($project->tags as $tag)
+                                <span class="badge badge-primary">{{ $tag->name}}</span>
+                            @endforeach
                         </div>
                         <div class="card-footer border-top text-light d-flex justify-content-between">
                             <span>
@@ -68,3 +88,13 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('#type').onchange(function(){
+                //
+            })
+        })
+    </script>
+@endpush

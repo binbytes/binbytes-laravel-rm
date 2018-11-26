@@ -10,6 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/download/{user}', function ($id) {
+//    //return Mail::to($user)->send(new \App\Mail\letter($user));
+//    $salary = App\Salary::with('user')->findOrFail($id);
+//
+//    $pdf = PDF::loadView('letter.payslip', compact('salary'));
+//
+//    return $pdf->stream();
+//});
 
 Route::redirect('/', '/dashboard');
 
@@ -20,22 +28,39 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('/clients', 'ClientController');
     Route::resource('/users', 'UserController');
+    Route::get('/users/promote/{user}', 'UserController@promote');
+    Route::post('/users/promote/{user}', 'UserController@storePromote')->name('store-promote');
+
     Route::get('/my-profile', 'UserController@editMe');
-    Route::get('/exp-latter/{user}', 'UserController@latter');
-    Route::get('/payslip/{user}', 'UserController@payslip');
+    Route::get('/experience-letter/{user}', 'UserController@experienceLetter');
+    Route::get('/joining-letter/{user}', 'UserController@joiningLetter');
+    Route::get('/download/{letter}/{user}', 'UserController@download');
 
     Route::resource('/projects', 'ProjectController');
+    Route::get('/projects/filter/{type}', 'ProjectController@index');
+    Route::get('/progress/{project}', 'ProjectController@showProgress');
+    Route::post('/progress', 'ProjectController@storeProgress')->name('progress');
+    Route::get('/progressView/{progress}', 'ProjectController@viewProgress');
+
+
     Route::resource('/holidays', 'HolidayController');
     Route::resource('/leaves', 'LeaveController')->parameters([
         'leaves' => 'leave'
     ]);
     Route::get('/leave-approval/{leave}/{approve}', 'LeaveController@approved');
 
-    Route::resource('/departments', 'DepartmentController');
     Route::resource('/designations', 'DesignationController');
 
+    Route::resource('/salaries', 'SalaryController');
+    Route::get('/salaries/filter/{month}/{year}', 'SalaryController@filter');
+    Route::get('/salary', 'SalaryController@view');
+    Route::get('/payslip/{user}', 'SalaryController@payslip');
+    Route::get('/download/{user}', 'SalaryController@download');
+
+
+
     Route::get('/attendance/ping', 'AttendanceController@ping');
-    Route::get('/attendance/day/{date}', 'AttendanceController@dailyView')->name('day-attendance');
+    Route::get('/attendance/day/{user}/{startDate}/{endDate?}', 'AttendanceController@dailyView')->name('day-attendance');
 
     Route::get('/notifications/recent', 'NotificationController@getRecentNotifications');
     Route::get('/notifications/mark-read/{notificationId}', 'NotificationController@markRead');

@@ -31,6 +31,16 @@ if(!function_exists('priority')) {
     }
 }
 
+if(!function_exists('months')) {
+    function months() {
+        $months = [];
+        for($m=1; $m <= 12; $m++) {
+            $months[$m] = date('F', mktime(0,0,0,$m));
+        }
+        return $months;
+    }
+}
+
 if(!function_exists('hoursFromSeconds')) {
     /**
      * Get readable hours from seconds

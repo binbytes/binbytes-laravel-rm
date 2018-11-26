@@ -7,7 +7,6 @@
 
         let barChartData = {
             datasets: [{
-                backgroundColor: "blue",
                 data: $.parseJSON(attendance).map(function (time) {
                     if (time == 0) {
                         return moment(`1970-02-01 00:00:00`).valueOf();
@@ -15,6 +14,7 @@
 
                     return moment(`1970-02-01 ${time}:00`).valueOf();
                 }),
+                backgroundColor: "blue",
                 borderWidth: 1
             }]
         };
@@ -25,6 +25,7 @@
                 type: 'bar',
                 data: barChartData,
                 options: {
+                    legend: { display: false },
                     scales: {
                         xAxes: [{
                             type: 'category',
@@ -39,6 +40,11 @@
                             {
                                 type: 'linear',
                                 position: 'left',
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: "Hours",
+                                    fontColor: "red"
+                                },
                                 ticks: {
                                     min: moment('1970-02-01 00:00:00').valueOf(),
                                     max: moment('1970-02-01 12:59:59').valueOf(),

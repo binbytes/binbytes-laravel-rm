@@ -1,22 +1,21 @@
 @extends('layouts.app', [
     'subTitle' => 'Users',
-    'pageTitle' => 'View User'
+    'pageTitle' => 'View User',
 ])
-
 @section('content')
     <div class="row">
         <div class="col-lg-4">
             <div class="card card-small mb-4 pt-3">
                 <div class="card-header border-bottom text-center">
-                    @if($user->avatar)
-                        <div class="mb-3 mx-auto">
+                    <div class="mb-3 row justify-content-center">
+                        @if($user->avatar)
                             <img class="rounded-circle" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" width="90" height="90">
-                        </div>
-                    @endif
-
+                        @else
+                            <span class="user-placeholder">{{ substr($user->name, 0, 2) }}</span>
+                        @endif
+                    </div>
                     <h4 class="mb-0">{{ $user->name }}</h4>
-                    <span class="text-muted d-block mb-2">{{ $user->designation }}</span>
-                    <div class="d-block mb-2">
+                    <div class="d-block mb-1">
                         @if($user->github)
                             <a href="{{ $user->github }}" class="mx-1"><i class="fab fa-github"></i></a>
                         @endif
@@ -32,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="border-top border-bottom p-4">
+                <div class="border-top border-bottom px-4 py-3">
                     <div class="mb-3">
                         <h6 class="mb-0">Email <i class="fas fa-envelope-open"></i></h6>
                         <span class="text-muted">{{ $user->email }}</span>
@@ -60,15 +59,36 @@
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item p-4">
+                    <li class="list-group-item px-4">
                         <strong class="text-muted d-block mb-2">About</strong>
                         <span>
                             {{ $user->about }}
                         </span>
                     </li>
-                    <li class="list-group-item p-4">
-                        <a class="btn btn-primary" href="/exp-latter/{{$user->id}}">Experience</a>
-                        <a class="btn btn-primary" href="/payslip/{{$user->id}}">Payslip</a>
+                    <li class="list-group-item px-4">
+                        <div class="row mb-2">
+                            <div class="col-5">
+                                <strong class="text-muted d-block">Date</strong>
+                            </div>
+                            <div class="col-7">
+                                <strong class="text-muted d-block">Designation</strong>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5">
+                                <span>{{ $user->designation->pivot->created_at->toDateString() }}</span>
+                            </div>
+                            <div class="col-7">
+                                <span>{{ $user->designation->title }}</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-4">
+                        <div class="row justify-content-center mb-1">
+                            <a class="btn btn-primary mr-1" href="/experience-letter/{{$user->id}}">Experience</a>
+                            <a class="btn btn-primary mr-1" href="/joining-letter/{{$user->id}}">Joining</a>
+                            <a class="btn btn-info" href="/users/promote/{{ $user->id }}"><i class="fas fa-star"> </i> promote</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -81,11 +101,24 @@
                         <li class="nav-item">
                             <a class="nav-link active show" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal Details</a>
                         </li>
-                        @if(Gate::allows('showTab', $user))
+                        @if(Gate::allows('userInfoTab', $user))
                             <li class="nav-item">
                                 <a class="nav-link" id="organizational-tab" data-toggle="tab" href="#organizational" role="tab" aria-controls="profile" aria-selected="false">Organizational</a>
                             </li>
                         @endif
+                        @if(Gate::allows('userInfoTab', $user))
+                            <li class="nav-item">
+                                <a class="nav-link" id="leaves-tab" data-toggle="tab" href="#leaves" role="tab" aria-controls="leaves" aria-selected="false">Leaves</a>
+                            </li>
+                        @endif
+                        @if(Gate::allows('userInfoTab', $user))
+                            <li class="nav-item">
+                                <a class="nav-link" id="pdf-tab" data-toggle="tab" href="#pdf" role="tab" aria-controls="pdf" aria-selected="false">PDF File</a>
+                            </li>
+                        @endif
+                        <div class="ml-auto">
+                            <a href="/users/{{ $user->id }}/edit" class="btn btn-primary">Edit Profile</a>
+                        </div>
                     </ul>
                 </div>
                 <div class="card-body tab-content px-4 py-2">
@@ -218,6 +251,92 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="leaves" role="tabpanel" aria-labelledby="leaves-tab">
+                        @if(count($leaves) <= 0)
+                            <div class="row justify-content-center">
+                                <span class="text-muted">No Leaves</span>
+                            </div>
+                        @else
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach($leaves as $leave)
+                                    <tr>
+                                        <td>
+                                            <span>{{ $leave->subject }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">{{ $leave->start_date->format('Y-m-d') }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">{{ $leave->end_date->format('Y-m-d') }}</span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a class="btn btn-white" href="/leaves/{{ $leave->id }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                @if($leave->start_date >= today())
+                                                    {{ html()->form('DELETE', route('leaves.destroy', $leave))->open() }}
+                                                    <button type="submit" class="btn btn-white ml-2">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                    {{ html()->form()->close() }}
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="pdf" role="tabpanel" aria-labelledby="pdf-tab">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>PDF</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>Joining</td>
+                                <td>
+                                    <span class="text-muted">{{ $user->joining_date }}</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a class="btn btn-white mr-1" href="/joining-letter/{{$user->id}}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-white" href="/download/joiningLetter/{{ $user->id }}">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @foreach($user->designations as $designation)
+                            <tr>
+                                <td>promote to {{ $designation->title }}</td>
+                                <td>
+                                    <span class="text-muted">{{ $designation->pivot->created_at->toDateString() }}</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a class="btn btn-white mr-1" href="/promote-letter/{{$user->id}}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-white" href="/download/promoteLetter/{{ $user->id }}">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
             </div>

@@ -3,13 +3,18 @@
 namespace App\Policies;
 
 use App\User;
-use App\Department;
+use App\Salary;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DepartmentPolicy
+class SalaryPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * @param $user
+     * @param $ability
+     * @return bool
+     */
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {
@@ -18,7 +23,7 @@ class DepartmentPolicy
     }
 
     /**
-     * Determine whether the user can view the department.
+     * Determine whether the user can view the client.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -29,7 +34,7 @@ class DepartmentPolicy
     }
 
     /**
-     * Determine whether the user can view the department.
+     * Determine whether the user can view the salary.
      *
      * @param  \App\User $user
      * @return mixed
@@ -39,8 +44,9 @@ class DepartmentPolicy
         return false;
     }
 
+
     /**
-     * Determine whether the user can create departments.
+     * Determine whether the user can create salaries.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -51,9 +57,9 @@ class DepartmentPolicy
     }
 
     /**
-     * Determine whether the user can update the department.
+     * Determine whether the user can update the salary.
      *
-     * @param  \App\User $user
+     * @param User $user
      * @return mixed
      */
     public function update(User $user)
@@ -62,13 +68,37 @@ class DepartmentPolicy
     }
 
     /**
-     * Determine whether the user can delete the department.
+     * Determine whether the user can delete the salary.
      *
-     * @param  \App\User $user
+     * @param  \App\User  $user
+     * @param  \App\Salary  $salary
      * @return mixed
      */
-    public function delete(User $user)
+    public function delete(User $user, Salary $salary)
     {
         return false;
     }
+
+    /**
+     * Determine whether the user can view the salary.
+     *
+     * @param  \App\User $user
+     * @param User $model
+     * @return mixed
+     */
+    public function show(User $user, User $model)
+    {
+        return $model->id === $user->id;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+
+    public function paidSalary(User $user)
+    {
+        return false;
+    }
+
 }

@@ -18,8 +18,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Project::class => \App\Policies\ProjectPolicy::class,
         \App\Holiday::class => \App\Policies\HolidayPolicy::class,
         \App\Leave::class => \App\Policies\LeavePolicy::class,
-        \App\Department::class => \App\Policies\DepartmentPolicy::class,
-        \App\Designation::class => \App\Policies\DesignationPolicy::class
+        \App\Designation::class => \App\Policies\DesignationPolicy::class,
+        \App\Salary::class => \App\Policies\SalaryPolicy::class
     ];
 
     /**
@@ -36,7 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('projects', \App\Project::class);
         Gate::resource('holidays', \App\Holiday::class);
         Gate::resource('leaves', \App\Leave::class);
-        Gate::resource('departments', \App\Department::class);
         Gate::resource('designations', \App\Designation::class);
+        Gate::resource('salaries', \App\Salary::class);
     }
 }

@@ -10,19 +10,26 @@
             <div class="card card-small mb-4">
                 @can('create', App\Holiday::class)
                     <div class="card-header border-bottom">
-                        <a href="/holidays/create" class="btn btn-primary pull-right">
-                            <i class="fa fa-plus mr-2"></i>
-                            Add Holiday
-                        </a>
+                        <div class="row">
+                            <input id="filter-type" type="hidden" value="all">
+                            <div class="btn-group ml-3">
+                                <button class="btn btn-info btn-filter" value="all">All</button>
+                                <button class="btn btn-info btn-filter" value="upcoming">Upcoming</button>
+                                <button class="btn btn-info btn-filter" value="past">Past</button>
+                            </div>
+                            <a href="/holidays/create" class="btn btn-primary ml-auto mr-3">
+                                <i class="fa fa-plus mr-2"></i>
+                                Add Holiday
+                            </a>
+                        </div>
                     </div>
                 @endcan
                 <div class="card-body">
-                    <table class="table table-striped table-bordered" id="holiday-table">
+                    <table class="table table-striped table-bordered p-0 text-center" id="holiday-table">
                         <thead>
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
-                            <th>Description</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Action</th>
@@ -38,19 +45,28 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#holiday-table').DataTable({
+            let dt = $('#holiday-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('holidays.index') !!}',
+                'ajax': {
+                    'url': '{!! route('holidays.index') !!}',
+                    'data': function ( d ) {
+                        d.filter = $('#filter-type').val()
+                    }
+                },
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'title', name: 'title' },
-                    { data: 'description', name: 'description' },
                     { data: 'start_date', name: 'start_date' },
                     { data: 'end_date', name: 'end_date' },
                     { data: 'action', name: 'action', sortable: false },
                 ]
-            });
-        });
+            })
+
+            $('.btn-filter').click(function(){
+                $('#filter-type').attr('value', $(this).val())
+                dt.draw()
+            })
+        })
     </script>
 @endpush

@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex justify-content-center">
     @isset($showUrl)
         <a class="btn btn-white" href="{{ $showUrl }}">
             <i class="fas fa-eye"></i>

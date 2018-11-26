@@ -70,21 +70,29 @@
                 </a>
             </li>
             @endcan
-            @can('index', App\Department::class)
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('departments*') ? 'active' : '' }}" href="/departments">
-                        <i class="fas fa-building"></i>
-                        <span>Departments</span>
-                    </a>
-                </li>
-            @endcan
             @can('index', App\Designation::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('designations*') ? 'active' : '' }}" href="/designations">
-                    <i class="fas fa-building"></i>
+                    <i class="fas fa-user"></i>
                     <span>Designations</span>
                 </a>
             </li>
+            @endcan
+            @can('view', App\Salary::class)
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('salary*') ? 'active' : '' }}" href="/salary">
+                        <i class="fas fa-sort-amount-down"></i>
+                        <span>Salary</span>
+                    </a>
+                </li>
+            @endcan
+            @can('index', App\Salary::class)
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('salaries*') ? 'active' : '' }}" href="/salaries">
+                        <i class="fas fa-sort-amount-up"></i>
+                        <span>Paid Salary</span>
+                    </a>
+                </li>
             @endcan
         </ul>
     </div>

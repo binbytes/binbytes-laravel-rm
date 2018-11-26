@@ -12,14 +12,14 @@
     "devDependencies": {
         "axios": "^0.17",
         "bootstrap": "^4.0.0",
-        "popper.js": "^1.12",
         "cross-env": "^5.1",
+        "datatables.net": "^1.10.19",
+        "datatables.net-bs4": "^1.10.19",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7",
-        "datatables.net": "^1.10.19",
-        "datatables.net-bs4": "^1.10.19"
+        "popper.js": "^1.14.5",
+        "vue": "^2.5.7"
     },
     "dependencies": {
         "chart.js": "^2.7.3",

@@ -15,7 +15,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->method('POST') || \Gate::allows('update', User::find($this->id));
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class UserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->id)
             ],
             'dob' => 'nullable|date',
-            'designation' => 'required',
+            'designation_id' => 'required',
             'address' => 'required',
             'mobile_no' => 'required',
             'joining_date' => 'required|date',

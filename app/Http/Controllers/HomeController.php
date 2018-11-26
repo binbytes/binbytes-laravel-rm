@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\Leave;
+use App\Project;
+use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -15,8 +20,13 @@ class HomeController extends Controller
         $weekAttendances = auth()->user()->week_attendances;
         $todayAttendance = auth()->user()->today_attendance;
 
-        //dd($weekAttendances);
+        $users = User::all();
+        $projects = Project::all();
+        $clients = Client::all();
+        $leaves = Leave::with('user')
+                    ->where('start_date', today())
+                    ->get();
 
-        return view('home', compact('weekAttendances', 'todayAttendance'));
+        return view('home', compact('weekAttendances', 'todayAttendance', 'users', 'leaves', 'projects', 'clients'));
     }
 }

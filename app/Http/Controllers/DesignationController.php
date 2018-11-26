@@ -27,13 +27,13 @@ class DesignationController extends Controller
             return Datatables::of(Designation::query())
                 ->addColumn('action', function (Designation $designation) {
                     return view('shared.dtAction', [
-                        'showUrl' => route('designations.show', $designation),
                         'deleteUrl' => route('designations.destroy', $designation),
                         'editUrl' => route('designations.edit', $designation)
                     ]);
                 })
                 ->make(true);
         }
+
         return view('designation.list');
     }
 
@@ -53,7 +53,7 @@ class DesignationController extends Controller
      * @param DesignationRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DesignationRequest $request)
     {
         $data = $request->all();
 
@@ -97,7 +97,7 @@ class DesignationController extends Controller
      * @param Designation $designation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Designation $designation)
+    public function update(DesignationRequest $request, Designation $designation)
     {
         $data = $request->all();
 

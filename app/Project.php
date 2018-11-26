@@ -34,13 +34,37 @@ class Project extends Model
             ->saveSlugsTo('slug');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function client()
     {
         return $this->belongsTo('App\Client');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany('App\User');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeCompleted($query)
+    {
+        return $query->where('is_completed', true);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRunning($query)
+    {
+        return $query->where('is_completed', false);
     }
 }

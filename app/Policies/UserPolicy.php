@@ -85,10 +85,21 @@ class UserPolicy
 
     /**
      * @param User $user
+     * @param User $model
      * @return bool
      */
-    public function showTab(User $user)
+    public function userInfoTab(User $user, User $model)
     {
-        return false;
+        return $model->id === $user->id;
+    }
+
+    /**
+     * @param User $user
+     * @param User $model
+     * @return bool
+     */
+    public function seeWeeklyAttendance(User $user, User $model)
+    {
+        return $model->id === $user->id;
     }
 }

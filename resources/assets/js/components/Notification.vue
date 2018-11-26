@@ -41,6 +41,19 @@
             </p>
         </div>
     </a>
+    <a v-else-if="notification.type == 'App\\Notifications\\SalaryPaid'" :class="cssClass" @click="markAsRead" :href="`/salaries/${notification.data.user_id}`">
+        <div class="notification__icon-wrapper">
+            <div class="notification__icon">
+                <i class="far fa-snowflake"></i>
+            </div>
+        </div>
+        <div class="notification__content">
+            <span class="notification__category">Salary Paid Alert</span>
+            <p>Your Salary <span class="text-success text-semibold"> {{ notification.data.paid_amount }}</span>
+                is paid for <span class="text-success text-semibold">{{ notification.data.paid_for }}</span>
+            </p>
+        </div>
+    </a>
     <div v-else>
         <a>Implement is missing. Work in progress.</a>
     </div>

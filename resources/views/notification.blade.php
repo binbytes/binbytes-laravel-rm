@@ -23,4 +23,11 @@
             is {{ array_get($notification->data, 'approval_status') }}
         </p>
     </a>
+@elseif($notification->type === 'App\Notifications\SalaryPaid')
+    <a href="{{ url('salaries', $notification->data['user_id']) }}">
+        <span class="text-shuttle-gray">Salary Paid Alert</span>
+        <p class="mb-0">Your Salary {{ array_get($notification->data, 'paid_amount') }} is paid fpr
+            <span class="text-reagent-gray text-semibold">{{ array_get($notification->data, 'paid_for') }}</span>
+        </p>
+    </a>
 @endif

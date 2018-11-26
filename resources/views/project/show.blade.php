@@ -84,6 +84,38 @@
                     </div>
                 </div>
             </div>
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom pl-4">
+                    <div class="row">
+                        <h5 class="mb-0 ml-2">Progress Report</h5>
+                        <a href="/progress/{{ $project->id }}" class="btn btn-primary ml-auto mr-3">Add Progress</a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="row mx-1">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>User</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach($progresses as $progress)
+                                <tr>
+                                    <td>{{ $progress->user->name }}</td>
+                                    <td>{{ substr($progress->description, 0, 20) }}</td>
+                                    <td>{{ $progress->date }}</td>
+                                    <td>
+                                        <a class="btn btn-white" href="/progressView/{{ $progress->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

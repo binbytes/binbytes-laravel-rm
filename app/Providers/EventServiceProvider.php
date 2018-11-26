@@ -23,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\LeaveApproval::class => [
             \App\Listeners\LeaveApprovalListener::class
+        ],
+        \App\Events\SalaryPaid::class => [
+            \App\Listeners\SalaryPaidListener::class
         ]
     ];
 

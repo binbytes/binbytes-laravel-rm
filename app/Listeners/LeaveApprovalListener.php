@@ -23,7 +23,6 @@ class LeaveApprovalListener
      * Handle the event.
      *
      * @param LeaveApproval $event
-     * @param Leave $leave
      * @return void
      */
     public function handle(LeaveApproval $event)

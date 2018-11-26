@@ -113,15 +113,16 @@
 
 <div class="form-group row">
     <div class="col-md-4">
-        {{ html()->text('designation')
-                ->placeholder('Designation')
-                ->class(['form-control', 'is-invalid' => $errors->has('designation')])
-                ->required()
+        {{ html()->select('designation_id')
+                ->placeholder('-Select Designation-')
+                ->class(['custom-select', 'is-invalid' => $errors->has('designation_id')])
+                ->options($designations)
+                ->value(old('designation_id', isset($user) ? $user->designation->id : []))
         }}
 
-        @if ($errors->has('designation'))
+        @if ($errors->has('designation_id'))
             <span class="invalid-feedback">
-                <strong>{{ $errors->first('designation') }}</strong>
+                <strong>{{ $errors->first('designation_id') }}</strong>
             </span>
         @endif
     </div>

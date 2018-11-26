@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Project;
 use App\Http\Requests\ProjectRequest;
+use App\ProjectProgress;
 use App\User;
+
+
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -22,15 +27,29 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type = null)
     {
+        $clients = Client::pluck('name');
+        $users = User::all();
+
         if(auth()->user()->isAdmin()) {
-            $projects = Project::with('client', 'users')->orderBy('priority', 'asc')->paginate();
+            $query = Project::query();
         } else {
-            $projects = auth()->user()->projects()->with('users')->latest()->paginate();
+            $query = auth()->user()->projects();
+        }
+        $query->with('client', 'users')->orderBy('priority', 'asc');
+
+        if($type === 'completed') {
+            $query->completed();
+        } elseif($type === 'running') {
+            $query->running();
+        } else {
+            $query;
         }
 
-        return view('project.list', compact('projects'));
+        $projects = $query->paginate();
+
+        return view('project.list', compact('projects', 'clients', 'users'));
     }
 
     /**
@@ -83,7 +102,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('project.show', compact('project'));
+        $progresses = ProjectProgress::where('project_id', $project->id)->orderBy('date', 'desc')->get();
+
+        return view('project.show', compact('project', 'progresses'));
     }
 
     /**
@@ -109,6 +130,7 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
+
         $data = $request->all();
 
         $data['is_completed'] = $request->has('is_completed');
@@ -139,5 +161,44 @@ class ProjectController extends Controller
         $project->delete();
 
         return back();
+    }
+
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showProgress(Project $project)
+    {
+        return view('project.progress', compact('project'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Routing\Redirector
+     */
+    public function storeProgress(Request $request)
+    {
+        $data = $request->all();
+
+        $data['user_id'] = auth()->id();
+        $data['date'] = Carbon::parse($data['date']);
+
+        $project = ProjectProgress::create($data);
+
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
+        return redirect('/projects');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function viewProgress($id)
+    {
+        $projectProgress = ProjectProgress::findOrFail($id);
+        return view('project.viewprogress', compact('projectProgress'));
     }
 }

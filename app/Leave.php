@@ -37,6 +37,9 @@ class Leave extends Model
         'is_approved', 'approved_on', 'approved_by', 'approved_note'
     ];
 
+    /**
+     * @return string
+     */
     public function getApprovalStatusAttribute()
     {
         if($this->is_approved === true) {
@@ -47,8 +50,35 @@ class Leave extends Model
        return 'Pending';
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get upcoming leave
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeUpcoming($query)
+    {
+        return $query->where('start_date', '>=', today());
+    }
+
+    /**
+     * Get past leave
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopePast($query)
+    {
+        return $query->where('start_date', '<=', today());
     }
 }

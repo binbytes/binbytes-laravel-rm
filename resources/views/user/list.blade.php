@@ -17,7 +17,7 @@
                     </div>
                 @endcan
                 <div class="card-body">
-                    <table class="table table-striped table-bordered" id="users-table">
+                    <table class="table table-striped table-bordered p-0 text-center" id="users-table">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -25,6 +25,7 @@
                             <th>Email</th>
                             <th>Mobile Number</th>
                             <th>Skype</th>
+                            <th>Slack</th>
                             <th>Twitter</th>
                             <th>Action</th>
                         </tr>
@@ -49,6 +50,7 @@
                     { data: 'email', name: 'email' },
                     { data: 'mobile_no', name: 'mobile_no' },
                     { data: 'skype', name: 'skype' },
+                    { data: 'slack', name: 'slack' },
                     { data: 'twitter', name: 'twitter' },
                     { data: 'action', name: 'action', sortable: false },
                 ]
