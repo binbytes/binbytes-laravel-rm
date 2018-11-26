@@ -62,8 +62,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" align="center">
-                                        This month no users salary log.
+                                    <td colspan="9" align="center">
+                                        No salary log
                                     </td>
                                 </tr>
                             @endforelse
