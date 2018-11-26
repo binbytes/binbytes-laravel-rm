@@ -75,12 +75,12 @@
             color: #2176bd;
         }
 
-        .latter, .latter h6 {
+        .letter, .letter h6 {
             font-size: 1.2em;
             color: black;
         }
 
-        .latter td p {
+        .letter td p {
             margin-bottom: 8px;
         }
 

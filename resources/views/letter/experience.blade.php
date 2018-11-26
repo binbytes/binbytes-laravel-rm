@@ -7,7 +7,7 @@
         </td>
     </tr>
     <tr>
-        <td class="latter">
+        <td class="letter">
             <h6>Date : {{ now()->format('jS F, Y') }}</h6>
             <h6>To : {{ $user->name }}</h6>
             <p class="py-2">
@@ -20,10 +20,5 @@
             <p>BinBytes, Rajkot</p>
         </td>
     </tr>
-    <tr>
-        <td class="latter">
-            ________________
-            <p>Management Team</p>
-        </td>
-    </tr>
+    @include('letter._footer')
 @endsection

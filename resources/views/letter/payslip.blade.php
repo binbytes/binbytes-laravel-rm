@@ -8,7 +8,7 @@
     </tr>
     <tr>
         <table class="table table-bordered mb-5">
-            <tr class="info latter">
+            <tr class="info letter">
                 <td colspan="2">
                     <table class="table table-borderless">
                         <tr>
@@ -40,7 +40,7 @@
                     </table>
                 </td>
             </tr>
-            <tr class="info latter">
+            <tr class="info letter">
                 <td>
                     <table class="table table-borderless">
                         <tr>
@@ -81,14 +81,14 @@
                         </tr>
                         @if($salary->penalty)
                         <tr>
-                            <td>Penalty</td>
+                            <td>Deduction</td>
                             <td class="text-right">{{ $salary->penalty }}</td>
                         </tr>
                         @endif
                     </table>
                 </td>
             </tr>
-            <tr class="latter">
+            <tr class="letter">
                 <td>
                     <table class="table table-borderless">
                         <tr>
@@ -106,7 +106,7 @@
                     </table>
                 </td>
             </tr>
-            <tr class="latter">
+            <tr class="letter">
                 <td colspan="2">
                     <table class="table table-borderless">
                         <tr>
