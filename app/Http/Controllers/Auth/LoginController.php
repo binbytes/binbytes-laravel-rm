@@ -49,12 +49,12 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->is_active == 0) {
-
+        if (!$user->is_active) {
             auth()->logout();
             session()->flash('alert-info', 'Your account is not activated yet, contact admin.');
             return back();
         }
+
         return redirect()->intended('/');
     }
 }
