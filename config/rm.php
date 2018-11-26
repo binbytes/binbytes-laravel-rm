@@ -6,8 +6,8 @@ return [
     ],
 
     'payment_method' => [
-        'check' => 'check',
-        'cash' => 'cash',
-        'online transaction' => 'online transaction'
+        'cheque' => 'Cheque',
+        'cash' => 'Cash',
+        'online transaction' => 'Online Transaction'
     ]
 ];
