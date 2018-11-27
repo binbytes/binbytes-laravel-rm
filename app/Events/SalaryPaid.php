@@ -15,18 +15,19 @@ class SalaryPaid
 {
     use Dispatchable, SerializesModels;
 
+    /**
+     * @var \App\Salary
+     */
     public $salary;
-    public $fileName;
 
     /**
      * Create a new event instance.
      *
      * @param Salary $salary
      */
-    public function __construct(Salary $salary, $fileName)
+    public function __construct(Salary $salary)
     {
         $this->salary = $salary;
-        $this->fileName = $fileName;
     }
 
     /**

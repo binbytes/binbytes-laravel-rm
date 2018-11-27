@@ -14,17 +14,15 @@ class SalaryPaid extends Notification
     use Queueable, SerializesModels;
 
     protected $salary;
-    private $fileName;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param \App\Salary $salary
      */
-    public function __construct(Salary $salary, $fileName)
+    public function __construct(Salary $salary)
     {
         $this->salary = $salary;
-        $this->fileName = $fileName;
     }
 
     /**
@@ -46,15 +44,15 @@ class SalaryPaid extends Notification
      */
     public function toMail($notifiable)
     {
-
         $url = url('/salaries/'. $this->salary->user_id);
+
         return (new MailMessage)
             ->subject('Your salary has been paid')
             ->markdown('mail.salary.paid', [
                 'salary' => $this->salary,
                 'url' => $url
             ])
-            ->attach(storage_path('app/public/download/'.$this->fileName));
+            ->attachData($this->salary->paySlipPDF()->output(), $this->salary->paySlipFileName());
     }
 
     /**

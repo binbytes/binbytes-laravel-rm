@@ -29,8 +29,7 @@ class SalaryPaidListener
     {
         User::find($event->salary->user_id)->notify(
             new \App\Notifications\SalaryPaid(
-                $event->salary,
-                $event->fileName
+                $event->salary
             )
         );
     }

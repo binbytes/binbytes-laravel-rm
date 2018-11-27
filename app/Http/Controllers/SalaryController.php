@@ -68,12 +68,7 @@ class SalaryController extends Controller
 
             $salary = Salary::create($data);
 
-            PDF::loadView('letter.payslip', compact('salary'))
-                ->save(storage_path('app/public/download/'. $salary->paySlipFileName()));
-
-            event(new SalaryPaid($salary, $salary->paySlipFileName()));
-
-
+            event(new SalaryPaid($salary));
         });
 
         return redirect('/salary');
@@ -154,10 +149,7 @@ class SalaryController extends Controller
 
         $salary = Salary::create($data);
 
-        PDF::loadView('letter.payslip', compact('salary'))
-            ->save(storage_path('app/public/download/'. $salary->paySlipFileName()));
-
-        event(new SalaryPaid($salary, $salary->paySlipFileName()));
+        event(new SalaryPaid($salary));
 
         return redirect('/salary');
     }
