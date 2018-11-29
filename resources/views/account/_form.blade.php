@@ -1,7 +1,7 @@
 <div class="form-group row">
     <div class="col-md-5">
         {{ html()->text('name')
-                ->placeholder('Name')
+                ->placeholder('Name (to identify account)')
                 ->class(['form-control', 'is-invalid' => $errors->has('name')])
                 ->required()
                 ->autofocus()
@@ -13,7 +13,9 @@
             </span>
         @endif
     </div>
+</div>
 
+<div class="form-group row">
     <div class="col-md-5">
         {{ html()->select('user_id')
                 ->placeholder('Select User')
@@ -26,6 +28,20 @@
         @if ($errors->has('user_id'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('user_id') }}</strong>
+            </span>
+        @endif
+    </div>
+
+    <div class="col-md-5">
+        {{ html()->text('name_on_account')
+                ->placeholder('Name on Account')
+                ->class(['form-control', 'is-invalid' => $errors->has('name_on_account')])
+                ->required()
+        }}
+
+        @if ($errors->has('name_on_account'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('name_on_account') }}</strong>
             </span>
         @endif
     </div>

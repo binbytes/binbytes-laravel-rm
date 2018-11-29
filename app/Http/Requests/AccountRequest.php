@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AccountRequest extends FormRequest
 {
@@ -24,10 +25,14 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exits:users,id',
-            'name' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'name' => [
+                'required',
+                Rule::unique('accounts')->ignore($this->id)
+            ],
             'bank_name' => 'required',
             'account_number' => 'required',
+            'name_on_account' => 'required',
             'branch_of' => 'nullable',
             'address' =>'nullable',
             'ifsc_code' => 'nullable',
