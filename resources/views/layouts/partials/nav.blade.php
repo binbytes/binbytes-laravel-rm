@@ -94,6 +94,22 @@
                     </a>
                 </li>
             @endcan
+            @can('index', App\Account::class)
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('accounts*') ? 'active' : '' }}" href="/accounts">
+                    <i class="fas fa-sort-amount-up"></i>
+                    <span>Accounts</span>
+                </a>
+            </li>
+            @endcan
+            @can('index', App\Transaction::class)
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('transactions*') ? 'active' : '' }}" href="/transactions">
+                        <i class="fas fa-sort-amount-up"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </aside>

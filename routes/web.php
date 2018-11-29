@@ -49,7 +49,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/payslip/{user}', 'SalaryController@payslip');
     Route::get('/download/{user}', 'SalaryController@download');
 
+    Route::resource('/accounts', 'AccountController');
 
+    Route::resource('/transactions', 'TransactionController');
+    Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
+    Route::get('/transactions/download/{transaction}', 'TransactionController@download');
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{user}/{startDate}/{endDate?}', 'AttendanceController@dailyView')->name('day-attendance');
