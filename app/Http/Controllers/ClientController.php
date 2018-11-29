@@ -137,6 +137,6 @@ class ClientController extends Controller
 
     protected function uploadFile()
     {
-        return request('avatar')->store('clients', 'public');
+        return request('avatar')->store('clients');
     }
 }

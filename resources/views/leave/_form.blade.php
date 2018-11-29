@@ -9,8 +9,8 @@
 
         @if ($errors->has('subject'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('subject') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('subject') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -24,8 +24,8 @@
 
         @if ($errors->has('description'))
             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
+                <strong>{{ $errors->first('description') }}</strong>
+            </span>
         @endif
     </div>
 </div>
@@ -40,8 +40,8 @@
 
             @if ($errors->has('start_date'))
                 <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('start_date') }}</strong>
-                                        </span>
+                    <strong>{{ $errors->first('start_date') }}</strong>
+                </span>
             @endif
         </div>
         <div class="col-md-5">
@@ -52,8 +52,8 @@
 
             @if ($errors->has('end_date'))
                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('end_date') }}</strong>
-                                </span>
+                    <strong>{{ $errors->first('end_date') }}</strong>
+                </span>
             @endif
         </div>
     </div>
@@ -69,8 +69,8 @@
 
             @if ($errors->has('start_date_partial_hours'))
                 <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('start_date_partial_hours') }}</strong>
-                                        </span>
+                    <strong>{{ $errors->first('start_date_partial_hours') }}</strong>
+                </span>
             @endif
         </div>
         <div class="col-md-5">
@@ -81,8 +81,8 @@
 
             @if ($errors->has('end_date_partial_hours'))
                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('end_date_partial_hours') }}</strong>
-                                </span>
+                    <strong>{{ $errors->first('end_date_partial_hours') }}</strong>
+                </span>
             @endif
         </div>
     </div>

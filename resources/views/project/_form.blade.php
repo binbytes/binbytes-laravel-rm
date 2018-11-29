@@ -114,6 +114,7 @@
         {{ html()->select('priority')
                 ->class('custom-select')
                 ->options(priority())
+                ->value(old('priority', isset($project) ? $project->priority : []))
         }}
     </div>
 </div>

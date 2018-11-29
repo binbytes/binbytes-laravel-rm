@@ -202,7 +202,7 @@ class UserController extends Controller
      */
     protected function uploadFile()
     {
-        return request('avatar')->store('users', 'public');
+        return request('avatar')->store('users');
     }
 
     /**

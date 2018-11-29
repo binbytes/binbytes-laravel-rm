@@ -9,7 +9,6 @@
             <div class="card card-small mb-3">
                 <div class="card-body">
                     {{ html()->form('POST', route('designations.store'))
-                        ->acceptsFiles()
                         ->open() }}
 
                     @include('designation._form')

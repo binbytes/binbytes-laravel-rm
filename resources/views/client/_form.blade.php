@@ -102,6 +102,7 @@
                 ->placeholder('Timezone')
                 ->class(['custom-select', 'is-invalid' => $errors->has('timezone')])
                 ->options(timeZoneList())
+                ->value(old('timezone', isset($client) ? $client->timezone : []))
         }}
 
         @if ($errors->has('timezone'))

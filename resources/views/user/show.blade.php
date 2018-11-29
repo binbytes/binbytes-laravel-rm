@@ -7,15 +7,9 @@
         <div class="col-lg-4">
             <div class="card card-small mb-4 pt-3">
                 <div class="card-header border-bottom text-center">
-                    <div class="mb-3 row justify-content-center">
-                        @if($user->avatar)
-                            <img class="rounded-circle" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" width="90" height="90">
-                        @else
-                            <span class="user-placeholder">{{ substr($user->name, 0, 2) }}</span>
-                        @endif
-                    </div>
-                    <h4 class="mb-0">{{ $user->name }}</h4>
-                    <div class="d-block mb-1">
+                    @include('shared.userAvatar')
+
+                    <div class="d-block mt-2">
                         @if($user->github)
                             <a href="{{ $user->github }}" class="mx-1"><i class="fab fa-github"></i></a>
                         @endif
