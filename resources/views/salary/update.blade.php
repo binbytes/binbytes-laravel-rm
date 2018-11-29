@@ -142,7 +142,7 @@
                             {{ html()->select('payment_method')
                                         ->id('payment_method')
                                         ->class('form-control')
-                                        ->options(config('rm.payment_method'))
+                                        ->options(config('rm.payment_methods'))
                             }}
 
                             @if ($errors->has('payment_method'))

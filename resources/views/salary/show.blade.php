@@ -32,7 +32,7 @@
                             <tbody>
                             @forelse($salaries as $salary)
                                 <tr>
-                                    <td>{{ $salary->paid_for }}</td>
+                                    <td>{{ $salary->paid_for->format('Y-m-d') }}</td>
                                     <td>{{ $salary->base_salary }}</td>
                                     <td>{{ $salary->pf }}</td>
                                     <td>{{ $salary->tds }}</td>

@@ -207,9 +207,7 @@ class SalaryController extends Controller
     {
         $salary = Salary::with('user')->findOrFail($id);
 
-        $pdf = PDF::loadView('letter.payslip', compact('salary'));
-
-        return $pdf->download($salary->paySlipFileName());
+        return $salary->paySlipPDF()->download($salary->paySlipFileName());
     }
 
     /**

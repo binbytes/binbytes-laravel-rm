@@ -19,7 +19,7 @@
                                     {{ html()->select('payment_method')
                                         ->id('payment_method')
                                         ->class('form-control mr-1')
-                                        ->options(config('rm.payment_method'))
+                                        ->options(config('rm.payment_methods'))
                                     }}
                                     <button type="submit" class="btn btn-primary">Mark Paid</button>
                                 </div>
