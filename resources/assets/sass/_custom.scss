@@ -43,3 +43,42 @@ img.avatar {
     font-size: 40px;
   }
 }
+
+.dataTable {
+  thead {
+    th {
+      @extend .bg-light;
+      border-top: 0;
+      border-bottom: 0;
+
+      &.sorting:after,
+      &.sorting:before,
+      &.sorting_asc:after,
+      &.sorting_asc:before,
+      &.sorting_desc:before,
+      &.sorting_desc:after {
+        content: "" !important;
+      }
+
+      &.sorting {
+        background-image: url('../images/sort_both.png');
+        background-repeat: no-repeat;
+        background-position: center right;
+      }
+
+      &.sorting_asc {
+        background-image: url('../images/sort_asc.png');
+        background-repeat: no-repeat;
+        background-position: center right;
+      }
+
+      &.sorting_desc {
+        background-image: url('../images/sort_desc.png');
+        background-repeat: no-repeat;
+        background-position: center right;
+      }
+    }
+
+
+  }
+}

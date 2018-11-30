@@ -17,18 +17,18 @@
                     </div>
                 @endcan
                 <div class="card-body">
-                    <table class="table table-striped table-bordered p-0 text-center" id="users-table">
+                    <table class="table table-bordered p-0 text-center" id="users-table">
                         <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile Number</th>
-                            <th>Skype</th>
-                            <th>Slack</th>
-                            <th>Twitter</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile Number</th>
+                                <th>Skype</th>
+                                <th>Slack</th>
+                                <th>Twitter</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>
