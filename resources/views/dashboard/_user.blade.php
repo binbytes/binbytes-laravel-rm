@@ -4,15 +4,15 @@
             <h6>Today Attendance</h6>
         </div>
         <div class="card-body p-0 pb-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th class="pl-3">Id</th>
-                    <th>User</th>
-                    <th>Today Hours</th>
-                    <th>Week Hours</th>
-                    <th></th>
-                </tr>
+            <table class="table">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="pl-3">Id</th>
+                        <th>User</th>
+                        <th>Today Hours</th>
+                        <th>Week Hours</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
@@ -38,7 +38,7 @@
                             ?>
                             <td class="{{ $color }}">{{ hoursFromSeconds($user->weekAttendances->sum('second')) }}</td>
                             <td>
-                                <a href="{{ route('day-attendance', [$user->id, today()->format('Y-m-d'), today()->format('Y-m-d')]) }}" class="btn btn-white">
+                                <a href="{{ route('day-attendance', [$user->id, today()->format('Y-m-d'), today()->format('Y-m-d')]) }}" class="btn btn-sm btn-white">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
@@ -54,15 +54,15 @@
         <div class="card-header px-3 pb-0">
             <h6>Users Leave</h6>
         </div>
-        <div class="card-body p-0 pb-3">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th class="pl-3">name</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Status</th>
-                </tr>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="pl-3">Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @forelse($leaves as $leave)
@@ -71,14 +71,14 @@
                         <td>{{ $leave->start_date->format('Y-m-d') }}</td>
                         <td>{{ $leave->end_date->format('Y-m-d') }}</td>
                         <?php
-                        $color = '';
-                        if($leave->approval_status == 'Approved') {
-                            $color = "btn-success";
-                        } elseif ($leave->approval_status == 'Declined') {
-                            $color = "btn-danger";
-                        } else {
-                            $color = "btn-warning";
-                        }
+                            $color = '';
+                            if($leave->approval_status == 'Approved') {
+                                $color = "btn-success";
+                            } elseif ($leave->approval_status == 'Declined') {
+                                $color = "btn-danger";
+                            } else {
+                                $color = "btn-warning";
+                            }
                         ?>
                         <td>
                             <a class="btn {{ $color }}" href="/leaves/{{$leave->id}}">

@@ -6,55 +6,46 @@
 <div class="pg-dashboard">
     @if(auth()->user()->isAdmin())
         <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/users">
-                        <div class="card-body">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="text-info">
-                                    <i class="fa fa-users fa-3x"></i>
+            <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <a href="/users">
+                                <div class="stats-small__data text-center">
+                                    <span class="stats-small__label text-primary text-uppercase">Users</span>
+                                    <h6 class="stats-small__value count my-3">{{ count($users) }}</h6>
                                 </div>
-                                <div class="ml-5">
-                                    <div class="font-weight-bold text-black">{{ count($users) }}</div>
-                                    <span class="text-muted">Users</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/projects">
-                        <div class="card-body">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="text-success">
-                                    <i class="fa fa-tasks fa-3x"></i>
+            <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <a href="/projects">
+                                <div class="stats-small__data text-center">
+                                    <span class="stats-small__label text-success text-uppercase">Projects</span>
+                                    <h6 class="stats-small__value count my-3">{{ count($projects) }}</h6>
                                 </div>
-                                <div class="ml-5">
-                                    <div class="font-weight-bold text-black">{{ count($projects) }}</div>
-                                    <span class="text-muted">Projects</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <a href="/clients">
-                        <div class="card-body">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="text-fiord-blue">
-                                    <i class="fas fa-user fa-3x"></i>
+            <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <a href="/clients">
+                                <div class="stats-small__data text-center">
+                                    <span class="stats-small__label text-fiord-blue text-uppercase">Clients</span>
+                                    <h6 class="stats-small__value count my-3">{{ count($clients) }}</h6>
                                 </div>
-                                <div class="ml-5">
-                                    <div class="font-weight-bold text-black">{{ count($clients) }}</div>
-                                    <span class="text-muted">Clients</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,4 +73,6 @@
 </div>
 @endsection
 
-@include('shared.chart')
+@if(!auth()->user()->isAdmin())
+    @include('shared.chart')
+@endif
