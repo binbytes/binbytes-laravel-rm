@@ -25,15 +25,15 @@
                     </div>
                 @endcan
                 <div class="card-body">
-                    <table class="table table-striped table-bordered p-0 text-center" id="holiday-table">
+                    <table class="table table-bordered p-0 text-center" id="holiday-table">
                         <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>

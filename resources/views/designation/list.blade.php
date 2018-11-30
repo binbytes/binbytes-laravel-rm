@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered p-0 text-center" id="designation-table">
+                    <table class="table table-bordered p-0 text-center" id="designation-table">
                         <thead>
                         <tr>
                             <th>Id</th>

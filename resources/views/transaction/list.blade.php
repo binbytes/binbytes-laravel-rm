@@ -17,19 +17,19 @@
                         </div>
                     </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered p-0 text-center" id="transaction-table">
+                    <table class="table table-bordered p-0 text-center" id="transaction-table">
                         <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Account</th>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Credit Amount</th>
-                            <th>Debit Amount</th>
-                            <th>Closing Balance</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Account</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Credit Amount</th>
+                                <th>Debit Amount</th>
+                                <th>Closing Balance</th>
+                                <th>Type</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>
