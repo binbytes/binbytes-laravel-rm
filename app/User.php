@@ -104,8 +104,13 @@ class User extends Authenticatable
      */
     public function dateRangeAttendances($startDate, $endDate)
     {
-        $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
-        $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+        if($startDate instanceof Carbon === false) {
+            $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+        }
+
+        if($endDate instanceof Carbon === false) {
+            $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+        }
 
         $days = generateDateRange($startDate, $endDate->addDay(1), '1 day');
 
@@ -122,7 +127,6 @@ class User extends Authenticatable
                 'second' => $attendance ? $attendance->total_times : 0,
                 'is_on_leave' => $attendance && $attendance->is_on_leave,
             ];
-
         });
     }
 
