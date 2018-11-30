@@ -31,16 +31,9 @@ class AttendanceController extends Controller
     public function dailyView(User $user, $startDate, $endDate = null)
     {
         if($this->authorize('seeWeeklyAttendance', $user)) {
-            if($startDate === $endDate) {
-                $attendance = $user->attendanceOfTheDay($startDate);
-                if(empty($attendance)) {
-                    $attendance = null;
-                }
-            } else {
-                $weekAttendances = $user->attendanceFromDates($startDate, $endDate);
-            }
+            $weekAttendances = $user->dateRangeAttendances($startDate, $endDate);
 
-            return view('attendance.day', compact('user', 'attendance', 'weekAttendances', 'startDate', 'endDate'));
+            return view('attendance.day', compact('user', 'weekAttendances', 'startDate', 'endDate'));
         }
     }
 }

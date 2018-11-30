@@ -82,7 +82,7 @@ class User extends Authenticatable
     public function attendanceFromDates($startDate, $endDate)
     {
         return $this->attendance()
-            ->whereBetween('date', array($startDate, $endDate))
+            ->whereBetween('date', [$startDate, $endDate])
             ->get();
     }
 
@@ -98,14 +98,18 @@ class User extends Authenticatable
     }
 
     /**
-     * @return UserAttendance|object|null
+     * @param $startDate
+     * @param $endDate
+     * @return \Illuminate\Support\Collection
      */
-    public function getWeekAttendancesAttribute()
+    public function dateRangeAttendances($startDate, $endDate)
     {
-        $days = generateDateRange(today()->startOfWeek(), today()->endOfWeek(), '1 day');
-        $attendances = $this->attendance()
-            ->where('date', '>=', today()->startOfWeek())
-            ->get();
+        $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+        $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+
+        $days = generateDateRange($startDate, $endDate->addDay(1), '1 day');
+
+        $attendances = $this->attendanceFromDates($startDate->toDateString(), $endDate->toDateString());
 
         return collect($days)->map(function (Carbon $day) use($attendances) {
             $attendance = $attendances->where('date', $day->format('Y-m-d'))->first();
@@ -118,7 +122,16 @@ class User extends Authenticatable
                 'second' => $attendance ? $attendance->total_times : 0,
                 'is_on_leave' => $attendance && $attendance->is_on_leave,
             ];
+
         });
+    }
+
+    /**
+     * @return UserAttendance|object|null
+     */
+    public function getWeekAttendancesAttribute()
+    {
+        return $this->dateRangeAttendances(today()->startOfWeek(), today()->endOfWeek());
     }
 
     /**
