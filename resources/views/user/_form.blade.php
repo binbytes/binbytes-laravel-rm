@@ -117,7 +117,7 @@
                 ->placeholder('-Select Designation-')
                 ->class(['custom-select', 'is-invalid' => $errors->has('designation_id')])
                 ->options($designations)
-                ->value(old('designation_id', isset($user) ? $user->designation->id : []))
+                ->value(old('designation_id', isset($user->designation) ? $user->designation->id : []))
         }}
 
         @if ($errors->has('designation_id'))
