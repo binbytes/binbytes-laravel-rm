@@ -40,6 +40,7 @@
             </div>
 
             <div class="card-columns">
+                <project-list></project-list>
                 @forelse($projects as $project)
                     <div class="card mb-3">
                         <div class="card-header pb-0">
@@ -98,7 +99,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('.filter').onchange(function(){
+            $('.filter').change(function() {
                 // TO DO
             })
         })
