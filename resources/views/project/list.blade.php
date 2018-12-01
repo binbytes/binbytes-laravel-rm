@@ -14,12 +14,16 @@
                     <a href="/projects/filter/running" class="btn btn-info">Running</a>
                 </div>
                 <div class="d-flex ml-3">
-                    <select id="type" class="mr-1">
-                        @foreach($clients as $client)
-                            <option value="{{ $client }}">{{ $client }}</option>
-                        @endforeach
-                    </select>
-                    <select id="type">
+                    @can('index', \App\Client::class)
+                        <select class="filter" class="mr-1">
+                            <option value="">Select Client</option>
+                            @foreach($clients as $client)
+                                <option value="{{ $client }}">{{ $client }}</option>
+                            @endforeach
+                        </select>
+                    @endcan
+                    <select class="filter">
+                        <option value="">Select User</option>
                         @foreach($users as $user)
                             <option value="{{ $user->name }}">{{ $user->name }}</option>
                         @endforeach
@@ -92,8 +96,8 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#type').onchange(function(){
-                //
+            $('.filter').onchange(function(){
+                // TO DO
             })
         })
     </script>
