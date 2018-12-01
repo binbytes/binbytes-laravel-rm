@@ -1,5 +1,5 @@
 <template>
-    <a v-if="notification.type == 'App\\Notifications\\HolidayAdded'" :class="cssClass" :href="`/holidays/${notification.data.id}`">
+    <a v-if="notification.type == 'App\\Notifications\\HolidayAdded'" :class="cssClass" @click="markAsRead" :href="`/holidays/${notification.data.id}`">
         <div class="notification__icon-wrapper">
             <div class="notification__icon">
                 <i class="far fa-snowflake"></i>
@@ -55,7 +55,7 @@
         </div>
     </a>
     <div v-else>
-        <a>Implement is missing. Work in progress.</a>
+        <a class="dropdown-item">Implement is missing. Work in progress.</a>
     </div>
 </template>
 
