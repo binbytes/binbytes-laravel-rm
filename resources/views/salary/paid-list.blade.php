@@ -31,17 +31,17 @@
                     <div class="card-body p-0">
                         <table class="table table-bordered text-center">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Basic salary</th>
-                                <th>PF</th>
-                                <th>TDS</th>
-                                <th>Deduction</th>
-                                <th>Bonus</th>
-                                <th>Paid Amount</th>
-                                <th>Payment Method</th>
-                                <th>Action</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Basic salary</th>
+                                    <th>PF</th>
+                                    <th>TDS</th>
+                                    <th>Deduction</th>
+                                    <th>Bonus</th>
+                                    <th>Paid Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @forelse($salaries as $salary)

@@ -18,16 +18,16 @@
                     <div class="card-body p-0">
                         <table class="table table-bordered text-center">
                             <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Basic salary</th>
-                                <th>PF</th>
-                                <th>TDS</th>
-                                <th>Deduction</th>
-                                <th>Bonus</th>
-                                <th>Paid Amount</th>
-                                <th>Download</th>
-                            </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Basic salary</th>
+                                    <th>PF</th>
+                                    <th>TDS</th>
+                                    <th>Deduction</th>
+                                    <th>Bonus</th>
+                                    <th>Paid Amount</th>
+                                    <th>Download</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @forelse($salaries as $salary)
@@ -48,14 +48,16 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" align="center">
-                                        This month all users salary paid.
+                                    <td colspan="8" align="center">
+                                        No salary log available.
                                     </td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
-                        <a href="/salaries" class="btn btn-link pull-right">Back</a>
+                        @can('index', \App\Salary::class)
+                            <a href="/salaries" class="btn btn-link pull-right">Back</a>
+                        @endcan
                     </div>
                 </div>
             </form>
