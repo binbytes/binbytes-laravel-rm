@@ -34,5 +34,9 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('admin', function () {
             return auth()->check() && auth()->user()->isAdmin();
         });
+
+        \Blade::if('notAdmin', function () {
+            return auth()->check() && !auth()->user()->isAdmin();
+        });
     }
 }

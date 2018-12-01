@@ -73,6 +73,6 @@
 </div>
 @endsection
 
-@admin
+@notAdmin
     @include('shared.chart')
 @endadmin
