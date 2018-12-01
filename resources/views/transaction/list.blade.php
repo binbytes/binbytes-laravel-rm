@@ -44,6 +44,7 @@
             $('#transaction-table').DataTable({
                 processing: true,
                 serverSide: true,
+                order: [ [0, 'desc'] ],
                 ajax: '{!! route('transactions.index') !!}',
                 columns: [
                     { data: 'id', name: 'id' },

@@ -7,8 +7,6 @@ use App\Project;
 use App\Http\Requests\ProjectRequest;
 use App\ProjectProgress;
 use App\User;
-
-
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -43,13 +41,16 @@ class ProjectController extends Controller
             $query->completed();
         } elseif($type === 'running') {
             $query->running();
-        } else {
-            $query;
         }
 
         $projects = $query->paginate();
 
         return view('project.list', compact('projects', 'clients', 'users'));
+    }
+
+    public function getProjects()
+    {
+        return response()->json(Project::with('users', 'tags')->get());
     }
 
     /**

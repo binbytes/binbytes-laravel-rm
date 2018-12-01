@@ -48,9 +48,10 @@
             let dt = $('#holiday-table').DataTable({
                 processing: true,
                 serverSide: true,
-                'ajax': {
-                    'url': '{!! route('holidays.index') !!}',
-                    'data': function ( d ) {
+                order: [ [0, 'desc'] ],
+                ajax: {
+                    url: '{!! route('holidays.index') !!}',
+                    data: function ( d ) {
                         d.filter = $('#filter-type').val()
                     }
                 },

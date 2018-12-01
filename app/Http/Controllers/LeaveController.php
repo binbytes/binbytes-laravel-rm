@@ -37,8 +37,6 @@ class LeaveController extends Controller
                     ->when(\request('filter') <> 'all', function ($query) {
                         \request('filter') == 'upcoming' ? $query->upcoming() : $query->past();
                     })
-                    ->latest('id')
-                    ->newQuery()
                 )
                 ->addColumn('approved', function (Leave $leave) {
                     $data['approval'] = $leave->approval_status;

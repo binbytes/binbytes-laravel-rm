@@ -47,9 +47,10 @@
             let dt = $('#leave-table').DataTable({
                 processing: true,
                 serverSide: true,
-                'ajax': {
-                    'url': '{!! route('leaves.index') !!}',
-                    'data': function ( d ) {
+                order: [ [0, 'desc'] ],
+                ajax: {
+                    url: '{!! route('leaves.index') !!}',
+                    data: function ( d ) {
                         d.filter = $('#filter-type').val()
                     }
                 },

@@ -29,17 +29,16 @@ class HolidayController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            $query = Holiday::query()->latest('id');
+            $query = Holiday::query();
 
             if (\request('filter') == 'upcoming') {
                 $query = Holiday::upcoming();
-            }
-            if(\request('filter') == 'past') {
+            } elseif(\request('filter') == 'past') {
                 $query = Holiday::past();
             }
+
             return Datatables::of($query)
                 ->addColumn('action', function (Holiday $holiday) {
-                    $data = [];
                     $data['showUrl'] = route('holidays.show', $holiday);
                     if(Gate::allows('delete', $holiday)) {
                         $data['deleteUrl'] = route('holidays.destroy', $holiday);

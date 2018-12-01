@@ -94,7 +94,7 @@ class AccountController extends Controller
     public function show(Account $account)
     {
         if(request()->ajax()) {
-            $query = Transaction::query()->where('account_id', $account->id);
+            $query = Transaction::where('account_id', $account->id);
 
             if((\request('month')) > 0) {
                 $query = $query->whereMonth('date', \request('date'));
