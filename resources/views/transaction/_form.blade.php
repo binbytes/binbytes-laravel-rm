@@ -132,10 +132,14 @@
 
 <div class="form-group row">
     <div class="col-md-10">
-        {{ html()->textarea('type')
-                ->placeholder('Type')
-                ->class(['form-control', 'is-invalid' => $errors->has('type')])
-         }}
+        {{ html()->select('type')
+                ->placeholder('Transaction Type')
+                ->class(['custom-select', 'is-invalid' => $errors->has('type')])
+                ->options(config('rm.transaction_types'))
+                ->value(old('type', isset($transaction->type) ? $transaction->type : ''))
+                ->required()
+        }}
+
         @if ($errors->has('type'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('type') }}</strong>
