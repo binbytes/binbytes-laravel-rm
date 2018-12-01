@@ -333,6 +333,7 @@
     </div>
 </div>
 
+@can('organizationDetail', $user)
 <strong class="text-muted d-block my-2">Organizational</strong>
 <div class="form-group row">
     <div class="col-md-6">
@@ -391,7 +392,6 @@
         @endif
     </div>
 </div>
-
 <div class="form-group row">
     <div class="col-md-12">
         {{ html()->textarea('remarks')
@@ -417,6 +417,7 @@
          }}
     </div>
 </div>
+@endcan
 
 <div class="form-group">
     <div class="custom-control custom-checkbox">

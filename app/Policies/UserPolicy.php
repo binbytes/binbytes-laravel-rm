@@ -83,6 +83,11 @@ class UserPolicy
         return false;
     }
 
+    public function organizationDetail(User $user, User $model)
+    {
+        return false;
+    }
+
     /**
      * @param User $user
      * @param User $model
