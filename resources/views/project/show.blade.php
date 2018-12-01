@@ -93,7 +93,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="row mx-1">
-                        <table class="table table-striped">
+                        <table class="table">
                             <tr>
                                 <th>User</th>
                                 <th>Description</th>

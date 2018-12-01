@@ -16,7 +16,7 @@
                         </h5>
                     </div>
                     <div class="card-body p-0">
-                        <table class="table table-striped table-bordered text-center">
+                        <table class="table table-bordered text-center">
                             <thead>
                             <tr>
                                 <th>Date</th>

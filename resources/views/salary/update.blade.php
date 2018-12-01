@@ -11,7 +11,7 @@
                     <h6 class="mb-0">Leaves</h6>
                 </div>
                 <div class="card-body p-0">
-                    <table class="table table-bordered table-striped text-center">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th>subject</th>

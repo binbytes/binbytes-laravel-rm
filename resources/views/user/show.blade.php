@@ -252,7 +252,7 @@
                                 <span class="text-muted">No Leaves</span>
                             </div>
                         @else
-                            <table class="table table-striped">
+                            <table class="table">
                                 <tr>
                                     <th>Subject</th>
                                     <th>Start Date</th>
@@ -290,7 +290,7 @@
                         @endif
                     </div>
                     <div class="tab-pane fade" id="pdf" role="tabpanel" aria-labelledby="pdf-tab">
-                        <table class="table table-striped">
+                        <table class="table">
                             <tr>
                                 <th>PDF</th>
                                 <th>Date</th>
