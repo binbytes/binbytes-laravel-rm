@@ -93,6 +93,13 @@
                         <span>Paid Salary</span>
                     </a>
                 </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('salaries*') ? 'active' : '' }}" href="/salaries/{{ auth()->id() }}">
+                        <i class="fas fa-sort-amount-up"></i>
+                        <span>My Salaries</span>
+                    </a>
+                </li>
             @endcan
             @can('index', App\Account::class)
             <li class="nav-item">

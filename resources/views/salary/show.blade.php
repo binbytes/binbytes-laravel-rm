@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-'pageTitle' => 'User Salaries'
+    'pageTitle' => auth()->user()->isMe() ? 'My Salaries' : 'Users Salaries'
 ])
 
 @section('content')
