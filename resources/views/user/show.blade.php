@@ -53,12 +53,14 @@
                             </div>
                         </div>
                     </li>
+                    @if($user->about)
                     <li class="list-group-item px-4">
                         <strong class="text-muted d-block mb-2">About</strong>
                         <span>
                             {{ $user->about }}
                         </span>
                     </li>
+                    @endif
                     <li class="list-group-item px-4">
                         <div class="row mb-2">
                             <div class="col-5">
