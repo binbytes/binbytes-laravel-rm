@@ -13,30 +13,30 @@
                 <div class="card-body p-0">
                     <table class="table table-bordered text-center">
                         <thead>
-                        <tr>
-                            <th>subject</th>
-                            <th>date</th>
-                        </tr>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Date</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @forelse($leaves as $leave)
+                            @forelse($leaves as $leave)
+                                <tr>
+                                    <td>{{ $leave->subject }}</td>
+                                    <td>{{ $leave->start_date->format('Y-m-d') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        No Leaves log available for this user.
+                                    </td>
+                                </tr>
+                            @endforelse
                             <tr>
-                                <td>{{ $leave->subject }}</td>
-                                <td>{{ $leave->start_date->format('Y-m-d') }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2" align="center">
-                                    No Leaves log available this user.
+                                <td colspan="2" align="right">
+                                    <span class="text-light">Total Leaves:</span>
+                                    <strong class="mr-3">{{ count($leaves) }}</strong>
                                 </td>
                             </tr>
-                        @endforelse
-                        <tr>
-                            <td colspan="2" align="right">
-                                <span class="text-light">Total Leaves:</span>
-                                <strong class="mr-3">{{ count($leaves) }}</strong>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
