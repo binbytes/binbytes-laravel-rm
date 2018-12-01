@@ -419,7 +419,7 @@
 </div>
 
 <div class="form-group">
-    <div class="custom-control custom-checkbox">
+    <div class="custom-control custom-toggle custom-toggle-md">
         {{ html()->checkbox('is_active')
                 ->id('is_active')
                 ->class('custom-control-input')
@@ -429,7 +429,7 @@
                 ->class('custom-control-label')
         }}
         {{ html()->span('(Only active users will be allowed to login)')
-                ->class('text-light')
+               ->class('text-light')
         }}
     </div>
 </div>
