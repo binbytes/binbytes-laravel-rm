@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="pg-dashboard">
-    @if(auth()->user()->isAdmin())
+    @admin
         <div class="row mb-4">
             <div class="col-lg-2 col-md-6 col-sm-6 mb-4">
                 <div class="stats-small stats-small--1 card card-small">
@@ -69,10 +69,10 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endadmin
 </div>
 @endsection
 
-@if(!auth()->user()->isAdmin())
+@admin
     @include('shared.chart')
-@endif
+@endadmin

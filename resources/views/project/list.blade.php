@@ -22,12 +22,14 @@
                             @endforeach
                         </select>
                     @endcan
-                    <select class="filter">
-                        <option value="">Select User</option>
-                        @foreach($users as $user)
-                            <option value="{{ $user->name }}">{{ $user->name }}</option>
-                        @endforeach
-                    </select>
+                    @admin
+                        <select class="filter">
+                            <option value="">Select User</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->name }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    @endadmin
                 </div>
                 @can('create', App\Project::class)
                     <a href="/projects/create" class="btn btn-primary ml-auto mr-3">
