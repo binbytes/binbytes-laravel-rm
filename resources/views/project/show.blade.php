@@ -65,20 +65,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 py-3">
+                        <div class="col-4">
                             @if($project->users->count())
-                                <div class="d-flex p-2">
+                                <table cellpadding="10">
                                     @foreach($project->users as $user)
-                                        <a href="/users/{{ $user->id }}">
-                                            @if($user->avatar)
-                                                <img src="{{ $user->avatar_url }}" class="avatar mr-1">
-                                            @else
-                                                <span class="user-placeholder mr-1">{{ substr($user->name, 0, 2) }}</span>
-                                            @endif
-                                            <span class="mr-1">{{ $user->name }}</span>
-                                        </a>
+                                        <tr>
+                                        <td>
+                                            <a href="/users/{{ $user->id }}">
+                                                @if($user->avatar)
+                                                    <img src="{{ $user->avatar_url }}" class="avatar mr-1">
+                                                @else
+                                                    <span class="user-placeholder mr-1">{{ substr($user->name, 0, 2) }}</span>
+                                                @endif
+                                                <span class="mr-1">{{ $user->name }}</span>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     @endforeach
-                                </div>
+                                </table>
                             @endif
                         </div>
                     </div>
