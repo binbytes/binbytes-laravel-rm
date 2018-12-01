@@ -94,7 +94,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
 
     public function YES($row)
     {
-        if (!isset($row['txn_date']) || !strtotime($row['txn_date']) || !isset($row['running_balance'])) {
+        if (!isset($row['txn_date']) || !strtotime(trim($row['txn_date'], "'")) || !isset($row['running_balance'])) {
             return null;
         }
 
