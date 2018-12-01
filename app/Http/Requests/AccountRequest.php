@@ -37,6 +37,7 @@ class AccountRequest extends FormRequest
             'address' =>'nullable',
             'ifsc_code' => 'nullable',
             'contact_number' => 'nullable',
+            'statement_starting_line' => 'required|numeric'
         ];
     }
 }
