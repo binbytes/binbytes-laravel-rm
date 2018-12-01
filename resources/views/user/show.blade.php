@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-4">
-            <div class="card card-small mb-4 pt-3">
+            <div class="card card-small mb-4">
                 <div class="card-header border-bottom text-center">
                     @include('shared.userAvatar')
 
