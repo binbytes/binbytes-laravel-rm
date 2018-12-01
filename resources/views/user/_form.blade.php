@@ -411,7 +411,8 @@
     <div class="col-md-12">
         {{ html()->text('tag')
                 ->class('form-control')
-                ->attribute('data-role','tagsinput')
+                ->placeholder('Tag')
+                ->attribute('data-role', 'tagsinput')
                 ->value(old('tag', (isset($user->tags) ? implode(',', $user->tags->pluck('name')->toArray()) : '')))
          }}
     </div>
