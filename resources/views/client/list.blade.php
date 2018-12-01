@@ -8,8 +8,8 @@
             @include('shared.alert')
 
             <div class="card card-small mb-4">
-                <div class="card-header border-bottom">
-                    <a href="/clients/create" class="btn btn-primary pull-right">
+                <div class="card-header border-bottom text-right">
+                    <a href="/clients/create" class="btn btn-primary">
                         <i class="fa fa-plus mr-2"></i>
                         Add Client
                     </a>

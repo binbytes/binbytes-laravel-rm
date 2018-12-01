@@ -9,8 +9,8 @@
 
             <div class="card card-small mb-4">
                 @can('create', App\User::class)
-                    <div class="card-header border-bottom">
-                        <a href="/users/create" class="btn btn-primary pull-right">
+                    <div class="card-header border-bottom text-right">
+                        <a href="/users/create" class="btn btn-primary">
                             <i class="fa fa-plus mr-2"></i>
                             Add User
                         </a>
