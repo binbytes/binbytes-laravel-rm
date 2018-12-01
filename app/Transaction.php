@@ -15,6 +15,12 @@ class Transaction extends Model
         'closing_balance', 'type', 'note', 'invoice'
     ];
 
+    protected $casts = [
+        'credit_amount' => 'float',
+        'credit_amount' => 'float',
+        'closing_balance' => 'float'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -18,5 +18,23 @@ class Account extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Set any specific reader type for any specific bank
+     * @return null|string
+     */
+    public function statementReaderType()
+    {
+        return $this->bank_name === 'SBI' ? \Maatwebsite\Excel\Excel::CSV : null;
+    }
+
+    /**
+     * Set any specific reader type for any specific bank
+     * @return null|string
+     */
+    public function customDelimiter()
+    {
+        return $this->bank_name === 'SBI' ? "\t" : null;
+    }
 }
 

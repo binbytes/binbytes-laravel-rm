@@ -87,3 +87,16 @@ if(!function_exists('generateDateRange')) {
         return $dates;
     }
 }
+
+if(!function_exists('amountStrToFloat')) {
+    /**
+     * Get float value from amount string
+     * @param $amountString
+     *
+     * @return float
+     */
+    function amountStrToFloat($amountString)
+    {
+        return floatval(str_replace(',', '', $amountString));
+    }
+}

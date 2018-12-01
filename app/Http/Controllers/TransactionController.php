@@ -187,9 +187,9 @@ class TransactionController extends Controller
      */
     public function import(Account $account)
     {
-            Excel::import(new TransactionImport($account), \request('file'));
+        Excel::import(new TransactionImport($account), \request('file'), null, $account->statementReaderType());
 
-            return back();
+        return back();
     }
 
     /**

@@ -128,7 +128,7 @@ class AccountController extends Controller
                     ]);
                 })
                 ->editColumn('description', function (Transaction $transaction) {
-                    return substr($transaction->description, 0, 15);
+                    return $transaction->description;
                 })
                 ->editColumn('date', function (Transaction $transaction) {
                     return $transaction->date->format('Y-m-d');
