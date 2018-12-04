@@ -16,7 +16,11 @@ class Account extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'first_name' => config('rm.company.name'),
+            'username' => config('rm.company.name'),
+            'email' => config('rm.company.email'),
+        ]);
     }
 
     /**

@@ -18,11 +18,10 @@
 <div class="form-group row">
     <div class="col-md-5">
         {{ html()->select('user_id')
-                ->placeholder('Select User')
+                ->placeholder('Account of ' . config('rm.company.name'))
                 ->class(['custom-select', 'is-invalid' => $errors->has('user_id')])
-                ->options($users)
+                ->options($users->toArray())
                 ->value(old('user_id', isset($account) ? $account->user_id : ''))
-                ->required()
         }}
 
         @if ($errors->has('user_id'))

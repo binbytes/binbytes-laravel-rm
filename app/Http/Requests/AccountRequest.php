@@ -25,7 +25,7 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id', // If null, it is own by company
             'name' => [
                 'required',
                 Rule::unique('accounts')->ignore($this->id)

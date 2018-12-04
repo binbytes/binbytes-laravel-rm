@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'company' => [
+        'name' => env('COMPANY_NAME', 'BinBytes'),
+        'email' => env('COMPANY_MAIL', 'info@binbytes.com')
+    ],
     'admin' => [
         'kanetiya@gmail.com'
     ],
