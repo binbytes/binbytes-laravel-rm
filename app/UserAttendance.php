@@ -11,19 +11,15 @@ use Illuminate\Support\Collection;
  */
 class UserAttendance extends Model
 {
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'is_on_leave' => 'boolean',
-        'is_absent' => 'boolean'
-    ];
+    static $HOLIDAY = 'holiday';
+    static $LEAVE = 'leave';
+    static $ABSENT = 'absent';
 
     /**
      * @var array
      */
     protected $fillable = [
-        'date', 'total_times', 'is_on_leave', 'is_absent',
+        'date', 'total_times', 'status',
     ];
 
     /**

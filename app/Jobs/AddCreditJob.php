@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Holiday;
 use App\User;
+use App\UserAttendance;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Model;
@@ -26,15 +28,22 @@ class AddCreditJob implements ShouldQueue
     private $type;
 
     /**
+     * @var \Carbon\Carbon
+     */
+    private $date;
+
+    /**
      * AddCreditJob constructor.
      *
      * @param \App\User $user
      * @param \Illuminate\Database\Eloquent\Model $type
+     * @param \Carbon\Carbon $date
      */
-    public function __construct(User $user, Model $type)
+    public function __construct(User $user, Model $type, Carbon $date)
     {
         $this->user = $user;
         $this->type = $type;
+        $this->date = $date;
     }
 
     /**
@@ -44,33 +53,33 @@ class AddCreditJob implements ShouldQueue
      */
     public function handle()
     {
-        $date = today()->subDay(1);
-        if ($date->diffInDays($this->type->start_date)  == 0 && $this->type->start_date_partial_hours) {
-            $this->createPartialHourAttendance($date, $this->type->start_date_partial_hours);
-        } elseif ($date->diffInDays($this->type->end_date) == 0 && $this->type->end_date_partial_hours) {
-            $this->createPartialHourAttendance($date, $this->type->end_date_partial_hours);
+        if ($this->date->diffInDays($this->type->start_date)  == 0 && $this->type->start_date_partial_hours) {
+            $this->createPartialHourAttendance($this->type->start_date_partial_hours);
+        } elseif ($this->date->diffInDays($this->type->end_date) == 0 && $this->type->end_date_partial_hours) {
+            $this->createPartialHourAttendance($this->type->end_date_partial_hours);
         } else {
-            $this->createPartialHourAttendance($date, 8);
+            $this->createPartialHourAttendance(8);
         }
     }
 
     /**
-     * @param \Carbon\Carbon $date
-     * @param $hour
+     * @param int $hour
      *
      * @return \App\UserAttendance
      */
-    protected function createPartialHourAttendance(Carbon $date, $hour)
+    protected function createPartialHourAttendance($hour)
     {
-        $attandance = $this->user->attendanceOfTheDay($date);
+        $attandance = $this->user->attendanceOfTheDay($this->date);
         if (! $attandance) {
-            $attandance = $this->user->createAttendance($date);
+            $attandance = $this->user->createAttendance($this->date, [
+                'status' => $this->type instanceof Holiday ? UserAttendance::$HOLIDAY : UserAttendance::$LEAVE,
+            ]);
         }
 
         $attandance->createAttandanceSession(
             $this->type,
             $this->user,
-            $date,
+            $this->date,
             $hour
         );
 

@@ -29,17 +29,17 @@ class LeaveCredit extends Command
      */
     public function handle()
     {
-        $today = today()->subDay(1);
+        $date = today()->subDay(1);
         $leaves = Leave::with('user')
             ->whereHas('user')
-            ->where('start_date', '>=', $today)
-            ->where('end_date', '>=', $today)
+            ->where('start_date', '>=', $date)
+            ->where('end_date', '>=', $date)
             ->where('is_approved', true)
             ->get();
 
         foreach ($leaves as $leave) {
             dispatch(
-                (new AddCreditJob($leave->user, $leave))
+                (new AddCreditJob($leave->user, $leave, $date))
             );
         }
     }

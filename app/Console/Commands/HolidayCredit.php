@@ -30,16 +30,16 @@ class HolidayCredit extends Command
      */
     public function handle()
     {
-        $today = today()->subDay(1);
-        $holidays = Holiday::where('start_date', '>=', $today)
-            ->where('end_date', '>=', $today)
+        $date = today()->subDay(1);
+        $holidays = Holiday::where('start_date', '>=', $date)
+            ->where('end_date', '>=', $date)
             ->get();
 
         foreach ($holidays as $holiday) {
-            User::chunk(20, function ($users) use ($holiday) {
+            User::chunk(20, function ($users) use ($holiday, $date) {
                 foreach ($users as $user) {
                     dispatch(
-                        (new AddCreditJob($user, $holiday))
+                        (new AddCreditJob($user, $holiday, $date))
                     );
                 }
             });
