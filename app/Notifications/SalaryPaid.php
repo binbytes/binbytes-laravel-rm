@@ -5,13 +5,12 @@ namespace App\Notifications;
 use App\Salary;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
 
 class SalaryPaid extends Notification
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Broadcaster;
 
     protected $salary;
 
@@ -33,7 +32,7 @@ class SalaryPaid extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**

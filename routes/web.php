@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/test', function () {
+    auth()->user()->notify(new \App\Notifications\LeaveRequested(\App\Leave::first()));
+});
+
 Route::redirect('/', '/dashboard');
 
 Auth::routes();

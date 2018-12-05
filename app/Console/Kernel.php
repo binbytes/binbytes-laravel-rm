@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('absent:user')
             ->dailyAt('01:20');
+
+        $schedule->command('websockets:clean')->daily();
     }
 
     /**
