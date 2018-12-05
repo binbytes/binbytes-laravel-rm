@@ -82,6 +82,7 @@
             let dt = $('#transaction-table').DataTable({
                 processing: true,
                 serverSide: true,
+                order: [ [0, 'desc'] ],
                 'ajax': {
                     'url': '{!! route('accounts.show', $account) !!}',
                     'data': function ( d ) {
