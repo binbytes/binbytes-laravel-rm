@@ -28,7 +28,10 @@ class Kernel extends ConsoleKernel
             ->dailyAt('01:00');
 
         $schedule->command('leave:credit')
-            ->dailyAt('01:30');
+            ->dailyAt('01:10');
+
+        $schedule->command('absent:user')
+            ->dailyAt('01:20');
     }
 
     /**
