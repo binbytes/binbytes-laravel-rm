@@ -42,5 +42,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('salaries', \App\Salary::class);
         Gate::resource('accounts', \App\Account::class);
         Gate::resource('transactions', \App\Transaction::class);
+
+        Gate::define('viewWebSocketsDashboard', function ($user = null) {
+            return $user->isAdmin();
+        });
     }
 }
