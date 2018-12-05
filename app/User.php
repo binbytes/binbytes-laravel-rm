@@ -162,9 +162,20 @@ class User extends Authenticatable
             return $attendance;
         }
 
-        return $this->attendance()->create([
-            'date' => today()
-        ]);
+        return $this->createAttendance(today());
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @param array $data
+     *
+     * @return \App\UserAttendance
+     */
+    public function createAttendance(Carbon $date, array $data = [])
+    {
+        return $this->attendance()->create(array_merge([
+            'date' => $date
+        ], $data));
     }
 
     /**
