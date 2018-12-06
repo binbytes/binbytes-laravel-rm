@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('/projects', 'ProjectController');
     Route::get('/projects/filter/{type}', 'ProjectController@index');
+    Route::get('/api-projects', 'ProjectController@getProjectsAPI');
+
     Route::get('/progress/{project}', 'ProjectController@showProgress');
     Route::post('/progress', 'ProjectController@storeProgress')->name('progress');
     Route::get('/progressView/{progress}', 'ProjectController@viewProgress');
@@ -54,6 +56,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/transactions', 'TransactionController');
     Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download');
+
+    Route::resource('/transaction-types', 'TransactionTypeController');
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{user}/{startDate}/{endDate?}', 'AttendanceController@dailyView')->name('day-attendance');

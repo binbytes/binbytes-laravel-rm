@@ -19,12 +19,14 @@ return [
         'YES' => 'YES',
         'SBI' => 'SBI'
     ],
-    'transaction_types' => [
-        'income' => 'Income',
-        'expense' => 'Expense',
-        'salary' => 'Salary',
-        'send_to_family' => 'Family transfer',
-        'internal' => 'Internal Account transfer', // transfer between own account
-        'other' => 'Other'
+    'target_models' => [
+        '\App\User' => 'User',
+        '\App\Client' => 'Client',
+        '\App\Project' => 'Project'
+    ],
+    'transaction_type' => [
+        'both' => 'Both',
+        'credit' => 'Credit',
+        'debit' => 'Debit'
     ]
 ];

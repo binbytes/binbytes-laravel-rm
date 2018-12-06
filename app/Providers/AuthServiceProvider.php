@@ -21,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Designation::class => \App\Policies\DesignationPolicy::class,
         \App\Salary::class => \App\Policies\SalaryPolicy::class,
         \App\Account::class => \App\Policies\AccountPolicy::class,
-        \App\Transaction::class => \App\Policies\TransactionPolicy::class
+        \App\Transaction::class => \App\Policies\TransactionPolicy::class,
+        \App\TransactionType::class => \App\Policies\TransactionTypePolicy::class
     ];
 
     /**
@@ -42,5 +43,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('salaries', \App\Salary::class);
         Gate::resource('accounts', \App\Account::class);
         Gate::resource('transactions', \App\Transaction::class);
+        Gate::resource('transaction-types', \App\TransactionType::class);
     }
 }
