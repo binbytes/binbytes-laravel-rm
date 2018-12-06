@@ -55,6 +55,8 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
     wsPort: process.env.MIX_WS_PORT,
+    wssPort: process.env.MIX_WS_PORT,
+    encrypted: true,
     disableStats: true,
 });
 

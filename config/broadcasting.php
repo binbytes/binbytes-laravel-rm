@@ -40,7 +40,11 @@ return [
                 'encrypted' => true,
                 'host' => '127.0.0.1',
                 'port' => env('WS_PORT', 6001),
-                'scheme' => 'http'
+                'scheme' => env('WS_SCHEME', 'http'),
+                'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                ]
             ],
         ],
 
