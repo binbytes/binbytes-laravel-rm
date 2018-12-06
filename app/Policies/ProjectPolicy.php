@@ -71,5 +71,4 @@ class ProjectPolicy
     {
         return false;
     }
-
 }

@@ -258,7 +258,6 @@ class UserController extends Controller
      */
     public function download($letter, User $user)
     {
-        //dd($letter);
         if($letter == "joiningLetter"){
             $pdf = PDF::loadView('letter.joining', compact('user'));
 

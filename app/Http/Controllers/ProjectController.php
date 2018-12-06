@@ -25,27 +25,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($type = null)
+    public function index()
     {
-        $clients = Client::pluck('name');
-        $users = User::all();
+        $clients = Client::pluck('name', 'id');
+        $users = User::pluck('username', 'id');
 
-        if(auth()->user()->isAdmin()) {
-            $query = Project::query();
-        } else {
-            $query = auth()->user()->projects();
-        }
-        $query->with('client', 'users')->orderBy('priority', 'asc');
-
-        if($type === 'completed') {
-            $query->completed();
-        } elseif($type === 'running') {
-            $query->running();
-        }
-
-        $projects = $query->paginate();
-
-        return view('project.list', compact('projects', 'clients', 'users'));
+        return view('project.list', compact('clients', 'users'));
     }
 
     public function getProjects()
@@ -131,7 +116,6 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
-
         $data = $request->all();
 
         $data['is_completed'] = $request->has('is_completed');
@@ -161,6 +145,10 @@ class ProjectController extends Controller
     {
         $project->delete();
 
+        if(\request()->wantsJson()) {
+            return response([], 200);
+        }
+
         return back();
     }
 
@@ -184,7 +172,7 @@ class ProjectController extends Controller
         $data['user_id'] = auth()->id();
         $data['date'] = Carbon::parse($data['date']);
 
-        $project = ProjectProgress::create($data);
+        ProjectProgress::create($data);
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -200,6 +188,35 @@ class ProjectController extends Controller
     public function viewProgress($id)
     {
         $projectProgress = ProjectProgress::findOrFail($id);
+
         return view('project.viewprogress', compact('projectProgress'));
+    }
+
+    /**
+     *
+     */
+    public function getProjectsAPI()
+    {
+        $query = Project::with('users', 'tags', 'client');
+        
+        $filterType = \request('type');
+
+        if(in_array($filterType, [
+            'completed',
+            'running'
+        ])) {
+            $query->{$filterType}();
+        }
+
+        if($filterClient = \request('client')) {
+            $query = $query->where('client_id', $filterClient);
+        }
+
+        // TO-DO
+//        if($filterUser = \request('user')) {
+//            $query = $query->users()->wherePivot('user_id', $filterUser);
+//        }
+
+        return \App\Http\Resources\Project::collection($query->get());
     }
 }

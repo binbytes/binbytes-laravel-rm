@@ -18,6 +18,7 @@ import appStore from './appStore.js'
 Vue.component('timer', require('./components/Timer.vue'));
 Vue.component('avatar-selector', require('./components/AvatarSelector.vue'));
 Vue.component('notifications', require('./components/Notifications.vue'));
+Vue.component('project-list', require('./components/ProjectList.vue'));
 
 const app = new Vue({
     el: '#app',
