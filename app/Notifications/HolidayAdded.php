@@ -5,13 +5,12 @@ namespace App\Notifications;
 use App\Holiday;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
 
 class HolidayAdded extends Notification
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Broadcaster;
 
     /**
      * @var Holiday
@@ -36,7 +35,7 @@ class HolidayAdded extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**

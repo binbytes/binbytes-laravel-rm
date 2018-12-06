@@ -37,6 +37,11 @@ export default {
     },
     mounted() {
         this.fetchNotifications()
+
+        Echo.private('App.User.1')
+            .notification((notification) => {
+                this.notifications.unshift(notification)
+            });
     },
     methods: {
         fetchNotifications() {

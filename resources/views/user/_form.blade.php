@@ -333,7 +333,7 @@
     </div>
 </div>
 
-@can('organizationDetail', $user)
+@can('organizationDetail', \App\User::class)
 <strong class="text-muted d-block my-2">Organizational</strong>
 <div class="form-group row">
     <div class="col-md-6">

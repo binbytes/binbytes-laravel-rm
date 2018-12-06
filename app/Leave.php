@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Leave extends Model
 {
-    use NotificationHandler;
+    use NotificationHandler, AttendanceScope;
 
     /**
      * Notifications related to Leave
@@ -56,29 +56,5 @@ class Leave extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get upcoming leave
-     *
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopeUpcoming($query)
-    {
-        return $query->where('start_date', '>=', today());
-    }
-
-    /**
-     * Get past leave
-     *
-     * @param $query
-     *
-     * @return mixed
-     */
-    public function scopePast($query)
-    {
-        return $query->where('start_date', '<=', today());
     }
 }

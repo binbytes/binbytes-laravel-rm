@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 
 class LeaveRequested extends Notification
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Broadcaster;
 
     /**
      *@var Leave
@@ -35,7 +35,7 @@ class LeaveRequested extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**

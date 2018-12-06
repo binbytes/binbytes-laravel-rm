@@ -83,7 +83,13 @@ class UserPolicy
         return false;
     }
 
-    public function organizationDetail(User $user, User $model)
+    /**
+     * Can change organization detail
+     * @param \App\User $user
+     *
+     * @return bool
+     */
+    public function organizationDetail(User $user)
     {
         return false;
     }

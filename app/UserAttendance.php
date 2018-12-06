@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -10,19 +11,15 @@ use Illuminate\Support\Collection;
  */
 class UserAttendance extends Model
 {
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'is_on_leave' => 'boolean',
-        'is_absent' => 'boolean'
-    ];
+    static $HOLIDAY = 'holiday';
+    static $LEAVE = 'leave';
+    static $ABSENT = 'absent';
 
     /**
      * @var array
      */
     protected $fillable = [
-        'date', 'total_times', 'is_on_leave', 'is_absent',
+        'date', 'total_times', 'status',
     ];
 
     /**
@@ -92,6 +89,35 @@ class UserAttendance extends Model
         ])->save();
 
         return $session;
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Model $type
+     * @param \App\User $user
+     * @param \Carbon\Carbon $date
+     * @param $hour
+     *
+     * @return $this
+     */
+    public function createAttandanceSession(Model $type, User $user, Carbon $date, $hour)
+    {
+        $startTime = $date->setTime(0, 0, 0);
+        $endTime = $startTime->copy()->addHour($hour);
+        $this->sessions()
+            ->create([
+                'user_id' => $user->getKey(),
+                'start_time' => $startTime,
+                'end_time' => $endTime,
+                'total_times' => $endTime->diffInSeconds($startTime),
+                'parent_id' => $type->getKey(),
+                'parent_type' => get_class($type),
+            ]);
+
+        $this->fill([
+            'total_times' => $this->totalTime
+        ])->save();
+
+        return $this;
     }
 
 }

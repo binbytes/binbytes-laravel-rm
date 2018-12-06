@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -48,6 +49,20 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         return asset($this->avatar);
+    }
+
+    /**
+     * @param Builder $query
+     * @param \Carbon\Carbon $date
+     *
+     * @return mixed
+     */
+    public function scopeDoesntOnLeave(Builder $query, Carbon $date)
+    {
+        return $query->whereDoesntHave('leaves', function ($query) use ($date)  {
+            $query->betweenDate($date)
+                ->where('is_approved', true);
+        });
     }
 
     /**
@@ -162,8 +177,31 @@ class User extends Authenticatable
             return $attendance;
         }
 
-        return $this->attendance()->create([
-            'date' => today()
+        return $this->createAttendance(today());
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @param array $data
+     *
+     * @return \App\UserAttendance
+     */
+    public function createAttendance(Carbon $date, array $data = [])
+    {
+        return $this->attendance()->create(array_merge([
+            'date' => $date
+        ], $data));
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     *
+     * @return \App\UserAttendance
+     */
+    public function createAbsent(Carbon $date)
+    {
+        return $this->createAttendance($date, [
+            'status' => UserAttendance::$ABSENT
         ]);
     }
 
@@ -203,6 +241,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Designation::class)
                     ->withTimestamps()
                     ->orderByDesc('pivot_created_at');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function leaves()
+    {
+        return $this->hasMany(Leave::class);
     }
 
     /**
