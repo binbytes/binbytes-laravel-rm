@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar',
         'address', 'designation', 'about', 'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
-        'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'remarks'
+        'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'use_icon_sidebar', 'remarks'
     ];
 
     public function getNameAttribute()

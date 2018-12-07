@@ -51,6 +51,7 @@ class UserRequest extends FormRequest
             'joining_date' => 'required|date',
             'leaving_date' => 'nullable|date',
             'is_active' => 'boolean',
+            'use_icon_sidebar' => 'boolean',
             'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)
             'base_salary' => 'nullable|numeric'
         ], $this->method() == 'POST' ? [

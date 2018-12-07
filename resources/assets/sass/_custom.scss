@@ -1,3 +1,41 @@
+// mini/icon sidebar
+aside.main-sidebar {
+  -webkit-transition: width 1s; /* Safari */
+  transition: width 1s;
+  &.icon-sidebar:not(:hover) {
+    width: 4rem;
+    .navbar-brand {
+      span {
+        display: none !important;
+      }
+    }
+    .nav-wrapper {
+      .nav-item {
+        .nav-link {
+          padding: 0.9375rem 1.0rem;
+          text-align: center;
+          i {
+            margin-right: 0;
+          }
+        }
+        span {
+          visibility: hidden;
+          opacity: 0;
+          -webkit-transition: opacity .4s, visibility .4s;
+          transition: opacity .4s, visibility .4s;
+          position: absolute;
+        }
+      }
+    }
+    + .main-content {
+      flex: 1;
+      margin-left: 65px;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
 .notifications {
   a.unread-notification {
     background-color: #f2f2f2;

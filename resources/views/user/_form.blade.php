@@ -435,6 +435,19 @@
 </div>
 @endcan
 
+<div class="form-group">
+    <div class="custom-control custom-toggle custom-toggle-md">
+        {{ html()->checkbox('use_icon_sidebar')
+                ->id('use_icon_sidebar')
+                ->class('custom-control-input')
+        }}
+        {{ html()->label('Use Icon Sidebar')
+                ->for('use_icon_sidebar')
+                ->class('custom-control-label')
+        }}
+    </div>
+</div>
+
 <div class="form-group row mb-0">
     <div class="col-md-8 offset-md-4">
         {{ html()->button('Save')
