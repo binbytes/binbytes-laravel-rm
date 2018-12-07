@@ -81,6 +81,9 @@ class UserController extends Controller
 
         $tags = $data['tag'] = explode(',', $request->get('tag'));
 
+        $data['is_active'] = $request->has('is_active');
+        $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
+
         $user = User::create($data);
 
         $user->attachTags($tags);
@@ -125,7 +128,6 @@ class UserController extends Controller
         $designations = Designation::pluck('title', 'id');
 
         return view('user.update', compact('user', 'designations'));
-
     }
 
     /**
@@ -166,6 +168,9 @@ class UserController extends Controller
         }
 
         $tags = $data['tag'] = explode(',', $request->get('tag'));
+
+        $data['is_active'] = $request->has('is_active');
+        $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
 
         $user->fill($data)->save();
 
