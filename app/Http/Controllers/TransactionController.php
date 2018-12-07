@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Http\Requests\TransactionRequest;
 use App\Imports\TransactionImport;
+use App\TransactionType;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Transaction;
@@ -29,9 +30,6 @@ class TransactionController extends Controller
     {
         if(request()->ajax()) {
             return Datatables::of(Transaction::query())
-                ->addColumn('account', function (Transaction $transaction){
-                    return $transaction->account->name;
-                })
                 ->addColumn('credit_amount', function (Transaction $transaction) {
                     $data['credit_amount'] = $transaction->credit_amount;
 
@@ -64,13 +62,19 @@ class TransactionController extends Controller
 
                     return view('shared.dtAction', $data);
                 })
+                ->editColumn('account', function (Transaction $transaction){
+                    return $transaction->account->name;
+                })
+                ->editColumn('type', function (Transaction $transaction){
+                    return $transaction->type ? $transaction->transactionType->title : null;
+                })
                 ->editColumn('description', function (Transaction $transaction) {
                     return substr($transaction->description, 0, 15);
                 })
                 ->editColumn('date', function (Transaction $transaction) {
                     return $transaction->date->format('Y-m-d');
                 })
-                ->rawColumns(['account', 'credit_amount', 'debit_amount', 'closing_balance', 'action'])
+                ->rawColumns(['credit_amount', 'debit_amount', 'closing_balance', 'action'])
                 ->make(true);
         }
 
@@ -86,7 +90,9 @@ class TransactionController extends Controller
     {
         $accounts = Account::pluck('name', 'id');
 
-        return view('transaction.create', compact('accounts'));
+        $transactionTypes = TransactionType::pluck('title', 'id');
+
+        return view('transaction.create', compact('accounts', 'transactionTypes'));
     }
 
     /**
@@ -135,7 +141,11 @@ class TransactionController extends Controller
     {
         $accounts = Account::pluck('name', 'id');
 
-        return view('transaction.update', compact('accounts', 'transaction'));
+        $transactionTypes = TransactionType::whereIn('transaction_type', [
+            'both', $transaction->isCredit() ? 'credit' : 'debit'
+        ])->pluck('title', 'id');
+
+        return view('transaction.update', compact('accounts', 'transaction', 'transactionTypes'));
     }
 
     /**

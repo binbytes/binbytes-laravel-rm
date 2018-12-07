@@ -26,12 +26,16 @@ class TransactionTypeController extends Controller
     {
         if(request()->ajax()) {
             return Datatables::of(TransactionType::query())
+                ->addColumn('parent_id', function (TransactionType $transactionType){
+                    return $transactionType->parent_id ? $transactionType->transactionType->title : null;
+                })
                 ->addColumn('action', function (TransactionType $transactionType) {
                     return view('shared.dtAction', [
                         'deleteUrl' => route('transaction-types.destroy', $transactionType),
                         'editUrl' => route('transaction-types.edit', $transactionType)
                     ]);
                 })
+                ->rawColumns(['parent_id', 'action'])
                 ->make(true);
         }
         return view('transaction_type.list');

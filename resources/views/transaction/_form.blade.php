@@ -135,7 +135,7 @@
         {{ html()->select('type')
                 ->placeholder('Transaction Type')
                 ->class(['custom-select', 'is-invalid' => $errors->has('type')])
-                ->options(config('rm.transaction_types'))
+                ->options($transactionTypes)
                 ->value(old('type', isset($transaction->type) ? $transaction->type : ''))
                 ->required()
         }}

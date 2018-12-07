@@ -17,9 +17,19 @@ class Transaction extends Model
 
     protected $casts = [
         'credit_amount' => 'float',
-        'credit_amount' => 'float',
+        'debit_amount' => 'float',
         'closing_balance' => 'float'
     ];
+
+    public function isCredit()
+    {
+        return $this->credit_amount > 0;
+    }
+
+    public function isDebit()
+    {
+        return $this->debit_amount > 0;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -27,5 +37,10 @@ class Transaction extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function transactionType()
+    {
+        return $this->belongsTo(TransactionType::class, 'type');
     }
 }
