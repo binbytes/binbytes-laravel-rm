@@ -19,6 +19,8 @@ Vue.component('timer', require('./components/Timer.vue'));
 Vue.component('avatar-selector', require('./components/AvatarSelector.vue'));
 Vue.component('notifications', require('./components/Notifications.vue'));
 Vue.component('project-list', require('./components/ProjectList.vue'));
+Vue.component('holiday-calender', require('./components/HolidayCalender'));
+Vue.component('leave-calender', require('./components/LeaveCalender'));
 
 const app = new Vue({
     el: '#app',

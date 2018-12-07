@@ -82,4 +82,9 @@ class HolidayPolicy
     {
         return false;
     }
+
+    public function calender()
+    {
+        return true;
+    }
 }

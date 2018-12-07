@@ -8,7 +8,6 @@ use App\Leave;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests\LeaveRequest;
-use Yajra\Datatables\Datatables;
 use Gate;
 
 class LeaveController extends Controller
@@ -29,45 +28,6 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            return Datatables::of(Leave::with('user')
-                    ->when(auth()->user()->isAdmin() === false, function ($query) {
-                        $query->where('user_id', auth()->id());
-                    })
-                    ->when(\request('filter') <> 'all', function ($query) {
-                        \request('filter') == 'upcoming' ? $query->upcoming() : $query->past();
-                    })
-                )
-                ->addColumn('approved', function (Leave $leave) {
-                    $data['approval'] = $leave->approval_status;
-                    return view('shared.approved', $data);
-                })
-                ->addColumn('action', function (Leave $leave) {
-                    $data = [];
-                    if(Gate::allows('show', $leave)) {
-                        $data['showUrl'] = route('leaves.show', $leave);
-                    }
-
-                    if (Gate::allows('update', $leave)) {
-                        $data['editUrl'] = route('leaves.update', $leave);
-                    }
-
-                    if (Gate::allows('delete', $leave)) {
-                        $data['deleteUrl'] = route('leaves.destroy', $leave);
-                    }
-
-                    return view('shared.dtAction', $data);
-                })
-                ->editColumn('start_date', function (Leave $leave) {
-                    return $leave->start_date->format('Y-m-d');
-                })
-                ->editColumn('end_date', function (Leave $leave) {
-                    return $leave->end_date->format('Y-m-d');
-                })
-                ->rawColumns(['approved', 'action'])
-                ->make(true);
-        }
-
         return view('leave.list');
     }
 
@@ -165,6 +125,10 @@ class LeaveController extends Controller
     {
         $leave->delete();
 
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
         session()->flash('alert-danger', 'Leave has been deleted.');
 
         return back();
@@ -175,13 +139,16 @@ class LeaveController extends Controller
      *
      * @param Leave $leave
      * @param $approve
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function approved(Leave $leave, $approve)
     {
+        $this->authorize('approval', $leave);
+
         $data = [];
 
-        $data['is_approved'] = $approve == 1;
+        $data['is_approved'] = $approve == true;
         $data['approved_by'] = auth()->id();
         $data['approved_on'] = now();
 
@@ -189,6 +156,18 @@ class LeaveController extends Controller
 
         event(new LeaveApproval($leave));
 
+        if(\request()->wantsJson()) {
+            return response([], 200);
+        }
+
         return back();
+    }
+
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getLeaveAPI()
+    {
+        return \App\Http\Resources\Leave::collection(Leave::with('user')->get());
     }
 }

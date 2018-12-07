@@ -36,12 +36,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/progress', 'ProjectController@storeProgress')->name('progress');
     Route::get('/progressView/{progress}', 'ProjectController@viewProgress');
 
-
+    Route::get('/api-holidays', 'HolidayController@getHolidayAPI');
     Route::resource('/holidays', 'HolidayController');
+
     Route::resource('/leaves', 'LeaveController')->parameters([
         'leaves' => 'leave'
     ]);
     Route::get('/leave-approval/{leave}/{approve}', 'LeaveController@approved');
+    Route::get('/api-leaves', 'LeaveController@getLeaveAPI');
 
     Route::resource('/designations', 'DesignationController');
 

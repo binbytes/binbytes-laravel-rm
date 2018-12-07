@@ -28,36 +28,6 @@ class HolidayController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            $query = Holiday::query();
-
-            if (\request('filter') == 'upcoming') {
-                $query = Holiday::upcoming();
-            } elseif(\request('filter') == 'past') {
-                $query = Holiday::past();
-            }
-
-            return Datatables::of($query)
-                ->addColumn('action', function (Holiday $holiday) {
-                    $data['showUrl'] = route('holidays.show', $holiday);
-                    if(Gate::allows('delete', $holiday)) {
-                        $data['deleteUrl'] = route('holidays.destroy', $holiday);
-                    }
-                    if(Gate::allows('update', $holiday)) {
-                        $data['editUrl'] = route('holidays.edit', $holiday);
-                    }
-
-                    return view('shared.dtAction', $data);
-                })
-                ->editColumn('start_date', function (Holiday $holiday) {
-                    return $holiday->start_date->format('Y-m-d');
-                })
-                ->editColumn('end_date', function (Holiday $holiday) {
-                    return $holiday->end_date->format('Y-m-d');
-                })
-                ->make(true);
-        }
-
         return view('holiday.list');
     }
 
@@ -158,5 +128,15 @@ class HolidayController extends Controller
         session()->flash('alert-danger', 'Holiday has been deleted.');
 
         return back();
+    }
+
+    /**
+     *
+     */
+    public function getHolidayAPI()
+    {
+        $query = Holiday::query();
+
+        return \App\Http\Resources\Holiday::collection($query->get());
     }
 }
