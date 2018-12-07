@@ -25,6 +25,6 @@ class Client extends Model
      */
     public function getAvatarUrlAttribute()
     {
-        return asset($this->avatar);
+        return \Storage::url($this->avatar);
     }
 }

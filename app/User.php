@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     public function getAvatarUrlAttribute()
     {
-        return asset($this->avatar);
+        return \Storage::url($this->avatar);
     }
 
     /**
