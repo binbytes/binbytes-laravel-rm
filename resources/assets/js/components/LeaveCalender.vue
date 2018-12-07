@@ -6,7 +6,7 @@
                 <span>Subject: {{ event.originalEvent.subject }}</span>
                 <span>Description: {{ event.originalEvent.description }}</span>
                 <div v-if="event.originalEvent.isApproved === null" class="text-right">
-                    <div v-if="can_approve">
+                    <div v-if="event.originalEvent.can_approve">
                         <button class="btn btn-success mr-3" @click="changeApproval(true)">
                             <i class="fas fa-check"> </i>
                             Approved
