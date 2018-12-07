@@ -20,4 +20,17 @@ trait Broadcaster {
             'data' => $this->toArray($notifiable)
         ]);
     }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return array_merge([
+            'mail', 'database'
+        ], config('rm.broadcast_notification') ? 'broadcast' : null);
+    }
 }
