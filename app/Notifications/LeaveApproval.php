@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 
 class LeaveApproval extends Notification
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Broadcaster;
 
     /**
      *@var Leave
