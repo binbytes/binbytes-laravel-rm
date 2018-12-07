@@ -6,11 +6,15 @@
             <span>Description: {{ leave.description }}</span>
             <div v-if="leave.isApproved === null && leave.can_approve" class="text-right">
                 <div v-if="leave.can_approve">
-                    <button class="btn btn-success mr-3" @click="changeApproval(1)">
+                    <button class="btn btn-success mr-3"
+                            @click="changeApproval(1)"
+                            :disabled="isProcessing">
                         <i class="fas fa-check"> </i>
                         Approved
                     </button>
-                    <button class="btn btn-danger" @click="changeApproval(0)">
+                    <button class="btn btn-danger"
+                            :disabled="isProcessing"
+                            @click="changeApproval(0)">
                         <i class="fas fa-times"></i>
                         Declined
                     </button>
@@ -27,6 +31,7 @@
                 </a>
                 <button v-if="leave.can_delete"
                         @click="deleteLeave"
+                        :disabled="isProcessing"
                         class="btn btn-sm btn-white"
                         aria-label="Delete">
                     <i class="fas fa-trash-alt"></i>
@@ -41,6 +46,11 @@ export default {
     props: [
         'leave'
     ],
+    data() {
+        return {
+            isProcessing: false
+        }
+    },
     computed: {
         classes() {
             return [
@@ -51,15 +61,23 @@ export default {
         }
     },
     methods: {
-        changeApproval(type) {
-            axios.get(`leave-approval/${this.leave.id}/${type}`).then(() => {
+        doRequest(endpoint, method = 'get') {
+            this.isProcessing = true
+            axios({
+                method: method,
+                url: endpoint
+            }).then(() => {
                 this.$emit('refresh-leave')
+                this.isProcessing = false
+            }).catch(() => {
+                this.isProcessing = false
             })
         },
+        changeApproval(type) {
+            this.doRequest(`/leave-approval/${this.leave.id}/${type}`)
+        },
         deleteLeave() {
-            axios.delete(`/leaves/${this.leave.id}`).then(() => {
-                this.$emit('refresh-leave')
-            })
+            this.doRequest(`/leaves/${this.leave.id}`, 'delete')
         }
     }
 }
