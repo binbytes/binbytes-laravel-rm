@@ -1,42 +1,9 @@
 <template>
     <div>
-        <div v-if="event && event.originalEvent" class="mb-4">
-            <div class="d-flex justify-content-between">
-                <span>Name: {{ event.originalEvent.title }}</span>
-                <span>Subject: {{ event.originalEvent.subject }}</span>
-                <span>Description: {{ event.originalEvent.description }}</span>
-                <div v-if="event.originalEvent.isApproved === null" class="text-right">
-                    <div v-if="event.originalEvent.can_approve">
-                        <button class="btn btn-success mr-3" @click="changeApproval(true)">
-                            <i class="fas fa-check"> </i>
-                            Approved
-                        </button>
-                        <button class="btn btn-danger" @click="changeApproval(false)">
-                            <i class="fas fa-times"></i>
-                            Declined
-                        </button>
-                    </div>
+        <transition name="fade">
+            <leave-detail v-if="event" :leave="event.originalEvent" @refresh-leave="getLeaves"></leave-detail>
+        </transition>
 
-                    <span v-else>Approval Status: <strong class="badge badge-warning">{{ event.originalEvent.approvalStatus }}</strong></span>
-                </div>
-                <div v-else>
-                    <h6>Approval Status: <strong :class="['badge', event.originalEvent.classes]">{{ event.originalEvent.approvalStatus }}</strong></h6>
-                </div>
-                <div>
-                    <a v-if="event.originalEvent.can_edit"
-                            :href="`/leaves/${event.originalEvent.id}/edit`"
-                            class="btn btn-sm btn-white" aria-label="Edit">
-                        <i class="fas fa-small fa-edit"></i>
-                    </a>
-                    <button v-if="event.originalEvent.can_delete"
-                            @click="deleteLeave"
-                            class="btn btn-sm btn-white"
-                            aria-label="Delete">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
         <calendar-view
                 :show-date="showDate"
                 :events="leaves"
@@ -52,20 +19,20 @@
 </template>
 
 <script>
-import { CalendarView, CalendarViewHeader }  from  'vue-simple-calendar'
+import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
+import LeaveDetail from './LeaveDetail'
 
 export default {
     components: {
         CalendarView,
-        CalendarViewHeader
+        CalendarViewHeader,
+        LeaveDetail
     },
     data () {
         return {
             event: null,
             showDate: null,
-            leaves: [],
-            event: '',
-            headerProps: {}
+            leaves: []
         }
     },
     mounted() {
@@ -87,6 +54,7 @@ export default {
 
                     return leave
                 })
+
                 this.event = null
             })
         },
@@ -95,17 +63,16 @@ export default {
         },
         clickEvent(e) {
             this.event = e
-        },
-        changeApproval(b) {
-            axios.get(`leave-approval/${this.event.originalEvent.id}/${b}`).then(() => {
-                this.getLeaves()
-            })
-        },
-        deleteLeave() {
-            axios.delete(`/leaves/${this.event.originalEvent.id}`).then(() => {
-                this.getLeaves()
-            })
         }
     }
 }
 </script>
+
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
+</style>
