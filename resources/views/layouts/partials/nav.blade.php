@@ -41,7 +41,9 @@
             @can('index', App\Client::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('clients*') ? 'active' : '' }}" href="/clients">
-                    <i class="fas fa-users"></i>
+                    <i class="material-icons">
+                        supervised_user_circle
+                    </i>
                     <span>Clients</span>
                 </a>
             </li>
@@ -57,7 +59,9 @@
             @can('index', App\Holiday::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('holidays*') ? 'active' : '' }}" href="/holidays">
-                    <i class="fa fa-calendar-alt"></i>
+                    <i class="material-icons">
+                        event
+                    </i>
                     <span>Holidays</span>
                 </a>
             </li>
@@ -104,7 +108,9 @@
             @can('index', App\Account::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('accounts*') ? 'active' : '' }}" href="/accounts">
-                    <i class="fas fa-sort-amount-up"></i>
+                    <i class="material-icons">
+                        account_balance_wallet
+                    </i>
                     <span>Accounts</span>
                 </a>
             </li>
@@ -112,7 +118,9 @@
             @can('index', App\Transaction::class)
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('transactions*') ? 'active' : '' }}" href="/transactions">
-                        <i class="fas fa-sort-amount-up"></i>
+                        <i class="material-icons">
+                            transform
+                        </i>
                         <span>Transactions</span>
                     </a>
                 </li>
@@ -120,7 +128,9 @@
             @can('index', App\TransactionType::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('transaction-types*') ? 'active' : '' }}" href="/transaction-types">
-                    <i class="fas fa-sort-amount-up"></i>
+                    <i class="material-icons">
+                        repeat
+                    </i>
                     <span>Transaction Types</span>
                 </a>
             </li>
