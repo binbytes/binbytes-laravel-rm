@@ -30,11 +30,11 @@ class Salary extends Model
      * @param null $month
      * @return mixed
      */
-    public function scopePaidForMonth($query, $month = null)
+    public function scopePaidForMonth($query, $date = null)
     {
-        if($month == null) $month = today()->month;
+        if($date == null) $date = today()->format('Y-m-d');
 
-        return $query->whereMonth('paid_for', $month);
+        return $query->where('paid_for', $date);
     }
 
     /**
