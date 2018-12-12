@@ -114,6 +114,7 @@ class UserController extends Controller
         $weekAttendances = $user->week_attendances;
         $leaves = Leave::orderBy('start_date', 'desc')
                 ->where('user_id', $user->id)
+                ->where('start_date', '>', today())
                 ->get();
 
         return view('user.show', compact('user', 'weekAttendances', 'leaves'));
@@ -144,6 +145,7 @@ class UserController extends Controller
         $weekAttendances = $user->week_attendances;
         $leaves = Leave::orderBy('start_date', 'desc')
             ->where('user_id', $user->id)
+            ->where('start_date', '>', today())
             ->get();
 
         return view('user.show', compact('user', 'weekAttendances', 'leaves'));

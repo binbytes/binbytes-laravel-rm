@@ -81,8 +81,6 @@
                     </li>
                     <li class="list-group-item px-4">
                         <div class="row justify-content-center mb-1">
-                            <a class="btn btn-primary mr-1" href="/experience-letter/{{$user->id}}">Experience</a>
-                            <a class="btn btn-primary mr-1" href="/joining-letter/{{$user->id}}">Joining</a>
                             <a class="btn btn-info" href="/users/promote/{{ $user->id }}"><i class="fas fa-star"> </i> promote</a>
                         </div>
                     </li>
