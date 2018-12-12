@@ -26,8 +26,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <table class="table table-bordered text-center">
+                    <div class="card-body">
+                        <table class="table table-bordered p-0 text-center">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" id="select-all"/></th>

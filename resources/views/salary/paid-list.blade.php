@@ -28,8 +28,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <table class="table table-bordered text-center">
+                    <div class="card-body">
+                        <table class="table table-bordered text-center p-0">
                             <thead>
                                 <tr>
                                     <th>Name</th>
