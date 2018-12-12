@@ -100,8 +100,20 @@ class AccountController extends Controller
                 $query = $query->whereMonth('date', \request('date'));
             }
 
-            if(in_array(request('filter_type'), ['credit', 'debit'])) {
-                $query->where(request('filter_type') . '_amount', '>', 0);
+            $amountValue = request('amount_value', 0);
+            $operator = request('operator', '>');
+            $filterType = request('filter_type');
+
+            if(in_array($filterType, [
+                    'credit_amount', 'debit_amount', 'closing_balance'
+            ])) {
+                $query->where($filterType, $operator, $amountValue);
+            }
+
+            if(\request('invoice') == 'with_invoice') {
+                $query->withInvoice();
+            } else if(\request('invoice') == 'without_invoice') {
+                $query->withoutInvoice();
             }
 
             return Datatables::of($query)
@@ -121,14 +133,14 @@ class AccountController extends Controller
                     return view('shared.formatAmount', $data);
                 })
                 ->addColumn('action', function (Transaction $transaction) {
-                    return view('shared.dtAction', [
-                        'showUrl' => route('transactions.show', $transaction),
-                        'deleteUrl' => route('transactions.destroy', $transaction),
-                        'editUrl' => route('transactions.edit', $transaction)
-                    ]);
-                })
-                ->editColumn('description', function (Transaction $transaction) {
-                    return $transaction->description;
+                    $data['showUrl'] = route('transactions.show', $transaction);
+                    $data['editUrl'] = route('transactions.destroy', $transaction);
+                    $data['deleteUrl'] = route('transactions.edit', $transaction);
+                    if($transaction->invoice) {
+                        $data['downloadUrl'] = route('transaction-download', $transaction->id);
+                    }
+
+                    return view('shared.dtAction', $data);
                 })
                 ->editColumn('date', function (Transaction $transaction) {
                     return $transaction->date->format('Y-m-d');

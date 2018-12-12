@@ -43,4 +43,14 @@ class Transaction extends Model
     {
         return $this->belongsTo(TransactionType::class, 'type');
     }
+
+    public function scopeWithInvoice($query)
+    {
+        return $query->where('invoice', '<>', null);
+    }
+
+    public function scopeWithoutInvoice($query)
+    {
+        return $query->where('invoice', null);
+    }
 }

@@ -10,45 +10,67 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <div class="row">
-                        <div>
-                            <div class="form-inline ml-3">
-                                {{ html()->select('month')
-                                        ->id('month')
-                                        ->placeholder('Select Month')
-                                        ->class('form-control mr-1')
-                                        ->options(months())
-                                        ->value()
-                                }}
+                    <div class="row pb-3">
+                        <div class="form-inline ml-3">
+                            {{ html()->select('month')
+                                    ->id('month')
+                                    ->placeholder('Select Month')
+                                    ->class('form-control mr-1')
+                                    ->options(months())
+                                    ->value()
+                            }}
 
-                                {{ html()->text('year')
-                                        ->id('year')
-                                        ->class('form-control mr-2')
-                                        ->value(today()->format('Y'))
-                                }}
-                                <input id="filter-date" type="hidden" value="{{ today()->format('m-Y') }}">
+                            {{ html()->text('year')
+                                    ->id('year')
+                                    ->class('form-control mr-2')
+                                    ->value(today()->format('Y'))
+                            }}
+                            <input id="filter-date" type="hidden" value="{{ today()->format('m-Y') }}">
 
-                                {{ html()->select('filter_type')
-                                        ->id('filter_type')
-                                        ->class('form-control mr-1')
-                                        ->options(['all' => 'All', 'credit' => 'Credit', 'debit' => 'Debit'])
-                                        ->value('all')
-                                }}
+                            {{ html()->select('filter_type')
+                                    ->id('filter_type')
+                                    ->class('form-control mr-1')
+                                    ->options(['all' => 'All', 'credit_amount' => 'Credit', 'debit_amount' => 'Debit', 'closing_balance' => 'Closing Balance'])
+                                    ->value('all')
+                            }}
+                            {{ html()->select('operator')
+                                    ->id('operator')
+                                    ->class('form-control mr-2')
+                                    ->options(['>' => '>', '<' => '<', '=' => '=',  '<=' => '<=', '>=' => '>='])
+                                    ->value('')
+                            }}
+                            {{ html()->text('amount')
+                                    ->id('amount')
+                                    ->placeholder('Amount')
+                                    ->class('form-control mr-2')
+                                    ->value('')
+                            }}
 
-                                <button id="btn-filter" class="btn btn-primary">Go</button>
-                            </div>
+                            {{ html()->select('invoice')
+                                    ->id('invoice')
+                                    ->class('form-control mr-1')
+                                    ->options(['all' => 'All', 'with_invoice' => 'With Invoice', 'without_invoice' => 'Without Invoice'])
+                                    ->value('all')
+                            }}
+                            <button id="btn-filter" class="btn btn-primary">Go</button>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="form-inline ml-auto mr-3">
                             {{ html()->form('POST', route('transaction-import', $account->id))
                                     ->acceptsFiles()
                                     ->open() }}
 
                             {{ html()->file('file')
+                                    ->id('file')
                                     ->class('form-control')
+                                    ->required()
                              }}
 
                             {{ html()->button('Import Transaction')
-                                    ->class('btn btn-primary')
+                                     ->id('import')
+                                    ->class('btn btn-primary disabled')
+                              
                              }}
 
                             {{ html()->form()->close() }}
@@ -89,6 +111,9 @@
                         d.month = $('#month').val()
                         d.date = $('#filter-date').val()
                         d.filter_type = $('#filter_type').val()
+                        d.operator = $('#operator').val()
+                        d.amount_value = $('#amount').val()
+                        d.invoice =$('#invoice').val()
                     }
                 },
                 columns: [
@@ -103,17 +128,27 @@
                 ]
             })
 
+            $('#file').change(function () {
+                if($('#file').val()) {
+                    $('#import').removeClass('disabled');
+                } else {
+                    $('#import').addClass('disabled');
+                }
+            })
+
             $('#btn-filter').click(function(){
                 let month = $('#month').val()
                 let year = $('#year').val()
                 let date = month + '-' + year
 
-                $('#filter_type').attr('option', 'value', $('#filter_type').val())
-
                 $('#month').attr('option', 'value', month)
                 $('#year').attr('value', year)
 
                 $('#filter-date').attr('value', date)
+
+                $('#filter_type').attr('option', 'value', $('#filter_type').val())
+
+                $('#invoice').attr('option', 'value', $('#invoice').val())
                 dt.draw()
             })
         });

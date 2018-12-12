@@ -16,4 +16,9 @@
             </button>
         {{ html()->form()->close() }}
     @endisset
+    @isset($downloadUrl)
+        <a href="{{ $downloadUrl }}" class="btn btn-white">
+            <i class="fas fa-download"></i>
+        </a>
+    @endisset
 </div>
