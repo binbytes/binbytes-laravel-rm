@@ -133,16 +133,18 @@
     </div>
 </div>
 
-<div class="form-group row">
-    <div class="offset-2 col-md-6">
-        {{ html()->checkbox('is_completed')
-                ->value(old('is_completed', (isset($project->is_completed) ? $project->is_completed : '')))
-                ->checked(old('is_completed', (isset($project->is_completed)) ? $project->is_completed : ''))
-        }}
-        {{ html()->label('Is Completed?')
-                ->for('is_completed')
-                ->class('col-sm-6 col-form-label')
-        }}
+<div class="form-group">
+    <div class="col-md-6 offset-2">
+        <div class="custom-control custom-toggle custom-toggle-md">
+            {{ html()->checkbox('is_completed')
+                    ->id('is_completed')
+                    ->class('custom-control-input')
+            }}
+            {{ html()->label('Is Completed?')
+                    ->for('is_completed')
+                    ->class('custom-control-label')
+            }}
+        </div>
     </div>
 </div>
 
