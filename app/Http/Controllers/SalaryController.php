@@ -20,14 +20,15 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        if($this->authorize('index', Salary::class)) {
-            $salaries = Salary::with('user')->whereMonth('paid_for', now()->month)->get();
-            $date = now()->format('F-Y');
-            $month = now()->month;
-            $year = now()->year;
+        $this->authorize('index', Salary::class);
 
-            return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
-        }
+        $salaries = Salary::with('user')->whereMonth('paid_for', now()->month)->get();
+        $date = now()->format('F-Y');
+        $month = now()->month;
+        $year = now()->year;
+
+        return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
+
     }
 
     /**
@@ -86,12 +87,11 @@ class SalaryController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if($this->authorize('show', [Salary::class, $user])) {
+        $this->authorize('show', [Salary::class, $user]);
 
-            $salaries = Salary::where('user_id', $id)->latest('paid_for')->get();
+        $salaries = Salary::where('user_id', $id)->latest('paid_for')->get();
 
-            return view('salary.show', compact('salaries', 'user'));
-        }
+        return view('salary.show', compact('salaries', 'user'));
     }
 
     /**
@@ -103,17 +103,16 @@ class SalaryController extends Controller
      */
     public function edit($id)
     {
-        if($this->authorize('update', Salary::class)) {
+        $this->authorize('update', Salary::class);
 
-            $leaves = Leave::with('user')
-                        ->where('user_id', $id)
-                        ->where('start_date', today()->month)
-                        ->get();
+        $leaves = Leave::with('user')
+                    ->where('user_id', $id)
+                    ->where('start_date', today()->month)
+                    ->get();
 
-            $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-            return view('salary.update', compact('user', 'leaves'));
-        }
+        return view('salary.update', compact('user', 'leaves'));
     }
 
     /**
@@ -175,15 +174,16 @@ class SalaryController extends Controller
      */
     public function filter($month , $year)
     {
-        if($this->authorize('paidSalary', Salary::class)) {
-            $date = $month . "-" . $year;
+        $this->authorize('paidSalary', Salary::class);
 
-            $salaries = Salary::with('user')->whereMonth('paid_for', $date)->get();
+        $date = $month . "-" . $year;
 
-            $date = date("F-Y", mktime(0, 0, 0, $month+1, 0, $year));
+        $salaries = Salary::with('user')->whereMonth('paid_for', $date)->get();
 
-            return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
-        }
+        $date = date("F-Y", mktime(0, 0, 0, $month+1, 0, $year));
+
+        return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
+
     }
 
     /**
@@ -194,13 +194,13 @@ class SalaryController extends Controller
      */
     public function view()
     {
-        if($this->authorize('view', Salary::class)) {
-            $salariesUserIds = Salary::paidForMonth()->pluck('user_id');
+        $this->authorize('view', Salary::class);
 
-            $users = User::whereNotIn('id', $salariesUserIds)->get();
+        $salariesUserIds = Salary::paidForMonth()->pluck('user_id');
 
-            return view('salary.list', compact('users', 'salary'));
-        }
+        $users = User::whereNotIn('id', $salariesUserIds)->get();
+
+        return view('salary.list', compact('users', 'salary'));
     }
 
     public function download($id)
