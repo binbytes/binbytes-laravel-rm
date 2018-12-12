@@ -9,12 +9,14 @@
 
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <div class="row">
-                        <a href="/accounts/create" class="btn btn-primary ml-auto mr-3">
-                            <i class="fa fa-plus mr-2"></i>
-                            Add Account
-                        </a>
-                    </div>
+                    @can('create', \App\Account::class)
+                        <div class="row">
+                            <a href="/accounts/create" class="btn btn-primary ml-auto mr-3">
+                                <i class="fa fa-plus mr-2"></i>
+                                Add Account
+                            </a>
+                        </div>
+                    @endcan
                 </div>
 
                 <div class="card-body">

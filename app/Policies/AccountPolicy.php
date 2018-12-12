@@ -25,7 +25,7 @@ class AccountPolicy
      */
     public function index(User $user)
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class AccountPolicy
      */
     public function view(User $user, Account $account)
     {
-        return false;
+        return true;
     }
 
     /**
@@ -48,7 +48,7 @@ class AccountPolicy
      */
     public function create(User $user)
     {
-        return false;
+        return true;
     }
 
     /**
@@ -60,7 +60,7 @@ class AccountPolicy
      */
     public function update(User $user, Account $account)
     {
-        return false;
+        return $user->id === $account->user_id;
     }
 
     /**
@@ -72,6 +72,25 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account)
     {
+        return $user->id === $account->user_id;
+    }
+
+    /**
+     * @param User $user
+     * @param Account $account
+     * @return bool
+     */
+    public function show(User $user, Account $account)
+    {
+        return $user->id === $account->user_id;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function accessAll(User $user)
+    {
         return false;
     }
 
@@ -79,8 +98,8 @@ class AccountPolicy
      * @param User $user
      * @return bool
      */
-    public function show(User $user)
+    public function importTransactions(User $user, Account $account)
     {
-        return false;
+        return $user->id === $account->user_id;
     }
 }

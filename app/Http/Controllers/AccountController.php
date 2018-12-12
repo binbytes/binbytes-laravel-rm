@@ -28,7 +28,14 @@ class AccountController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Account::with('user'))
+            if(Gate::allows('accessAll', Account::class)){
+                $query = Account::with('user');
+            } else {
+                $query = Account::with('user')
+                            ->where('user_id', auth()->id());
+            }
+
+            return Datatables::of($query)
                 ->addColumn('action', function (Account $account) {
                     $data = [];
                     if(Gate::allows('show', $account)) {
@@ -134,10 +141,17 @@ class AccountController extends Controller
                 })
                 ->addColumn('action', function (Transaction $transaction) {
                     $data['showUrl'] = route('transactions.show', $transaction);
-                    $data['editUrl'] = route('transactions.destroy', $transaction);
-                    $data['deleteUrl'] = route('transactions.edit', $transaction);
-                    if($transaction->invoice) {
-                        $data['downloadUrl'] = route('transaction-download', $transaction->id);
+
+                    if(Gate::allows('update', $transaction)) {
+                        $data['editUrl'] = route('transactions.edit', $transaction);
+                    }
+                    if(Gate::allows('delete', $transaction)) {
+                        $data['deleteUrl'] = route('transactions.destroy', $transaction);
+                    }
+                    if(Gate::allows('download', $transaction)) {
+                        if ($transaction->invoice) {
+                            $data['downloadUrl'] = route('transaction-download', $transaction->id);
+                        }
                     }
 
                     return view('shared.dtAction', $data);

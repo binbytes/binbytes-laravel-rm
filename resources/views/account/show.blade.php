@@ -10,7 +10,7 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="form-inline ml-3">
                             {{ html()->select('month')
                                     ->id('month')
@@ -55,27 +55,28 @@
                             <button id="btn-filter" class="btn btn-primary">Go</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-inline ml-auto mr-3">
-                            {{ html()->form('POST', route('transaction-import', $account->id))
-                                    ->acceptsFiles()
-                                    ->open() }}
+                    @can('importTransactions', $account)
+                        <div class="row pt-3">
+                            <div class="form-inline ml-auto mr-3">
+                                {{ html()->form('POST', route('transaction-import', $account->id))
+                                        ->acceptsFiles()
+                                        ->open() }}
 
-                            {{ html()->file('file')
-                                    ->id('file')
-                                    ->class('form-control')
-                                    ->required()
-                             }}
+                                {{ html()->file('file')
+                                        ->id('file')
+                                        ->class('form-control')
+                                        ->required()
+                                }}
 
-                            {{ html()->button('Import Transaction')
-                                     ->id('import')
-                                    ->class('btn btn-primary disabled')
-                              
-                             }}
+                                {{ html()->button('Import Transaction')
+                                         ->id('import')
+                                        ->class('btn btn-primary disabled')
 
-                            {{ html()->form()->close() }}
+                                }}
+                                {{ html()->form()->close() }}
+                            </div>
                         </div>
-                    </div>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered p-0 text-center" id="transaction-table">

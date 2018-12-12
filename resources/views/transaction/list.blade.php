@@ -8,6 +8,7 @@
             @include('shared.alert')
 
             <div class="card card-small mb-4">
+                @can('create', App\Transaction::class)
                     <div class="card-header border-bottom">
                         <div class="row">
                             <a href="/transactions/create" class="btn btn-primary ml-auto mr-3">
@@ -16,6 +17,7 @@
                             </a>
                         </div>
                     </div>
+                @endcan
                 <div class="card-body">
                     <table class="table table-bordered p-0 text-center" id="transaction-table">
                         <thead>

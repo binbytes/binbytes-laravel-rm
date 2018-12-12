@@ -29,7 +29,16 @@ class TransactionController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return Datatables::of(Transaction::query())
+            if(Gate::allows('accessAll', Account::class)) {
+                $query = Transaction::with('account');
+            } else {
+                $query = Transaction::with('account')
+                            ->whereHas('account', function ($query) {
+                                return $query->where('user_id', auth()->id());
+                            });
+            }
+
+            return Datatables::of($query)
                 ->addColumn('credit_amount', function (Transaction $transaction) {
                     $data['credit_amount'] = $transaction->credit_amount;
 
@@ -197,6 +206,8 @@ class TransactionController extends Controller
      */
     public function import(Account $account)
     {
+        $this->authorize('importTransactions', $account);
+
         Excel::import(new TransactionImport($account), \request('file'), null, $account->statementReaderType());
 
         return back();
