@@ -22,6 +22,9 @@ import Notification from "./Notification"
 
 export default {
     name: 'notifications',
+    props: [
+        'authId'
+    ],
     components: {
         Notification
     },
@@ -38,7 +41,7 @@ export default {
     mounted() {
         this.fetchNotifications()
 
-        Echo.private('App.User.1')
+        Echo.private(`App.User.${this.authId}`)
             .notification((notification) => {
                 this.notifications.unshift(notification)
             });

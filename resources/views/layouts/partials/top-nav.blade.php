@@ -4,7 +4,7 @@
         <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"></div>
         <ul class="navbar-nav border-left flex-row pl-2">
             <li class="nav-item border-right dropdown notifications">
-                <notifications></notifications>
+                <notifications :auth-id="{{ auth()->id() }}"></notifications>
             </li>
             <li class="nav-item align-self-center">
                 <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
