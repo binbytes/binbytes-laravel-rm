@@ -48,7 +48,7 @@ class UserRequest extends FormRequest
             'designation_id' => 'required',
             'address' => 'required',
             'mobile_no' => 'required',
-            'joining_date' => 'required|date',
+            'joining_date' => 'nullable|date', //required
             'leaving_date' => 'nullable|date',
             'is_active' => 'boolean',
             'use_icon_sidebar' => 'boolean',

@@ -340,6 +340,7 @@
         {{ html()->text('joining_date')
                     ->placeholder('Joining Date')
                     ->class(['form-control input-date', 'is-invalid' => $errors->has('joining_date')])
+                    ->required()
         }}
 
         @if ($errors->has('joining_date'))
