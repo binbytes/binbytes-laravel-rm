@@ -436,21 +436,47 @@
 </div>
 @endcan
 
-<div class="form-group">
-    <div class="custom-control custom-toggle custom-toggle-md">
-        {{ html()->checkbox('use_icon_sidebar')
-                ->id('use_icon_sidebar')
-                ->class('custom-control-input')
-        }}
-        {{ html()->label('Use Icon Sidebar')
-                ->for('use_icon_sidebar')
-                ->class('custom-control-label')
-        }}
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="custom-control custom-toggle custom-toggle-md">
+            {{ html()->checkbox('use_icon_sidebar')
+                    ->id('use_icon_sidebar')
+                    ->class('custom-control-input')
+            }}
+            {{ html()->label('Use Icon Sidebar')
+                    ->for('use_icon_sidebar')
+                    ->class('custom-control-label')
+            }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="custom-control custom-toggle custom-toggle-md">
+            {{ html()->checkbox('exclude_from_salary')
+                    ->id('exclude_from_salary')
+                    ->class('custom-control-input')
+            }}
+            {{ html()->label('Exclude From Salary')
+                    ->for('exclude_from_salary')
+                    ->class('custom-control-label')
+            }}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="custom-control custom-toggle custom-toggle-md">
+            {{ html()->checkbox('exclude_from_attendance')
+                    ->id('exclude_from_attendance')
+                    ->class('custom-control-input')
+            }}
+            {{ html()->label('Exclude From Attendance')
+                    ->for('exclude_from_attendance')
+                    ->class('custom-control-label')
+            }}
+        </div>
     </div>
 </div>
 
 <div class="form-group row mb-0">
-    <div class="col-md-8 offset-md-4">
+    <div class="col-md-8 offset-md-5">
         {{ html()->button('Save')
                 ->type('submit')
                 ->class('btn btn-primary')

@@ -22,7 +22,9 @@ class SalaryController extends Controller
     {
         $this->authorize('index', Salary::class);
 
-        $salaries = Salary::with('user')->whereMonth('paid_for', now()->month)->get();
+        $salaries = Salary::with('user')
+                    ->whereMonth('paid_for', now()->month)
+                    ->get();
         $date = now()->format('F-Y');
         $month = now()->month;
         $year = now()->year;
@@ -198,7 +200,9 @@ class SalaryController extends Controller
 
         $salariesUserIds = Salary::paidForMonth()->pluck('user_id');
 
-        $users = User::whereNotIn('id', $salariesUserIds)->get();
+        $users = User::whereNotIn('id', $salariesUserIds)
+                    ->whereExcludeFromSalary(false)
+                    ->get();
 
         return view('salary.list', compact('users', 'salary'));
     }

@@ -83,6 +83,8 @@ class UserController extends Controller
 
         $data['is_active'] = $request->has('is_active');
         $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
+        $data['exclude_from_salary'] = $request->has('exclude_from_salary');
+        $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
 
         $user = User::create($data);
 
@@ -171,6 +173,8 @@ class UserController extends Controller
 
         $data['is_active'] = $request->has('is_active');
         $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
+        $data['exclude_from_salary'] = $request->has('exclude_from_salary');
+        $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
 
         $user->fill($data)->save();
 

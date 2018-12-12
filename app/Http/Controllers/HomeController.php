@@ -20,7 +20,7 @@ class HomeController extends Controller
         $weekAttendances = auth()->user()->week_attendances;
         $todayAttendance = auth()->user()->today_attendance;
 
-        $users = User::all();
+        $users = User::whereExcludeFromAttendance(false)->get();
         $projects = Project::all();
         $clients = Client::all();
         $leaves = Leave::with('user')
