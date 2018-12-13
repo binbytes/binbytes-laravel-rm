@@ -115,16 +115,6 @@
                 </a>
             </li>
             @endcan
-            @can('index', App\Transaction::class)
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('transactions*') ? 'active' : '' }}" href="/transactions">
-                        <i class="material-icons">
-                            transform
-                        </i>
-                        <span>Transactions</span>
-                    </a>
-                </li>
-            @endcan
             @can('index', App\TransactionType::class)
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('transaction-types*') ? 'active' : '' }}" href="/transaction-types">

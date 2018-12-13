@@ -118,7 +118,7 @@ class TransactionController extends Controller
             $data['invoice'] = $this->storeFile();
         }
 
-        Transaction::create($data);
+        $transaction = Transaction::create($data);
 
         if(request()->wantsJson()) {
             return response([], 200);
@@ -126,7 +126,7 @@ class TransactionController extends Controller
 
         session()->flash('alert-success', 'Transaction has been created.');
 
-        return back();
+        return redirect(url('accounts', $transaction->account->id));
     }
 
     /**
@@ -180,7 +180,7 @@ class TransactionController extends Controller
 
         session()->flash('alert-success', 'Transaction has been updated.');
 
-        return back();
+        return redirect(url('accounts', $transaction->account->id));
     }
 
     /**
@@ -196,7 +196,7 @@ class TransactionController extends Controller
 
         session()->flash('alert-danger', 'Transaction has been deleted.');
 
-        return back();
+        return redirect(url('accounts', $transaction->account->id));
     }
 
     /**
@@ -210,7 +210,7 @@ class TransactionController extends Controller
 
         Excel::import(new TransactionImport($account), \request('file'), null, $account->statementReaderType());
 
-        return back();
+        return redirect(url('accounts', $account->id));
     }
 
     /**
