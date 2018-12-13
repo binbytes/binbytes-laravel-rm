@@ -187,7 +187,7 @@
          }}
 
         {{ html()->a()
-               ->href('/transactions')
+               ->href(url()->previous())
                ->text('Cancel')
                ->class('btn btn-link')
          }}

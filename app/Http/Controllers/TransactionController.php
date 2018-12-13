@@ -126,7 +126,7 @@ class TransactionController extends Controller
 
         session()->flash('alert-success', 'Transaction has been created.');
 
-        return redirect('/transactions');
+        return back();
     }
 
     /**
@@ -180,7 +180,7 @@ class TransactionController extends Controller
 
         session()->flash('alert-success', 'Transaction has been updated.');
 
-        return redirect('/transactions');
+        return back();
     }
 
     /**

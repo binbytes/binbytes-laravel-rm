@@ -106,7 +106,6 @@
                                     Invoice <i class="fas fa-download"></i>
                                 </a>
                             @endif
-                            <a href="/transactions" class="btn btn-link">Back</a>
                         </div>
                     </div>
                 </div>
