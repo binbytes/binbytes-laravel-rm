@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'broadcast_notification' => env('NOTIFICATION_BROADCAST', false),
+    'broadcast_notification' => env('NOTIFICATION_BROADCAST') == 'true',
     'company' => [
         'name' => env('COMPANY_NAME', 'BinBytes'),
         'email' => env('COMPANY_MAIL', 'info@binbytes.com')

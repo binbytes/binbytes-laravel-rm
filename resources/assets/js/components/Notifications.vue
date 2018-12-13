@@ -40,13 +40,17 @@ export default {
     },
     mounted() {
         this.fetchNotifications()
-
-        Echo.private(`App.User.${this.authId}`)
-            .notification((notification) => {
-                this.notifications.unshift(notification)
-            });
+        this.bindEchoEvents()
     },
     methods: {
+        bindEchoEvents() {
+            if(window.Echo) {
+                Echo.private(`App.User.${this.authId}`)
+                    .notification((notification) => {
+                        this.notifications.unshift(notification)
+                    });
+            }
+        },
         fetchNotifications() {
             axios.get('/notifications/recent').then(({ data }) => {
                 this.notifications = data
