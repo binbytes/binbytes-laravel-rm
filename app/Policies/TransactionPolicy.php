@@ -15,6 +15,10 @@ class TransactionPolicy
         if ($user->isAdmin()) {
             return true;
         }
+
+        if($user->isAccountant()) {
+            return true;
+        }
     }
 
     /**

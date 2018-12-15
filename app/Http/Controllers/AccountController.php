@@ -28,7 +28,7 @@ class AccountController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            if(Gate::allows('accessAll', Account::class)){
+            if(Gate::allows('accessAll', Account::class)) {
                 $query = Account::with('user');
             } else {
                 $query = Account::with('user')

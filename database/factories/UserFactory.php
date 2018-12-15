@@ -27,6 +27,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'joining_date' => $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d'),
         'dob' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'), // :D
         'weekly_hours_credit' => 40,
-        'base_salary' => $faker->randomNumber(5)
+        'base_salary' => $faker->randomNumber(5),
+        'role' => 'admin'
     ];
 });

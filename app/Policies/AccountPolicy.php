@@ -12,7 +12,7 @@ class AccountPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() && $user->isAccountant()) {
             return true;
         }
     }
@@ -82,7 +82,7 @@ class AccountPolicy
      */
     public function show(User $user, Account $account)
     {
-        return $user->id === $account->user_id;
+        return $user->isAccountant() || $user->id === $account->user_id;
     }
 
     /**
@@ -91,7 +91,7 @@ class AccountPolicy
      */
     public function accessAll(User $user)
     {
-        return false;
+        return $user->isAccountant();
     }
 
     /**
@@ -100,6 +100,6 @@ class AccountPolicy
      */
     public function importTransactions(User $user, Account $account)
     {
-        return $user->id === $account->user_id;
+        return $user->isAccountant() || $user->id === $account->user_id;
     }
 }

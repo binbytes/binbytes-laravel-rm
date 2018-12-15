@@ -25,7 +25,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar',
         'address', 'designation', 'about', 'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
         'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'use_icon_sidebar',
-        'exclude_from_salary', 'exclude_from_attendance', 'remarks'
+        'exclude_from_salary', 'exclude_from_attendance', 'role', 'remarks'
     ];
 
     public function getNameAttribute()
@@ -231,7 +231,27 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        return in_array($this->email, config('rm.admin'));
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Determine if user is employee
+     *
+     * @return bool
+     */
+    public function isEmployee()
+    {
+        return $this->role === 'employee';
+    }
+
+    /**
+     * Determine if user is accountant
+     *
+     * @return bool
+     */
+    public function isAccountant()
+    {
+        return $this->role === 'accountant';
     }
 
     /**

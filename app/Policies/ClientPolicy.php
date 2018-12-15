@@ -15,6 +15,10 @@ class ClientPolicy
         if ($user->isAdmin()) {
             return true;
         }
+
+        if($user->isAccountant()) {
+            return false;
+        }
     }
 
     /**

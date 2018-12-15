@@ -29,5 +29,10 @@ return [
         'both' => 'Both',
         'credit' => 'Credit',
         'debit' => 'Debit'
+    ],
+    'roles' => [
+        'admin' => 'Admin',
+        'employee' => 'Employee',
+        'accountant' => 'Accountant'
     ]
 ];

@@ -52,6 +52,7 @@ class UserRequest extends FormRequest
             'leaving_date' => 'nullable|date',
             'is_active' => 'boolean',
             'use_icon_sidebar' => 'boolean',
+            'role' => 'required',
             'exclude_from_salary' => 'boolean',
             'exclude_from_attendance' => 'boolean',
             'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)

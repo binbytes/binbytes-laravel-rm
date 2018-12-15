@@ -393,6 +393,32 @@
         @endif
     </div>
 </div>
+
+<div class="form-group row">
+    <div class="col-md-3">
+        {{ html()->select('role')
+                ->placeholder('Select Role')
+                ->class(['custom-select', 'is-invalid' => $errors->has('role')])
+                ->options(config('rm.roles'))
+                ->value(old('role', isset($user->role) ? $user->role : []))
+        }}
+
+        @if ($errors->has('role'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('role') }}</strong>
+            </span>
+        @endif
+    </div>
+    <div class="col-md-9">
+        {{ html()->text('tag')
+                ->class('form-control')
+                ->placeholder('Tag')
+                ->attribute('data-role', 'tagsinput')
+                ->value(old('tag', (isset($user->tags) ? implode(',', $user->tags->pluck('name')->toArray()) : '')))
+         }}
+    </div>
+</div>
+
 <div class="form-group row">
     <div class="col-md-12">
         {{ html()->textarea('remarks')
@@ -405,17 +431,6 @@
                 <strong>{{ $errors->first('remarks') }}</strong>
             </span>
         @endif
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-12">
-        {{ html()->text('tag')
-                ->class('form-control')
-                ->placeholder('Tag')
-                ->attribute('data-role', 'tagsinput')
-                ->value(old('tag', (isset($user->tags) ? implode(',', $user->tags->pluck('name')->toArray()) : '')))
-         }}
     </div>
 </div>
 
