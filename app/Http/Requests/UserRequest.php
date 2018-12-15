@@ -52,7 +52,11 @@ class UserRequest extends FormRequest
             'leaving_date' => 'nullable|date',
             'is_active' => 'boolean',
             'use_icon_sidebar' => 'boolean',
-            'role' => 'required',
+            'role' => [
+                'sometimes',
+                'required',
+                Rule::in(array_keys(config('rm.roles')))
+            ],
             'exclude_from_salary' => 'boolean',
             'exclude_from_attendance' => 'boolean',
             'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)
