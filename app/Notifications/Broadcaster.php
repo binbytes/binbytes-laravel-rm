@@ -31,6 +31,6 @@ trait Broadcaster {
     {
         return array_merge([
             'mail', 'database'
-        ], config('rm.broadcast_notification') ? 'broadcast' : []);
+        ], config('rm.broadcast_notification') ? ['broadcast'] : []);
     }
 }
