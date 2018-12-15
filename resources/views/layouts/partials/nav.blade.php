@@ -98,7 +98,7 @@
                     </a>
                 </li>
             @else
-                @can('show', \App\Salary::class, auth()->id())
+                @can('show', [\App\Salary::class, auth()->user()])
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('salaries*') ? 'active' : '' }}" href="/salaries/{{ auth()->id() }}">
                             <i class="fas fa-sort-amount-up"></i>
