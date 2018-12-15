@@ -21,7 +21,7 @@ class SalaryPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if($user->isAccountant() || $user->salaryExcluded()) {
             return false;
         }
     }

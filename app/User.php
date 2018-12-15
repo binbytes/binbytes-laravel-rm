@@ -217,6 +217,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Is user excluded from attendance
+     *
+     * @return mixed
+     */
+    public function attendanceExcluded()
+    {
+        return $this->exclude_from_attendance == true;
+    }
+
+    /**
+     * Is user excluded from salary
+     *
+     * @return mixed
+     */
+    public function salaryExcluded()
+    {
+        return $this->exclude_from_salary == true;
+    }
+
+    /**
      * Detect is user object is mine
      */
     public function isMe()

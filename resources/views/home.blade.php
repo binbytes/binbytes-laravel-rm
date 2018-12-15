@@ -52,7 +52,7 @@
         <div class="row">
             @include('dashboard._user')
         </div>
-    @else
+    @elseif(! auth()->user()->attendanceExcluded())
         <div class="row">
             @include('dashboard._today')
             <div class="col-md-8">

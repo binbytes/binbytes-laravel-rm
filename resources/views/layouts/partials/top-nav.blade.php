@@ -7,7 +7,9 @@
                 <notifications :auth-id="{{ auth()->id() }}"></notifications>
             </li>
             <li class="nav-item align-self-center">
-                <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
+                @if(! auth()->user()->attendanceExcluded())
+                    <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
+                @endif
             </li>
             <li class="nav-item dropdown align-self-center">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
