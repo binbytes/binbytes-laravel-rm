@@ -67,6 +67,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Admin users only
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeAdmin(Builder $query)
+    {
+        return $query->whereRole('admin');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function attendance()

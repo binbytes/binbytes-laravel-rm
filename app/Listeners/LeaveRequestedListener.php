@@ -27,7 +27,7 @@ class LeaveRequestedListener
     public function handle(\App\Events\LeaveRequested $event)
     {
         Notification::send(
-            User::whereIn('email', config('rm.admin'))->get(), // update this
+            User::admin()->get(),
             new LeaveRequested($event->leave)
         );
     }
