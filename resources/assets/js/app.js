@@ -15,12 +15,12 @@ import appStore from './appStore.js'
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('timer', require('./components/Timer.vue'));
-Vue.component('avatar-selector', require('./components/AvatarSelector.vue'));
-Vue.component('notifications', require('./components/Notifications.vue'));
-Vue.component('project-list', require('./components/ProjectList.vue'));
-Vue.component('holiday-calender', require('./components/HolidayCalender'));
-Vue.component('leave-calender', require('./components/LeaveCalender'));
+Vue.component('timer', require('./components/Timer.vue').default);
+Vue.component('avatar-selector', require('./components/AvatarSelector.vue').default);
+Vue.component('notifications', require('./components/Notifications.vue').default);
+Vue.component('project-list', require('./components/ProjectList.vue').default);
+Vue.component('holiday-calender', require('./components/HolidayCalender').default);
+Vue.component('leave-calender', require('./components/LeaveCalender').default);
 
 const app = new Vue({
     el: '#app',
