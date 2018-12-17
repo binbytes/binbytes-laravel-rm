@@ -8,7 +8,7 @@
             </li>
             <li class="nav-item align-self-center">
                 @if(! auth()->user()->attendanceExcluded())
-                    <timer :initial-time="{{ auth()->user()->today_attendance->totaltime }}" class="nav-link"></timer>
+                    <timer :initial-time="{{ auth()->user()->today_attendance->totaltime or '0:00' }}" class="nav-link"></timer>
                 @endif
             </li>
             <li class="nav-item dropdown align-self-center">

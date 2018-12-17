@@ -61,6 +61,7 @@
                         </span>
                     </li>
                     @endif
+                    @if($user->designation)
                     <li class="list-group-item px-4">
                         <div class="row mb-2">
                             <div class="col-5">
@@ -72,13 +73,14 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-5">
-                                <span>{{ $user->designation->pivot->created_at->toDateString() }}</span>
+                                <span>{{ optional($user->designation)->pivot->created_at->toDateString() }}</span>
                             </div>
                             <div class="col-7">
                                 <span>{{ $user->designation->title }}</span>
                             </div>
                         </div>
                     </li>
+                    @endif
                     <li class="list-group-item px-4">
                         <div class="row justify-content-center mb-1">
                             <a class="btn btn-info" href="/users/promote/{{ $user->id }}"><i class="fas fa-star"> </i> promote</a>
