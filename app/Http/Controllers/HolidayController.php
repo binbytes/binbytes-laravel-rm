@@ -125,6 +125,10 @@ class HolidayController extends Controller
     {
         $holiday->delete();
 
+        if(request()->wantsJson()) {
+            return response([], 200);
+        }
+
         session()->flash('alert-danger', 'Holiday has been deleted.');
 
         return back();

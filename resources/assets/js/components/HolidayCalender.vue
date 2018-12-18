@@ -1,5 +1,9 @@
 <template>
     <div>
+        <transition name="fade">
+            <holiday-detail v-if="event" :holiday="event.originalEvent" @refresh-holiday="getHolidays"></holiday-detail>
+        </transition>
+
         <calendar-view
                 :show-date="showDate"
                 :events="holidays"
@@ -16,11 +20,13 @@
 
 <script>
 import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
+import HolidayDetail from './HolidayDetail'
 
 export default {
     components: {
         CalendarView,
-        CalendarViewHeader
+        CalendarViewHeader,
+        HolidayDetail
     },
     data () {
         return {
@@ -37,6 +43,7 @@ export default {
         getHolidays() {
             axios.get('/api-holidays').then(({ data }) => {
                 this.holidays = data.data
+                this.event = null
             })
         },
         setShowDate(d) {

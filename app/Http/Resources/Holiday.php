@@ -17,8 +17,11 @@ class Holiday extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'startDate' => $this->start_date->format('Y-m-d'),
-            'endDate' => $this->end_date->format('Y-m-d')
+            'endDate' => $this->end_date->format('Y-m-d'),
+            'can_edit' => \Gate::allows('update', $this->resource),
+            'can_delete' => \Gate::allows('delete', $this->resource),
         ];
     }
 }
