@@ -29,6 +29,9 @@ class UserController extends Controller
     {
         if(request()->ajax()) {
             return Datatables::of(User::query())
+                ->addColumn('name', function (User $user) {
+                    return $user->name;
+                })
                 ->addColumn('action', function (User $user) {
                     $data = [];
                     if(Gate::allows('show', $user)) {
@@ -112,6 +115,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $weekAttendances = $user->week_attendances;
+
         $leaves = Leave::orderBy('start_date', 'desc')
                 ->where('user_id', $user->id)
                 ->where('start_date', '>', today())

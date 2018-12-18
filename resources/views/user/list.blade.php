@@ -23,7 +23,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Mobile Number</th>
+                                <th>Joining Date</th>
                                 <th>Skype</th>
                                 <th>Slack</th>
                                 <th>Twitter</th>
@@ -46,9 +46,9 @@
                 ajax: '{!! route('users.index') !!}',
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'username', name: 'username' },
+                    { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
-                    { data: 'mobile_no', name: 'mobile_no' },
+                    { data: 'joining_date', name: 'joining_date' },
                     { data: 'skype', name: 'skype' },
                     { data: 'slack', name: 'slack' },
                     { data: 'twitter', name: 'twitter' },
