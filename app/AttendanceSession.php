@@ -46,4 +46,31 @@ class AttendanceSession extends Model
     {
         return $this->belongsTo(UserAttendance::class, 'attendance_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function updateRequest()
+    {
+        return $this->hasMany(AttendanceSessionUpdate::class, 'session_id');
+    }
+
+    /**
+     * @param $sessionUpdate
+     * @return AttendanceSession
+     */
+    public function updateAttendanceSession($sessionUpdate)
+    {
+        $this->fill([
+            'start_time' => $sessionUpdate->start_time,
+            'end_time' => $sessionUpdate->end_time,
+            'total_times' => ($sessionUpdate->end_time)->diffInSeconds($sessionUpdate->start_time)
+        ])->save();
+
+        $this->attendance->fill([
+            'total_times' => $this->attendance->totalTime
+        ])->save();
+
+        return $this;
+    }
 }

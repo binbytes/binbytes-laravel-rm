@@ -8,8 +8,8 @@
         <div class="col-lg-10 col-md-12">
             <div class="row m-0 mb-2">
                 <div class="input-daterange input-group input-date-range pl-0 col-6">
-                    <input type="text" id="start_date" name="start_date" class="form-control input-date" placeholder="Start Date">
-                    <input type="text" id="end_date" name="end_date" class="form-control input-date" placeholder="End Date">
+                    <input type="text" id="start_date" name="start_date" value="{{ $startDate }}" class="form-control input-date" placeholder="Start Date">
+                    <input type="text" id="end_date" name="end_date" value="{{ $endDate }}" class="form-control input-date" placeholder="End Date">
                 </div>
                 <input type="hidden" id="user" value="{{ $user->id }}">
                 <a id="go" href="" class="btn btn-primary">Go</a>

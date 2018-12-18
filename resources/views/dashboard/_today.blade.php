@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header border-bottom pb-0 d-flex justify-content-between">
             <h6 class="font-weight-bold">Today</h6>
-            <a href="{{ route('day-attendance', [$todayAttendance->date, $todayAttendance->date]) }}" aria-label="View">
+            <a href="attendance/{{ auth()->id() }}" aria-label="View">
                 <i class="fa fa-edit"></i>
             </a>
         </div>

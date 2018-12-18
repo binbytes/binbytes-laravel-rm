@@ -49,9 +49,14 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             @include('dashboard._user')
         </div>
+        @if($sessionAttendances->count())
+            <div class="row">
+                @include('dashboard._session')
+            </div>
+        @endif
     @elseif(! auth()->user()->attendanceExcluded())
         <div class="row">
             @include('dashboard._today')
@@ -60,7 +65,7 @@
                     <div class="card-header border-bottom">
                         <div class="row mx-2">
                             <h6 class="mb-0">Weekly Performance Report</h6>
-                            <a href="{{ route('day-attendance', [auth()->id(), today()->format('Y-m-d'), today()->format('Y-m-d')]) }}" class="btn btn-primary ml-auto">This week</a>
+                            <a href="{{ route('day-attendance', [auth()->id(), today()->startOfWeek()->toDateString(), today()->endOfWeek()->toDateString()]) }}" class="btn btn-primary ml-auto">This week</a>
                         </div>
                     </div>
                     <div class="card-body pt-0">

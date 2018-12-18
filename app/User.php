@@ -131,15 +131,7 @@ class User extends Authenticatable
      */
     public function dateRangeAttendances($startDate, $endDate)
     {
-        if($startDate instanceof Carbon === false) {
-            $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
-        }
-
-        if($endDate instanceof Carbon === false) {
-            $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
-        }
-
-        $days = generateDateRange($startDate, $endDate->addDay(1), '1 day');
+        $days = generateDateRange($startDate, $endDate, '1 day');
 
         $attendances = $this->attendanceFromDates($startDate->toDateString(), $endDate->toDateString());
 

@@ -63,6 +63,11 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{user}/{startDate}/{endDate?}', 'AttendanceController@dailyView')->name('day-attendance');
+    Route::get('/attendance/request/{sessionUpdate}/{request}', 'AttendanceController@approvedRequest');
+    Route::model('sessionUpdate', \App\AttendanceSessionUpdate::class);
+    Route::resource('/attendance', 'AttendanceController')->parameters([
+        'attendance' => 'attendanceSession'
+    ]);
 
     Route::get('/notifications/recent', 'NotificationController@getRecentNotifications');
     Route::get('/notifications/mark-read/{notificationId}', 'NotificationController@markRead');

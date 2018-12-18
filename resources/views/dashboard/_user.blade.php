@@ -37,9 +37,12 @@
                             }
                             ?>
                             <td class="{{ $color }}">{{ hoursFromSeconds($user->weekAttendances->sum('second')) }}</td>
-                            <td>
-                                <a href="{{ route('day-attendance', [$user->id, today()->format('Y-m-d'), today()->format('Y-m-d')]) }}" class="btn btn-sm btn-white">
-                                    <i class="fas fa-eye"></i>
+                            <td class="d-flex">
+                                <a href="{{ route('day-attendance', [$user->id, today()->startOfWeek()->toDateString(), today()->endOfWeek()->toDateString()]) }}" class="btn btn-sm btn-white" title="Weekly">
+                                    <i class="fa fa-calendar-week"></i>
+                                </a>
+                                <a href="attendance/{{ $user->id }}" class="btn btn-sm btn-white" title="Daily">
+                                    <i class="fa fa-calendar-day"></i>
                                 </a>
                             </td>
                         </tr>

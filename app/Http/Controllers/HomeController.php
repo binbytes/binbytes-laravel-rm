@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AttendanceSessionUpdate;
 use App\Client;
 use App\Leave;
 use App\Project;
@@ -26,7 +27,9 @@ class HomeController extends Controller
         $leaves = Leave::with('user')
                     ->where('start_date', today())
                     ->get();
+        $sessionAttendances = AttendanceSessionUpdate::with('attendanceSession')
+                            ->get();
 
-        return view('home', compact('weekAttendances', 'todayAttendance', 'users', 'leaves', 'projects', 'clients'));
+        return view('home', compact('weekAttendances', 'todayAttendance', 'users', 'leaves', 'projects', 'clients', 'sessionAttendances'));
     }
 }

@@ -37,9 +37,9 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, User $model)
     {
-        return true;
+        return $model->id === $user->id;
     }
 
     /**
@@ -116,5 +116,14 @@ class UserPolicy
     public function seeWeeklyAttendance(User $user, User $model)
     {
         return $model->id === $user->id;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function approvedAttendance(User $user)
+    {
+        return false;
     }
 }
