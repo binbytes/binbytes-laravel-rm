@@ -1,5 +1,6 @@
 <div class="form-group row">
     <div class="col-md-5">
+        {{ html()->form('POST', route('holidays.store'))->open() }}
         {{ html()->text('title')
                 ->placeholder('Title')
                 ->class(['form-control', 'is-invalid' => $errors->has('title')])

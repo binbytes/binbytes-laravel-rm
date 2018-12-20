@@ -8,6 +8,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import appStore from './appStore.js'
+import ShardsVue from 'shards-vue'
+
+Vue.use(ShardsVue);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,3 +32,4 @@ const app = new Vue({
         //
     }
 });
+

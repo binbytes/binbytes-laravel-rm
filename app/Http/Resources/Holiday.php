@@ -20,6 +20,8 @@ class Holiday extends JsonResource
             'description' => $this->description,
             'startDate' => $this->start_date->format('Y-m-d'),
             'endDate' => $this->end_date->format('Y-m-d'),
+            'start_date_partial_hours' => $this->start_date_partial_hours,
+            'end_date_partial_hours' => $this->start_date_partial_hours,
             'can_edit' => \Gate::allows('update', $this->resource),
             'can_delete' => \Gate::allows('delete', $this->resource),
         ];

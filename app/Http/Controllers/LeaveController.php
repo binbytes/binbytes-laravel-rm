@@ -51,6 +51,10 @@ class LeaveController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+
+        if($data['end_date'] == null) {
+            $data['end_date'] = $data['start_date'];
+        }
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
 
@@ -100,6 +104,9 @@ class LeaveController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+        if($data['end_date'] == null) {
+            $data['end_date'] = $data['start_date'];
+        }
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
 

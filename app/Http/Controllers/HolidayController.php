@@ -51,6 +51,10 @@ class HolidayController extends Controller
     {
         $data = $request->all();
 
+        if($data['end_date'] == null) {
+            $data['end_date'] = $data['start_date'];
+        }
+
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
 
@@ -98,6 +102,10 @@ class HolidayController extends Controller
     public function update(Request $request, Holiday $holiday)
     {
         $data = $request->all();
+
+        if($data['end_date'] == null) {
+            $data['end_date'] = $data['start_date'];
+        }
 
         $data['start_date'] = Carbon::parse($data['start_date']);
         $data['end_date'] = Carbon::parse($data['end_date']);
