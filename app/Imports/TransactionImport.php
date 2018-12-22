@@ -25,6 +25,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
      */
     public function model(array $row)
     {
+        //dd($row);
         if(!method_exists($this, $this->account->bank_name)) {
             return;
         }
@@ -94,7 +95,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
 
     public function YES($row)
     {
-        if (!isset($row['txn_date']) || !strtotime(trim($row['txn_date'], "'")) || !isset($row['running_balance'])) {
+        if(!isset($row['txn_date']) || !isset($row['running_balance'])) {
             return null;
         }
 
