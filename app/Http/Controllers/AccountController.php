@@ -159,6 +159,9 @@ class AccountController extends Controller
                 ->editColumn('date', function (Transaction $transaction) {
                     return $transaction->date->format('Y-m-d');
                 })
+                ->editColumn('type', function (Transaction $transaction){
+                    return $transaction->type ? $transaction->transactionType->title : null;
+                })
                 ->rawColumns(['credit_amount', 'debit_amount', 'closing_balance', 'action'])
                 ->make(true);
         }

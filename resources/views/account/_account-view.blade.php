@@ -3,20 +3,20 @@
         <div class="card card-small mb-4 pt-0">
             <div class="card-body p-3">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         @include('shared.userAvatar', [
                             'user' => $account->user
                         ])
 
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <div class="mb-2">
-                            <h6 class="mb-0">Email <i class="fas fa-envelope-open"></i></h6>
+                            <h6 class="mb-0"><i class="fas fa-envelope-open"></i></h6>
                             <span class="text-muted">{{ $account->user->email }}</span>
                         </div>
                         @if($account->contact_number)
                             <div>
-                                <h6 class="mb-0">Phone <i class="fas fa-phone"></i></h6>
+                                <h6 class="mb-0"><i class="fas fa-phone"></i></h6>
                                 <span class="text-muted">{{ $account->contact_number }}</span>
                             </div>
                         @endif
