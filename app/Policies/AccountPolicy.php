@@ -12,7 +12,7 @@ class AccountPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isAdmin() && $user->isAccountant()) {
+        if ($user->isAdmin() || $user->isAccountant()) {
             return true;
         }
     }
