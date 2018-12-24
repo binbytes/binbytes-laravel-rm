@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Carbon\Carbon;
 use App\AttendanceSession;
 use App\AttendanceSessionUpdate;
 use App\Http\Requests\AttendanceUpdate;
-use App\User;
-use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -21,7 +21,7 @@ class AttendanceController extends Controller
         $attendance->incrementSession();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -78,7 +78,7 @@ class AttendanceController extends Controller
 
         AttendanceSessionUpdate::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -95,7 +95,7 @@ class AttendanceController extends Controller
     {
         $this->authorize('approvedAttendance', \App\User::class);
 
-        if($request) {
+        if ($request) {
             $sessionUpdate->attendanceSession->updateAttendanceSession($sessionUpdate);
         }
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TransactionTypeRequest;
 use App\TransactionType;
 use Yajra\Datatables\Datatables;
+use App\Http\Requests\TransactionTypeRequest;
 
 class TransactionTypeController extends Controller
 {
@@ -24,20 +24,21 @@ class TransactionTypeController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
+        if (request()->ajax()) {
             return Datatables::of(TransactionType::query())
-                ->addColumn('parent_id', function (TransactionType $transactionType){
+                ->addColumn('parent_id', function (TransactionType $transactionType) {
                     return $transactionType->parent_id ? $transactionType->transactionType->title : null;
                 })
                 ->addColumn('action', function (TransactionType $transactionType) {
                     return view('shared.dtAction', [
                         'deleteUrl' => route('transaction-types.destroy', $transactionType),
-                        'editUrl' => route('transaction-types.edit', $transactionType)
+                        'editUrl' => route('transaction-types.edit', $transactionType),
                     ]);
                 })
                 ->rawColumns(['parent_id', 'action'])
                 ->make(true);
         }
+
         return view('transaction_type.list');
     }
 
@@ -65,7 +66,7 @@ class TransactionTypeController extends Controller
 
         TransactionType::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -93,7 +94,7 @@ class TransactionTypeController extends Controller
      */
     public function edit(TransactionType $transactionType)
     {
-        $transactionTypes = TransactionType::where('id','<>', $transactionType->id)->pluck('title', 'id');
+        $transactionTypes = TransactionType::where('id', '<>', $transactionType->id)->pluck('title', 'id');
 
         return view('transaction_type.update', compact('transactionType', 'transactionTypes'));
     }
@@ -111,7 +112,7 @@ class TransactionTypeController extends Controller
 
         $transactionType->fill($data)->save();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 

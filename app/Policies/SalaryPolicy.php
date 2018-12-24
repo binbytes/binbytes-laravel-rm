@@ -21,7 +21,7 @@ class SalaryPolicy
             return true;
         }
 
-        if($user->isAccountant() || $user->salaryExcluded()) {
+        if ($user->isAccountant() || $user->salaryExcluded()) {
             return false;
         }
     }
@@ -47,7 +47,6 @@ class SalaryPolicy
     {
         return false;
     }
-
 
     /**
      * Determine whether the user can create salaries.
@@ -99,10 +98,8 @@ class SalaryPolicy
      * @param User $user
      * @return bool
      */
-
     public function paidSalary(User $user)
     {
         return false;
     }
-
 }

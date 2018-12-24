@@ -3,11 +3,8 @@
 namespace Tests\Feature;
 
 use App\Holiday;
-use App\Notifications\HolidayAdded;
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Notifications\Notification;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HolidayTest extends TestCase
 {

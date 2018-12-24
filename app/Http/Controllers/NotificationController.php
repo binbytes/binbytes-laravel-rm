@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Notification;
-use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
     /**
-     * Get recent notifications
+     * Get recent notifications.
      *
      * @return \Illuminate\Http\Response
      */
@@ -18,7 +17,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Mark notification as read @API
+     * Mark notification as read @API.
      *
      * @param $notificationId
      *
@@ -26,24 +25,24 @@ class NotificationController extends Controller
      */
     public function markRead($notificationId)
     {
-        if($notification = auth()->user()->unReadNotifications()
+        if ($notification = auth()->user()->unReadNotifications()
                                 ->whereId($notificationId)
                                 ->first()
         ) {
             $notification->markAsRead();
 
             return response()->json([
-                'success' => true
+                'success' => true,
             ]);
         }
 
         return response()->json([
-            'success' => false
+            'success' => false,
         ]);
     }
 
     /**
-     * View all notifications
+     * View all notifications.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

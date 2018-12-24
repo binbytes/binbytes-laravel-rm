@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
+use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
@@ -50,7 +50,7 @@ class UserTest extends TestCase
             'last_name' => null,
             'email' => null,
             'mobile_no' => null,
-            'address' => null
+            'address' => null,
         ]);
 
         $this->json('POST', '/users', $user)
@@ -58,7 +58,7 @@ class UserTest extends TestCase
             ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'mobile_no', 'address']);
 
         $userWitIncorrectMail = raw(User::class, [
-            'email' => 'foobar'
+            'email' => 'foobar',
         ]);
 
         $this->json('POST', '/users', $userWitIncorrectMail)
@@ -75,10 +75,9 @@ class UserTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors(['dob', 'joining_date', 'leaving_date']);
 
-
         $userWithIncorrectNumbers = raw(User::class, [
             'weekly_hours_credit' => 'test',
-            'base_salary' => 'test'
+            'base_salary' => 'test',
         ]);
 
         $this->json('POST', '/users', $userWithIncorrectNumbers)
@@ -90,7 +89,7 @@ class UserTest extends TestCase
 
         $newUser = raw(User::class, [
             'email' => $user->email,
-            'username' => $user->username
+            'username' => $user->username,
         ]);
 
         $this->json('POST', '/users', $newUser)
@@ -121,13 +120,13 @@ class UserTest extends TestCase
         Storage::fake('public');
 
         $user = raw(User::class, [
-            'avatar' => $file = UploadedFile::fake()->image('user.jpg')
-        ]);;
+            'avatar' => $file = UploadedFile::fake()->image('user.jpg'),
+        ]);
 
         $this->json('POST', '/users', $user)
             ->assertStatus(200);
 
-        Storage::disk('public')->assertExists('users/' . $file->hashName());
+        Storage::disk('public')->assertExists('users/'.$file->hashName());
 
         $this->get('/users')
             ->assertSee($user['first_name'])

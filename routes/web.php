@@ -15,7 +15,7 @@ Route::redirect('/', '/dashboard');
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
     Route::resource('/clients', 'ClientController');
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/holidays', 'HolidayController');
 
     Route::resource('/leaves', 'LeaveController')->parameters([
-        'leaves' => 'leave'
+        'leaves' => 'leave',
     ]);
     Route::get('/leave-approval/{leave}/{approve}', 'LeaveController@approved');
     Route::get('/api-leaves', 'LeaveController@getLeaveAPI');
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/attendance/request/{sessionUpdate}/{request}', 'AttendanceController@approvedRequest');
     Route::model('sessionUpdate', \App\AttendanceSessionUpdate::class);
     Route::resource('/attendance', 'AttendanceController')->parameters([
-        'attendance' => 'attendanceSession'
+        'attendance' => 'attendanceSession',
     ]);
 
     Route::get('/notifications/recent', 'NotificationController@getRecentNotifications');

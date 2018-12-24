@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Project;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Project;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
 {
@@ -45,7 +45,7 @@ class ProjectTest extends TestCase
 
         $client = make(Project::class, [
             'title' => null,
-            'client_id' => null
+            'client_id' => null,
         ]);
 
         $this->json('POST', '/projects', $client->toArray())
@@ -54,7 +54,7 @@ class ProjectTest extends TestCase
 
         // client_id must be valid client id
         $this->json('post', '/projects', factory(Project::class)->raw([
-            'client_id' => 9999
+            'client_id' => 9999,
         ]))
         ->assertStatus(422)
         ->assertJsonValidationErrors(['client_id']);
@@ -86,8 +86,8 @@ class ProjectTest extends TestCase
         $project = raw(Project::class, [
             'users' => [
                 $userA->id,
-                $userB->id
-            ]
+                $userB->id,
+            ],
         ]);
 
         $this->json('POST', '/projects', $project)

@@ -12,6 +12,6 @@ class Designation extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'remarks'
+        'title', 'remarks',
     ];
 }

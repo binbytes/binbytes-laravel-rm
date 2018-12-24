@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Http\Requests\ClientRequest;
 use Yajra\Datatables\Datatables;
+use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
 {
@@ -19,13 +19,13 @@ class ClientController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
+        if (request()->ajax()) {
             return Datatables::of(Client::query()->orderBy('priority', 'asc'))
                 ->addColumn('action', function (Client $client) {
                     return view('shared.dtAction', [
                         'showUrl' => route('clients.show', $client),
                         'deleteUrl' => route('clients.destroy', $client),
-                        'editUrl' => route('clients.edit', $client)
+                        'editUrl' => route('clients.edit', $client),
                     ]);
                 })
                 ->make(true);
@@ -53,7 +53,7 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
         $data = $request->all();
-        if(request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
         }
 
@@ -61,7 +61,7 @@ class ClientController extends Controller
         $client = Client::create($data);
         $client->attachTags($tags);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -102,7 +102,7 @@ class ClientController extends Controller
     public function update(ClientRequest $request, Client $client)
     {
         $data = $request->all();
-        if(request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
         }
 
@@ -110,7 +110,7 @@ class ClientController extends Controller
         $client->fill($data)->save();
         $client->syncTags($tags);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 

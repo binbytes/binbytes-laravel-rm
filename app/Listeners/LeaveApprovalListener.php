@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\LeaveApproval;
-use App\Leave;
 use App\User;
-use Notification;
+use App\Events\LeaveApproval;
 
 class LeaveApprovalListener
 {

@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     public $dates = [
-        'date'
+        'date',
     ];
 
     protected $fillable = [
         'account_id', 'sequence_number', 'date', 'description', 'reference', 'credit_amount', 'debit_amount',
-        'closing_balance', 'type', 'note', 'invoice'
+        'closing_balance', 'type', 'note', 'invoice',
     ];
 
     protected $casts = [
         'credit_amount' => 'float',
         'debit_amount' => 'float',
-        'closing_balance' => 'float'
+        'closing_balance' => 'float',
     ];
 
     public function isCredit()

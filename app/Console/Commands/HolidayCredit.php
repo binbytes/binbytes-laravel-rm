@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\User;
 use App\Holiday;
 use App\Jobs\AddCreditJob;
-use App\User;
 use Illuminate\Console\Command;
 
 class HolidayCredit extends Command

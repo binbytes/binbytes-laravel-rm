@@ -4,9 +4,9 @@ namespace App\Notifications;
 
 use App\Holiday;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
 
 class HolidayAdded extends Notification
 {
@@ -33,7 +33,6 @@ class HolidayAdded extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-
     public function toMail($notifiable)
     {
         $url = url('/holidays/'.$this->holiday->id);
@@ -42,7 +41,7 @@ class HolidayAdded extends Notification
             ->subject('Holiday Alert')
             ->markdown('mail.holiday.added', [
                 'holiday' => $this->holiday,
-                'url'=> $url
+                'url'=> $url,
             ]);
     }
 
@@ -59,7 +58,7 @@ class HolidayAdded extends Notification
             'title' => $this->holiday->title,
             'description' => $this->holiday->description,
             'start_date'=> $this->holiday->start_date->toDateString(),
-            'end_date' => $this->holiday->end_date->toDateString()
+            'end_date' => $this->holiday->end_date->toDateString(),
         ];
     }
 }

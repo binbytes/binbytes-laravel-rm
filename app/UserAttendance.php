@@ -3,17 +3,17 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property Collection sessions
  */
 class UserAttendance extends Model
 {
-    static $HOLIDAY = 'holiday';
-    static $LEAVE = 'leave';
-    static $ABSENT = 'absent';
+    public static $HOLIDAY = 'holiday';
+    public static $LEAVE = 'leave';
+    public static $ABSENT = 'absent';
 
     /**
      * @var array
@@ -39,7 +39,7 @@ class UserAttendance extends Model
     }
 
     /**
-     * Get total times in hours
+     * Get total times in hours.
      *
      * @return float
      */
@@ -85,11 +85,11 @@ class UserAttendance extends Model
 
         $session->fill([
             'end_time' => $endTime,
-            'total_times' => $endTime->diffInSeconds($session->start_time)
+            'total_times' => $endTime->diffInSeconds($session->start_time),
         ])->save();
 
         $this->fill([
-            'total_times' => $this->totalTime
+            'total_times' => $this->totalTime,
         ])->save();
 
         return $session;
@@ -118,10 +118,9 @@ class UserAttendance extends Model
             ]);
 
         $this->fill([
-            'total_times' => $this->totalTime
+            'total_times' => $this->totalTime,
         ])->save();
 
         return $this;
     }
-
 }

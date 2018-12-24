@@ -21,15 +21,15 @@ class Project extends JsonResource
             'users' => $this->users->map(function ($user) {
                 return [
                     'id' => $user->id,
-                    'name' => substr($user->name, 0 , 2),
+                    'name' => substr($user->name, 0, 2),
                     'avatar' => $user->avatar,
-                    'avatar_url' => $user->avatarUrl
+                    'avatar_url' => $user->avatarUrl,
                 ];
             }),
             'tags' => $this->tags->map(function ($tag) {
                 return [
                     'id' => $tag->id,
-                    'name' => $tag->name
+                    'name' => $tag->name,
                 ];
             }),
             'client' => \Gate::allows('view', $this->client) ? $this->client->name : '',

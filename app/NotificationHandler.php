@@ -2,14 +2,16 @@
 
 namespace App;
 
-trait NotificationHandler {
-
+trait NotificationHandler
+{
     /**
      * Boot the trait.
      */
     protected static function bootNotificationHandler()
     {
-        if (auth()->guest()) return;
+        if (auth()->guest()) {
+            return;
+        }
 
         // For future use
         foreach (static::getActivitiesToRecord() as $event) {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransactionType extends Model
 {
     protected $fillable = [
-        'title', 'transaction_type', 'parent_id', 'model_name'
+        'title', 'transaction_type', 'parent_id', 'model_name',
     ];
 
     /**
@@ -15,6 +15,6 @@ class TransactionType extends Model
      */
     public function transactionType()
     {
-        return $this->belongsTo(TransactionType::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 }

@@ -4,9 +4,9 @@ namespace App\Notifications;
 
 use App\Leave;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
 
 class LeaveRequested extends Notification
 {
@@ -35,13 +35,13 @@ class LeaveRequested extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/leaves/'. $this->leave->id);
+        $url = url('/leaves/'.$this->leave->id);
 
         return (new MailMessage)
             ->subject('Leave Request')
             ->markdown('mail.leave.request', [
                 'leave' => $this->leave,
-                'url'=> $url
+                'url'=> $url,
             ]);
     }
 
@@ -60,7 +60,7 @@ class LeaveRequested extends Notification
             'subject' => $this->leave->subject,
             'description' => $this->leave->description,
             'start_date'=> $this->leave->start_date->toDateString(),
-            'end_date' => $this->leave->end_date->toDateString()
+            'end_date' => $this->leave->end_date->toDateString(),
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Notifications\LeaveRequested;
 use App\User;
 use Notification;
+use App\Notifications\LeaveRequested;
 
 class LeaveRequestedListener
 {

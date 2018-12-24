@@ -30,7 +30,7 @@ class SalaryRequest extends FormRequest
             'penalty' => 'numeric',
             'payment_method'=> 'nullable',
             'paid_note' => 'nullable',
-            'general_note' => 'nullable'
+            'general_note' => 'nullable',
         ];
     }
 }

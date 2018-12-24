@@ -10,7 +10,7 @@ class AttendanceSession extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'attendance_id', 'start_time', 'end_time', 'total_times', 'parent_id', 'parent_type'
+        'user_id', 'attendance_id', 'start_time', 'end_time', 'total_times', 'parent_id', 'parent_type',
     ];
 
     /**
@@ -22,7 +22,7 @@ class AttendanceSession extends Model
     ];
 
     /**
-     * Get total times in hours
+     * Get total times in hours.
      *
      * @return float
      */
@@ -64,11 +64,11 @@ class AttendanceSession extends Model
         $this->fill([
             'start_time' => $sessionUpdate->start_time,
             'end_time' => $sessionUpdate->end_time,
-            'total_times' => ($sessionUpdate->end_time)->diffInSeconds($sessionUpdate->start_time)
+            'total_times' => ($sessionUpdate->end_time)->diffInSeconds($sessionUpdate->start_time),
         ])->save();
 
         $this->attendance->fill([
-            'total_times' => $this->attendance->totalTime
+            'total_times' => $this->attendance->totalTime,
         ])->save();
 
         return $this;

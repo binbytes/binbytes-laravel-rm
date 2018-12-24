@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\HolidayAdded;
 use App\Holiday;
-use App\Http\Requests\HolidayRequest;
 use Carbon\Carbon;
+use App\Events\HolidayAdded;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
-use Gate;
+use App\Http\Requests\HolidayRequest;
 
 class HolidayController extends Controller
 {
@@ -51,7 +49,7 @@ class HolidayController extends Controller
     {
         $data = $request->all();
 
-        if($data['end_date'] == null) {
+        if ($data['end_date'] == null) {
             $data['end_date'] = $data['start_date'];
         }
 
@@ -61,7 +59,7 @@ class HolidayController extends Controller
         $holiday = Holiday::create($data);
         event(new HolidayAdded($holiday));
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -103,7 +101,7 @@ class HolidayController extends Controller
     {
         $data = $request->all();
 
-        if($data['end_date'] == null) {
+        if ($data['end_date'] == null) {
             $data['end_date'] = $data['start_date'];
         }
 
@@ -113,7 +111,7 @@ class HolidayController extends Controller
         $holiday->fill($data)->save();
         event(new HolidayAdded($holiday));
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -133,7 +131,7 @@ class HolidayController extends Controller
     {
         $holiday->delete();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -142,9 +140,6 @@ class HolidayController extends Controller
         return back();
     }
 
-    /**
-     *
-     */
     public function getHolidayAPI()
     {
         $query = Holiday::query();

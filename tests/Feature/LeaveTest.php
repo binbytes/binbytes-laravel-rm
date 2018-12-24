@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Leave;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LeaveTest extends TestCase
 {
@@ -23,7 +23,7 @@ class LeaveTest extends TestCase
         $this->logIn();
 
         $leave = create(Leave::class, [
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         $this->get('/leaves')

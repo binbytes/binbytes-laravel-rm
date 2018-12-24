@@ -24,7 +24,7 @@ class UserDesignationRequest extends FormRequest
     public function rules()
     {
         return [
-            'remarks' => 'nullable'
+            'remarks' => 'nullable',
         ];
     }
 }

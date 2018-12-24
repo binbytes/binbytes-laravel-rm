@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Client;
 use App\User;
+use App\Client;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ClientPolicy
@@ -16,7 +16,7 @@ class ClientPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return false;
         }
     }

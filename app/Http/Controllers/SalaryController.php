@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\SalaryPaid;
-use App\Http\Requests\SalaryRequest;
+use App\User;
 use App\Leave;
 use App\Salary;
-use App\User;
+use App\Events\SalaryPaid;
 use Illuminate\Http\Request;
-use PDF;
+use App\Http\Requests\SalaryRequest;
 
 class SalaryController extends Controller
 {
@@ -29,8 +28,7 @@ class SalaryController extends Controller
         $month = now()->month;
         $year = now()->year;
 
-        return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
-
+        return view('salary.paid-list', compact('salaries', 'date', 'month', 'year'));
     }
 
     /**
@@ -66,7 +64,7 @@ class SalaryController extends Controller
                 'pf' => $pf,
                 'tds' => $tds,
                 'paid_amount' => $paidSalary,
-                'payment_method' => request('payment_method')
+                'payment_method' => request('payment_method'),
             ];
 
             $salary = Salary::create($data);
@@ -75,7 +73,6 @@ class SalaryController extends Controller
         });
 
         return redirect('/salary');
-
     }
 
     /**
@@ -134,7 +131,7 @@ class SalaryController extends Controller
 
         $paidSalary = ($paidSalary + request('bonus'));
 
-        $data =[
+        $data = [
             'user_id' => $id,
             'base_salary' => request('base_salary'),
             'paid_amount' => $paidSalary,
@@ -145,7 +142,7 @@ class SalaryController extends Controller
             'penalty' => request('penalty'),
             'payment_method' => request('payment_method'),
             'paid_note' => request('paid_note'),
-            'general_note' => request('general_note')
+            'general_note' => request('general_note'),
         ];
 
         $salary = Salary::create($data);
@@ -174,18 +171,17 @@ class SalaryController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function filter($month , $year)
+    public function filter($month, $year)
     {
         $this->authorize('paidSalary', Salary::class);
 
-        $date = $month . "-" . $year;
+        $date = $month.'-'.$year;
 
         $salaries = Salary::with('user')->whereMonth('paid_for', $date)->get();
 
-        $date = date("F-Y", mktime(0, 0, 0, $month+1, 0, $year));
+        $date = date('F-Y', mktime(0, 0, 0, $month + 1, 0, $year));
 
-        return view('salary.paid-list', compact( 'salaries', 'date', 'month', 'year'));
-
+        return view('salary.paid-list', compact('salaries', 'date', 'month', 'year'));
     }
 
     /**

@@ -4,9 +4,9 @@ namespace App\Notifications;
 
 use App\Salary;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
 
 class SalaryPaid extends Notification
 {
@@ -32,13 +32,13 @@ class SalaryPaid extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/salaries/'. $this->salary->user_id);
+        $url = url('/salaries/'.$this->salary->user_id);
 
         return (new MailMessage)
             ->subject('Your salary has been paid')
             ->markdown('mail.salary.paid', [
                 'salary' => $this->salary,
-                'url' => $url
+                'url' => $url,
             ])
             ->attachData($this->salary->paySlipPDF()->output(), $this->salary->paySlipFileName());
     }
