@@ -24,6 +24,8 @@ Vue.component('notifications', require('./components/Notifications.vue').default
 Vue.component('project-list', require('./components/ProjectList.vue').default);
 Vue.component('holiday-calender', require('./components/HolidayCalender').default);
 Vue.component('leave-calender', require('./components/LeaveCalender').default);
+Vue.component('transaction-edit', require('./components/TransactionEdit').default);
+Vue.component('transaction-show', require('./components/TransactionShow').default);
 
 const app = new Vue({
     el: '#app',

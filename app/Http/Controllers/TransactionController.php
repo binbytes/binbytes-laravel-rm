@@ -229,4 +229,12 @@ class TransactionController extends Controller
     {
         return Storage::download($transaction->invoice);
     }
+
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getAPI()
+    {
+        return \App\Http\Resources\Transaction::collection(Transaction::with('account')->get());
+    }
 }

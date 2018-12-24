@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('/accounts', 'AccountController');
 
+    Route::get('/api-transaction', 'TransactionController@getAPI');
     Route::resource('/transactions', 'TransactionController');
     Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download')->name('transaction-download');
