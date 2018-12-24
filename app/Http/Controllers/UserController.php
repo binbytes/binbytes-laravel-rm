@@ -177,10 +177,19 @@ class UserController extends Controller
 
         $tags = $data['tag'] = explode(',', $request->get('tag'));
 
-        $data['is_active'] = $request->has('is_active');
+        if ($request->has('is_active')) {
+            $data['is_active'] = $request->has('is_active');
+        }
+
+        if ($request->has('exclude_from_salary')) {
+            $data['exclude_from_salary'] = $request->has('exclude_from_salary');
+        }
+
+        if ($request->has('exclude_from_attendance')) {
+            $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
+        }
+
         $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
-        $data['exclude_from_salary'] = $request->has('exclude_from_salary');
-        $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
 
         $user->fill($data)->save();
 
@@ -206,6 +215,10 @@ class UserController extends Controller
         $user->delete();
 
         session()->flash('alert-danger', 'User has been deleted.');
+
+        if(\request()->ajax()) {
+            return response()->json([]);
+        }
 
         return back();
     }
