@@ -134,6 +134,10 @@ class TransactionTypeController extends Controller
 
         session()->flash('alert-danger', 'Transaction Type has been deleted.');
 
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
         return back();
     }
 }

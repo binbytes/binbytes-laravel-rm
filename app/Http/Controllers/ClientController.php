@@ -132,6 +132,10 @@ class ClientController extends Controller
 
         session()->flash('alert-danger', 'Client has been deleted.');
 
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
         return back();
     }
 

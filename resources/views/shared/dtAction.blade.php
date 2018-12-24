@@ -10,11 +10,9 @@
         </a>
     @endisset
     @isset($deleteUrl)
-        {{ html()->form('DELETE', $deleteUrl)->open() }}
-            <button type="submit" class="btn btn-white">
-                <i class="material-icons">delete</i>
-            </button>
-        {{ html()->form()->close() }}
+        <button class="btn btn-white btn-delete" rel="{{ $deleteUrl }}">
+            <i class="material-icons">delete</i>
+        </button>
     @endisset
     @isset($downloadUrl)
         <a href="{{ $downloadUrl }}" class="btn btn-white">

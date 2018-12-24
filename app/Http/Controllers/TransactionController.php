@@ -192,11 +192,38 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
+        $accountId = $transaction->account->id;
         $transaction->delete();
 
         session()->flash('alert-danger', 'Transaction has been deleted.');
 
-        return redirect(url('accounts', $transaction->account->id));
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
+        return redirect(url('accounts', $accountId));
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function deleteAll()
+    {
+        if ($ids = \request('ids')) {
+            foreach ($ids as $id) {
+                if ($transaction = Transaction::find($id)) {
+                    $this->authorize('delete', $transaction);
+                    $transaction->delete();
+                }
+            }
+        }
+
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
+        return redirect(url('accounts'));
     }
 
     /**

@@ -216,7 +216,7 @@ class UserController extends Controller
 
         session()->flash('alert-danger', 'User has been deleted.');
 
-        if(\request()->ajax()) {
+        if (\request()->ajax()) {
             return response()->json([]);
         }
 

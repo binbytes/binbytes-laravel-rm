@@ -124,6 +124,9 @@ class AccountController extends Controller
             }
 
             return Datatables::of($query)
+                ->addColumn('select', function (Transaction $transaction) {
+                    return "<input type='checkbox' class='chk-transaction' value='".$transaction->id."'>";
+                })
                 ->addColumn('credit_amount', function (Transaction $transaction) {
                     $data['credit_amount'] = $transaction->credit_amount;
 
@@ -162,7 +165,7 @@ class AccountController extends Controller
                 ->editColumn('type', function (Transaction $transaction) {
                     return $transaction->type ? $transaction->transactionType->title : null;
                 })
-                ->rawColumns(['credit_amount', 'debit_amount', 'closing_balance', 'action'])
+                ->rawColumns(['select', 'credit_amount', 'debit_amount', 'closing_balance', 'action'])
                 ->make(true);
         }
 
@@ -216,6 +219,10 @@ class AccountController extends Controller
         $account->delete();
 
         session()->flash('alert-danger', 'Account has been deleted.');
+
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
 
         return back();
     }

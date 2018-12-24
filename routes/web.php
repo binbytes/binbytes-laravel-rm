@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/api-transaction', 'TransactionController@getAPI');
     Route::resource('/transactions', 'TransactionController');
+    Route::delete('/delete-selected-transaction', 'TransactionController@deleteAll');
     Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download')->name('transaction-download');
 

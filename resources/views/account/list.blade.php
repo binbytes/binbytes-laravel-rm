@@ -43,7 +43,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#account-table').DataTable({
+            let dt = $('#account-table').DataTable({
                 processing: true,
                 serverSide: true,
                 order: [ [0, 'desc'] ],
@@ -59,6 +59,11 @@
                     { data: 'action', name: 'action', sortable: false },
                 ]
             });
+
+            @include('shared.dtDeleteScript', [
+                'dtTable' => 'account-table',
+                'dtVar' => 'dt'
+            ])
         });
     </script>
 @endpush

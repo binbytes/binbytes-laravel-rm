@@ -40,7 +40,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#users-table').DataTable({
+           let dt = $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('users.index') !!}',
@@ -55,6 +55,11 @@
                     { data: 'action', name: 'action', sortable: false },
                 ]
             });
+
+            @include('shared.dtDeleteScript', [
+                'dtTable' => 'users-table',
+                'dtVar' => 'dt'
+            ])
         });
     </script>
 @endpush

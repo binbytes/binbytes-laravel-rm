@@ -37,7 +37,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#clients-table').DataTable({
+            let dt = $('#clients-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('clients.index') !!}',
@@ -51,6 +51,11 @@
                     { data: 'action', name: 'action', sortable: false },
                 ]
             });
+
+            @include('shared.dtDeleteScript', [
+                'dtTable' => 'clients-table',
+                'dtVar' => 'dt'
+            ])
         });
     </script>
 @endpush

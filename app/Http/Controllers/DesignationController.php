@@ -124,6 +124,10 @@ class DesignationController extends Controller
 
         session()->flash('alert-danger', 'Designation has been deleted.');
 
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
         return back();
     }
 }
