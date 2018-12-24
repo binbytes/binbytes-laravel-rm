@@ -59,7 +59,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
 
     public function HDFC($row)
     {
-        if (!isset($row['date']) || !strtotime($row['date']) || !isset($row['closing_balance'])) {
+        if (!isset($row['date']) || !validateDate($row['date'], $format = 'd/m/y') || !isset($row['closing_balance'])) {
             return null;
         }
 
