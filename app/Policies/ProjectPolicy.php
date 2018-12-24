@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Project;
 use App\User;
+use App\Project;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
@@ -16,7 +16,7 @@ class ProjectPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return false;
         }
     }

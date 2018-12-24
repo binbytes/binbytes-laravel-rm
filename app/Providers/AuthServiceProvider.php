@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Salary::class => \App\Policies\SalaryPolicy::class,
         \App\Account::class => \App\Policies\AccountPolicy::class,
         \App\Transaction::class => \App\Policies\TransactionPolicy::class,
-        \App\TransactionType::class => \App\Policies\TransactionTypePolicy::class
+        \App\TransactionType::class => \App\Policies\TransactionTypePolicy::class,
     ];
 
     /**

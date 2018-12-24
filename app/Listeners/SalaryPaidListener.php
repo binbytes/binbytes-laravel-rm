@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\SalaryPaid;
 use App\User;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\SalaryPaid;
 
 class SalaryPaidListener
 {

@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
@@ -32,17 +32,17 @@ class UserRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->id),
             ],
             'personal_email' => [
                 'nullable',
                 'email',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->id),
             ],
             'username' => [
                 'required',
                 'min:2',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->id),
             ],
             'dob' => 'nullable|date',
             'designation_id' => 'required',
@@ -55,12 +55,12 @@ class UserRequest extends FormRequest
             'role' => [
                 'sometimes',
                 'required',
-                Rule::in(array_keys(config('rm.roles')))
+                Rule::in(array_keys(config('rm.roles'))),
             ],
             'exclude_from_salary' => 'boolean',
             'exclude_from_attendance' => 'boolean',
             'weekly_hours_credit' => 'nullable|numeric|max:60', // Assuming :)
-            'base_salary' => 'nullable|numeric'
+            'base_salary' => 'nullable|numeric',
         ], $this->method() == 'POST' ? [
             'password' => 'required|min:3',
         ] : []);

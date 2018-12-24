@@ -25,7 +25,7 @@ class DesignationRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'remarks' => 'nullable'
+            'remarks' => 'nullable',
         ];
     }
 }

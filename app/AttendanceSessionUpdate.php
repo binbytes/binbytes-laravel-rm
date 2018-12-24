@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class AttendanceSessionUpdate extends Model
 {
     protected $fillable = [
-        'session_id', 'start_time', 'end_time', 'note'
+        'session_id', 'start_time', 'end_time', 'note',
     ];
 
     public $dates = [
-        'start_time', 'end_time'
+        'start_time', 'end_time',
     ];
 
     /**

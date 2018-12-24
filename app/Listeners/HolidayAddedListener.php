@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\HolidayAdded;
 use App\User;
 use Notification;
+use App\Events\HolidayAdded;
 
 class HolidayAddedListener
 {

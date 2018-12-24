@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Designation;
-use App\Leave;
-use App\Notifications\HolidayAdded;
+use PDF;
+use Gate;
 use App\User;
+use App\Leave;
+use App\Designation;
+use Yajra\Datatables\Datatables;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserDesignationRequest;
-use PDF;
-use Yajra\Datatables\Datatables;
-use Gate;
 
 class UserController extends Controller
 {
@@ -27,24 +26,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
+        if (request()->ajax()) {
             return Datatables::of(User::query())
                 ->addColumn('name', function (User $user) {
                     return $user->name;
                 })
                 ->addColumn('action', function (User $user) {
                     $data = [];
-                    if(Gate::allows('show', $user)) {
+                    if (Gate::allows('show', $user)) {
                         $data['showUrl'] = route('users.show', $user);
                     }
 
-                    if(Gate::allows('update', $user)) {
+                    if (Gate::allows('update', $user)) {
                         $data['editUrl'] = route('users.edit', $user);
                     }
 
-                    if(Gate::allows('delete', $user)) {
+                    if (Gate::allows('delete', $user)) {
                         $data['deleteUrl'] = route('users.destroy', $user);
                     }
+
                     return view('shared.dtAction', $data);
                 })
                 ->make(true);
@@ -74,11 +74,11 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $data = $request->all();
-        if(request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
         }
 
-        if($data['password']) {
+        if ($data['password']) {
             $data['password'] = bcrypt($data['password']);
         }
 
@@ -93,11 +93,11 @@ class UserController extends Controller
 
         $user->attachTags($tags);
 
-        if($request->has('designation_id')) {
+        if ($request->has('designation_id')) {
             $user->designations()->attach(request('designation_id'));
         }
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -165,11 +165,11 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $data = $request->all();
-        if(request()->hasFile('avatar')) {
+        if (request()->hasFile('avatar')) {
             $data['avatar'] = $this->uploadFile();
         }
 
-        if($data['password']) {
+        if ($data['password']) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
@@ -187,7 +187,7 @@ class UserController extends Controller
         $user->syncTags($tags);
         $user->designations()->sync(request('designation_id'));
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -211,7 +211,7 @@ class UserController extends Controller
     }
 
     /**
-     * Upload user avatar
+     * Upload user avatar.
      *
      * @return mixed
      */
@@ -238,7 +238,6 @@ class UserController extends Controller
         return view('letter.joining', compact('user'));
     }
 
-
     /**
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -260,7 +259,7 @@ class UserController extends Controller
     {
         $user->designations()
             ->attach(request('designation_id'), [
-                'remarks' => request('remarks')
+                'remarks' => request('remarks'),
             ]);
 
         return redirect('/users');
@@ -273,13 +272,13 @@ class UserController extends Controller
      */
     public function download($letter, User $user)
     {
-        if($letter == "joiningLetter"){
+        if ($letter == 'joiningLetter') {
             $pdf = PDF::loadView('letter.joining', compact('user'));
 
             return $pdf->download($user->username.'-joiningLatter.pdf');
         }
 
-        if($letter == "promoteLetter") {
+        if ($letter == 'promoteLetter') {
             $pdf = PDF::loadView('letter.promoteletter', compact('user'));
 
             return $pdf->download($user->username.'promoteLatter.pdf');

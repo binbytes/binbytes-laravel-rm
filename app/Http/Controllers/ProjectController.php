@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Client;
 use App\Project;
-use App\Http\Requests\ProjectRequest;
-use App\ProjectProgress;
-use App\User;
 use Carbon\Carbon;
+use App\ProjectProgress;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -69,11 +69,11 @@ class ProjectController extends Controller
 
         $project->attachTags($tags);
 
-        if($request->has('users')) {
+        if ($request->has('users')) {
             $project->users()->attach(request('users'));
         }
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -127,7 +127,7 @@ class ProjectController extends Controller
         $project->syncTags($tags);
         $project->users()->sync(request('users'));
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -145,7 +145,7 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        if(\request()->wantsJson()) {
+        if (\request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -174,7 +174,7 @@ class ProjectController extends Controller
 
         ProjectProgress::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -192,23 +192,20 @@ class ProjectController extends Controller
         return view('project.viewprogress', compact('projectProgress'));
     }
 
-    /**
-     *
-     */
     public function getProjectsAPI()
     {
         $query = Project::with('users', 'tags', 'client');
-        
+
         $filterType = \request('type');
 
-        if(in_array($filterType, [
+        if (in_array($filterType, [
             'completed',
-            'running'
+            'running',
         ])) {
             $query->{$filterType}();
         }
 
-        if($filterClient = \request('client')) {
+        if ($filterClient = \request('client')) {
             $query = $query->where('client_id', $filterClient);
         }
 

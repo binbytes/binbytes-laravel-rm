@@ -8,7 +8,7 @@ class Account extends Model
 {
     protected $fillable = [
         'user_id', 'name', 'bank_name', 'account_number', 'name_on_account', 'branch_of', 'address',
-        'ifsc_code', 'contact_number', 'statement_starting_line'
+        'ifsc_code', 'contact_number', 'statement_starting_line',
     ];
 
     /**
@@ -24,7 +24,7 @@ class Account extends Model
     }
 
     /**
-     * Set any specific reader type for any specific bank
+     * Set any specific reader type for any specific bank.
      * @return null|string
      */
     public function statementReaderType()
@@ -33,7 +33,7 @@ class Account extends Model
     }
 
     /**
-     * Set any specific reader type for any specific bank
+     * Set any specific reader type for any specific bank.
      * @return null|string
      */
     public function customDelimiter()
@@ -41,4 +41,3 @@ class Account extends Model
         return $this->bank_name === 'SBI' ? "\t" : null;
     }
 }
-

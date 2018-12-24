@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use App\AttendanceSession;
 use App\User;
 use App\UserAttendance;
+use App\AttendanceSession;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -15,11 +15,11 @@ abstract class TestCase extends BaseTestCase
     {
         // For now
         $user = create(User::class, $isAdmin ? [
-            'email' => array_first(config('rm.admin'))
+            'email' => array_first(config('rm.admin')),
         ] : []);
 
         $attendance = create(UserAttendance::class, [
-            'user_id' => $user->getKey()
+            'user_id' => $user->getKey(),
         ]);
 
         create(AttendanceSession::class, [

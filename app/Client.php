@@ -15,11 +15,11 @@ class Client extends Model
     protected $fillable = [
         'name', 'company_name', 'avatar', 'timezone', 'address', 'city', 'country', 'dob',
         'mobile_no', 'email', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
-        'remarks'
+        'remarks',
     ];
 
     /**
-     * Get avatar url
+     * Get avatar url.
      *
      * @return string
      */

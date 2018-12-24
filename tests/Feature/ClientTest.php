@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Client;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ClientTest extends TestCase
 {
@@ -46,7 +46,7 @@ class ClientTest extends TestCase
         $this->logIn();
 
         $client = raw(Client::class, [
-            'name' => null
+            'name' => null,
         ]);
 
         $this->json('POST', '/clients', $client)
@@ -55,7 +55,7 @@ class ClientTest extends TestCase
 
         // avatar must be image file
         $this->json('post', '/clients', raw(Client::class, [
-            'avatar' => 'test'
+            'avatar' => 'test',
         ]))
         ->assertStatus(422)
         ->assertJsonValidationErrors(['avatar']);
@@ -83,13 +83,13 @@ class ClientTest extends TestCase
         Storage::fake('public');
 
         $client = raw(Client::class, [
-            'avatar' => $file = UploadedFile::fake()->image('client.jpg')
+            'avatar' => $file = UploadedFile::fake()->image('client.jpg'),
         ]);
 
         $this->json('POST', '/clients', $client)
             ->assertStatus(200);
 
-        Storage::disk('public')->assertExists('clients/' . $file->hashName());
+        Storage::disk('public')->assertExists('clients/'.$file->hashName());
 
         $this->get('/clients')
             ->assertSee($client['name']);

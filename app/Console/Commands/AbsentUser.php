@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Holiday;
 use App\User;
+use App\Holiday;
 use Illuminate\Console\Command;
 
 class AbsentUser extends Command

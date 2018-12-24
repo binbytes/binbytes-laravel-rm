@@ -27,7 +27,7 @@ class ClientRequest extends FormRequest
             'name' => 'required',
             'dob' => 'date',
             'email' => 'email',
-            'avatar' => 'image'
+            'avatar' => 'image',
         ];
     }
 }

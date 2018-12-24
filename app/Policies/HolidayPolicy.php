@@ -16,13 +16,13 @@ class HolidayPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return false;
         }
     }
 
     /**
-     * Determine whether the user can view the holidays
+     * Determine whether the user can view the holidays.
      *
      * @param  \App\User  $user
      * @return mixed

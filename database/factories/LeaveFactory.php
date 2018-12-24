@@ -13,14 +13,13 @@ use Faker\Generator as Faker;
 |
 */
 
-
 $factory->define(App\Leave::class, function (Faker $faker) {
-    return array(
+    return [
         'subject' => $faker->text(10), //
         'description' => $faker->paragraph,
         'start_date' => today()->addDay(rand(1, 10))->toDateString(),
         'end_date' => today()->addDay(rand(11, 20))->toDateString(),
         'start_date_partial_hours' => $faker->numberBetween($min = 0, $max = 4),
-        'end_date_partial_hours' => $faker->numberBetween($min = 0, $max = 4)
-    );
+        'end_date_partial_hours' => $faker->numberBetween($min = 0, $max = 4),
+    ];
 });

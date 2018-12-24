@@ -34,7 +34,7 @@ class TransactionRequest extends FormRequest
             'closing_balance' => 'required|numeric',
             'type' => 'nullable',
             'note' => 'nullable',
-            'invoice' => 'nullable|file'
+            'invoice' => 'nullable|file',
         ];
     }
 }

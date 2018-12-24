@@ -3,8 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -25,7 +25,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar',
         'address', 'designation', 'about', 'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
         'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'use_icon_sidebar',
-        'exclude_from_salary', 'exclude_from_attendance', 'role', 'remarks'
+        'exclude_from_salary', 'exclude_from_attendance', 'role', 'remarks',
     ];
 
     public function getNameAttribute()
@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get avatar url
+     * Get avatar url.
      *
      * @return string
      */
@@ -60,14 +60,14 @@ class User extends Authenticatable
      */
     public function scopeDoesntOnLeave(Builder $query, Carbon $date)
     {
-        return $query->whereDoesntHave('leaves', function ($query) use ($date)  {
+        return $query->whereDoesntHave('leaves', function ($query) use ($date) {
             $query->betweenDate($date)
                 ->where('is_approved', true);
         });
     }
 
     /**
-     * Admin users only
+     * Admin users only.
      *
      * @param Builder $query
      * @return Builder
@@ -135,7 +135,7 @@ class User extends Authenticatable
 
         $attendances = $this->attendanceFromDates($startDate->toDateString(), $endDate->toDateString());
 
-        return collect($days)->map(function (Carbon $day) use($attendances) {
+        return collect($days)->map(function (Carbon $day) use ($attendances) {
             $attendance = $attendances->where('date', $day->format('Y-m-d'))->first();
 
             return [
@@ -163,7 +163,7 @@ class User extends Authenticatable
     public function getWeeklyWorksHrsPercentage()
     {
         $weekSeconds = $this->week_attendances->sum('second');
-        if(!$weekSeconds) {
+        if (! $weekSeconds) {
             return 0;
         } elseif ($weekSeconds >= $this->weekly_hours_credit * 3600) {
             return 100;
@@ -193,7 +193,7 @@ class User extends Authenticatable
     public function createAttendance(Carbon $date, array $data = [])
     {
         return $this->attendance()->create(array_merge([
-            'date' => $date
+            'date' => $date,
         ], $data));
     }
 
@@ -205,12 +205,12 @@ class User extends Authenticatable
     public function createAbsent(Carbon $date)
     {
         return $this->createAttendance($date, [
-            'status' => UserAttendance::$ABSENT
+            'status' => UserAttendance::$ABSENT,
         ]);
     }
 
     /**
-     * Get recent notifications
+     * Get recent notifications.
      *
      * @return mixed
      */
@@ -220,7 +220,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Is user excluded from attendance
+     * Is user excluded from attendance.
      *
      * @return mixed
      */
@@ -230,7 +230,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Is user excluded from salary
+     * Is user excluded from salary.
      *
      * @return mixed
      */
@@ -240,7 +240,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Detect is user object is mine
+     * Detect is user object is mine.
      */
     public function isMe()
     {
@@ -248,7 +248,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determine if user is admin
+     * Determine if user is admin.
      *
      * @return bool
      */
@@ -258,7 +258,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determine if user is employee
+     * Determine if user is employee.
      *
      * @return bool
      */
@@ -268,7 +268,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determine if user is accountant
+     * Determine if user is accountant.
      *
      * @return bool
      */
@@ -296,7 +296,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get user's current designation
+     * Get user's current designation.
      *
      * @return string
      */

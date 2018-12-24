@@ -22,6 +22,6 @@ $factory->define(App\Project::class, function (Faker $faker) {
         },
         'started_at' => $faker->date(),
         'is_completed' => false,
-        'remarks' => $faker->paragraph
+        'remarks' => $faker->paragraph,
     ];
 });

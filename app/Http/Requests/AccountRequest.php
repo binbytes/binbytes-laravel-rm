@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class AccountRequest extends FormRequest
 {
@@ -28,7 +28,7 @@ class AccountRequest extends FormRequest
             'user_id' => 'nullable|exists:users,id', // If null, it is own by company
             'name' => [
                 'required',
-                Rule::unique('accounts')->ignore($this->id)
+                Rule::unique('accounts')->ignore($this->id),
             ],
             'bank_name' => 'required',
             'account_number' => 'required',
@@ -37,7 +37,7 @@ class AccountRequest extends FormRequest
             'address' =>'nullable',
             'ifsc_code' => 'nullable',
             'contact_number' => 'nullable',
-            'statement_starting_line' => 'required|numeric'
+            'statement_starting_line' => 'required|numeric',
         ];
     }
 }

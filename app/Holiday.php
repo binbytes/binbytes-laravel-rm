@@ -10,15 +10,15 @@ class Holiday extends Model
     use NotificationHandler, AttendanceScope;
 
     /**
-     * Notifications related to Leave
+     * Notifications related to Leave.
      * @var array
      */
     public static $notifications = [
-        HolidayAdded::class
+        HolidayAdded::class,
     ];
 
     public $dates = [
-        'start_date', 'end_date'
+        'start_date', 'end_date',
     ];
 
     /**
@@ -27,6 +27,6 @@ class Holiday extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'start_date', 'start_date_partial_hours', 'end_date', 'end_date_partial_hours'
+        'title', 'description', 'start_date', 'start_date_partial_hours', 'end_date', 'end_date_partial_hours',
     ];
 }

@@ -27,7 +27,7 @@ class TransactionTypeRequest extends FormRequest
             'title' => 'required',
             'transaction_type' => 'required',
             'parent_id' => 'nullable|exists:transaction_types,id',
-            'model_name' => 'nullable'
+            'model_name' => 'nullable',
         ];
     }
 }

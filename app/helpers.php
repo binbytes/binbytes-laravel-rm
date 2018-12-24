@@ -2,13 +2,14 @@
 
 use Carbon\Carbon;
 
-if(!function_exists('timeZoneList')) {
+if (! function_exists('timeZoneList')) {
 
     /**
-     * Get all timezone list for select
+     * Get all timezone list for select.
      * @return mixed
      */
-    function timeZoneList() {
+    function timeZoneList()
+    {
         return \Cache::rememberForever('timezones', function () {
             $optionsArray = timezone_identifiers_list();
             $timezones = [];
@@ -21,50 +22,54 @@ if(!function_exists('timeZoneList')) {
     }
 }
 
-if(!function_exists('priority')) {
-    function priority() {
+if (! function_exists('priority')) {
+    function priority()
+    {
         $priority = [];
-        for($a = 0; $a<10; $a++) {
+        for ($a = 0; $a < 10; $a++) {
             $priority[$a] = $a;
         }
+
         return $priority;
     }
 }
 
-if(!function_exists('months')) {
-    function months() {
+if (! function_exists('months')) {
+    function months()
+    {
         $months = [];
-        for($m=1; $m <= 12; $m++) {
-            $months[$m] = date('F', mktime(0,0,0,$m));
+        for ($m = 1; $m <= 12; $m++) {
+            $months[$m] = date('F', mktime(0, 0, 0, $m));
         }
+
         return $months;
     }
 }
 
-if(!function_exists('hoursFromSeconds')) {
+if (! function_exists('hoursFromSeconds')) {
     /**
-     * Get readable hours from seconds
+     * Get readable hours from seconds.
      *
      * @param $seconds
      * @return float
      */
-    function hoursFromSeconds($seconds) {
-
-        $hours = floor($seconds/3600);
+    function hoursFromSeconds($seconds)
+    {
+        $hours = floor($seconds / 3600);
         if ($hours < 10) {
             $hours = '0'.$hours;
         }
 
-        $minute = floor(($seconds/60)%60);
+        $minute = floor(($seconds / 60) % 60);
         if ($minute < 10) {
             $minute = '0'.$minute;
         }
 
-        return $hours.":".$minute;
+        return $hours.':'.$minute;
     }
 }
 
-if(!function_exists('generateDateRange')) {
+if (! function_exists('generateDateRange')) {
 
     /**
      * Generate Date range.
@@ -84,13 +89,14 @@ if(!function_exists('generateDateRange')) {
         foreach ($daterange as $date) {
             $dates[] = new Carbon($date);
         }
+
         return $dates;
     }
 }
 
-if(!function_exists('amountStrToFloat')) {
+if (! function_exists('amountStrToFloat')) {
     /**
-     * Get float value from amount string
+     * Get float value from amount string.
      * @param $amountString
      *
      * @return float
@@ -101,7 +107,7 @@ if(!function_exists('amountStrToFloat')) {
     }
 }
 
-if(!function_exists('validateDate')) {
+if (! function_exists('validateDate')) {
     /**
      * @param $date
      * @param string $format

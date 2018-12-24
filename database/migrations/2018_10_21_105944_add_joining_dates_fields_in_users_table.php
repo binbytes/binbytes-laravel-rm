@@ -31,7 +31,7 @@ class AddJoiningDatesFieldsInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn([
-                'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active'
+                'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active',
             ]);
         });
     }

@@ -11,20 +11,20 @@ class Leave extends Model
     use NotificationHandler, AttendanceScope;
 
     /**
-     * Notifications related to Leave
+     * Notifications related to Leave.
      * @var array
      */
     public static $notifications = [
         LeaveApproval::class,
-        LeaveRequested::class
+        LeaveRequested::class,
     ];
 
     public $dates = [
-        'start_date', 'end_date'
+        'start_date', 'end_date',
     ];
 
     public $casts = [
-        'is_approved' => 'boolean'
+        'is_approved' => 'boolean',
     ];
 
     /**
@@ -34,7 +34,7 @@ class Leave extends Model
      */
     protected $fillable = [
         'user_id', 'subject', 'description', 'start_date', 'start_date_partial_hours', 'end_date', 'end_date_partial_hours',
-        'is_approved', 'approved_on', 'approved_by', 'approved_note'
+        'is_approved', 'approved_on', 'approved_by', 'approved_note',
     ];
 
     /**
@@ -42,7 +42,7 @@ class Leave extends Model
      */
     public function getApprovalStatusAttribute()
     {
-        if($this->is_approved === true) {
+        if ($this->is_approved === true) {
             return 'Approved';
         } elseif ($this->is_approved === false) {
             return 'Declined';

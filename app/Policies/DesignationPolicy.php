@@ -16,7 +16,7 @@ class DesignationPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return false;
         }
     }

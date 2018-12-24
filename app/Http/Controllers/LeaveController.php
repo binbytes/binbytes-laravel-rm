@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Leave;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Events\LeaveApproval;
 use App\Events\LeaveRequested;
-use App\Leave;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Http\Requests\LeaveRequest;
-use Gate;
 
 class LeaveController extends Controller
 {
@@ -52,7 +51,7 @@ class LeaveController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
 
-        if($data['end_date'] == null) {
+        if ($data['end_date'] == null) {
             $data['end_date'] = $data['start_date'];
         }
         $data['start_date'] = Carbon::parse($data['start_date']);
@@ -62,7 +61,7 @@ class LeaveController extends Controller
 
         event(new LeaveRequested($leave));
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -104,7 +103,7 @@ class LeaveController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
-        if($data['end_date'] == null) {
+        if ($data['end_date'] == null) {
             $data['end_date'] = $data['start_date'];
         }
         $data['start_date'] = Carbon::parse($data['start_date']);
@@ -112,7 +111,7 @@ class LeaveController extends Controller
 
         $leave->fill($data)->save();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -132,7 +131,7 @@ class LeaveController extends Controller
     {
         $leave->delete();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -142,7 +141,7 @@ class LeaveController extends Controller
     }
 
     /**
-     * Approve/Reject Leave Request
+     * Approve/Reject Leave Request.
      *
      * @param Leave $leave
      * @param $approve
@@ -163,7 +162,7 @@ class LeaveController extends Controller
 
         event(new LeaveApproval($leave));
 
-        if(\request()->wantsJson()) {
+        if (\request()->wantsJson()) {
             return response([], 200);
         }
 

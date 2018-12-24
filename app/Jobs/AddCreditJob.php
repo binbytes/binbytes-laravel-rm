@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Holiday;
 use App\User;
-use App\UserAttendance;
+use App\Holiday;
 use Carbon\Carbon;
+use App\UserAttendance;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -53,7 +53,7 @@ class AddCreditJob implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->date->diffInDays($this->type->start_date)  == 0 && $this->type->start_date_partial_hours) {
+        if ($this->date->diffInDays($this->type->start_date) == 0 && $this->type->start_date_partial_hours) {
             $this->createPartialHourAttendance($this->type->start_date_partial_hours);
         } elseif ($this->date->diffInDays($this->type->end_date) == 0 && $this->type->end_date_partial_hours) {
             $this->createPartialHourAttendance($this->type->end_date_partial_hours);

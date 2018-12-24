@@ -3,11 +3,11 @@
 namespace App\Imports;
 
 use App\Account;
-use App\Transaction;
 use Carbon\Carbon;
+use App\Transaction;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
 class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSettings
 {
@@ -26,13 +26,13 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
     public function model(array $row)
     {
         //dd($row);
-        if(!method_exists($this, $this->account->bank_name)) {
+        if (! method_exists($this, $this->account->bank_name)) {
             return;
         }
 
         $data = $this->{$this->account->bank_name}($row);
 
-        if(!$data) {
+        if (! $data) {
             return;
         }
 
@@ -41,8 +41,8 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
 
     public function AXIS($row)
     {
-        if (!isset($row['tran_date']) || !strtotime($row['tran_date']) || !isset($row['bal'])) {
-            return null;
+        if (! isset($row['tran_date']) || ! strtotime($row['tran_date']) || ! isset($row['bal'])) {
+            return;
         }
 
         return [
@@ -53,14 +53,14 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
             'description' => $row['particulars'],
             'debit_amount' => amountStrToFloat($row['dr']),
             'credit_amount' => amountStrToFloat($row['cr']),
-            'closing_balance' => amountStrToFloat($row['bal'])
+            'closing_balance' => amountStrToFloat($row['bal']),
         ];
     }
 
     public function HDFC($row)
     {
-        if (!isset($row['date']) || !validateDate($row['date'], $format = 'd/m/y') || !isset($row['closing_balance'])) {
-            return null;
+        if (! isset($row['date']) || ! validateDate($row['date'], $format = 'd/m/y') || ! isset($row['closing_balance'])) {
+            return;
         }
 
         return [
@@ -71,14 +71,14 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
             'description' => $row['narration'],
             'debit_amount' => amountStrToFloat($row['withdrawal_amt']),
             'credit_amount' => amountStrToFloat($row['deposit_amt']),
-            'closing_balance' => amountStrToFloat($row['closing_balance'])
+            'closing_balance' => amountStrToFloat($row['closing_balance']),
         ];
     }
 
     public function SBI($row)
     {
-        if (!isset($row['txn_date']) || !strtotime($row['txn_date']) || !isset($row['balance'])) {
-            return null;
+        if (! isset($row['txn_date']) || ! strtotime($row['txn_date']) || ! isset($row['balance'])) {
+            return;
         }
 
         return [
@@ -89,14 +89,14 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
             'description' => $row['description'],
             'debit_amount' => amountStrToFloat($row['debit']),
             'credit_amount' => amountStrToFloat($row['credit']),
-            'closing_balance' => amountStrToFloat($row['balance'])
+            'closing_balance' => amountStrToFloat($row['balance']),
         ];
     }
 
     public function YES($row)
     {
-        if(!isset($row['txn_date']) || !isset($row['running_balance'])) {
-            return null;
+        if (! isset($row['txn_date']) || ! isset($row['running_balance'])) {
+            return;
         }
 
         return [
@@ -107,7 +107,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
             'description' => $row['description'],
             'debit_amount' => amountStrToFloat($row['debit_amount']),
             'credit_amount' => amountStrToFloat($row['credit_amount']),
-            'closing_balance' => amountStrToFloat($row['running_balance'])
+            'closing_balance' => amountStrToFloat($row['running_balance']),
         ];
     }
 
@@ -120,9 +120,9 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
     {
         $delimiter = $this->account->customDelimiter();
 
-        if($delimiter) {
+        if ($delimiter) {
             return [
-                'delimiter' => "\t"
+                'delimiter' => "\t",
             ];
         }
 

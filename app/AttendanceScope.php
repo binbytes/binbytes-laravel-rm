@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 trait AttendanceScope
 {
     /**
-     * Get upcoming holidays
+     * Get upcoming holidays.
      *
      * @param $query
      *
@@ -20,7 +20,7 @@ trait AttendanceScope
     }
 
     /**
-     * Get past holiday
+     * Get past holiday.
      *
      * @param $query
      *

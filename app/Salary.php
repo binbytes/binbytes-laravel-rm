@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Salary extends Model
 {
     public $dates = [
-        'paid_for'
+        'paid_for',
     ];
 
     protected $fillable = [
         'user_id', 'base_salary', 'paid_amount', 'paid_for', 'pf', 'tds', 'bonus', 'penalty', 'payment_method',
-        'paid_note', 'general_note'
+        'paid_note', 'general_note',
     ];
 
     /**
@@ -24,7 +24,7 @@ class Salary extends Model
     }
 
     /**
-     * Get records salary paid for month
+     * Get records salary paid for month.
      *
      * @param $query
      * @param null $month
@@ -32,13 +32,15 @@ class Salary extends Model
      */
     public function scopePaidForMonth($query, $date = null)
     {
-        if($date == null) $date = today()->format('Y-m-d');
+        if ($date == null) {
+            $date = today()->format('Y-m-d');
+        }
 
         return $query->where('paid_for', $date);
     }
 
     /**
-     * Suggested name of PDF file
+     * Suggested name of PDF file.
      *
      * @return string
      */
@@ -48,14 +50,14 @@ class Salary extends Model
     }
 
     /**
-     * Get binary of PDF
+     * Get binary of PDF.
      *
      * @return \Barryvdh\DomPDF\PDF
      */
     public function paySlipPDF()
     {
         return \PDF::loadView('letter.payslip', [
-            'salary' => $this
+            'salary' => $this,
         ]);
     }
 }

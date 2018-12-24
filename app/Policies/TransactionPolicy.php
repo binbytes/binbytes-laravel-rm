@@ -16,7 +16,7 @@ class TransactionPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return true;
         }
     }

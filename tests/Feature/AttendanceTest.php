@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AttendanceTest extends TestCase
 {
@@ -15,23 +15,23 @@ class AttendanceTest extends TestCase
     {
         $user = create(User::class, [
             'email' => 'random@email.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
         ]);
 
         $this->json('POST', '/login', [
             'email' => 'random@email.com',
-            'password' => '12345678'
+            'password' => '12345678',
         ])->assertRedirect('/dashboard');
 
         $this->assertDatabaseHas('user_attendances', [
             'user_id' => $user->getKey(),
-            'date' => today()
+            'date' => today(),
         ]);
 
         $this->assertDatabaseHas('attendance_sessions', [
             'user_id' => $user->getKey(),
             'start_time' => now()->toDateTimeString(),
-            'end_time' => now()->toDateTimeString()
+            'end_time' => now()->toDateTimeString(),
         ]);
     }
 
@@ -48,7 +48,7 @@ class AttendanceTest extends TestCase
         $this->get('/attendance/ping')
             ->assertSuccessful()
             ->assertJson([
-                'success' => true
+                'success' => true,
             ]);
 
         $this->assertGreaterThan(

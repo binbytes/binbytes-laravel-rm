@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Events\UserSignIn;
 use App\User;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
+use App\Events\UserSignIn;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
@@ -17,12 +17,12 @@ class LoginTest extends TestCase
     {
         create(User::class, [
             'email' => 'random@email.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
         ]);
 
         $this->json('POST', '/login', [
             'email' => 'test@gmail.com',
-            'password' => '123456'
+            'password' => '123456',
         ])
             ->assertStatus(422)
             ->assertJsonValidationErrors(['email']);
@@ -33,12 +33,12 @@ class LoginTest extends TestCase
     {
         $user = create(User::class, [
             'email' => 'random@email.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
         ]);
 
         $this->json('POST', '/login', [
             'email' => 'random@email.com',
-            'password' => '12345678'
+            'password' => '12345678',
         ])
             ->assertRedirect('/dashboard');
 
@@ -50,7 +50,7 @@ class LoginTest extends TestCase
     {
         $user = create(User::class, [
             'email' => 'random@email.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
         ]);
         Event::fake([
             UserSignIn::class,
@@ -58,7 +58,7 @@ class LoginTest extends TestCase
 
         $this->json('POST', '/login', [
             'email' => 'random@email.com',
-            'password' => '12345678'
+            'password' => '12345678',
         ])
             ->assertRedirect('/dashboard');
 

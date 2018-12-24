@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\AttendanceSessionUpdate;
-use App\Client;
-use App\Leave;
-use App\Project;
 use App\User;
+use App\Leave;
+use App\Client;
+use App\Project;
+use App\AttendanceSessionUpdate;
 
 class HomeController extends Controller
 {

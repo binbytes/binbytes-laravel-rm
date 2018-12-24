@@ -4,9 +4,9 @@ namespace App\Notifications;
 
 use App\Leave;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
 
 class LeaveApproval extends Notification
 {
@@ -35,13 +35,13 @@ class LeaveApproval extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/leaves/'. $this->leave->id);
+        $url = url('/leaves/'.$this->leave->id);
 
         return (new MailMessage)
-            ->subject('Your Leave Request has been ' . $this->leave->approval_status)
+            ->subject('Your Leave Request has been '.$this->leave->approval_status)
             ->markdown('mail.leave.approval', [
                 'leave' => $this->leave,
-                'url'=> $url
+                'url'=> $url,
             ]);
     }
 

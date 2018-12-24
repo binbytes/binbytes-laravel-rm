@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use App\Account;
-use App\Http\Requests\TransactionRequest;
-use App\Imports\TransactionImport;
-use App\TransactionType;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Transaction;
+use App\TransactionType;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use Gate;
+use App\Imports\TransactionImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
@@ -28,8 +28,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            if(Gate::allows('accessAll', Account::class)) {
+        if (request()->ajax()) {
+            if (Gate::allows('accessAll', Account::class)) {
                 $query = Transaction::with('account');
             } else {
                 $query = Transaction::with('account')
@@ -57,24 +57,24 @@ class TransactionController extends Controller
                 ->addColumn('action', function (Transaction $transaction) {
                     $data = [];
 
-                    if(Gate::allows('show', $transaction)) {
+                    if (Gate::allows('show', $transaction)) {
                         $data['showUrl'] = route('transactions.show', $transaction);
                     }
 
-                    if(Gate::allows('update', $transaction)) {
+                    if (Gate::allows('update', $transaction)) {
                         $data['editUrl'] = route('transactions.edit', $transaction);
                     }
 
-                    if(Gate::allows('delete', $transaction)) {
+                    if (Gate::allows('delete', $transaction)) {
                         $data['deleteUrl'] = route('transactions.destroy', $transaction);
                     }
 
                     return view('shared.dtAction', $data);
                 })
-                ->editColumn('account', function (Transaction $transaction){
+                ->editColumn('account', function (Transaction $transaction) {
                     return $transaction->account->name;
                 })
-                ->editColumn('type', function (Transaction $transaction){
+                ->editColumn('type', function (Transaction $transaction) {
                     return $transaction->type ? $transaction->transactionType->title : null;
                 })
                 ->editColumn('description', function (Transaction $transaction) {
@@ -114,13 +114,13 @@ class TransactionController extends Controller
     {
         $data = $request->all();
 
-        if(request()->hasFile('invoice')) {
+        if (request()->hasFile('invoice')) {
             $data['invoice'] = $this->storeFile();
         }
 
         $transaction = Transaction::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -151,7 +151,7 @@ class TransactionController extends Controller
         $accounts = Account::pluck('name', 'id');
 
         $transactionTypes = TransactionType::whereIn('transaction_type', [
-            'both', $transaction->isCredit() ? 'credit' : 'debit'
+            'both', $transaction->isCredit() ? 'credit' : 'debit',
         ])->pluck('title', 'id');
 
         return view('transaction.update', compact('accounts', 'transaction', 'transactionTypes'));
@@ -168,13 +168,13 @@ class TransactionController extends Controller
     {
         $data = $request->all();
 
-        if(request()->hasFile('invoice')) {
+        if (request()->hasFile('invoice')) {
             $data['invoice'] = $this->storeFile();
         }
 
         $transaction->fill($data)->save();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 

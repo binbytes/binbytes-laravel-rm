@@ -4,36 +4,36 @@ return [
     'broadcast_notification' => env('NOTIFICATION_BROADCAST') == 'true',
     'company' => [
         'name' => env('COMPANY_NAME', 'BinBytes'),
-        'email' => env('COMPANY_MAIL', 'info@binbytes.com')
+        'email' => env('COMPANY_MAIL', 'info@binbytes.com'),
     ],
     'admin' => [
-        'kanetiya@gmail.com'
+        'kanetiya@gmail.com',
     ],
     'payment_methods' => [
         'cheque' => 'Cheque',
         'cash' => 'Cash',
-        'online transaction' => 'Online Transaction'
+        'online transaction' => 'Online Transaction',
     ],
     'banks' => [
         'HDFC' => 'HDFC',
         'AXIS' => 'AXIS',
         'YES' => 'YES',
-        'SBI' => 'SBI'
+        'SBI' => 'SBI',
     ],
     'target_models' => [
         '\App\User' => 'User',
         '\App\Client' => 'Client',
-        '\App\Project' => 'Project'
+        '\App\Project' => 'Project',
     ],
     'transaction_type' => [
         'both' => 'Both',
         'credit' => 'Credit',
-        'debit' => 'Debit'
+        'debit' => 'Debit',
     ],
     'roles' => [
         'admin' => 'Admin',
         'employee' => 'Employee',
-        'accountant' => 'Accountant'
+        'accountant' => 'Accountant',
     ],
 
     'ping_timeout' => 5 * 60, //second format.

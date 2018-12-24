@@ -15,7 +15,7 @@ class UserPolicy
             return true;
         }
 
-        if($user->isAccountant()) {
+        if ($user->isAccountant()) {
             return false;
         }
     }
@@ -88,7 +88,7 @@ class UserPolicy
     }
 
     /**
-     * Can change organization detail
+     * Can change organization detail.
      * @param \App\User $user
      *
      * @return bool

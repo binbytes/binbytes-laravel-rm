@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
@@ -12,16 +12,16 @@ class Project extends Model
     use \Spatie\Tags\HasTags;
 
     protected $casts = [
-        'is_completed' => 'boolean'
+        'is_completed' => 'boolean',
     ];
 
     protected $fillable = [
-        'title', 'description', 'client_id', 'started_at', 'is_completed', 'slug', 'remarks'
+        'title', 'description', 'client_id', 'started_at', 'is_completed', 'slug', 'remarks',
     ];
 
     public function path()
     {
-        return '/projects/' . $this->id;
+        return '/projects/'.$this->id;
     }
 
     /**

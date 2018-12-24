@@ -27,7 +27,7 @@ class AttendanceUpdate extends FormRequest
             'session_id' => 'nullable|exists:attendance_sessions,id',
             'start_time' => 'required|date',
             'end_time' => 'required|date',
-            'note' => 'nullable'
+            'note' => 'nullable',
         ];
     }
 }

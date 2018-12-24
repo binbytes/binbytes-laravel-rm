@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
-use App\Http\Requests\AccountRequest;
-use App\Transaction;
-use App\User;
-use Yajra\Datatables\Datatables;
 use Gate;
+use App\User;
+use App\Account;
+use App\Transaction;
+use Yajra\Datatables\Datatables;
+use App\Http\Requests\AccountRequest;
 
 class AccountController extends Controller
 {
@@ -27,8 +27,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            if(Gate::allows('accessAll', Account::class)) {
+        if (request()->ajax()) {
+            if (Gate::allows('accessAll', Account::class)) {
                 $query = Account::with('user');
             } else {
                 $query = Account::with('user')
@@ -38,15 +38,15 @@ class AccountController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function (Account $account) {
                     $data = [];
-                    if(Gate::allows('show', $account)) {
+                    if (Gate::allows('show', $account)) {
                         $data['showUrl'] = route('accounts.show', $account);
                     }
 
-                    if(Gate::allows('update', $account)) {
+                    if (Gate::allows('update', $account)) {
                         $data['editUrl'] = route('accounts.edit', $account);
                     }
 
-                    if(Gate::allows('delete', $account)) {
+                    if (Gate::allows('delete', $account)) {
                         $data['deleteUrl'] = route('accounts.destroy', $account);
                     }
 
@@ -82,7 +82,7 @@ class AccountController extends Controller
 
         Account::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -100,10 +100,10 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        if(request()->ajax()) {
+        if (request()->ajax()) {
             $query = Transaction::where('account_id', $account->id);
 
-            if((\request('month')) > 0) {
+            if ((\request('month')) > 0) {
                 $query = $query->whereMonth('date', \request('date'));
             }
 
@@ -111,15 +111,15 @@ class AccountController extends Controller
             $operator = request('operator', '>');
             $filterType = request('filter_type');
 
-            if(in_array($filterType, [
-                    'credit_amount', 'debit_amount', 'closing_balance'
+            if (in_array($filterType, [
+                    'credit_amount', 'debit_amount', 'closing_balance',
             ])) {
                 $query->where($filterType, $operator, $amountValue);
             }
 
-            if(\request('invoice') == 'with_invoice') {
+            if (\request('invoice') == 'with_invoice') {
                 $query->withInvoice();
-            } else if(\request('invoice') == 'without_invoice') {
+            } elseif (\request('invoice') == 'without_invoice') {
                 $query->withoutInvoice();
             }
 
@@ -142,13 +142,13 @@ class AccountController extends Controller
                 ->addColumn('action', function (Transaction $transaction) {
                     $data['showUrl'] = route('transactions.show', $transaction);
 
-                    if(Gate::allows('update', $transaction)) {
+                    if (Gate::allows('update', $transaction)) {
                         $data['editUrl'] = route('transactions.edit', $transaction);
                     }
-                    if(Gate::allows('delete', $transaction)) {
+                    if (Gate::allows('delete', $transaction)) {
                         $data['deleteUrl'] = route('transactions.destroy', $transaction);
                     }
-                    if(Gate::allows('download', $transaction)) {
+                    if (Gate::allows('download', $transaction)) {
                         if ($transaction->invoice) {
                             $data['downloadUrl'] = route('transaction-download', $transaction->id);
                         }
@@ -159,7 +159,7 @@ class AccountController extends Controller
                 ->editColumn('date', function (Transaction $transaction) {
                     return $transaction->date->format('Y-m-d');
                 })
-                ->editColumn('type', function (Transaction $transaction){
+                ->editColumn('type', function (Transaction $transaction) {
                     return $transaction->type ? $transaction->transactionType->title : null;
                 })
                 ->rawColumns(['credit_amount', 'debit_amount', 'closing_balance', 'action'])
@@ -195,7 +195,7 @@ class AccountController extends Controller
 
         $account->fill($data)->save();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 

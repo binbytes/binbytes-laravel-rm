@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
     {
         factory(\App\User::class)->create([
             'email' => 'kanetiya@gmail.com',
-            'is_active' => true
+            'is_active' => true,
         ]);
     }
 }

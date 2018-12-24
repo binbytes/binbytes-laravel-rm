@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DesignationRequest;
-use Illuminate\Http\Request;
 use App\Designation;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\DesignationRequest;
 
 class DesignationController extends Controller
 {
-
     public function __construct()
     {
         $this->authorizeResource(Designation::class);
@@ -23,12 +22,12 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
+        if (request()->ajax()) {
             return Datatables::of(Designation::query())
                 ->addColumn('action', function (Designation $designation) {
                     return view('shared.dtAction', [
                         'deleteUrl' => route('designations.destroy', $designation),
-                        'editUrl' => route('designations.edit', $designation)
+                        'editUrl' => route('designations.edit', $designation),
                     ]);
                 })
                 ->make(true);
@@ -59,7 +58,7 @@ class DesignationController extends Controller
 
         Designation::create($data);
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 
@@ -103,7 +102,7 @@ class DesignationController extends Controller
 
         $designation->fill($data)->save();
 
-        if(request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response([], 200);
         }
 

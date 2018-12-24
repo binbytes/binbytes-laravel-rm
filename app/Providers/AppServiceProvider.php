@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register our custom blade directives
+     * Register our custom blade directives.
      */
     protected function registerBladeDirectives()
     {
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Blade::if('notAdmin', function () {
-            return auth()->check() && !auth()->user()->isAdmin();
+            return auth()->check() && ! auth()->user()->isAdmin();
         });
     }
 }

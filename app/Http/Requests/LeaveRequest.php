@@ -29,14 +29,14 @@ class LeaveRequest extends FormRequest
             'description' => 'required',
             'start_date' => [
                 'required', 'date',
-                new FutureDate
+                new FutureDate,
             ],
             'end_date' => [
                 'nullable', 'date',
-                new FutureDate
+                new FutureDate,
             ],
             'start_date_partial_hours' => 'nullable|numeric|max:10',
-            'end_date_partial_hours' => 'nullable|numeric|max:10'
+            'end_date_partial_hours' => 'nullable|numeric|max:10',
         ];
     }
 }

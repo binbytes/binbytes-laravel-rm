@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\AddCreditJob;
 use App\Leave;
+use App\Jobs\AddCreditJob;
 use Illuminate\Console\Command;
 
 class LeaveCredit extends Command

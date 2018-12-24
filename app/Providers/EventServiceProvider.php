@@ -19,14 +19,14 @@ class EventServiceProvider extends ServiceProvider
             \App\Listeners\HolidayAddedListener::class,
         ],
         \App\Events\LeaveRequested::class => [
-            \App\Listeners\LeaveRequestedListener::class
+            \App\Listeners\LeaveRequestedListener::class,
         ],
         \App\Events\LeaveApproval::class => [
-            \App\Listeners\LeaveApprovalListener::class
+            \App\Listeners\LeaveApprovalListener::class,
         ],
         \App\Events\SalaryPaid::class => [
-            \App\Listeners\SalaryPaidListener::class
-        ]
+            \App\Listeners\SalaryPaidListener::class,
+        ],
     ];
 
     /**

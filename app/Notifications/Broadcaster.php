@@ -4,8 +4,8 @@ namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-trait Broadcaster {
-
+trait Broadcaster
+{
     /**
      * Get the broadcastable representation of the notification.
      *
@@ -17,7 +17,7 @@ trait Broadcaster {
         return new BroadcastMessage([
             'read_at' => null,
             'type' => self::class,
-            'data' => $this->toArray($notifiable)
+            'data' => $this->toArray($notifiable),
         ]);
     }
 
@@ -30,7 +30,7 @@ trait Broadcaster {
     public function via($notifiable)
     {
         return array_merge([
-            'mail', 'database'
+            'mail', 'database',
         ], config('rm.broadcast_notification') ? ['broadcast'] : []);
     }
 }
