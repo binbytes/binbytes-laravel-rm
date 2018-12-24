@@ -79,6 +79,10 @@ class UserAttendance extends Model
             ->first();
 
         $endTime = now();
+        if ($endTime->diffInSeconds($session->end_time) > config('rm.ping_timeout')) {
+            $session = $this->createSession($session->user);
+        }
+
         $session->fill([
             'end_time' => $endTime,
             'total_times' => $endTime->diffInSeconds($session->start_time)

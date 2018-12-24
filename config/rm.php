@@ -34,5 +34,7 @@ return [
         'admin' => 'Admin',
         'employee' => 'Employee',
         'accountant' => 'Accountant'
-    ]
+    ],
+
+    'ping_timeout' => 5 * 60, //second format.
 ];
