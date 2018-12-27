@@ -7,7 +7,7 @@
                 <button @click="updateFilter('running')" class="btn btn-info">Running</button>
             </div>
             <div class="d-flex ml-3">
-                <select v-if="clients" class="mr-2" v-model="filters.client">
+                <select v-if="clients" class="mr-2 form-control" v-model="filters.client">
                     <option value="">Select Client</option>
                     <option v-for="(client, id) in clients"
                             :value="id"
@@ -16,7 +16,7 @@
                     </option>
                 </select>
 
-                <select v-if="users" v-model="filters.user">
+                <select v-if="users" class="form-control" v-model="filters.user">
                     <option value="">Select User</option>
                     <option v-for="(user, id) in users"
                             :value="id"
