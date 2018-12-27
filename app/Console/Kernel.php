@@ -24,14 +24,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('holiday:credit')
-            ->dailyAt('01:00');
+        $schedule->command('holiday:credit')->daily();
 
-        $schedule->command('leave:credit')
-            ->dailyAt('01:10');
+        $schedule->command('leave:credit')->daily();
 
-        $schedule->command('absent:user')
-            ->dailyAt('01:20');
+        $schedule->command('absent:user')->daily();
+
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
 
         $schedule->command('websockets:clean')->daily();
     }
