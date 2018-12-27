@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('absent:user')->daily();
 
-        $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        $schedule->command('horizon:snapshot')->hourly();
 
         $schedule->command('websockets:clean')->daily();
     }
