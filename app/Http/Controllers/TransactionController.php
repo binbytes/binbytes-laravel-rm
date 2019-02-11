@@ -137,6 +137,10 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
+        if(\request()->ajax()) {
+            return response()->json($transaction);
+        }
+
         return view('transaction.show', compact('transaction'));
     }
 

@@ -1,25 +1,27 @@
 <template>
     <div class="mb-4">
+        <input id="transaction-show-id" class="d-none" v-model="id"/>
+
         <d-modal v-if="showModal" @close="handleClose">
             <d-modal-header>
                 <d-modal-title>Transaction Detail</d-modal-title>
             </d-modal-header>
-            <d-form @submit="handleOnSubmit">
+            <d-form>
                 <d-modal-body>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <span>Sequence No: {{ form.sequence_number }}</span>
+                            <span>Sequence No: {{ transition.sequence_number }}</span>
                         </div>
                         <div class="col-6">
-                            <span>Date: {{ form.date }}</span>
+                            <span>Date: {{ transition.date }}</span>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <span>Reference: {{ form.reference }}</span>
+                            <span>Reference: {{ transition.reference }}</span>
                         </div>
                         <div class="col-6">
-                            <span>Type: {{ form.type }}</span>
+                            <span>Type: {{ transition.type }}</span>
                         </div>
                     </div>
                     <div class="row mb-1">
@@ -35,13 +37,13 @@
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <span class="text-success">{{ form.credit_amount }}</span>
+                            <span class="text-success">{{ transition.credit_amount }}</span>
                         </div>
                         <div class="col-4">
-                            <span class="text-danger">{{ form.debit_amount }}</span>
+                            <span class="text-danger">{{ transition.debit_amount }}</span>
                         </div>
                         <div class="col-4">
-                            <span class="text-info">{{ form.closing_balance }}</span>
+                            <span class="text-info">{{ transition.closing_balance }}</span>
                         </div>
                     </div>
                 </d-modal-body>
@@ -51,38 +53,38 @@
 </template>
 
 <script>
-    import Form from 'form-backend-validation'
-
     export default {
-        props: [
-            'openModal'
-        ],
-        data() {
-            return {
-                form: new Form({
-                    account_id:'',
-                    sequence_number:'',
-                    date:'',
-                    description: '',
-                    reference:'',
-                    credit_amount:'',
-                    debit_amount:'',
-                    closing_balance:'',
-                    note:'',
-                    invoice:'',
-                    type:''
-                }),
-                isProcessing: false,
-                showModal: false
+        watch: {
+            id() {
+                if(this.id) {
+                    this.fetchData()
+                }
             }
         },
-        mounted() {
-            this.form = new Form(this.transaction)
-            this.showModal = true
+        data() {
+            return {
+                id: null,
+                isProcessing: false,
+                showModal: false,
+                transition: {}
+            }
         },
         methods: {
+            fetchData() {
+                if(this.transition.id === this.id) {
+                    this.showModal = true
+                    return
+                }
+
+                axios.get('/transactions/' + this.id)
+                    .then(res => {
+                        this.transition = res.data
+                        this.showModal = true
+                    })
+            },
             handleClose() {
                 this.showModal = false
+                this.id = null
             }
         }
     }

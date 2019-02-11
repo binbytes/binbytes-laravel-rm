@@ -143,7 +143,10 @@ class AccountController extends Controller
                     return view('shared.formatAmount', $data);
                 })
                 ->addColumn('action', function (Transaction $transaction) {
-                    $data['showUrl'] = route('transactions.show', $transaction);
+                    $data = [
+                        'id' => $transaction->id,
+                        'showUrl' => route('transactions.show', $transaction)
+                    ];
 
                     if (Gate::allows('update', $transaction)) {
                         $data['editUrl'] = route('transactions.edit', $transaction);

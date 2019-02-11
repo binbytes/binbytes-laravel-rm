@@ -100,6 +100,9 @@
                 </div>
             </div>
         </div>
+
+        <transaction-show />
+        <transaction-edit />
     </div>
 @endsection
 
@@ -132,6 +135,18 @@
                     { data: 'type', name: 'type' },
                     { data: 'action', name: 'action', sortable: false },
                 ]
+            })
+
+            $('#transaction-table').on('click', '.btn-show', function (e) {
+                e.preventDefault()
+                $('#transaction-show-id').val($(this).attr('rel'));
+                $('#transaction-show-id')[0].dispatchEvent(new Event('input', { 'bubbles': true }))
+            })
+
+            $('#transaction-table').on('click', '.btn-edit', function (e) {
+                e.preventDefault()
+                $('#transaction-edit-id').val($(this).attr('rel'));
+                $('#transaction-edit-id')[0].dispatchEvent(new Event('input', { 'bubbles': true }))
             })
 
             $('#file').change(function () {

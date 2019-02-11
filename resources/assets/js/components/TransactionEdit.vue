@@ -134,23 +134,21 @@
                 showModal: false
             }
         },
-        mounted(){
+        mounted() {
+            this.fetchInitialData()
             this.form = new Form(this.transaction)
             this.showModal = true
         },
         methods: {
-            getTransactions() {
-                axios.get('/api-transactions', {
-                }).then(({ data }) => {
-                    this.transaction = data.data
-                })
+            fetchInitialData() {
+                // this.accounts
+                // this.transactionTypes
             },
             handleOnSubmit(e) {
                 e.preventDefault();
                 this.isProcessing = true
                 this.form.put(`/transactions/${this.transaction.id}`).then(response => {
                     this.isProcessing = false
-                    this.getTransactions()
                     this.showModal = false
                 }).catch(() => {
                     this.isProcessing = false
