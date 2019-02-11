@@ -37,13 +37,13 @@
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <span class="text-success">{{ transition.credit_amount }}</span>
+                            <span class="text-success">₹ {{ transition.credit_amount }}</span>
                         </div>
                         <div class="col-4">
-                            <span class="text-danger">{{ transition.debit_amount }}</span>
+                            <span class="text-danger">₹ {{ transition.debit_amount }}</span>
                         </div>
                         <div class="col-4">
-                            <span class="text-info">{{ transition.closing_balance }}</span>
+                            <span class="text-info">₹ {{ transition.closing_balance }}</span>
                         </div>
                     </div>
                 </d-modal-body>
