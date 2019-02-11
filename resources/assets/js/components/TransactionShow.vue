@@ -48,6 +48,7 @@
                     </div>
                 </d-modal-body>
             </d-form>
+            <d-modal-footer v-if="transition.note" v-text="transition.note" />
         </d-modal>
     </div>
 </template>
