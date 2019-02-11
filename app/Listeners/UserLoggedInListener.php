@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\User;
 use Illuminate\Auth\Events\Login;
 
 class UserLoggedInListener
@@ -14,8 +15,10 @@ class UserLoggedInListener
      */
     public function handle(Login $event)
     {
-        $attendance = $event->user->firstOrCreateAttendance();
+        if($event->user instanceof User) {
+            $attendance = $event->user->firstOrCreateAttendance();
 
-        $attendance->createSession($event->user);
+            $attendance->createSession($event->user);
+        }
     }
 }
