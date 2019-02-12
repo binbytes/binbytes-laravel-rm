@@ -79,7 +79,13 @@
                         </div>
 
                         <div class="col-md-6">
-                            <d-form-select v-model="form.type" name="type" :options="transactionTypes" :class="{ 'is-invalid': form.errors.has('type') }" />
+                            <d-form-select
+                                    v-model="form.type"
+                                    name="type"
+                                    :options="filterTransactionType"
+                                    value-field="id"
+                                    text-field="title"
+                                    :class="{ 'is-invalid': form.errors.has('type') }" />
                             <span class="invalid-feedback text-left" v-if="form.errors.has('type')">
                                 <strong v-html="form.errors.first('type')"></strong>
                             </span>
@@ -127,6 +133,20 @@
         watch: {
             id() {
                this.fetchTransaction()
+            }
+        },
+        computed: {
+            filterTransactionType() {
+                let types = [];
+                for(let i = 0 ; i < this.transactionTypes.length; i++) {
+                    let type = this.form.credit_amount > 0 ? 'credit' : 'debit'
+                    if(this.transactionTypes[i].transaction_type === type
+                        || this.transactionTypes[i].transaction_type === 'both') {
+                        types.push(this.transactionTypes[i]);
+                    }
+                }
+
+                return types;
             }
         },
         mounted() {

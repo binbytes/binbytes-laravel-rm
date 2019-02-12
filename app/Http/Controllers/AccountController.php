@@ -239,7 +239,7 @@ class AccountController extends Controller
     {
         $accounts = Account::pluck('name', 'id');
 
-        $transactionTypes = TransactionType::pluck('title', 'id');
+        $transactionTypes = TransactionType::all();
 
         return response()->json([
             'accounts' => $accounts,
