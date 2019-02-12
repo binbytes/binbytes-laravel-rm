@@ -117,6 +117,17 @@ class AccountController extends Controller
                     'credit_amount', 'debit_amount', 'closing_balance',
             ])) {
                 $query->where($filterType, $operator, $amountValue);
+            } else {
+                if($amountValue > 0) {
+                    $query->where(function ($q) use ($amountValue, $operator) {
+                        $q->where('credit_amount', '>', 0)
+                            ->where('credit_amount', $operator, $amountValue);
+                    })
+                    ->orWhere(function ($q) use ($amountValue, $operator) {
+                        $q->where('debit_amount', '>', 0)
+                            ->where('debit_amount', $operator, $amountValue);
+                    });
+                }
             }
 
             if (\request('invoice') == 'with_invoice') {
