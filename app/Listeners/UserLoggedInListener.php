@@ -15,7 +15,7 @@ class UserLoggedInListener
      */
     public function handle(Login $event)
     {
-        if($event->user instanceof User) {
+        if ($event->user instanceof User) {
             $attendance = $event->user->firstOrCreateAttendance();
 
             $attendance->createSession($event->user);

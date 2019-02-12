@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\TransactionType;
 use Gate;
 use App\User;
 use App\Account;
 use App\Transaction;
+use App\TransactionType;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\AccountRequest;
-use App\Http\Resources\Account as AccountResource;
 
 class AccountController extends Controller
 {
@@ -118,7 +117,7 @@ class AccountController extends Controller
             ])) {
                 $query->where($filterType, $operator, $amountValue);
             } else {
-                if($amountValue > 0) {
+                if ($amountValue > 0) {
                     $query->where(function ($q) use ($amountValue, $operator) {
                         $q->where('credit_amount', '>', 0)
                             ->where('credit_amount', $operator, $amountValue);
@@ -158,7 +157,7 @@ class AccountController extends Controller
                 ->addColumn('action', function (Transaction $transaction) {
                     $data = [
                         'id' => $transaction->id,
-                        'showUrl' => route('transactions.show', $transaction)
+                        'showUrl' => route('transactions.show', $transaction),
                     ];
 
                     if (Gate::allows('update', $transaction)) {
@@ -254,7 +253,7 @@ class AccountController extends Controller
 
         return response()->json([
             'accounts' => $accounts,
-            'transactionTypes' => $transactionTypes
+            'transactionTypes' => $transactionTypes,
         ]);
     }
 }
