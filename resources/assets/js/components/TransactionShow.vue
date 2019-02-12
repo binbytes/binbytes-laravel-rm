@@ -24,6 +24,11 @@
                             <span>Type: {{ transition.type }}</span>
                         </div>
                     </div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <span>Description: {{ transition.description }}</span>
+                        </div>
+                    </div>
                     <div class="row mb-1">
                         <div class="col-4">
                             <span>Credit Amount</span>
@@ -72,6 +77,10 @@
         },
         methods: {
             fetchData() {
+                if(!this.id) {
+                    return
+                }
+
                 if(this.transition.id === this.id) {
                     this.showModal = true
                     return
