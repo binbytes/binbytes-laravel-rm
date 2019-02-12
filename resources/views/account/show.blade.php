@@ -23,9 +23,10 @@
 
                                 {{ html()->text('year')
                                         ->id('year')
+                                        ->placeholder('Year')
                                         ->class('form-control mr-2')
-                                        ->value(today()->format('Y'))
                                 }}
+                                <input id="filter-year" type="hidden" value="">
                                 <input id="filter-date" type="hidden" value="{{ today()->format('m-Y') }}">
 
                                 {{ html()->select('filter_type')
@@ -117,6 +118,7 @@
                     'url': '{!! route('accounts.show', $account) !!}',
                     'data': function ( d ) {
                         d.month = $('#month').val()
+                        d.year = $('#filter-year').val()
                         d.date = $('#filter-date').val()
                         d.filter_type = $('#filter_type').val()
                         d.operator = $('#operator').val()
@@ -163,6 +165,7 @@
                 let year = $('#year').val()
 
                 $('#filter-date').attr('value', month + '-' + year)
+                $('#filter-year').attr('value', year)
 
                 dt.draw()
             });
