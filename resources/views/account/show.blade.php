@@ -101,8 +101,8 @@
             </div>
         </div>
 
-        <transaction-show />
-        <transaction-edit />
+        <transaction-show></transaction-show>
+        <transaction-edit></transaction-edit>
     </div>
 @endsection
 

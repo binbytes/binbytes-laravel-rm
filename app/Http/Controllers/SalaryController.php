@@ -200,7 +200,7 @@ class SalaryController extends Controller
                     ->whereExcludeFromSalary(false)
                     ->get();
 
-        return view('salary.list', compact('users', 'salary'));
+        return view('salary.list', compact('users'));
     }
 
     public function download($id)

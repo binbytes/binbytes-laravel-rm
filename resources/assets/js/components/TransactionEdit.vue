@@ -1,14 +1,18 @@
 <template>
     <div class="mb-4">
+        <input id="transaction-edit-id" class="d-none" v-model="id"/>
+
         <d-modal v-if="showModal" @close="handleClose">
             <d-modal-header>
                 <d-modal-title>Transaction</d-modal-title>
             </d-modal-header>
-            <d-form @submit="handleOnSubmit">
+            <d-form v-if="form" @submit="handleOnSubmit" enctype="multipart/form-data">
                 <d-modal-body class="pb-0">
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <d-form-select v-model="form.account_id" name="account_id" :options="accounts" :class="{ 'is-invalid': form.errors.has('account_id') }" />
+                            <d-form-select v-model="form.account_id" name="account_id"
+                                           :options="accounts"
+                                           :class="{ 'is-invalid': form.errors.has('account_id') }" />
                             <span class="invalid-feedback text-left" v-if="form.errors.has('account_id')">
                                 <strong v-html="form.errors.first('account_id')"></strong>
                             </span>
@@ -21,11 +25,10 @@
                         </div>
                         <div class="col-md-4">
                             <d-datepicker
-                                    v-model="form.date"
-                                    placeholder="Date"
-                                    :name="date"
-                                    :input-class="['form-control', {'is-invalid' : form.errors.has('date') }]"
-                                    typeable />
+                                v-model="form.date"
+                                name="date"
+                                :input-class="['form-control', {'is-invalid' : form.errors.has('date') }]"
+                                typeable />
 
                             <span class="invalid-feedback text-left" v-if="form.errors.has('date')">
                                 <strong v-html="form.errors.first('date')"></strong>
@@ -93,13 +96,14 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <input name="invoice" type="file" :class="{ 'is-invalid': form.errors.has('invoice') }">
+                            <input name="invoice" @change="handleInvoice" type="file" :class="{ 'is-invalid': form.errors.has('invoice') }">
                         </div>
                     </div>
                 </d-modal-body>
                 <d-modal-footer>
+                    <input name="_method" type="hidden" v-model="form._method" value="PUT">
                     <button type="submit" class="btn btn-primary" :disabled="isProcessing">Save</button>
-                    <button type="reset" @click="handleClose" class="btn btn-link">Cancel</button>
+                    <button type="reset" @click="handleClose" class="btn btn-link" :disabled="isProcessing">Cancel</button>
                 </d-modal-footer>
             </d-form>
         </d-modal>
@@ -110,44 +114,62 @@
     import Form from 'form-backend-validation'
 
     export default {
-        props: [
-          'accounts',
-          'transaction',
-          'transactionTypes'
-        ],
         data() {
             return {
-                form: new Form({
-                    account_id:'',
-                    sequence_number:'',
-                    date:'',
-                    description: '',
-                    reference:'',
-                    credit_amount:'',
-                    debit_amount:'',
-                    closing_balance:'',
-                    note:'',
-                    invoice:'',
-                    type:''
-                }),
+                id: null,
+                accounts: null,
+                transactionTypes: [],
                 isProcessing: false,
-                showModal: false
+                showModal: false,
+                form: null,
+            }
+        },
+        watch: {
+            id() {
+               this.fetchTransaction()
             }
         },
         mounted() {
             this.fetchInitialData()
-            this.form = new Form(this.transaction)
-            this.showModal = true
         },
         methods: {
+            handleInvoice($event) {
+                if($event.target.files) {
+                    this.form.invoice = $event.target.files[0]
+                }
+            },
             fetchInitialData() {
-                // this.accounts
-                // this.transactionTypes
+                axios.get('/api-accounts').then(res => {
+                    this.accounts = res.data.accounts
+                    this.transactionTypes = res.data.transactionTypes
+                })
+            },
+            fetchTransaction() {
+                axios.get('/transactions/' + this.id)
+                    .then(res => {
+                        let transaction = res.data
+                        this.form = new Form({
+                            account_id: transaction.account_id,
+                            sequence_number: transaction.sequence_number,
+                            date: transaction.date,
+                            description: transaction.description,
+                            reference: transaction.reference,
+                            credit_amount: transaction.credit_amount,
+                            debit_amount: transaction.debit_amount,
+                            closing_balance: transaction.closing_balance,
+                            note: transaction.note,
+                            invoice: '',
+                            type: transaction.type,
+                            _method: 'PUT'
+                        })
+                        this.showModal = true
+                    })
             },
             handleOnSubmit(e) {
                 e.preventDefault();
                 this.isProcessing = true
-                this.form.put(`/transactions/${this.transaction.id}`).then(response => {
+                this.form._method = 'PUT';
+                this.form.post(`/transactions/${this.id}`).then(response => {
                     this.isProcessing = false
                     this.showModal = false
                 }).catch(() => {
@@ -156,6 +178,7 @@
             },
             handleClose() {
                 this.showModal = false
+                this.id = null
             }
         }
     }

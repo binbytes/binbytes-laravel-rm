@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\TransactionType;
 use Gate;
 use App\User;
 use App\Account;
 use App\Transaction;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\AccountRequest;
+use App\Http\Resources\Account as AccountResource;
 
 class AccountController extends Controller
 {
@@ -228,5 +230,20 @@ class AccountController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getAPI()
+    {
+        $accounts = Account::pluck('name', 'id');
+
+        $transactionTypes = TransactionType::pluck('title', 'id');
+
+        return response()->json([
+            'accounts' => $accounts,
+            'transactionTypes' => $transactionTypes
+        ]);
     }
 }

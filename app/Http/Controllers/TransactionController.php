@@ -17,7 +17,7 @@ class TransactionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Transaction::class);
+        //$this->authorizeResource(Transaction::class);
     }
 
     /**

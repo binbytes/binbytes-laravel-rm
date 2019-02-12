@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/download/{user}', 'SalaryController@download');
 
     Route::resource('/accounts', 'AccountController');
+    Route::get('/api-accounts', 'AccountController@getAPI');
 
     Route::get('/api-transaction', 'TransactionController@getAPI');
     Route::resource('/transactions', 'TransactionController');
