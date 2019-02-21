@@ -102,7 +102,6 @@ class AccountController extends Controller
     public function show(Account $account)
     {
         if (request()->ajax()) {
-            //dd(request()->all());
             $query = Transaction::where('account_id', $account->id);
 
             if ((\request('month')) > 0) {
@@ -124,12 +123,14 @@ class AccountController extends Controller
             } else {
                 if ($amountValue > 0) {
                     $query->where(function ($q) use ($amountValue, $operator) {
-                        $q->where('credit_amount', '>', 0)
-                            ->where('credit_amount', $operator, $amountValue);
-                    })
-                    ->orWhere(function ($q) use ($amountValue, $operator) {
-                        $q->where('debit_amount', '>', 0)
-                            ->where('debit_amount', $operator, $amountValue);
+                        $q->where(function ($q) use($amountValue, $operator) {
+                            $q->where('credit_amount', '>', 0)
+                                ->where('credit_amount', $operator, $amountValue);
+                        })
+                        ->orWhere(function ($q) use ($amountValue, $operator) {
+                            $q->where('debit_amount', '>', 0)
+                                ->where('debit_amount', $operator, $amountValue);
+                        });
                     });
                 }
             }
