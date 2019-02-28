@@ -145,17 +145,17 @@ class AccountController extends Controller
                 ->addColumn('select', function (Transaction $transaction) {
                     return "<input type='checkbox' class='chk-transaction' value='".$transaction->id."'>";
                 })
-                ->addColumn('credit_amount', function (Transaction $transaction) {
+                ->editColumn('credit_amount', function (Transaction $transaction) {
                     $data['credit_amount'] = $transaction->credit_amount;
 
                     return view('shared.formatAmount', $data);
                 })
-                ->addColumn('debit_amount', function (Transaction $transaction) {
+                ->editColumn('debit_amount', function (Transaction $transaction) {
                     $data['debit_amount'] = $transaction->debit_amount;
 
                     return view('shared.formatAmount', $data);
                 })
-                ->addColumn('closing_balance', function (Transaction $transaction) {
+                ->editColumn('closing_balance', function (Transaction $transaction) {
                     $data['closing_balance'] = $transaction->closing_balance;
 
                     return view('shared.formatAmount', $data);
