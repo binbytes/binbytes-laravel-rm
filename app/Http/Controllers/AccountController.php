@@ -185,12 +185,12 @@ class AccountController extends Controller
                     return view('shared.dtAction', $data);
                 })
                 ->editColumn('date', function (Transaction $transaction) {
-                    return $transaction->date->format('Y-m-d');
+                    return $transaction->date->format('j-n-y');
                 })
                 ->editColumn('type', function (Transaction $transaction) {
                     return $transaction->type ? $transaction->transactionType->title : null;
                 })
-                ->rawColumns(['select', 'credit_amount', 'debit_amount', 'closing_balance', 'action'])
+                ->rawColumns(['date', 'select', 'credit_amount', 'debit_amount', 'closing_balance', 'action'])
                 ->make(true);
         }
 
