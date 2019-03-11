@@ -50,7 +50,7 @@
                 ajax: '{!! route('accounts.index') !!}',
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'user.username', name: 'user.username' },
+                    { data: 'user', name: 'user' },
                     { data: 'name', name: 'name' },
                     { data: 'bank_name', name: 'bank_name' },
                     { data: 'account_number', name: 'account_number' },

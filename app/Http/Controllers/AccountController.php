@@ -53,6 +53,10 @@ class AccountController extends Controller
 
                     return view('shared.dtAction', $data);
                 })
+                ->editColumn('user', function (Account $account) {
+                    return $account->user->name;
+                })
+                ->rawColumns(['user', 'action'])
                 ->make(true);
         }
 
