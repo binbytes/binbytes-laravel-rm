@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransactionExport;
 use Gate;
 use App\Account;
 use App\Transaction;
@@ -242,6 +243,57 @@ class TransactionController extends Controller
         Excel::import(new TransactionImport($account), \request('file'), null, $account->statementReaderType());
 
         return redirect(url('accounts', $account->id));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export(Request $request)
+    {
+        $query = Transaction::where('account_id', \request('account_id'));
+
+        if ((\request('month')) > 0) {
+            $query = $query->whereMonth('date', \request('date'));
+        }
+
+        if ((\request('year')) > 0) {
+            $query = $query->whereYear('date', \request('year'));
+        }
+
+        $amountValue = request('amount', 0);
+        $operator = request('operator', '>');
+        $filterType = request('filter_type');
+
+        if (in_array($filterType, [
+            'credit_amount', 'debit_amount', 'closing_balance',
+        ])) {
+            $query->where($filterType, $operator, $amountValue);
+        } else {
+            if ($amountValue > 0) {
+                $query->where(function ($q) use ($amountValue, $operator) {
+                    $q->where(function ($q) use ($amountValue, $operator) {
+                        $q->where('credit_amount', '>', 0)
+                            ->where('credit_amount', $operator, $amountValue);
+                    })
+                        ->orWhere(function ($q) use ($amountValue, $operator) {
+                            $q->where('debit_amount', '>', 0)
+                                ->where('debit_amount', $operator, $amountValue);
+                        });
+                });
+            }
+        }
+
+        if (\request('invoice') == 'with_invoice') {
+            $query->withInvoice();
+        } elseif (\request('invoice') == 'without_invoice') {
+            $query->withoutInvoice();
+        }
+
+        $transactions = $query->select('id', 'date', 'description', 'reference', 'credit_amount', 'debit_amount', 'closing_balance', 'note')
+                        ->get();
+
+        return (new TransactionExport($transactions))->download('invoices.xlsx');
     }
 
     /**

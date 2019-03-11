@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/transactions', 'TransactionController');
     Route::delete('/delete-selected-transaction', 'TransactionController@deleteAll');
     Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
+    Route::post('/transaction/export', 'TransactionController@export')->name('transaction-export');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download')->name('transaction-download');
 
     Route::resource('/transaction-types', 'TransactionTypeController');

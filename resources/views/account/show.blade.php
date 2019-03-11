@@ -10,9 +10,12 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <div class="row">
-                        <form action="#" id="filter-form">
-                            <div class="form-inline ml-3">
+                    <div class="d-flex justify-content-between">
+                        {{ html()->form('POST', route('transaction-export'))
+                                    ->acceptsFiles()
+                                    ->open() }}
+                            <div class="form-inline">
+                                <input name="account_id" type="hidden" value="{{ $account->id }}">
                                 {{ html()->select('month')
                                         ->id('month')
                                         ->placeholder('Select Month')
@@ -54,9 +57,14 @@
                                         ->options(['all' => 'All', 'with_invoice' => 'With Invoice', 'without_invoice' => 'Without Invoice'])
                                         ->value('all')
                                 }}
-                                <button type="submit" id="btn-filter" class="btn btn-primary">Go</button>
+                                <button id="btn-filter" class="btn btn-primary">Go</button>
+
+                                {{ html()->button('Export Transaction')
+                                         ->id('export')
+                                        ->class('btn btn-primary ml-5')
+                                }}
                             </div>
-                        </form>
+                        {{ html()->form()->close() }}
                     </div>
                     @can('importTransactions', $account)
                         <div class="d-flex justify-content-between pt-3">
@@ -160,7 +168,7 @@
                 }
             })
 
-            $('#filter-form').submit(function(e){
+            $('#btn-filter').click(function(e){
                 e.preventDefault();
                 let month = $('#month').val()
                 let year = $('#year').val()
