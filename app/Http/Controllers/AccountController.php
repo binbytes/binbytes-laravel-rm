@@ -112,7 +112,7 @@ class AccountController extends Controller
                 $query = $query->whereMonth('date', \request('date'));
             }
 
-            if((\request('year')) > 0) {
+            if ((\request('year')) > 0) {
                 $query = $query->whereYear('date', \request('year'));
             }
 
@@ -127,7 +127,7 @@ class AccountController extends Controller
             } else {
                 if ($amountValue > 0) {
                     $query->where(function ($q) use ($amountValue, $operator) {
-                        $q->where(function ($q) use($amountValue, $operator) {
+                        $q->where(function ($q) use ($amountValue, $operator) {
                             $q->where('credit_amount', '>', 0)
                                 ->where('credit_amount', $operator, $amountValue);
                         })
