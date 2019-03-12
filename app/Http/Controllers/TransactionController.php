@@ -290,10 +290,23 @@ class TransactionController extends Controller
             $query->withoutInvoice();
         }
 
-        $transactions = $query->select('id', 'date', 'description', 'reference', 'credit_amount', 'debit_amount', 'closing_balance', 'note', 'invoice')
-                        ->get();
+        $transactions = $query->get();
 
-        return (new TransactionExport($transactions))->download('invoices.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        $transactions = collect($transactions)->map(function($transaction) {
+            return [
+                'id' => $transaction->id,
+                'date' => $transaction->date->format('d-m-Y'),
+                'description' => $transaction->description,
+                'reference' => $transaction->reference,
+                'credit_amount' => $transaction->credit_amount,
+                'debit_amount' => $transaction->debit_amount,
+                'closing_balance' => $transaction->closing_balance,
+                'note' => $transaction->note,
+                'invoice' => $transaction->invoice ? \Storage::url($transaction->invoice) : null
+            ];
+        });
+
+        return (new TransactionExport($transactions))->download('TransactionSheet.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     /**
