@@ -10,23 +10,23 @@
                 <d-modal-body>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <span>Sequence No: {{ transition.sequence_number }}</span>
+                            <strong>Sequence No: <span class="text-muted font-weight-light">{{ transition.sequence_number }}</span></strong>
                         </div>
                         <div class="col-6">
-                            <span>Date: {{ transition.date }}</span>
+                            <span>Date: <span class="text-muted font-weight-light">{{ transition.date }}</span></span>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <span>Reference: {{ transition.reference }}</span>
+                            <span>Reference: <span class="text-muted font-weight-light">{{ transition.reference }}</span></span>
                         </div>
                         <div class="col-6">
-                            <span>Type: {{ transition.type }}</span>
+                            <span>Type: <span class="text-muted font-weight-light">{{ transition.type }}</span></span>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-12">
-                            <span>Description: {{ transition.description }}</span>
+                            <span>Description: <span class="text-muted font-weight-light">{{ transition.description }}</span></span>
                         </div>
                     </div>
                     <div class="row mb-1">
