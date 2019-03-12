@@ -292,7 +292,7 @@ class TransactionController extends Controller
 
         $transactions = $query->get();
 
-        $transactions = collect($transactions)->map(function($transaction) {
+        $transactions = collect($transactions)->map(function ($transaction) {
             return [
                 'id' => $transaction->id,
                 'date' => $transaction->date->format('d-m-Y'),
@@ -302,7 +302,7 @@ class TransactionController extends Controller
                 'debit_amount' => $transaction->debit_amount,
                 'closing_balance' => $transaction->closing_balance,
                 'note' => $transaction->note,
-                'invoice' => $transaction->invoice ? \Storage::url($transaction->invoice) : null
+                'invoice' => $transaction->invoice ? \Storage::url($transaction->invoice) : null,
             ];
         });
 

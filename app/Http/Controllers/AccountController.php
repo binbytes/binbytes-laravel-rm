@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Gate;
 use App\User;
-use App\Account;
 use App\Client;
+use App\Account;
 use App\Project;
 use App\Transaction;
 use App\TransactionType;
