@@ -25,7 +25,6 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
      */
     public function model(array $row)
     {
-        //dd($row);
         if (! method_exists($this, $this->account->bank_name)) {
             return;
         }

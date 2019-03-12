@@ -3,10 +3,11 @@
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
-class TransactionExport implements FromCollection, WithHeadings
+class TransactionExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     use Exportable;
 
@@ -20,14 +21,15 @@ class TransactionExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            '#',
+            'ID',
             'Date',
-            'description',
-            'reference',
-            'credit_amount',
-            'debit_amount',
-            'closing_balance',
-            'note'
+            'Description',
+            'Reference',
+            'Credit Amount',
+            'Debit Amount',
+            'Closing Balance',
+            'Note',
+            'Invoice',
         ];
     }
 
@@ -36,7 +38,6 @@ class TransactionExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-
         return $this->transactions;
     }
 }

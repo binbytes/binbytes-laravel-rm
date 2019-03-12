@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\TransactionExport;
 use Gate;
 use App\Account;
 use App\Transaction;
 use App\TransactionType;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use App\Exports\TransactionExport;
 use App\Imports\TransactionImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -290,10 +290,10 @@ class TransactionController extends Controller
             $query->withoutInvoice();
         }
 
-        $transactions = $query->select('id', 'date', 'description', 'reference', 'credit_amount', 'debit_amount', 'closing_balance', 'note')
+        $transactions = $query->select('id', 'date', 'description', 'reference', 'credit_amount', 'debit_amount', 'closing_balance', 'note', 'invoice')
                         ->get();
 
-        return (new TransactionExport($transactions))->download('invoices.xlsx');
+        return (new TransactionExport($transactions))->download('invoices.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     /**
