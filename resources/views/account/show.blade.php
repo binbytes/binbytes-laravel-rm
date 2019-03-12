@@ -111,7 +111,7 @@
         </div>
 
         <transaction-show></transaction-show>
-        <transaction-edit></transaction-edit>
+        <transaction-edit :users="{{ $users }}" :clients="{{ $clients }}" :projects="{{ $projects }}"></transaction-edit>
     </div>
 @endsection
 

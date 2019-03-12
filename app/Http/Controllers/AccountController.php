@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Gate;
 use App\User;
 use App\Account;
+use App\Client;
+use App\Project;
 use App\Transaction;
 use App\TransactionType;
 use Yajra\Datatables\Datatables;
@@ -194,7 +196,13 @@ class AccountController extends Controller
                 ->make(true);
         }
 
-        return view('account.show', compact('account'));
+        $users = User::pluck('username', 'id');
+
+        $clients = Client::pluck('name', 'id');
+
+        $projects = Project::pluck('title', 'id');
+
+        return view('account.show', compact('account', 'users', 'clients', 'projects'));
     }
 
     /**
@@ -261,9 +269,12 @@ class AccountController extends Controller
 
         $transactionTypes = TransactionType::all();
 
+        $transactionalTypes = config('rm.target_models');
+
         return response()->json([
             'accounts' => $accounts,
             'transactionTypes' => $transactionTypes,
+            'transactionalTypes' => $transactionalTypes,
         ]);
     }
 }

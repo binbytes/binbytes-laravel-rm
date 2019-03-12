@@ -10,7 +10,8 @@
                 <d-modal-body class="pb-0">
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <d-form-select v-model="form.account_id" name="account_id"
+                            <d-form-select v-model="form.account_id"
+                                           name="account_id"
                                            :options="accounts"
                                            :class="{ 'is-invalid': form.errors.has('account_id') }" />
                             <span class="invalid-feedback text-left" v-if="form.errors.has('account_id')">
@@ -85,7 +86,8 @@
                                     :options="filterTransactionType"
                                     value-field="id"
                                     text-field="title"
-                                    :class="{ 'is-invalid': form.errors.has('type') }" />
+                                    :class="{ 'is-invalid': form.errors.has('type') }"
+                                    @change="changeType" />
                             <span class="invalid-feedback text-left" v-if="form.errors.has('type')">
                                 <strong v-html="form.errors.first('type')"></strong>
                             </span>
@@ -97,6 +99,29 @@
                             <textarea v-model="form.note" name="note" placeholder="Note" class="form-control" :class="{ 'is-invalid': form.errors.has('note') }"></textarea>
                             <span class="invalid-feedback text-left" v-if="form.errors.has('note')">
                                 <strong v-html="form.errors.first('note')"></strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <d-form-select
+                                v-model="form.transactional_type"
+                                name="transactional_type"
+                                :options="transactionalTypes"
+                                :class="{ 'is-invalid': form.errors.has('transactional_type') }" />
+                            <span class="invalid-feedback text-left" v-if="form.errors.has('transactional_type')">
+                                <strong v-html="form.errors.first('transactional_type')"></strong>
+                            </span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <d-form-select
+                                    v-model="form.transactional_id"
+                                    name="transactional_id"
+                                    :options="filterTransactionalId"
+                                    :class="{ 'is-invalid': form.errors.has('transactional_id') }" />
+                            <span class="invalid-feedback text-left" v-if="form.errors.has('transactional_id')">
+                                <strong v-html="form.errors.first('transactional_id')"></strong>
                             </span>
                         </div>
                     </div>
@@ -120,6 +145,9 @@
     import Form from 'form-backend-validation'
 
     export default {
+        props: [
+            'clients', 'users', 'projects'
+        ],
         data() {
             return {
                 id: null,
@@ -128,6 +156,7 @@
                 isProcessing: false,
                 showModal: false,
                 form: null,
+                transactionalTypes: []
             }
         },
         watch: {
@@ -147,6 +176,20 @@
                 }
 
                 return types;
+            },
+
+            filterTransactionalId() {
+                let data = null;
+
+                if(this.form.transactional_type === '\\App\\User') {
+                    data = this.users;
+                } else if(this.form.transactional_type === '\\App\\Client') {
+                    data = this.clients;
+                } else {
+                    data = this.projects
+                }
+
+                return data;
             }
         },
         mounted() {
@@ -162,6 +205,7 @@
                 axios.get('/api-accounts').then(res => {
                     this.accounts = res.data.accounts
                     this.transactionTypes = res.data.transactionTypes
+                    this.transactionalTypes = res.data.transactionalTypes
                 })
             },
             fetchTransaction() {
@@ -180,6 +224,8 @@
                             note: transaction.note,
                             invoice: '',
                             type: transaction.type,
+                            transactional_type: transaction.transactional_type,
+                            transactional_id: transaction.transactional_id,
                             _method: 'PUT'
                         })
                         this.showModal = true
@@ -199,6 +245,14 @@
             handleClose() {
                 this.showModal = false
                 this.id = null
+            },
+            changeType(id) {
+                let transation = this.transactionTypes.find(x => x.id === id)
+
+                $.each(this.transactionalTypes, (key) => {
+                    if(key === transation.model_name)
+                        this.form.transactional_type = key
+                });
             }
         }
     }

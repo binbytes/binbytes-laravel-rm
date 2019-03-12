@@ -12,7 +12,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'account_id', 'sequence_number', 'date', 'description', 'reference', 'credit_amount', 'debit_amount',
-        'closing_balance', 'type', 'note', 'invoice',
+        'closing_balance', 'type', 'note', 'invoice', 'transactional_type', 'transactional_id'
     ];
 
     protected $casts = [
