@@ -10,7 +10,7 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex">
                         {{ html()->form('POST', route('transaction-export'))
                                     ->acceptsFiles()
                                     ->open() }}
@@ -27,7 +27,7 @@
                                 {{ html()->text('year')
                                         ->id('year')
                                         ->placeholder('Year')
-                                        ->class('form-control mr-2')
+                                        ->class('form-control col-1 mr-1')
                                 }}
                                 <input id="filter-year" type="hidden" value="">
                                 <input id="filter-date" type="hidden" value="{{ today()->format('m-Y') }}">
@@ -40,14 +40,14 @@
                                 }}
                                 {{ html()->select('operator')
                                         ->id('operator')
-                                        ->class('form-control mr-2')
+                                        ->class('form-control mr-sm-1')
                                         ->options(['>' => '>', '<' => '<', '=' => '=',  '<=' => '<=', '>=' => '>='])
                                         ->value('')
                                 }}
                                 {{ html()->text('amount')
                                         ->id('amount')
                                         ->placeholder('Amount')
-                                        ->class('form-control mr-2')
+                                        ->class('form-control mr-1')
                                         ->value('')
                                 }}
 
@@ -57,11 +57,39 @@
                                         ->options(['all' => 'All', 'with_invoice' => 'With Invoice', 'without_invoice' => 'Without Invoice'])
                                         ->value('all')
                                 }}
-                                <button id="btn-filter" class="btn btn-primary">Go</button>
 
-                                {{ html()->button('Export Transaction')
+                                {{ html()->select('user')
+                                        ->id('user')
+                                        ->class('form-control mr-1')
+                                        ->placeholder('Select User')
+                                        ->options($users)
+                                        ->value('')
+                                }}
+
+                                {{ html()->select('client')
+                                        ->id('client')
+                                        ->class('form-control mr-1')
+                                        ->placeholder('Select Client')
+                                        ->options($clients)
+                                        ->value('')
+                                }}
+
+                                {{ html()->select('project')
+                                        ->id('project')
+                                        ->class('form-control mr-sm-1')
+                                        ->placeholder('Select Project')
+                                        ->options($projects)
+                                        ->value('')
+                                }}
+
+                                <input id="model-type" type="hidden" value="">
+                                <input id="model-id" type="hidden" value="">
+
+                                <button id="btn-filter" class="btn btn-primary px-3">Go</button>
+
+                                {{ html()->button('Export')
                                          ->id('export')
-                                        ->class('btn btn-primary ml-5')
+                                        ->class('btn btn-primary px-3 ml-1')
                                 }}
                             </div>
                         {{ html()->form()->close() }}
@@ -133,6 +161,8 @@
                         d.operator = $('#operator').val()
                         d.amount_value = $('#amount').val()
                         d.invoice =$('#invoice').val()
+                        d.model_type = $('#model-type').val()
+                        d.model_id = $('#model-id').val()
                     }
                 },
                 columns: [
@@ -168,6 +198,21 @@
                 }
             })
 
+            $('#user').change(function () {
+                $('#model-type').attr('value', '\\App\\User')
+                $('#model-id').attr('value', $('#user').val())
+            })
+
+            $('#client').change(function () {
+                $('#model-type').attr('value', '\\App\\Client')
+                $('#model-id').attr('value', $('#client').val())
+            })
+
+            $('#project').change(function () {
+                $('#model-type').attr('value', '\\App\\Project')
+                $('#model-id').attr('value', $('#project').val())
+            })
+
             $('#btn-filter').click(function(e){
                 e.preventDefault();
                 let month = $('#month').val()
@@ -185,7 +230,7 @@
 
             $('.delete-all').click(function () {
                 let ids = []
-                $.each($(".chk-transaction:checked"), function(){
+                $.each($(".chk-transaction:checked"), function() {
                     ids.push($(this).val());
                 });
 

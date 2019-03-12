@@ -147,6 +147,11 @@ class AccountController extends Controller
                 $query->withoutInvoice();
             }
 
+            if(\request('model_type') && \request('model_id')) {
+                $query->where('transactional_type', \request('model_type'))
+                    ->Where('transactional_id', \request('model_id'));
+            }
+
             return Datatables::of($query)
                 ->addColumn('select', function (Transaction $transaction) {
                     return "<input type='checkbox' class='chk-transaction' value='".$transaction->id."'>";
