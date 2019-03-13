@@ -12,7 +12,8 @@
                     <option v-for="(client, id) in clients"
                             :value="id"
                             :key="id"
-                            v-text="client">
+                            v-text="client"
+                            @change="updateFilter(client.id)">
                     </option>
                 </select>
 
@@ -21,7 +22,8 @@
                     <option v-for="(user, id) in users"
                             :value="id"
                             :key="id"
-                            v-text="user">
+                            v-text="user"
+                            @change="updateFilter(user.id)">
                     </option>
                 </select>
             </div>
