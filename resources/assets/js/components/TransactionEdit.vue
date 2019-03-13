@@ -138,16 +138,17 @@
                             <label class="small mb-0">Invoice</label>
                             <input ref="input_invoice" name="invoice" @change="handleInvoice" class="d-none" type="file">
 
-                            <button type="button" class="form-control col-3" @click="selectImage" :class="{ 'is-invalid': form.errors.has('invoice') }">
+                            <button type="button" class="form-control d-flex" @click="selectImage" :class="{ 'is-invalid': form.errors.has('invoice') }">
                                 <i class="fas fa-file-upload fa-2x"></i>
+                                <span class="flex-grow-1 text-truncate" v-text="form.invoice.name"></span>
                             </button>
                         </div>
                     </div>
 
                 </d-modal-body>
                 <d-modal-footer>
-                    <input name="_method" type="hidden" v-model="form._method" value="PUT">
-                    <button type="submit" class="btn btn-primary" :disabled="isProcessing">Save</button>
+                    <input name="_method" type="hidden" v-model="form._method" class="d-none" value="PUT">
+                    <button type="submit" id="edit-data" class="btn btn-primary" :disabled="isProcessing">Save</button>
                     <button type="reset" @click="handleClose" class="btn btn-link" :disabled="isProcessing">Cancel</button>
                 </d-modal-footer>
             </d-form>
@@ -213,9 +214,12 @@
             changeValue(val) {
                 this.id = val.target.value
             },
-            handleInvoice($event) {
-                if($event.target.files) {
-                    this.form.invoice = $event.target.files[0]
+            selectImage() {
+                this.$refs['input_invoice'].click()
+            },
+            handleInvoice(event) {
+                if(event.target.files) {
+                    this.form.invoice = event.target.files[0]
                 }
             },
             fetchInitialData() {
@@ -250,9 +254,6 @@
                         this.showModal = true
                     })
             },
-            selectImage() {
-                this.$refs['input_invoice'].click()
-            },
             handleOnSubmit(e) {
                 e.preventDefault();
                 this.isProcessing = true
@@ -261,6 +262,7 @@
                     this.isProcessing = false
                     this.showModal = false
                     this.id = null
+                    //window.location.reload()
                 }).catch(() => {
                     this.isProcessing = false
                 })

@@ -244,9 +244,11 @@
                 })
             })
 
-            // $('#transaction-edit-id').change(function () {
-            //     dt.draw()
-            // })
+            $(document).on('click', '#edit-data', function() {
+                setTimeout(() => {
+                    dt.draw()
+                }, 500)
+            })
 
             @include('shared.dtDeleteScript', [
                 'dtTable' => 'transaction-table',
