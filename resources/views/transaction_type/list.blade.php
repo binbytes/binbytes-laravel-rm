@@ -24,7 +24,6 @@
                                 <th>Title</th>
                                 <th>Transaction Type</th>
                                 <th>Parent Id</th>
-                                <th>Model Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,7 +47,6 @@
                     { data: 'title', name: 'title' },
                     { data: 'transaction_type', name: 'transaction_type' },
                     { data: 'parent_id', name: 'parent_id' },
-                    { data: 'model_name', name: 'model_name' },
                     { data: 'action', name: 'action', sortable: false },
                 ]
             });

@@ -37,36 +37,36 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 <h6>Bank Name</h6>
                             </div>
-                            <div class="col-lg-7">
+                            <div class="col-lg-8">
                                 <span class="text-muted">{{ $account->bank_name }}</span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 <h6>Account Number</h6>
                             </div>
-                            <div class="col-lg-7">
+                            <div class="col-lg-8">
                                 <span class="text-muted">{{ $account->account_number }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <h6>Branch</h6>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <span class="text-muted">{{ $account->branch_of }}</span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <h6>IFSC Code</h6>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <span class="text-muted">{{ $account->ifsc_code }}</span>
                             </div>
                         </div>

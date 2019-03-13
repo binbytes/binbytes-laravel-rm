@@ -225,7 +225,7 @@
             fetchTransaction() {
                 axios.get('/transactions/' + this.id)
                     .then(res => {
-                        let transaction = res.data
+                        let transaction = res.data.transaction
                         this.form = new Form({
                             account_id: transaction.account_id,
                             sequence_number: transaction.sequence_number,

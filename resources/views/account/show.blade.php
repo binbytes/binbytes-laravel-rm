@@ -47,7 +47,7 @@
                                 {{ html()->text('amount')
                                         ->id('amount')
                                         ->placeholder('Amount')
-                                        ->class('form-control mr-1')
+                                        ->class('form-control col-1 mr-1')
                                         ->value('')
                                 }}
 

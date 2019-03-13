@@ -136,10 +136,37 @@ class TransactionController extends Controller
      * @param Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show($transaction)
     {
+        $transaction = Transaction::with('transactionType')->find($transaction);
+
+        $transactional = [];
+
+        if($transaction->transactional_type) {
+            foreach (config('rm.target_models') as $key => $value) {
+                if($transaction->transactional_type == $key) {
+                    $type = $value;
+                    $person = $key::find($transaction->transactional_id);
+
+                    if ($type == 'Project') {
+                        $transactionalPerson = $person->title;
+                    } else {
+                        $transactionalPerson = $person->name;
+                    }
+
+                    $transactional = [
+                        'type' => $type,
+                        'person' => $transactionalPerson
+                    ];
+                }
+            }
+        }
+
         if (\request()->ajax()) {
-            return response()->json($transaction);
+            return response()->json([
+                'transaction' => $transaction,
+                'transactionalTypes' => $transactional,
+            ]);
         }
 
         return view('transaction.show', compact('transaction'));
