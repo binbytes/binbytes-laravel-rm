@@ -52,18 +52,16 @@ class SalaryController extends Controller
         $usersIds = $request->users;
 
         User::whereIn('id', $usersIds)->get()->each(function ($user) {
-            $pf = 200;
-            $tds = 200;
+            $tds = $user->tds_amount ? (int)$user->tds_amount : 0 ;
+            $pf = $user->professional_tax_amount ? (int)$user->professional_tax_amount : 0;
 
-            $deduction = $tds + $pf;
-            $paidSalary = (($user->base_salary) - $deduction);
             $data = [
                 'user_id' => $user->id,
                 'base_salary' => $user->base_salary,
                 'paid_for' => today(),
                 'pf' => $pf,
                 'tds' => $tds,
-                'paid_amount' => $paidSalary,
+                'paid_amount' => (((int)$user->base_salary) - ( $tds + $pf)),
                 'payment_method' => request('payment_method'),
             ];
 
@@ -118,23 +116,24 @@ class SalaryController extends Controller
      * Update the specified resource in storage.
      *
      * @param SalaryRequest $request
-     * @param  int $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function update(SalaryRequest $request, $id)
     {
-        $pf = 200;
-        $tds = 200;
+        $user = User::findOrFail($id);
+
+        $tds = $user->tds_amount ? (int)$user->tds_amount : 0 ;
+        $pf = $user->professional_tax_amount ? (int)$user->professional_tax_amount : 0;
+
         $deduction = $tds + $pf + request('penalty');
 
         $paidSalary = (request('base_salary') - $deduction);
 
-        $paidSalary = ($paidSalary + request('bonus'));
-
         $data = [
-            'user_id' => $id,
+            'user_id' => $user->id,
             'base_salary' => request('base_salary'),
-            'paid_amount' => $paidSalary,
+            'paid_amount' => ($paidSalary + request('bonus')),
             'paid_for' => today(),
             'pf' => $pf,
             'tds' => $tds,

@@ -116,7 +116,7 @@
                                 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                                 ?>
                                 <p>
-                                    Inwords : {{strtoupper($f->format($salary->paid_amount))}} ONLY(All Amount Is In <i class="fas fa-rupee-sign"></i>)
+                                    Inwords : {{strtoupper($f->format($salary->paid_amount))}} ONLY(All Amount Is In ₹)
                                 </p>
                             </td>
                         </tr>

@@ -25,7 +25,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'middle_name', 'username', 'email', 'personal_email', 'password', 'dob', 'avatar',
         'address', 'designation', 'about', 'mobile_no', 'skype', 'trello', 'slack', 'github', 'twitter', 'linkedin',
         'weekly_hours_credit', 'base_salary', 'joining_date', 'leaving_date', 'is_active', 'use_icon_sidebar',
-        'exclude_from_salary', 'exclude_from_attendance', 'role', 'remarks',
+        'exclude_from_salary', 'exclude_from_attendance', 'role', 'remarks', 'tds_amount', 'professional_tax_amount',
     ];
 
     public function getNameAttribute()

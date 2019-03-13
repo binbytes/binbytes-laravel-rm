@@ -41,7 +41,7 @@
                                 {{ html()->select('operator')
                                         ->id('operator')
                                         ->class('form-control mr-sm-1')
-                                        ->options(['>' => '>', '<' => '<', '=' => '=',  '<=' => '<=', '>=' => '>='])
+                                        ->options(['=' => '=', '>=' => '>=', '>' => '>', '<=' => '<=', '<' => '<'])
                                         ->value('')
                                 }}
                                 {{ html()->text('amount')
@@ -94,8 +94,9 @@
                             </div>
                         {{ html()->form()->close() }}
                     </div>
-                    @can('importTransactions', $account)
-                        <div class="d-flex justify-content-between pt-3">
+
+                    <div class="d-flex justify-content-between pt-3">
+                        @can('importTransactions', $account)
                             <div class="form-inline">
                                 {{ html()->form('POST', route('transaction-import', $account->id))
                                         ->acceptsFiles()
@@ -114,9 +115,13 @@
                                 }}
                                 {{ html()->form()->close() }}
                             </div>
+                        @endcan
+
+                        @can('deleteAll', $account)
                             <button class="btn btn-primary delete-all">Delete All</button>
-                        </div>
-                    @endcan
+                        @endcan
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered p-0 text-center" id="transaction-table">
@@ -226,18 +231,22 @@
 
             $('#transaction-table').on('click', '.select-all', function () {
                 $('.chk-transaction').attr('checked', this.checked);
-            });
+            })
 
             $('.delete-all').click(function () {
                 let ids = []
                 $.each($(".chk-transaction:checked"), function() {
                     ids.push($(this).val());
-                });
+                })
 
                 axios.delete('/delete-selected-transaction', { data: { ids: ids } }).then(() => {
                     dt.draw()
                 })
             })
+
+            // $('#transaction-edit-id').change(function () {
+            //     dt.draw()
+            // })
 
             @include('shared.dtDeleteScript', [
                 'dtTable' => 'transaction-table',

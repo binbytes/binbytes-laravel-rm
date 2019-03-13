@@ -395,6 +395,36 @@
 </div>
 
 <div class="form-group row">
+    <div class="col-md-6">
+        {{ html()->text('tds_amount')
+                ->placeholder('TDS Amount')
+                ->type('number')
+                ->class(['form-control', 'is-invalid' => $errors->has('tds_amount')])
+        }}
+
+        @if ($errors->has('tds_amount'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('tds_amount') }}</strong>
+            </span>
+        @endif
+    </div>
+
+    <div class="col-md-6">
+        {{ html()->text('professional_tax_amount')
+                ->placeholder('Professional Tax Amount')
+                ->type('number')
+                ->class(['form-control', 'is-invalid' => $errors->has('professional_tax_amount')])
+        }}
+
+        @if ($errors->has('professional_tax_amount'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('professional_tax_amount') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row">
     <div class="col-md-3">
         {{ html()->select('role')
                 ->placeholder('Select Role')

@@ -1,6 +1,6 @@
 <template>
     <div class="mb-4">
-        <input id="transaction-edit-id" class="d-none" v-model="id"/>
+        <input type="hidden" id="transaction-edit-id" class="d-none" :value="id" @input="event => id = event.target.value" />
 
         <d-modal v-if="showModal" size="lg" @close="handleClose">
             <d-modal-header>
@@ -210,6 +210,9 @@
             this.fetchInitialData()
         },
         methods: {
+            changeValue(val) {
+                this.id = val.target.value
+            },
             handleInvoice($event) {
                 if($event.target.files) {
                     this.form.invoice = $event.target.files[0]
@@ -223,6 +226,8 @@
                 })
             },
             fetchTransaction() {
+                if(!this.id) return;
+
                 axios.get('/transactions/' + this.id)
                     .then(res => {
                         let transaction = res.data.transaction
@@ -255,6 +260,7 @@
                 this.form.post(`/transactions/${this.id}`).then(response => {
                     this.isProcessing = false
                     this.showModal = false
+                    this.id = null
                 }).catch(() => {
                     this.isProcessing = false
                 })

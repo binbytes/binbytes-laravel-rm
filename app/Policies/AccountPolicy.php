@@ -102,4 +102,14 @@ class AccountPolicy
     {
         return $user->isAccountant() || $user->id === $account->user_id;
     }
+
+    /**
+     * @param User $user
+     * @param Account $account
+     * @return bool
+     */
+    public function deleteAll(User $user, Account $account)
+    {
+        return $user->isAdmin() || $user->id === $account->user_id;
+    }
 }

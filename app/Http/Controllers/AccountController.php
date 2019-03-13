@@ -119,7 +119,7 @@ class AccountController extends Controller
             }
 
             $amountValue = request('amount_value', 0);
-            $operator = request('operator', '>');
+            $operator = request('operator', '=');
             $filterType = request('filter_type');
 
             if (in_array($filterType, [
@@ -201,7 +201,8 @@ class AccountController extends Controller
                 ->make(true);
         }
 
-        $users = User::pluck('username', 'id');
+        $users = User::where('exclude_from_salary', false)
+                    ->pluck('username', 'id');
 
         $clients = Client::pluck('name', 'id');
 

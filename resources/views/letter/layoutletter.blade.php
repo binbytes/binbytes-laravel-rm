@@ -36,6 +36,10 @@
             min-width: 100%;
         }
 
+        hr {
+            border-top: 1px solid #bcbfc1;
+        }
+
         .header .logo {
             width: 150px;
             text-align: center;
@@ -51,7 +55,7 @@
         }
 
         .table-borderless {
-            margin: -10px 0 !important;
+            margin: -6px 0 !important;
         }
 
         .info td {
@@ -80,7 +84,7 @@
             color: black;
         }
 
-        .letter td p {
+        .letter td, .letter p {
             margin-bottom: 8px;
         }
 
