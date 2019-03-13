@@ -139,8 +139,8 @@
                             <input ref="input_invoice" name="invoice" @change="handleInvoice" class="d-none" type="file">
 
                             <button type="button" class="form-control d-flex" @click="selectImage" :class="{ 'is-invalid': form.errors.has('invoice') }">
-                                <i class="fas fa-file-upload fa-2x"></i>
-                                <span class="flex-grow-1 text-truncate" v-text="form.invoice.name"></span>
+                                <i class="fas fa-file-upload fa-2x mr-1"></i>
+                                <span class="flex-grow-1 text-warp" v-text="form.invoice.name"></span>
                             </button>
                         </div>
                     </div>
