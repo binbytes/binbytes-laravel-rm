@@ -196,12 +196,12 @@
             filterTransactionalId() {
                 let data = null;
 
-                if(this.form.transactional_type === '\\App\\User') {
-                    data = this.users;
-                } else if(this.form.transactional_type === '\\App\\Client') {
-                    data = this.clients;
-                } else {
+                if(this.form.transactional_type === '\\App\\Project') {
                     data = this.projects
+                } else if(this.form.transactional_type === '\\App\\Client') {
+                    data = this.clients
+                } else {
+                    data = this.users
                 }
 
                 return data;
@@ -262,7 +262,6 @@
                     this.isProcessing = false
                     this.showModal = false
                     this.id = null
-                    //window.location.reload()
                 }).catch(() => {
                     this.isProcessing = false
                 })
@@ -272,10 +271,10 @@
                 this.id = null
             },
             changeType(id) {
-                let transation = this.transactionTypes.find(x => x.id === id)
+                let transaction = this.transactionTypes.find(x => x.id === id)
 
                 $.each(this.transactionalTypes, (key) => {
-                    if(key === transation.model_name)
+                    if(key === transaction.model_name)
                         this.form.transactional_type = key
                 });
             }

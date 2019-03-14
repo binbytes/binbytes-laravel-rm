@@ -66,13 +66,15 @@
                                         ->value('')
                                 }}
 
-                                {{ html()->select('client')
-                                        ->id('client')
-                                        ->class('form-control mr-1')
-                                        ->placeholder('Select Client')
-                                        ->options($clients)
-                                        ->value('')
-                                }}
+                                @can('view', \App\Client::class)
+                                    {{ html()->select('client')
+                                            ->id('client')
+                                            ->class('form-control mr-1')
+                                            ->placeholder('Select Client')
+                                            ->options($clients)
+                                            ->value('')
+                                    }}
+                                @endcan
 
                                 {{ html()->select('project')
                                         ->id('project')

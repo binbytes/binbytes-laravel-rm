@@ -9,6 +9,7 @@ use App\Account;
 use App\Project;
 use App\Transaction;
 use App\TransactionType;
+use Illuminate\Support\Arr;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\AccountRequest;
 
@@ -275,7 +276,14 @@ class AccountController extends Controller
 
         $transactionTypes = TransactionType::all();
 
-        $transactionalTypes = config('rm.target_models');
+        $types = config('rm.target_models');
+
+        if (Gate::allows('view', Client::class)) {
+            $transactionalTypes = $types;
+        } else {
+            $transactionalTypes = Arr::except($types, ['\App\Client']);
+        }
+
 
         return response()->json([
             'accounts' => $accounts,
