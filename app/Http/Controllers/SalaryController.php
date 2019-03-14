@@ -123,7 +123,7 @@ class SalaryController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $tds = $user->tds_amount ? (int) $user->tds_amount : 0 ;
+        $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
         $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
 
         $deduction = $tds + $pf + request('penalty');

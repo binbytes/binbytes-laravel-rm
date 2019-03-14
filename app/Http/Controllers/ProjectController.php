@@ -210,7 +210,7 @@ class ProjectController extends Controller
         }
 
         if ($filterUser = \request('user')) {
-            $query = $query->whereHas('users', function($q) use ($filterUser) {
+            $query = $query->whereHas('users', function ($q) use ($filterUser) {
                 $q->where('user_id', $filterUser);
             });
         }
