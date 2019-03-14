@@ -52,8 +52,8 @@ class SalaryController extends Controller
         $usersIds = $request->users;
 
         User::whereIn('id', $usersIds)->get()->each(function ($user) {
-            $tds = $user->tds_amount ? (int)$user->tds_amount : 0 ;
-            $pf = $user->professional_tax_amount ? (int)$user->professional_tax_amount : 0;
+            $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
+            $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
 
             $data = [
                 'user_id' => $user->id,
@@ -61,7 +61,7 @@ class SalaryController extends Controller
                 'paid_for' => today(),
                 'pf' => $pf,
                 'tds' => $tds,
-                'paid_amount' => (((int)$user->base_salary) - ( $tds + $pf)),
+                'paid_amount' => (((int) $user->base_salary) - ($tds + $pf)),
                 'payment_method' => request('payment_method'),
             ];
 
@@ -123,8 +123,8 @@ class SalaryController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $tds = $user->tds_amount ? (int)$user->tds_amount : 0 ;
-        $pf = $user->professional_tax_amount ? (int)$user->professional_tax_amount : 0;
+        $tds = $user->tds_amount ? (int) $user->tds_amount : 0 ;
+        $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
 
         $deduction = $tds + $pf + request('penalty');
 

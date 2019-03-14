@@ -142,9 +142,9 @@ class TransactionController extends Controller
 
         $transactional = [];
 
-        if($transaction->transactional_type) {
+        if ($transaction->transactional_type) {
             foreach (config('rm.target_models') as $key => $value) {
-                if($transaction->transactional_type == $key) {
+                if ($transaction->transactional_type == $key) {
                     $type = $value;
                     $person = $key::find($transaction->transactional_id);
 
@@ -156,7 +156,7 @@ class TransactionController extends Controller
 
                     $transactional = [
                         'type' => $type,
-                        'person' => $transactionalPerson
+                        'person' => $transactionalPerson,
                     ];
                 }
             }

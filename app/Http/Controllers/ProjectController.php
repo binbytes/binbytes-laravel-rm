@@ -209,7 +209,7 @@ class ProjectController extends Controller
             $query = $query->where('client_id', $filterClient);
         }
 
-        if($filterUser = \request('user')) {
+        if ($filterUser = \request('user')) {
             $query = $query->whereHas('users', function($q) use ($filterUser) {
                 $q->where('user_id', $filterUser);
             });

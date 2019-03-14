@@ -148,7 +148,7 @@ class AccountController extends Controller
                 $query->withoutInvoice();
             }
 
-            if(\request('model_type') && \request('model_id')) {
+            if (\request('model_type') && \request('model_id')) {
                 $query->where('transactional_type', \request('model_type'))
                     ->Where('transactional_id', \request('model_id'));
             }
@@ -283,7 +283,6 @@ class AccountController extends Controller
         } else {
             $transactionalTypes = Arr::except($types, ['\App\Client']);
         }
-
 
         return response()->json([
             'accounts' => $accounts,
