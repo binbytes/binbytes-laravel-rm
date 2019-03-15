@@ -156,7 +156,8 @@
             let dt = $('#transaction-table').DataTable({
                 processing: true,
                 serverSide: true,
-                pageLength: 100,
+                lengthMenu: [[10, 25, 50, 100, 150], [10, 25, 50, 100, 150]],
+                pageLength: 150,
                 order: [ [1, 'desc'] ],
                 'ajax': {
                     'url': '{!! route('accounts.show', $account) !!}',
