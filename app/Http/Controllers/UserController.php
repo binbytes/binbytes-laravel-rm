@@ -177,18 +177,9 @@ class UserController extends Controller
 
         $tags = $data['tag'] = explode(',', $request->get('tag'));
 
-        if ($request->has('is_active')) {
-            $data['is_active'] = $request->has('is_active');
-        }
-
-        if ($request->has('exclude_from_salary')) {
-            $data['exclude_from_salary'] = $request->has('exclude_from_salary');
-        }
-
-        if ($request->has('exclude_from_attendance')) {
-            $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
-        }
-
+        $data['is_active'] = $request->has('is_active');
+        $data['exclude_from_salary'] = $request->has('exclude_from_salary');
+        $data['exclude_from_attendance'] = $request->has('exclude_from_attendance');
         $data['use_icon_sidebar'] = $request->has('use_icon_sidebar');
 
         $user->fill($data)->save();
