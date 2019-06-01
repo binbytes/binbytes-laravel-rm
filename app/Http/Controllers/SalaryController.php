@@ -232,7 +232,7 @@ class SalaryController extends Controller
 
         $pdf = \PDF::loadView('letter.paidSalary', [
             'salaries' => $salaries,
-            'date' => $date
+            'date' => $date,
         ]);
 
         return $pdf->download($date.'.pdf');
