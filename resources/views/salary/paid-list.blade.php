@@ -22,6 +22,7 @@
                                         ->value(old('month', isset($year) ? $year : []))
                                 }}
                                 <a id="btn-filter" href="" class="btn btn-primary">Go</a>
+                                <a id="btn-download" href="" class="btn btn-primary ml-2">Download</a>
                             </div>
                             <div class="ml-auto mr-3">
                                 <h4 class="mb-0"><span class="badge badge-secondary">{{ $date }}</span></h4>
@@ -84,6 +85,13 @@
                 let year = $('#year').val()
 
                 $('#btn-filter').attr('href', "/salaries/filter/" + month + "/" + year)
+            });
+
+            $('#btn-download').click(function(){
+                let month = $('#month').val()
+                let year = $('#year').val()
+
+                $('#btn-download').attr('href', "/paid_salary/download/" + month + "/" + year)
             })
         })
     </script>

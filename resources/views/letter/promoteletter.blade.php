@@ -3,7 +3,7 @@
 @section('data')
     <tr>
         <td class="heading">
-            <h3 class="center py-4"><u>PROMOTE LETTER</u></h3>
+            <h3 class="center py-4">PROMOTE LETTER</h3>
         </td>
     </tr>
     <tr>

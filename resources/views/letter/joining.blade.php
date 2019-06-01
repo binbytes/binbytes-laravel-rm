@@ -3,7 +3,7 @@
 @section('data')
     <tr>
         <td class="heading">
-            <h3 class="center py-4"><u>JOINING LETTER</u></h3>
+            <h3 class="center py-4">JOINING LETTER</h3>
         </td>
     </tr>
     <tr>

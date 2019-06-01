@@ -137,7 +137,7 @@
         </td>
         <td class="footer-text">
             <h5>Office No - 213, Nakshatra 7, Raiya Road, Rajkot-360005, Gujarat, India.</h5>
-            <h5>info@binbytes.com - Website : www.BinBytes.com</h5>
+            <h5>info@binbytes.com - Website : www.binbytes.com</h5>
             <h5>Phone : (+91) 75670 72070 / (+91) 90330 90059</h5>
         </td>
     </tr>

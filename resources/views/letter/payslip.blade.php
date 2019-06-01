@@ -3,7 +3,7 @@
 @section('data')
     <tr>
         <th colspan="2" class="heading">
-            <h3 class="center py-4"><u>Payslip for the month of {{ date('F Y', strtotime($salary->paid_for)) }}</u></h3>
+            <h3 class="center py-4">>Payslip for the month of {{ date('F Y', strtotime($salary->paid_for)) }}</h3>
         </th>
     </tr>
     <tr>

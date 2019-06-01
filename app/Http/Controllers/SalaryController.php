@@ -202,7 +202,7 @@ class SalaryController extends Controller
         return view('salary.list', compact('users'));
     }
 
-    public function download($id)
+    public function downloadPayslip($id)
     {
         $salary = Salary::with('user')->findOrFail($id);
 
@@ -218,5 +218,23 @@ class SalaryController extends Controller
         $salary = Salary::with('user')->findOrFail($id);
 
         return view('letter.payslip', compact('salary'));
+    }
+
+    public function downloadPaidSalary($month, $year)
+    {
+        $this->authorize('paidSalary', Salary::class);
+
+        $date = $month.'-'.$year;
+
+        $salaries = Salary::with('user')->whereMonth('paid_for', $date)->get();
+
+        $date = date('F-Y', mktime(0, 0, 0, $month + 1, 0, $year));
+
+        $pdf = \PDF::loadView('letter.paidSalary', [
+            'salaries' => $salaries,
+            'date' => $date
+        ]);
+
+        return $pdf->download($date.'.pdf');
     }
 }

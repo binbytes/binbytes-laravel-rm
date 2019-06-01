@@ -3,7 +3,7 @@
 @section('data')
     <tr>
         <td class="heading">
-            <h3 class="center py-4"><u>TO WHOM IT MAY CONCERN</u></h3>
+            <h3 class="center py-4">TO WHOM IT MAY CONCERN</h3>
         </td>
     </tr>
     <tr>
