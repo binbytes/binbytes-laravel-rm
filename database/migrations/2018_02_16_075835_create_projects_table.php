@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('description', 5000)->nullable();
             $table->unsignedInteger('client_id');
             $table->date('started_at');
-            $table->boolean('is_completed')->default();
+            $table->boolean('is_completed')->default(0);
             $table->string('slug')->unique();
             //
             $table->string('remarks', 3000)->nullable();

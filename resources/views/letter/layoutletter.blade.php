@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,89 +19,63 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial sans-serif;
-            background: white;
-            color: #777777;
-            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+            line-height: 160%;
+            mso-line-height-rule: exactly;
+            color: #434b4d;
+            width: 100%;
+            font-weight: 400 !important;
+        }
+
+        @media only screen and (max-width: 560px) {
+            body {
+                font-size: 14px !important;
+            }
+        }
+
+        b, th {
+            color: black;
+        }
+
+        body, table, td {
+            font-family: Open Sans, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+
+        table {
             width: 100%;
         }
 
-        table, tr, td, th {
-            padding: 6px 5px !important;
-            margin: 1px 0 !important;
+        td, th {
+            padding: .50rem !important;
         }
 
-        .main {
-            min-width: 100%;
+        .wrap {
+            width: 100%;
+            text-align: left;
         }
 
-        hr {
-            border-top: 1px solid #bcbfc1;
+        .box {
+            background: #ffffff;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .header .logo {
-            width: 150px;
-            text-align: center;
-        }
-
-        .header .header-text {
-            width: 400px;
-            text-align: center;
-        }
-
-        .header h5 {
-            margin-bottom: 5px;
-        }
-
-        .table-borderless {
-            margin: -6px 0 !important;
-        }
-
-        .info td {
-            width: 50%;
-            padding-bottom: 3px;
-        }
-
-        td .label {
-            width: 30%;
+        .box + .box {
+            margin-top: 24px;
         }
 
         .center {
             text-align: center;
         }
 
-        .heading, th {
-            color: black;
-        }
-
-        .title {
-            color: #2176bd;
-        }
-
-        .letter, .letter h6 {
-            font-size: 1.2em;
-            color: black;
-        }
-
-        .letter td, .letter p {
-            margin-bottom: 8px;
-        }
-
-        .footer .logo {
-            width: 100px;
-            text-align: center;
-        }
-
-        .footer .footer-text {
-            width: 1000px;
-            text-align: left;
-        }
-
-        .footer h5 {
-            margin-bottom: 5px;
+        .table-borderless {
+            margin: -6px 0 !important;
         }
 
         @media print {
@@ -107,40 +83,40 @@
                 border-style: hidden !important;
             }
         }
+
+        img {
+            vertical-align: top !important;
+        }
+
+        hr {
+            border-top: 1px solid rgba(17, 17, 17, 0.96);
+            margin-bottom: 2rem;
+        }
+
+        h6 {
+            color: #6c757d !important;
+            font-weight: 400 !important;
+        }
     </style>
 </head>
 <body>
-<table>
-    <tr class="header">
-        <td class="logo">
-            <img src="{{ url('images/logo.png') }}" alt="Logo" width="70">
-            <h5>BINBYTES</h5>
-        </td>
-        <td class="header-text">
-            <h5 class="title">BINBYTES</h5>
-            <h5>213, Nakshatra 7,</h5>
-            <h5>Raiya Road,</h5>
-            <h5>Rajkot - 360005</h5>
-        </td>
-    </tr>
-</table>
-<hr>
-<table class="main">
-    @yield('data')
-</table>
-<hr>
-<table>
-    <tr class="footer">
-        <td class="logo">
-            <img src="{{ url('images/logo.png') }}" alt="Logo" width="40">
-            <h5 class="heading">BinBytes</h5>
-        </td>
-        <td class="footer-text">
-            <h5>Office No - 213, Nakshatra 7, Raiya Road, Rajkot-360005, Gujarat, India.</h5>
-            <h5>info@binbytes.com - Website : www.binbytes.com</h5>
-            <h5>Phone : (+91) 75670 72070 / (+91) 90330 90059</h5>
-        </td>
-    </tr>
-</table>
+    <div class="main-content" align="center">
+        <div class="box">
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="center">
+                        <h4><img src="{{ url('images/logo.png') }}" alt="Logo" width="25"> BINBYTES</h4>
+                        <h6 class="mt-3">213, Nakshatra 7, Raiya Road, Rajkot-360005, Gujarat, India.</h6>
+                        <h6>info@binbytes.com - Website : www.binbytes.com</h6>
+                        <h6>Phone : (+91) 75670 72070 / (+91) 90330 90059</h6>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <table class="mt-5">
+                @yield('data')
+            </table>
+        </div>
+    </div>
 </body>
 </html>
