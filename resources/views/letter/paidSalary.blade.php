@@ -2,12 +2,12 @@
 
 @section('data')
     <tr>
-        <th class="heading">
+        <th class="p-3">
             <h3 class="center py-4">Paid salary for the {{ $date }}</h3>
         </th>
     </tr>
     <tr>
-        <td class="px-3 pb-4">
+        <td class="py-3">
             <table class="table table-bordered text-center">
                 <thead>
                 <tr>
