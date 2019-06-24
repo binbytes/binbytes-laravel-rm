@@ -3,7 +3,7 @@
 @section('data')
     <tr>
         <th class="p-3">
-            <h3 class="center py-4">Paid salary for the {{ $date }}</h3>
+            <h3 class="center pb-4">Paid salary for the {{ $date }}</h3>
         </th>
     </tr>
     <tr>

@@ -2,12 +2,12 @@
 
 @section('data')
     <tr>
-        <td>
-            <h3 class="center py-4">JOINING LETTER</h3>
+        <td class="p-3">
+            <h3 align="center" class="pb-4"><b>JOINING LETTER</b></h3>
         </td>
     </tr>
     <tr>
-        <td class="letter">
+        <td class="p-3">
             <h6><b>Date : </b>{{ now()->format('jS F, Y') }}</h6>
             <h6><b>To : </b>{{ $user->name }}</h6>
             <p class="pt-3">
