@@ -78,6 +78,15 @@ class User extends Authenticatable
     }
 
     /**
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeSalaryExclude(Builder $query)
+    {
+        return $query->whereExcludeFromSalary(true);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function attendance()

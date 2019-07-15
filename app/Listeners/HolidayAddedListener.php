@@ -16,6 +16,6 @@ class HolidayAddedListener
      */
     public function handle(HolidayAdded $event)
     {
-        Notification::send(User::all(), new \App\Notifications\HolidayAdded($event->holiday));
+        Notification::send(User::salaryExclude()->get(), new \App\Notifications\HolidayAdded($event->holiday));
     }
 }

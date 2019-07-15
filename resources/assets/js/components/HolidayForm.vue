@@ -29,7 +29,7 @@
                             <d-datepicker
                                     v-model="form.start_date"
                                     placeholder="Start Date"
-                                    :name="start_date"
+                                    name="start_date"
                                     :input-class="['form-control', {'is-invalid' : form.errors.has('start_date') }]"
                                     typeable />
 
@@ -42,7 +42,7 @@
                             <d-datepicker
                                     v-model="form.end_date"
                                     placeholder="End Date"
-                                    :name="end_date"
+                                    name="end_date"
                                     :input-class="['form-control',{'is-invalid' : form.errors.has('end_date') }]"
                                     typeable />
                             <span class="invalid-feedback text-left" v-if="form.errors.has('end_date')">
