@@ -12,7 +12,16 @@
                     <div class="card-header border-bottom">
                         <div class="row">
                             <div class="ml-3">
-                                <h4 class="mb-0"><span class="badge badge-secondary">{{ today()->format('F-Y') }}</span></h4>
+                                <div class="form-inline ml-3">
+                                    {{ html()->select('month')
+                                            ->id('month')
+                                            ->class('form-control mr-1')
+                                            ->options(months())
+                                            ->value(old('month', isset($month) ? $month : []))
+                                    }}
+                                    <a id="btn-filter" href="" class="btn btn-primary mr-2">Go</a>
+{{--                                    <h4 class="mb-0"><span class="badge badge-secondary">{{ today()->format('F-Y') }}</span></h4>--}}
+                                </div>
                             </div>
                             <div class="ml-auto mr-3">
                                 <div class="d-flex">
@@ -71,6 +80,12 @@
         $(function() {
             $("#select-all").click(function () {
                 $('.chk-user').attr('checked', this.checked);
+            });
+
+            $('#btn-filter').click(function(){
+                let month = $('#month').val()
+
+                $('#btn-filter').attr('href', "/salary/" + month)
             });
         })
     </script>

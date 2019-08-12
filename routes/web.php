@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/salaries', 'SalaryController');
     Route::get('/salaries/filter/{month}/{year}', 'SalaryController@filter');
-    Route::get('/salary', 'SalaryController@view');
+    Route::get('/salary/{month?}', 'SalaryController@view');
     Route::get('/payslip/{user}', 'SalaryController@payslip');
     Route::get('/download/{user}', 'SalaryController@downloadPayslip');
     Route::get('/paid_salary/download/{month}/{year}', 'SalaryController@downloadPaidSalary');

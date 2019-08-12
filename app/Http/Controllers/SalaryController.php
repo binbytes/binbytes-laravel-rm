@@ -189,17 +189,24 @@ class SalaryController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function view()
+    public function view($month = null)
     {
         $this->authorize('view', Salary::class);
 
-        $salariesUserIds = Salary::paidForMonth()->pluck('user_id');
+        if ($month == null) {
+            $month = today()->format('m');
+            $date = today()->format('m-Y');
+        } else {
+            $date = $month. '-' .today()->format('Y');
+        }
+
+        $salariesUserIds =  Salary::with('user')->whereMonth('paid_for', $date)->pluck('user_id');
 
         $users = User::whereNotIn('id', $salariesUserIds)
                     ->whereExcludeFromSalary(false)
                     ->get();
 
-        return view('salary.list', compact('users'));
+        return view('salary.list', compact('users', 'month'));
     }
 
     public function downloadPayslip($id)
