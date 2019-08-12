@@ -50,15 +50,16 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         $usersIds = $request->users;
+        $date = today()->format('Y'). '-' .request('month'). '-' .today()->format('d');
 
-        User::whereIn('id', $usersIds)->get()->each(function ($user) {
+        User::whereIn('id', $usersIds)->get()->each(function ($user) use ($date) {
             $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
             $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
 
             $data = [
                 'user_id' => $user->id,
                 'base_salary' => $user->base_salary,
-                'paid_for' => today(),
+                'paid_for' => $date,
                 'pf' => $pf,
                 'tds' => $tds,
                 'paid_amount' => (((int) $user->base_salary) - ($tds + $pf)),
@@ -122,6 +123,7 @@ class SalaryController extends Controller
     public function update(SalaryRequest $request, $id)
     {
         $user = User::findOrFail($id);
+        $date = today()->format('Y'). '-' .request('month'). '-' .today()->format('d');
 
         $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
         $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
@@ -134,7 +136,7 @@ class SalaryController extends Controller
             'user_id' => $user->id,
             'base_salary' => request('base_salary'),
             'paid_amount' => ($paidSalary + request('bonus')),
-            'paid_for' => today(),
+            'paid_for' => $date,
             'pf' => $pf,
             'tds' => $tds,
             'bonus' => request('bonus'),

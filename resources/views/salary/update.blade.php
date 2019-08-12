@@ -51,6 +51,7 @@
                          ->open() }}
 
                     {{ html()->hidden('id', $user->id) }}
+                    {{ html()->hidden('month', $_GET['month']) }}
 
                     <div class="form-group row">
                         {{ html()->label('Name')

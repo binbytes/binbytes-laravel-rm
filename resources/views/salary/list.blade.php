@@ -54,7 +54,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->base_salary }}</td>
                                     <td>
-                                        <a href="/salaries/{{$user->id}}/edit" class="btn btn-white">
+                                        <a href="/salaries/{{$user->id}}/edit?month={{$month}}" class="btn btn-white">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
