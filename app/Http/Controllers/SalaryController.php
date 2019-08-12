@@ -50,7 +50,7 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         $usersIds = $request->users;
-        $date = today()->format('Y'). '-' .request('month'). '-' .today()->format('d');
+        $date = today()->format('Y').'-'.request('month').'-'.today()->format('d');
 
         User::whereIn('id', $usersIds)->get()->each(function ($user) use ($date) {
             $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
@@ -123,7 +123,7 @@ class SalaryController extends Controller
     public function update(SalaryRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $date = today()->format('Y'). '-' .request('month'). '-' .today()->format('d');
+        $date = today()->format('Y').'-'.request('month').'-'.today()->format('d');
 
         $tds = $user->tds_amount ? (int) $user->tds_amount : 0;
         $pf = $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0;
@@ -199,10 +199,10 @@ class SalaryController extends Controller
             $month = today()->format('m');
             $date = today()->format('m-Y');
         } else {
-            $date = $month. '-' .today()->format('Y');
+            $date = $month.'-'.today()->format('Y');
         }
 
-        $salariesUserIds =  Salary::with('user')->whereMonth('paid_for', $date)->pluck('user_id');
+        $salariesUserIds = Salary::with('user')->whereMonth('paid_for', $date)->pluck('user_id');
 
         $users = User::whereNotIn('id', $salariesUserIds)
                     ->whereExcludeFromSalary(false)
