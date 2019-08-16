@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/my-profile', 'UserController@editMe');
     Route::get('/experience-letter/{user}', 'UserController@experienceLetter');
     Route::get('/joining-letter/{user}', 'UserController@joiningLetter');
+    Route::get('/promote-letter/{user}', 'UserController@promoteLetter');
     Route::get('/download/{letter}/{user}', 'UserController@download');
 
     Route::resource('/projects', 'ProjectController');

@@ -313,4 +313,9 @@ class User extends Authenticatable
     {
         return $this->designations->first();
     }
+
+    public function account()
+    {
+        return $this->hasOne(Account::class, 'user_id');
+    }
 }

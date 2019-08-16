@@ -246,6 +246,15 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+    public function promoteLetter(User $user)
+    {
+        return view('letter.promoteletter', compact('user'));
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function promote(User $user)
     {
         $designations = Designation::where('id', '<>', $user->designation->id)
