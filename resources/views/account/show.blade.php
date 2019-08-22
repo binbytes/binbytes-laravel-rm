@@ -16,21 +16,7 @@
                                     ->open() }}
                             <div class="form-inline">
                                 <input name="account_id" type="hidden" value="{{ $account->id }}">
-                                {{ html()->select('month')
-                                        ->id('month')
-                                        ->placeholder('Select Month')
-                                        ->class('form-control mr-1')
-                                        ->options(months())
-                                        ->value()
-                                }}
-
-                                {{ html()->text('year')
-                                        ->id('year')
-                                        ->placeholder('Year')
-                                        ->class('form-control col-1 mr-1')
-                                }}
-                                <input id="filter-year" type="hidden" value="">
-                                <input id="filter-date" type="hidden" value="{{ today()->format('m-Y') }}">
+                                <date-time-picker id="date-time" class="mr-1"></date-time-picker>
 
                                 {{ html()->select('filter_type')
                                         ->id('filter_type')
@@ -153,6 +139,7 @@
 @push('scripts')
     <script>
         $(function() {
+            console.log($('#start-date').val(), $('#end-date').val(), 'aa')
             let dt = $('#transaction-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -162,9 +149,8 @@
                 'ajax': {
                     'url': '{!! route('accounts.show', $account) !!}',
                     'data': function ( d ) {
-                        d.month = $('#month').val()
-                        d.year = $('#filter-year').val()
-                        d.date = $('#filter-date').val()
+                        d.start_date = $('#start-date').val()
+                        d.end_date = $('#end-date').val()
                         d.filter_type = $('#filter_type').val()
                         d.operator = $('#operator').val()
                         d.amount_value = $('#amount').val()
@@ -223,12 +209,7 @@
 
             $('#btn-filter').click(function(e){
                 e.preventDefault();
-                let month = $('#month').val()
-                let year = $('#year').val()
-
-                $('#filter-date').attr('value', month + '-' + year)
-                $('#filter-year').attr('value', year)
-
+                console.log($('#start-date').val(), $('#end-date').val())
                 dt.draw()
             });
 
