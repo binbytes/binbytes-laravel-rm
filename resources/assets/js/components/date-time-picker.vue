@@ -39,7 +39,8 @@
         },
         methods: {
             formateDate(date) {
-                return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+                let month = date.getMonth()+1
+                return date.getFullYear() + '-' + month + '-' + date.getDate();
             }
         }
     }
