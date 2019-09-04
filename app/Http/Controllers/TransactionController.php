@@ -284,7 +284,7 @@ class TransactionController extends Controller
         $query = Transaction::where('account_id', \request('account_id'));
 
         if ($start && $end) {
-            $query = $query->whereBetween('date', [$start, $end] );
+            $query = $query->whereBetween('date', [$start, $end]);
         }
 
         $amountValue = request('amount', 0);

@@ -115,7 +115,7 @@ class AccountController extends Controller
             $query = Transaction::where('account_id', $account->id);
 
             if ($start && $end) {
-                $query = $query->whereBetween('date', [$start, $end] );
+                $query = $query->whereBetween('date', [$start, $end]);
             }
 
             $amountValue = request('amount_value', 0);
