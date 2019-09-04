@@ -1,7 +1,7 @@
 <template>
     <div>
-        <input id="start-date" type="hidden" value="">
-        <input id="end-date" type="hidden" value="">
+        <input id="start-date" name="start_date" type="hidden" value="">
+        <input id="end-date" name="end_date" type="hidden" value="">
         <VueCtkDateTimePicker v-model="yourValue" range format="YYYY-MM-DD" formatted="ll" noClearButton/>
     </div>
 </template>

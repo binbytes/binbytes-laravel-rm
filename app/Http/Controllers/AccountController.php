@@ -201,8 +201,7 @@ class AccountController extends Controller
                 ->make(true);
         }
 
-        $users = User::where('exclude_from_salary', false)
-                    ->pluck('username', 'id');
+        $users = User::where('exclude_from_salary', false)->get()->pluck('name', 'id');
 
         $clients = Client::pluck('name', 'id');
 

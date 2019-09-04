@@ -180,7 +180,7 @@
             },
             'form.transactional_id': {
                 handler () {
-                    if (this.form.transactional_id) {
+                    if (this.form.transactional_id && !this.form.note) {
                         if(this.form.transactional_type === '\\App\\Project') {
                             this.form.note = this.projects[this.form.transactional_id]
                         } else if(this.form.transactional_type === '\\App\\Client') {
