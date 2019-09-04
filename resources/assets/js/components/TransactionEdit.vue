@@ -177,6 +177,20 @@
         watch: {
             id() {
                this.fetchTransaction()
+            },
+            'form.transactional_id': {
+                handler () {
+                    if (this.form.transactional_id) {
+                        if(this.form.transactional_type === '\\App\\Project') {
+                            this.form.note = this.projects[this.form.transactional_id]
+                        } else if(this.form.transactional_type === '\\App\\Client') {
+                            this.form.note = this.clients[this.form.transactional_id]
+                        } else {
+                            this.form.note = this.users[this.form.transactional_id]
+                        }
+                    }
+                },
+                deep: true
             }
         },
         computed: {
