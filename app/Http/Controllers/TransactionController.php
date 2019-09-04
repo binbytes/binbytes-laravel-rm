@@ -332,7 +332,9 @@ class TransactionController extends Controller
             ];
         });
 
-        return (new TransactionExport($transactions))->download('TransactionSheet.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        $fileName = 'Transaction-'.str_replace('-', '', $start).'-'.str_replace('-', '', $end).'.xlsx';
+
+        return (new TransactionExport($transactions))->download($fileName, \Maatwebsite\Excel\Excel::XLSX);
     }
 
     /**

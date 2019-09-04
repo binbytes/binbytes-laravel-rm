@@ -2,7 +2,9 @@
     <div>
         <input id="start-date" name="start_date" type="hidden" value="">
         <input id="end-date" name="end_date" type="hidden" value="">
-        <VueCtkDateTimePicker v-model="yourValue" range format="YYYY-MM-DD" formatted="ll" noClearButton/>
+        <VueCtkDateTimePicker v-model="yourValue" format="YYYY-MM-DD" formatted="ll"
+                              color="#9362ce" button-color="#9362ce"
+                              range noClearButton/>
     </div>
 </template>
 
