@@ -133,7 +133,6 @@
             {{ html()->email('email')
                 ->placeholder('Email')
                 ->class(['form-control', 'is-invalid' => $errors->has('email')])
-                ->required()
             }}
             <div class="input-group-append">
                 <div class="input-group-text">

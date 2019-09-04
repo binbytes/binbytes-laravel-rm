@@ -92,6 +92,11 @@
     .w-20 {
       width: 20%;
     }
+
+    .w-30 {
+      width: 30%;
+    }
+
     .table-borderless {
       margin: -6px 0 !important;
     }

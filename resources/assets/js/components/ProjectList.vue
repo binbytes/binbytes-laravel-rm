@@ -2,9 +2,9 @@
     <div>
         <div class="row mb-3">
             <div class="btn-group ml-3">
-                <button @click="updateFilter('all')" class="btn btn-info">All</button>
-                <button @click="updateFilter('completed')" class="btn btn-info">Completed</button>
-                <button @click="updateFilter('running')" class="btn btn-info">Running</button>
+                <button @click="updateFilter('all')" class="btn btn-primary">All</button>
+                <button @click="updateFilter('completed')" class="btn btn-primary">Completed</button>
+                <button @click="updateFilter('running')" class="btn btn-primary">Running</button>
             </div>
             <div class="d-flex ml-3">
                 <select v-if="clients" class="mr-2 form-control" v-model="filters.client">

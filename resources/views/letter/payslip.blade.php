@@ -13,7 +13,7 @@
             <p class="address mt-3">409-A, The Spire, 150ft Ring Road, Rajkot-360006, Gujarat, India.</p>
             <p class="address">Phone : (+91) 75670 72070 / (+91) 90330 90059</p>
           </td>
-          <td class="text-right w-25 pl-0">
+          <td class="text-right w-30 pl-0">
             <b class="header-title">PAYSLIP</b>
             <p class="address mt-3">For the month of {{ date('F Y', strtotime($salary->paid_for)) }}</p>
           </td>
@@ -40,7 +40,7 @@
               </tr>
               <tr>
                 <td class="w-20">Designation</td>
-                <td class="w-50"> {{ $salary->user->designation->title }}</td>
+                <td class="w-50"> {{ $salary->user->designation ? $salary->user->designation->title : '' }}</td>
               </tr>
               <tr>
                 <td class="w-20">Date of Joining</td>
@@ -52,7 +52,7 @@
               </tr>
               <tr>
                 <td class="w-20">Account Number</td>
-                <td class="w-50">{{ $salary->user->account->account_number }}</td>
+                <td class="w-50">{{ $salary->user->account ? $salary->user->account->account_number : '' }}</td>
               </tr>
             </table>
           </td>
