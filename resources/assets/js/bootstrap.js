@@ -14,6 +14,8 @@ try {
     require('bootstrap');
     window.DataTable = require('datatables.net');
     require('datatables.net-bs4');
+
+    window.DataTable.defaults.pageLength = 25;
 } catch (e) {}
 
 /**
