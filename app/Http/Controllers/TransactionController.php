@@ -332,9 +332,19 @@ class TransactionController extends Controller
             ];
         });
 
-        $fileName = 'Transaction-'.str_replace('-', '', $start).'-'.str_replace('-', '', $end).'.xlsx';
+        $fileName = 'Transaction-'.str_replace('-', '', $start).'-'.str_replace('-', '', $end);
 
-        return (new TransactionExport($transactions))->download($fileName, \Maatwebsite\Excel\Excel::XLSX);
+        if (\request('btn') === 'pdf') {
+            $pdf = \PDF::loadView('letter.transactionPdf', [
+                'transactions' => $transactions,
+                'start' => $start,
+                'end' => $end
+            ]);
+
+            return $pdf->setPaper('a4', 'landscape')->download($fileName.'.pdf');
+        } else {
+            return (new TransactionExport($transactions))->download($fileName.'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        }
     }
 
     /**

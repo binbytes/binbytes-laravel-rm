@@ -75,8 +75,13 @@
 
                                 <button id="btn-filter" class="btn btn-primary px-3">Go</button>
 
+                                <input id="btn-type" name="btn" type="hidden" value="">
                                 {{ html()->button('Export')
                                          ->id('export')
+                                        ->class('btn btn-primary px-3 ml-1')
+                                }}
+                                {{ html()->button('PDF')
+                                         ->id('pdf')
                                         ->class('btn btn-primary px-3 ml-1')
                                 }}
                             </div>
@@ -215,6 +220,14 @@
 
             $('#transaction-table').on('click', '.select-all', function () {
                 $('.chk-transaction').attr('checked', this.checked);
+            })
+
+            $('#export').click(function () {
+                $('#btn-type').attr('value', 'export')
+            })
+
+            $('#pdf').click(function () {
+                $('#btn-type').attr('value', 'pdf')
             })
 
             $('.delete-all').click(function () {
