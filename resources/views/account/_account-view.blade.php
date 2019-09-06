@@ -9,14 +9,14 @@
                         ])
 
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-7 d-flex flex-column justify-content-center">
                         <div class="mb-2">
-                            <h6 class="mb-0"><i class="fas fa-envelope-open"></i></h6>
+                            <span><i class="fas fa-envelope-open"></i></span>
                             <span class="text-muted">{{ $account->user->email }}</span>
                         </div>
                         @if($account->contact_number)
                             <div>
-                                <h6 class="mb-0"><i class="fas fa-phone"></i></h6>
+                                <span><i class="fas fa-phone"></i></span>
                                 <span class="text-muted">{{ $account->contact_number }}</span>
                             </div>
                         @endif

@@ -52,6 +52,7 @@
     .field-input[data-v-a0144ed0] {
          height: calc(2.09375rem + 2px);
          min-height: calc(2.09375rem + 2px);
+         width: 200px;
     }
     .field-label[data-v-a0144ed0] {
         top: 1px;

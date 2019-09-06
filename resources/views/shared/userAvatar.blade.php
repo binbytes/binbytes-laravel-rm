@@ -6,5 +6,5 @@
             <span class="user-placeholder">{{ substr($user->name, 0, 2) }}</span>
         @endif
     </div>
-    <h5 class="my-0">{{ $user->name }}</h5>
+    <h6 class="my-0">{{ $user->name }}</h6>
 </div>
