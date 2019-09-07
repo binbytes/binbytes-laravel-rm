@@ -33,7 +33,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 160%;
       mso-line-height-rule: exactly;
       color: #434b4d;

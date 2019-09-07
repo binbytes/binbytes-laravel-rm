@@ -7,7 +7,6 @@
                         @include('shared.userAvatar', [
                             'user' => $account->user
                         ])
-
                     </div>
                     <div class="col-lg-7 d-flex flex-column justify-content-center">
                         <div class="mb-2">
