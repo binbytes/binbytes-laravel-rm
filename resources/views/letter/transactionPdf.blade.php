@@ -67,6 +67,14 @@
       padding: .50rem 0.2rem !important;
     }
 
+    .w-10 {
+      width: 10%;
+    }
+
+    .w-20 {
+      width: 20%;
+    }
+
     @media print {
       .table-borderless tr, .table-borderless td, .table-borderless th, .table-borderless {
         border-style: hidden !important;
@@ -82,8 +90,8 @@
       <thead>
       <tr>
         <th>Id</th>
-        <th>Date</th>
-        <th class="w-25">Description</th>
+        <th class="w-10">Date</th>
+        <th class="w-20">Description</th>
         <th>Reference</th>
         <th>Credit Amount</th>
         <th>Debit Amount</th>
