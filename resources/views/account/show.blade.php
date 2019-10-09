@@ -131,6 +131,15 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4">Total Amount</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -174,8 +183,44 @@
                     { data: 'closing_balance', name: 'closing_balance' },
                     { data: 'type', name: 'type' },
                     { data: 'action', name: 'action', sortable: false },
-                ]
-            })
+                ],
+                "footerCallback": function(row, data, start, end, display) {
+                    let api = this.api();
+                    let credit = api
+                            .column(4, { page: 'current'})
+                            .data()
+                            .reduce( function (a, b) {
+                                let s = b.indexOf('>') + 1
+                                let l = b.indexOf('</') - s
+                                let v = b.substr(s, l);
+                                return parseFloat(a) + parseFloat(v);
+                            }, 0 );
+
+                    let debit = api
+                            .column(5, { page: 'current'})
+                            .data()
+                            .reduce( function (a, b) {
+                                let s = b.indexOf('>') + 1
+                                let l = b.indexOf('</') - s
+                                let v = b.substr(s, l);
+                                return parseFloat(a) + parseFloat(v);
+                            }, 0 );
+
+                    let closing = api
+                            .column(6, { page: 'current'})
+                            .data()
+                            .reduce( function (a, b) {
+                                let s = b.indexOf('>') + 1
+                                let l = b.indexOf('</') - s
+                                let v = b.substr(s, l);
+                                return parseFloat(a) + parseFloat(v);
+                            }, 0 );
+
+                    $( api.column(4).footer() ).html('$' + parseFloat(credit).toFixed(2));
+                    $( api.column(5).footer() ).html('$' + parseFloat(debit).toFixed(2));
+                    $( api.column(6).footer() ).html('$' + parseFloat(closing).toFixed(2));
+                }
+            });
 
             $('#transaction-table').on('click', '.btn-show', function (e) {
                 e.preventDefault()

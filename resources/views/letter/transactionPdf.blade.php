@@ -27,7 +27,6 @@
       src: {{ storage_path('fonts/Roboto-Regular.ttf') }} format('truetype');
       font-weight: normal;
       font-style: normal;
-
     }
 
     body {
@@ -77,7 +76,7 @@
 </head>
 <body>
 <div class="main-content">
-  <div class="p-2">
+  <div class="p-1">
     <h5 class="mb-2"><b>{{ $start }} To {{ $end }}</b></h5>
     <table class="table table-bordered text-center">
       <thead>
@@ -94,6 +93,7 @@
       </thead>
       <tbody>
       @forelse($transactions as $transaction)
+
         <tr>
           <td>{{ $transaction['id'] }}</td>
           <td>{{ $transaction['date'] }}</td>
@@ -112,6 +112,15 @@
         </tr>
       @endforelse
       </tbody>
+      <tfoot>
+      <tr>
+        <th colspan="4">Total Amount</th>
+        <th>{{ $transactions->sum('credit_amount') }}</th>
+        <th>{{ $transactions->sum('debit_amount') }}</th>
+        <th>{{ $transactions->sum('closing_balance') }}</th>
+        <th></th>
+      </tr>
+      </tfoot>
     </table>
   </div>
 </div>

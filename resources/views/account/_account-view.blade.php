@@ -3,12 +3,12 @@
         <div class="card card-small mb-4 pt-0">
             <div class="card-body p-3">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         @include('shared.userAvatar', [
                             'user' => $account->user
                         ])
                     </div>
-                    <div class="col-lg-7 d-flex flex-column justify-content-center">
+                    <div class="col-lg-8 d-flex flex-column justify-content-center">
                         <div class="mb-2">
                             <span><i class="fas fa-envelope-open"></i></span>
                             <span class="text-muted">{{ $account->user->email }}</span>

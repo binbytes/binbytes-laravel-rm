@@ -44,21 +44,21 @@
     <script>
         $(function() {
            let dt = $('#transaction-table').DataTable({
-                processing: true,
-                serverSide: true,
-                order: [ [0, 'desc'] ],
-                ajax: '{!! route('transactions.index') !!}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'account', name: 'account' },
-                    { data: 'date', name: 'date' },
-                    { data: 'description', name: 'description' },
-                    { data: 'credit_amount', name: 'credit_amount' },
-                    { data: 'debit_amount', name: 'debit_amount' },
-                    { data: 'closing_balance', name: 'closing_balance' },
-                    { data: 'type', name: 'type' },
-                    { data: 'action', name: 'action', sortable: false },
-                ]
+              processing: true,
+              serverSide: true,
+              order: [ [0, 'desc'] ],
+              ajax: '{!! route('transactions.index') !!}',
+              columns: [
+                  { data: 'id', name: 'id' },
+                  { data: 'account', name: 'account' },
+                  { data: 'date', name: 'date' },
+                  { data: 'description', name: 'description' },
+                  { data: 'credit_amount', name: 'credit_amount' },
+                  { data: 'debit_amount', name: 'debit_amount' },
+                  { data: 'closing_balance', name: 'closing_balance' },
+                  { data: 'type', name: 'type' },
+                  { data: 'action', name: 'action', sortable: false },
+              ]
             });
 
             @include('shared.dtDeleteScript', [

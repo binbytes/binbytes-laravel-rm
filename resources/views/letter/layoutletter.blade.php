@@ -27,13 +27,12 @@
       src: {{ storage_path('fonts/Roboto-Regular.ttf') }} format('truetype');
       font-weight: normal;
       font-style: normal;
-
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-size: 15px;
+      font-size: 13px;
       line-height: 160%;
       mso-line-height-rule: exactly;
       color: #434b4d;
@@ -43,7 +42,7 @@
 
     @media only screen and (max-width: 560px) {
       body {
-        font-size: 14px !important;
+        font-size: 12px !important;
       }
     }
 
@@ -89,12 +88,20 @@
       margin-top: 24px;
     }
 
+    .w-15 {
+      width: 15%;
+    }
+
     .w-20 {
       width: 20%;
     }
 
     .w-30 {
       width: 30%;
+    }
+
+    .w-35 {
+      width: 35%;
     }
 
     .table-borderless {
@@ -132,6 +139,10 @@
     .header-title {
       font-weight: 700 !important;
       font-size: 1.3em !important;
+    }
+    .title {
+      color: black !important;
+      font-weight: 500 !important;
     }
   </style>
 </head>
