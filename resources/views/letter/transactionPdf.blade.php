@@ -101,7 +101,6 @@
       </thead>
       <tbody>
       @forelse($transactions as $transaction)
-
         <tr>
           <td>{{ $transaction['id'] }}</td>
           <td>{{ $transaction['date'] }}</td>
