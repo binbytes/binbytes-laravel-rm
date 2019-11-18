@@ -349,8 +349,7 @@ class TransactionController extends Controller
                 'description' => '',
                 'reference' => 'Total Amount',
                 'credit_amount' => $transactions->sum('credit_amount'),
-                'debit_amount' => $transactions->sum('debit_amount'),
-                'closing_balance' => $transactions->sum('closing_balance')
+                'debit_amount' => $transactions->sum('debit_amount')
             ]);
             return (new TransactionExport($transactions))->download($fileName.'.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }

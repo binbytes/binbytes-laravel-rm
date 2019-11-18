@@ -124,7 +124,7 @@
         <th colspan="4">Total Amount</th>
         <th>{{ $transactions->sum('credit_amount') }}</th>
         <th>{{ $transactions->sum('debit_amount') }}</th>
-        <th>{{ $transactions->sum('closing_balance') }}</th>
+        <th></th>
         <th></th>
       </tr>
       </tfoot>

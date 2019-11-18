@@ -206,19 +206,8 @@
                                 return parseFloat(a) + parseFloat(v);
                             }, 0 );
 
-                    let closing = api
-                            .column(6, { page: 'current'})
-                            .data()
-                            .reduce( function (a, b) {
-                                let s = b.indexOf('>') + 1
-                                let l = b.indexOf('</') - s
-                                let v = b.substr(s, l);
-                                return parseFloat(a) + parseFloat(v);
-                            }, 0 );
-
                     $( api.column(4).footer() ).html(parseFloat(credit).toFixed(2));
                     $( api.column(5).footer() ).html(parseFloat(debit).toFixed(2));
-                    $( api.column(6).footer() ).html(parseFloat(closing).toFixed(2));
                 }
             });
 
