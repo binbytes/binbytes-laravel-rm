@@ -110,6 +110,24 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
         ];
     }
 
+    public function BOB($row)
+    {
+        if (! isset($row['date']) || ! validateDate($row['date'], $format = 'd/m/y') || ! isset($row['balance'])) {
+            return;
+        }
+
+        return [
+            'account_id' => $this->account->id,
+            'sequence_number' => $row['sno'],
+            'date' =>  Carbon::createFromFormat('d/m/y', $row['date']),
+            'reference' => $row['chequeno'],
+            'description' => $row['description'],
+            'debit_amount' => amountStrToFloat($row['debit']),
+            'credit_amount' => amountStrToFloat($row['credit']),
+            'closing_balance' => amountStrToFloat($row['balance']),
+        ];
+    }
+
     public function headingRow(): int
     {
         return $this->account->statement_starting_line;
