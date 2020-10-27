@@ -128,6 +128,33 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
         ];
     }
 
+    public function ICICI($row)
+    {
+        if (! isset($row['value_date'])|| ! validateDate($row['value_date'], $format = 'd/m/Y') || ! isset($row['available_balanceinr'])) {
+            return;
+        }
+
+        $cr=0;
+        $dr=0;
+
+        if($row['crdr'] == 'DR') {
+            $dr = amountStrToFloat($row['transaction_amountinr']);
+        } else {
+            $cr = amountStrToFloat($row['transaction_amountinr']);
+        }
+
+        return [
+            'account_id' => $this->account->id,
+            'sequence_number' => $row['no'],
+            'date' =>  Carbon::createFromFormat('d/m/Y', $row['value_date']),
+            'reference' => $row['chequeno'],
+            'description' => $row['description'],
+            'debit_amount' => $dr,
+            'credit_amount' => $cr,
+            'closing_balance' => amountStrToFloat($row['available_balanceinr']),
+        ];
+    }
+
     public function headingRow(): int
     {
         return $this->account->statement_starting_line;

@@ -20,6 +20,7 @@ return [
         'YES' => 'YES',
         'SBI' => 'SBI',
         'BOB' => 'BOB',
+        'ICICI' => 'ICICI',
     ],
     'target_models' => [
         '\App\User' => 'User',
