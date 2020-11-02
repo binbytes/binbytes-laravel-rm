@@ -209,8 +209,6 @@ class AccountController extends Controller
 
         $projects = Project::pluck('title', 'id');
 
-        //dd($users);
-
         return view('account.show', compact('account', 'users', 'clients', 'projects'));
     }
 

@@ -16,7 +16,7 @@ class Project extends Model
     ];
 
     protected $fillable = [
-        'title', 'description', 'client_id', 'started_at', 'is_completed', 'slug', 'remarks',
+        'title', 'description', 'client_id', 'started_at', 'is_completed', 'slug', 'remarks', 'invoice_prefix'
     ];
 
     public function path()
@@ -68,5 +68,9 @@ class Project extends Model
     public function scopeRunning($query)
     {
         return $query->where('is_completed', false);
+    }
+
+    public function bill() {
+        return $this->hasMany(Bill::class);
     }
 }

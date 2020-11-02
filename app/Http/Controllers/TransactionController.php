@@ -387,10 +387,12 @@ class TransactionController extends Controller
 
         $bill = Bill::create($data);
 
-        if (\request()->ajax()) {
-            return response()->json([]);
-        }
+        $bill = Bill::with('client', 'project')->find($bill->id);
 
-        return response()->json(['success' => true]);
+        $pdf = \PDF::loadView('letter.billPdf', [
+            'bill' => $bill
+        ]);
+
+        return $pdf->setPaper('a4', 'landscape')->download($bill->id.'.pdf');
     }
 }

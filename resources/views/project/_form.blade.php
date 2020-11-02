@@ -133,6 +133,19 @@
     </div>
 </div>
 
+<div class="form-group row">
+    {{ html()->label('Invoice Prefix')
+                ->for('invoice_prefix')
+                ->class('col-sm-2 col-form-label text-md-right')
+    }}
+    <div class="col-md-6">
+        {{ html()->text('invoice_prefix')
+                ->placeholder('Invoice Prefix')
+                ->class(['form-control', 'is-invalid' => $errors->has('invoice_prefix')])
+        }}
+    </div>
+</div>
+
 <div class="form-group">
     <div class="col-md-6 offset-2">
         <div class="custom-control custom-toggle custom-toggle-md">

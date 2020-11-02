@@ -18,4 +18,20 @@ class Bill extends Model
     protected $fillable = [
         'date', 'client_id', 'amount', 'project_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function client()
+    {
+        return $this->belongsTo('App\Client');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
