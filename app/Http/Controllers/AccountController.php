@@ -189,6 +189,8 @@ class AccountController extends Controller
                         }
                     }
 
+                    $data['billUrl'] = route('transaction-bill', $transaction);
+
                     return view('shared.dtAction', $data);
                 })
                 ->editColumn('date', function (Transaction $transaction) {

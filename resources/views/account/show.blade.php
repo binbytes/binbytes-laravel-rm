@@ -147,6 +147,7 @@
 
         <transaction-show></transaction-show>
         <transaction-edit :users="{{ $users }}" :clients="{{ $clients }}" :projects="{{ $projects }}"></transaction-edit>
+        <transaction-bill :clients="{{ $clients }}"></transaction-bill>
     </div>
 @endsection
 
@@ -221,6 +222,11 @@
                 e.preventDefault()
                 $('#transaction-edit-id').val($(this).attr('rel'));
                 $('#transaction-edit-id')[0].dispatchEvent(new Event('input', { 'bubbles': true }))
+            })
+            $('#transaction-table').on('click', '.btn-bill', function (e) {
+                e.preventDefault()
+                $('#transaction-bill-id').val($(this).attr('rel'));
+                $('#transaction-bill-id')[0].dispatchEvent(new Event('input', { 'bubbles': true }))
             })
 
             $('#file').change(function () {

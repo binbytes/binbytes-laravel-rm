@@ -19,4 +19,9 @@
             <i class="fas fa-download"></i>
         </a>
     @endisset
+    @isset($billUrl)
+        <a href="{{ $billUrl }}" rel="{{ $id ?? '' }}" class="btn btn-white btn-bill">
+            <i class="fas fa-file-invoice"></i>
+        </a>
+    @endisset
 </div>

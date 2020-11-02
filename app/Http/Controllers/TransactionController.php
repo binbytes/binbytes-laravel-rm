@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
+use App\Http\Requests\BillRequest;
 use Gate;
 use App\Account;
 use App\Transaction;
@@ -378,5 +380,17 @@ class TransactionController extends Controller
     public function getAPI()
     {
         return \App\Http\Resources\Transaction::collection(Transaction::with('account')->get());
+    }
+
+    public function bill(BillRequest $request) {
+        $data = $request->all();
+
+        $bill = Bill::create($data);
+
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }

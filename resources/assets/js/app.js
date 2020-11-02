@@ -27,6 +27,7 @@ Vue.component('leave-calender', require('./components/LeaveCalender').default);
 Vue.component('transaction-edit', require('./components/TransactionEdit').default);
 Vue.component('transaction-show', require('./components/TransactionShow').default);
 Vue.component('date-time-picker', require('./components/date-time-picker').default);
+Vue.component('transaction-bill', require('./components/TransactionBill').default);
 
 const app = new Vue({
     el: '#app',
