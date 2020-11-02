@@ -217,4 +217,10 @@ class ProjectController extends Controller
 
         return \App\Http\Resources\Project::collection($query->get());
     }
+
+    public function getClientProjects($id) {
+        $project = Project::where('client_id', $id)->get()->pluck('title', 'id');
+
+        return response()->json($project);
+    }
 }

@@ -9,7 +9,7 @@
       <d-form v-if="form" @submit="handleOnSubmit" class="text-muted">
         <d-modal-body class="pb-0">
           <div class="form-group row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label class="small mb-0">Date</label>
               <d-datepicker
                   v-model="form.date"
@@ -21,7 +21,7 @@
                   <strong v-html="form.errors.first('date')"></strong>
               </span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label class="small mb-0">Amount</label>
               <input v-model="form.amount"
                      type="text"
@@ -33,13 +33,27 @@
                   <strong v-html="form.errors.first('amount')"></strong>
               </span>
             </div>
-            <div class="col-md-4">
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
               <label class="small mb-0">Client</label>
               <d-form-select v-model="form.client_id"
                              name="client_id"
                              :options="clients"
                              :class="{ 'is-invalid': form.errors.has('client_id') }" >
                 <option :value="null">Select Client</option>
+              </d-form-select>
+              <span class="invalid-feedback text-left" v-if="form.errors.has('client_id')">
+                  <strong v-html="form.errors.first('client_id')"></strong>
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label class="small mb-0">Project</label>
+              <d-form-select v-model="form.project_id"
+                             name="project_id"
+                             :options="projects"
+                             :class="{ 'is-invalid': form.errors.has('project_id') }" >
+                <option :value="null">Select Project</option>
               </d-form-select>
               <span class="invalid-feedback text-left" v-if="form.errors.has('client_id')">
                   <strong v-html="form.errors.first('client_id')"></strong>
@@ -69,21 +83,36 @@ export default {
       id: null,
       isProcessing: false,
       showModal: false,
+      projects: [],
       form: new Form({
         date: '',
         amount: '',
         client_id: null,
+        project_id: null
       }),
     }
   },
   watch: {
     id() {
       this.fetchTransaction()
+    },
+    'form.client_id': {
+      handler (val) {
+        this.getProject(val)
+      },
+      deep: true
     }
   },
   methods: {
     changeValue(val) {
       this.id = val.target.value
+    },
+
+    getProject(id) {
+      axios.get('/client-project/' + id)
+          .then(res => {
+            this.projects = res.data
+          })
     },
 
     fetchTransaction() {

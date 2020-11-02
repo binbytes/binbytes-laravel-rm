@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/projects', 'ProjectController');
     Route::get('/projects/filter/{type}', 'ProjectController@index');
     Route::get('/api-projects', 'ProjectController@getProjectsAPI');
+    Route::get('/client-project/{id}', 'ProjectController@getClientProjects');
 
     Route::get('/progress/{project}', 'ProjectController@showProgress');
     Route::post('/progress', 'ProjectController@storeProgress')->name('progress');
