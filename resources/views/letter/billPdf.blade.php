@@ -30,7 +30,7 @@
         }
 
         body {
-            margin: 25px 100px;
+            margin: 0;
             padding: 0;
             font-size: 14px;
             line-height: 90%;
@@ -48,7 +48,7 @@
 
         b, th {
             color: black !important;
-            font-weight: 600 !important;
+            font-weight: 500 !important;
         }
 
         body, table, td {
@@ -57,27 +57,29 @@
 
         table {
             width: 100%;
-        }
-
-        td {
-            padding: 0.3rem 0.3rem !important;
-        }
-
-        th {
-            padding: .50rem 0.2rem !important;
+            margin-bottom: 0 !important;
         }
 
         .w-25 {
-            width: 25%;
+            width: 30%;
         }
 
-        .w-75 {
-            width: 75%;
+        .w-35 {
+            width: 35%;
         }
 
-        .memo td{
-            padding-top: 0.6rem !important;
-            padding-bottom: 0.6rem !important;
+        .w-65 {
+            width: 65%;
+        }
+
+        .header {
+            border-bottom: 1px solid #8a8a8a !important;
+            padding: 10px 5px !important;
+            text-align: left !important;
+        }
+
+        .table-secondary td, .thead-dark th {
+            border: 1px solid #8a8a8a !important;
         }
 
         @media print {
@@ -93,7 +95,7 @@
         <table class="table table-borderless">
             <tbody>
                 <tr>
-                    <td>
+                    <td class="w-35">
                         <table class="table table-borderless">
                             <tbody>
                             <tr>
@@ -108,19 +110,19 @@
                             </tbody>
                         </table>
                     </td>
-                    <td>
+                    <td class="w-65">
                         <table class="table table-bordered text-center">
                             <tbody>
                             <tr>
-                                <td class="w-25 table-dark" style="border-bottom: 1px solid #8a8a8a; padding: 10px 5px !important; text-align: left">
+                                <td class="w-35 table-dark header">
                                     INVOICE NO.
                                 </td>
-                                <td class="w-75" style="border-bottom: 1px solid #dee2e6; padding: 10px 0 !important;">
+                                <td class="w-65" style="border-bottom: 1px solid #dee2e6; padding: 10px 0 !important;">
                                     {{ $bill->project['invoice_prefix'] ? $bill->project['invoice_prefix'] : 'BB' }}-{{ $bill['id'] }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="w-25 table-dark" style=" padding: 10px 5px !important; text-align: left ">DATE</td>
+                                <td class="w-25 table-dark header">DATE</td>
                                 <td class="w-75" style="padding: 10px 0 !important;">{{ date_format($bill['date'], 'd/m/Y') }}</td>
                             </tr>
                             </tbody>
@@ -128,7 +130,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="w-35">
                         <table class="table table-borderless">
                             <thead class="thead-dark">
                             <tr>
@@ -158,7 +160,7 @@
                 <th class="w-25 text-white">AMOUNT (INR)</th>
             </tr>
             </thead>
-            <tbody class="memo">
+            <tbody>
                 <tr>
                     <td>{{ $bill->project['description'] ? $bill->project['description'] : 'Project' }}</td>
                     <td class="w-25">${{ number_format($bill['amount'] / 72, 2 )}}</td>
@@ -168,7 +170,7 @@
                 </tr>
                 @for($a = 0; $a < 3; $a++)
                     <tr>
-                        <td></td>
+                        <td style="margin: 0.3rem;"></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -177,18 +179,21 @@
                     @php
                         $igst = 0.00
                     @endphp
-                    <td>Export Against LUT (IGST)</td>
+                    <td class="text-left">Export Against LUT (IGST)</td>
                     <td></td>
                     <td><span style="font-family: DejaVu Sans;">&#x20B9;</span>{{$igst}}</td>
                 </tr>
             </tbody>
             <tfoot>
-            <tr>
-                <th class="text-right mr-3">Total Amount</th>
+            <tr class="table-secondary">
+                <th class="text-right pr-3">Total Amount</th>
                 <th class="w-25">${{ number_format($bill['amount'] / 72, 2 )}}</th>
                 <th class="w-25"><span style="font-family: DejaVu Sans;">&#x20B9;</span>
                     {{ number_format(($bill['amount'] + $igst), 2) }}
                 </th>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-left">Remarks/Instructions:</td>
             </tr>
             </tfoot>
         </table>

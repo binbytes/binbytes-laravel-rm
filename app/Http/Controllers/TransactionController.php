@@ -403,6 +403,6 @@ class TransactionController extends Controller
 
         $filename = 'Invoice-'.$prefix.'-'.$bill->id;
 
-        return $pdf->setPaper('a4', 'landscape')->download($filename.'.pdf');
+        return $pdf->download($filename.'.pdf');
     }
 }
