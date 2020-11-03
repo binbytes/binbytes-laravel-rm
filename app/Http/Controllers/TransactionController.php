@@ -399,9 +399,7 @@ class TransactionController extends Controller
             'bill' => $bill
         ]);
 
-        dd($bill->project);
-
-        $prefix = $bill->project === null ? $bill->project['invoice_prefix'] : 'BB';
+        $prefix = $bill->project !== null ? $bill->project['invoice_prefix'] : 'BB';
 
         $filename = 'Invoice-'.$prefix.'-'.$bill->id;
 
