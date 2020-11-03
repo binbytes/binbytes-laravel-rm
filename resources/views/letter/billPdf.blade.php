@@ -30,10 +30,10 @@
         }
 
         body {
-            margin: 30px 100px;
+            margin: 25px 100px;
             padding: 0;
             font-size: 14px;
-            line-height: 100%;
+            line-height: 90%;
             mso-line-height-rule: exactly;
             color: #434b4d;
             width: 100%;
@@ -76,8 +76,8 @@
         }
 
         .memo td{
-            padding-top: 0.7rem !important;
-            padding-bottom: 0.7rem !important;
+            padding-top: 0.6rem !important;
+            padding-bottom: 0.6rem !important;
         }
 
         @media print {
@@ -89,7 +89,7 @@
 </head>
 <body>
 <div class="main-content">
-    <div class="p-1">
+    <div>
         <table class="table table-borderless">
             <tbody>
                 <tr>
@@ -166,14 +166,21 @@
                         {{ number_format($bill['amount'], 2) }}
                     </td>
                 </tr>
-            <tr>
-                @php
-                    $igst = 0.00
-                @endphp
-                <td>Export Against LUT (IGST)</td>
-                <td></td>
-                <td><span style="font-family: DejaVu Sans;">&#x20B9;</span>{{$igst}}</td>
-            </tr>
+                @for($a = 0; $a < 3; $a++)
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endfor
+                <tr>
+                    @php
+                        $igst = 0.00
+                    @endphp
+                    <td>Export Against LUT (IGST)</td>
+                    <td></td>
+                    <td><span style="font-family: DejaVu Sans;">&#x20B9;</span>{{$igst}}</td>
+                </tr>
             </tbody>
             <tfoot>
             <tr>

@@ -399,6 +399,8 @@ class TransactionController extends Controller
             'bill' => $bill
         ]);
 
-        return $pdf->setPaper('a4', 'landscape')->download($bill->id.'.pdf');
+        $filename = 'Invoice-'.$bill->project->invoice_prefix.'-'.$bill->id;
+
+        return $pdf->setPaper('a4', 'landscape')->download($filename.'.pdf');
     }
 }
