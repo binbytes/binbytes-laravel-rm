@@ -91,7 +91,8 @@
         }
 
         hr {
-            border-top: 1px solid #949393;
+            border-bottom: 1px solid #949393;
+            margin-bottom: 0.3rem !important;
         }
 
         @media print {
