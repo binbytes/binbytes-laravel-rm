@@ -188,8 +188,11 @@ class AccountController extends Controller
                             $data['downloadUrl'] = route('transaction-download', $transaction->id);
                         }
                     }
-
-                    $data['billUrl'] = route('transaction-bill', $transaction);
+                    if(Gate::allows('bill', $transaction)) {
+                        if($transaction->credit_amount > 0){
+                            $data['billUrl'] = route('transaction-bill', $transaction);
+                        }
+                    }
 
                     return view('shared.dtAction', $data);
                 })

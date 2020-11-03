@@ -167,9 +167,12 @@
                     </td>
                 </tr>
             <tr>
+                @php
+                    $igst = 0.00
+                @endphp
                 <td>Export Against LUT (IGST)</td>
                 <td></td>
-                <td><span style="font-family: DejaVu Sans;">&#x20B9;</span>0.00</td>
+                <td><span style="font-family: DejaVu Sans;">&#x20B9;</span>{{$igst}}</td>
             </tr>
             </tbody>
             <tfoot>
@@ -177,7 +180,7 @@
                 <th class="text-right mr-3">Total Amount</th>
                 <th class="w-25">${{ number_format($bill['amount'] / 72, 2 )}}</th>
                 <th class="w-25"><span style="font-family: DejaVu Sans;">&#x20B9;</span>
-                    {{ number_format($bill['amount'], 2) }}
+                    {{ number_format(($bill['amount'] + $igst), 2) }}
                 </th>
             </tr>
             </tfoot>
