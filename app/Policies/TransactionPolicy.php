@@ -105,6 +105,6 @@ class TransactionPolicy
      */
     public function bill(user $user, Transaction $transaction)
     {
-        return false;
+        return true;
     }
 }
