@@ -116,12 +116,12 @@
                                     INVOICE NO.
                                 </td>
                                 <td class="w-75" style="border-bottom: 1px solid #dee2e6; padding: 10px 0 !important;">
-                                    {{ $bill->project['invoice_prefix'] }}-{{ $bill['id'] }}
+                                    {{ $bill->project['invoice_prefix'] ? $bill->project['invoice_prefix'] : 'BB' }}-{{ $bill['id'] }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="w-25 table-dark" style=" padding: 10px 5px !important; text-align: left ">DATE</td>
-                                <td class="w-75" style="padding: 10px 0 !important;">{{ $bill['date'] }}</td>
+                                <td class="w-75" style="padding: 10px 0 !important;">{{ date_format($bill['date'], 'd/m/Y') }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -160,7 +160,7 @@
             </thead>
             <tbody class="memo">
                 <tr>
-                    <td>{{ $bill->project['description'] }}</td>
+                    <td>{{ $bill->project['description'] ? $bill->project['description'] : 'Project' }}</td>
                     <td class="w-25">${{ number_format($bill['amount'] / 72, 2 )}}</td>
                     <td class="w-25"><span style="font-family: DejaVu Sans;">&#x20B9;</span>
                         {{ number_format($bill['amount'], 2) }}

@@ -62,6 +62,9 @@
           </div>
         </d-modal-body>
         <d-modal-footer>
+          <div class="mr-auto">
+            <d-checkbox inline v-model="billPdf" toggle>PDF Generate</d-checkbox>
+          </div>
           <input name="_method" type="hidden" v-model="form._method" class="d-none" value="POST">
           <button type="submit" id="edit-data" class="btn btn-primary" :disabled="isProcessing">Save</button>
           <button type="reset" @click="handleClose" class="btn btn-link" :disabled="isProcessing">Cancel</button>
@@ -90,6 +93,7 @@ export default {
         client_id: null,
         project_id: null
       }),
+      billPdf: false
     }
   },
   watch: {
@@ -131,7 +135,10 @@ export default {
       this.isProcessing = true
       this.form._method = 'POST';
       this.form.post('/transactions/bill').then(response => {
-        window.location.href = `/download-bill/${response.id}`;
+        if(this.billPdf) {
+          window.location.href = `/download-bill/${response.id}`;
+          this.billPdf = false
+        }
         this.isProcessing = false
         this.showModal = false
         this.id = null
