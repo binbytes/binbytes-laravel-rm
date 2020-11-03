@@ -60,6 +60,10 @@
             margin-bottom: 0 !important;
         }
 
+        .w-20 {
+            width: 20%;
+        }
+
         .w-25 {
             width: 30%;
         }
@@ -84,6 +88,10 @@
 
         tfoot .table-secondary>th {
             border: 1px solid #bbbaba !important;
+        }
+
+        hr {
+            border-top: 1px solid #949393;
         }
 
         @media print {
@@ -201,6 +209,16 @@
             </tr>
             </tfoot>
         </table>
+        <div class="d-flex mt-5">
+            <table class="table table-borderless mt-5 ml-auto w-20 text-center">
+                <tr>
+                    <td>
+                        <hr/>
+                        <p>Signature</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 </body>
