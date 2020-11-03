@@ -168,9 +168,9 @@
                         {{ number_format($bill['amount'], 2) }}
                     </td>
                 </tr>
-                @for($a = 0; $a < 3; $a++)
+                @for($a = 0; $a < 6; $a++)
                     <tr>
-                        <td style="margin: 0.3rem;"></td>
+                        <td><p/></td>
                         <td></td>
                         <td></td>
                     </tr>
