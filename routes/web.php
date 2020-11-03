@@ -11,6 +11,8 @@
 |
 */
 
+use App\Bill;
+
 Route::redirect('/', '/dashboard');
 
 Auth::routes();
@@ -66,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transaction/export', 'TransactionController@export')->name('transaction-export');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download')->name('transaction-download');
     Route::post('/transactions/bill', 'TransactionController@bill')->name('transaction-bill');
+    Route::get('/download-bill/{bill}', 'TransactionController@downloadBill')->name('download-bill');
 
     Route::resource('/transaction-types', 'TransactionTypeController');
 

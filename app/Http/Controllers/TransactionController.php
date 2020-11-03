@@ -9,6 +9,7 @@ use App\Account;
 use App\Transaction;
 use App\TransactionType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\Datatables\Datatables;
 use App\Exports\TransactionExport;
 use App\Imports\TransactionImport;
@@ -387,7 +388,12 @@ class TransactionController extends Controller
 
         $bill = Bill::create($data);
 
-        $bill = Bill::with('client', 'project')->find($bill->id);
+        return response()->json($bill);
+    }
+
+    public function downloadBill($bill) {
+
+        $bill = Bill::with('project', 'client')->find($bill);
 
         $pdf = \PDF::loadView('letter.billPdf', [
             'bill' => $bill
