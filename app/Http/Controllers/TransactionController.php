@@ -399,7 +399,9 @@ class TransactionController extends Controller
             'bill' => $bill
         ]);
 
-        $filename = 'Invoice-'.$bill->project === null ? $bill->project->invoice_prefix : ''.'-'.$bill->id;
+        $prefix = $bill->project === null ? $bill->project->invoice_prefix : 'BB';
+
+        $filename = 'Invoice-'.$prefix.'-'.$bill->id;
 
         return $pdf->setPaper('a4', 'landscape')->download($filename.'.pdf');
     }
