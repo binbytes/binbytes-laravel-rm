@@ -82,6 +82,10 @@
             border: 1px solid #8a8a8a !important;
         }
 
+        tfoot .table-secondary>th {
+            border: 1px solid #bbbaba !important;
+        }
+
         @media print {
             .table-borderless tr, .table-borderless td, .table-borderless th, .table-borderless {
                 border-style: hidden !important;
@@ -170,7 +174,7 @@
                 </tr>
                 @for($a = 0; $a < 6; $a++)
                     <tr>
-                        <td><p/></td>
+                        <td><p style="height: 2px !important;"></p></td>
                         <td></td>
                         <td></td>
                     </tr>
