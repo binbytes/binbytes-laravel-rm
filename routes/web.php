@@ -67,10 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transactions/import/{account}', 'TransactionController@import')->name('transaction-import');
     Route::post('/transaction/export', 'TransactionController@export')->name('transaction-export');
     Route::get('/transactions/download/{transaction}', 'TransactionController@download')->name('transaction-download');
-    Route::post('/transactions/bill', 'TransactionController@bill')->name('transaction-bill');
-    Route::get('/download-bill/{bill}', 'TransactionController@downloadBill')->name('download-bill');
 
     Route::resource('/transaction-types', 'TransactionTypeController');
+
+    Route::resource('/invoice', 'BillController');
+    Route::get('/download-bill/{bill}', 'BillController@downloadBill')->name('download-bill');
 
     Route::get('/attendance/ping', 'AttendanceController@ping');
     Route::get('/attendance/day/{user}/{startDate}/{endDate?}', 'AttendanceController@dailyView')->name('day-attendance');

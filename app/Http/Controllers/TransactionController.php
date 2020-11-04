@@ -391,18 +391,5 @@ class TransactionController extends Controller
         return response()->json($bill);
     }
 
-    public function downloadBill($bill) {
 
-        $bill = Bill::with('project', 'client')->find($bill);
-
-        $pdf = \PDF::loadView('letter.billPdf', [
-            'bill' => $bill
-        ]);
-
-        $prefix = $bill->project !== null ? $bill->project->invoice_prefix : 'BB';
-
-        $filename = 'Invoice-'.$prefix.'-'.$bill->id;
-
-        return $pdf->download($filename.'.pdf');
-    }
 }

@@ -127,6 +127,16 @@
                 </a>
             </li>
             @endcan
+            @can('index', App\Bill::class)
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('invoice*') ? 'active' : '' }}" href="/invoice">
+                    <i class="material-icons">
+                        request_quote
+                    </i>
+                    <span>Invoice</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </aside>

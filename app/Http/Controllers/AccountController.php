@@ -188,9 +188,9 @@ class AccountController extends Controller
                             $data['downloadUrl'] = route('transaction-download', $transaction->id);
                         }
                     }
-                    if(Gate::allows('bill', $transaction)) {
+                    if(Gate::allows('pdf', \App\Bill::class)) {
                         if($transaction->credit_amount > 0){
-                            $data['billUrl'] = route('transaction-bill', $transaction);
+                            $data['billUrl'] = route('transactions.show', $transaction);
                         }
                     }
 

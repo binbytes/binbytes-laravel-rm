@@ -114,7 +114,6 @@
                             <button class="btn btn-primary delete-all">Delete All</button>
                         @endcan
                     </div>
-
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered p-0 text-center" id="transaction-table">

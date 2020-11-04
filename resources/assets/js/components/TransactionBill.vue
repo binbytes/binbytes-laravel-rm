@@ -134,10 +134,10 @@ export default {
       e.preventDefault();
       this.isProcessing = true
       this.form._method = 'POST';
-      this.form.post('/transactions/bill').then(response => {
+      this.form.post('/invoice').then(response => {
         if(this.billPdf === true) {
           this.billPdf = false
-          window.location.href = `/download-bill/${response.id}`;
+          window.open(`/download-bill/${response.id}`, '_blank');
         }
         this.isProcessing = false
         this.showModal = false

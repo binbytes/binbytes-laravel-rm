@@ -97,14 +97,4 @@ class TransactionPolicy
     {
         return $user->id === $transaction->account->user_id;
     }
-
-    /**
-     * @param User $user
-     * @param Transaction $transaction
-     * @return bool
-     */
-    public function bill(user $user, Transaction $transaction)
-    {
-        return false;
-    }
 }

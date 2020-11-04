@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Account::class => \App\Policies\AccountPolicy::class,
         \App\Transaction::class => \App\Policies\TransactionPolicy::class,
         \App\TransactionType::class => \App\Policies\TransactionTypePolicy::class,
+        \App\Bill::class => \App\Policies\BillPolicy::class,
     ];
 
     /**
@@ -44,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('accounts', \App\Account::class);
         Gate::resource('transactions', \App\Transaction::class);
         Gate::resource('transaction-types', \App\TransactionType::class);
+        Gate::resource('invoice', \App\Bill::class);
 
         Gate::define('viewWebSocketsDashboard', function ($user = null) {
             return $user->isAdmin();
