@@ -57,7 +57,7 @@
     <div v-else-if="notification.type == 'App\\Notifications\\InvoiceZip'" :class="cssClass" @click="markAsRead">
       <div class="notification__icon-wrapper">
         <div class="notification__icon">
-          <i class="far fa-snowflake"></i>
+          <i class="fas fa-file-invoice"></i>
         </div>
       </div>
       <div class="notification__content">
