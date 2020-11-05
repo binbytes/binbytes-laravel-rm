@@ -30,4 +30,9 @@
             <span class="text-reagent-gray text-semibold">{{ array_get($notification->data, 'paid_for') }}</span>
         </p>
     </a>
+@elseif($notification->type === 'App\Notifications\InvoiceZip')
+    <div>
+        <span class="text-shuttle-gray">Invoice Zip</span>
+        <p class="mb-0">Your Invoice zip send in mail.</p>
+    </div>
 @endif
