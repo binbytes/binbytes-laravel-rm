@@ -153,7 +153,6 @@
 @push('scripts')
     <script>
         $(function() {
-            console.log($('#start-date').val(), $('#end-date').val(), 'aa')
             let dt = $('#transaction-table').DataTable({
                 processing: true,
                 serverSide: true,

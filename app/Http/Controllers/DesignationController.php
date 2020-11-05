@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Designation;
-use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\DesignationRequest;
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Client;
 use App\Http\Requests\BillRequest;
+use App\Jobs\InvoicePdfDownload;
 use App\Project;
 use Yajra\Datatables\Datatables;
 
@@ -97,5 +98,34 @@ class BillController extends Controller
         $filename = 'Invoice-'.$prefix.'-'.$bill->id;
 
         return $pdf->stream($filename.'.pdf');
+    }
+
+    public function downloadAll()
+    {
+        $start = (\request('start_date'));
+        $end = (\request('end_date')) ? (\request('end_date')) : (\request('start_date'));
+
+        $query = Bill::with('client', 'project');
+
+        if ($start && $end) {
+            $query = $query->whereBetween('date', [$start, $end]);
+        }
+
+        if (\request('client_id')) {
+            $query->where('client_id', \request('client_id'));
+        }
+
+        if (\request('project_id')) {
+            $query->where('project_id', \request('project_id'));
+        }
+
+        $bills = $query->get();
+        $user = auth()->user();
+
+        dispatch(
+            (new InvoicePdfDownload($bills, $user, $start, $end))
+        );
+
+        return redirect()->back();
     }
 }

@@ -54,6 +54,17 @@
             </p>
         </div>
     </a>
+    <div v-else-if="notification.type == 'App\\Notifications\\InvoiceZip'" :class="cssClass" @click="markAsRead">
+      <div class="notification__icon-wrapper">
+        <div class="notification__icon">
+          <i class="far fa-snowflake"></i>
+        </div>
+      </div>
+      <div class="notification__content">
+        <span class="notification__category">Invoice Zip</span>
+        <p>Your Invoice zip send in mail.</p>
+      </div>
+    </div>
     <div v-else>
         <a class="dropdown-item">Implement is missing. Work in progress.</a>
     </div>
