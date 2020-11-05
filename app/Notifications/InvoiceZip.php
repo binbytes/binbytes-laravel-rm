@@ -35,7 +35,6 @@ class InvoiceZip extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('hello')
             ->line('Thank you for using our application!')
             ->line('Your Invoice Zip '.$this->start.' To '.$this->end. ' Ready To Download.')
             ->attach($this->zipname);
