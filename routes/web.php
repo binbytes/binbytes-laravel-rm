@@ -15,35 +15,6 @@ use App\Bill;
 
 Route::redirect('/', '/dashboard');
 
-Route::get('/bill', function () {
-    $zipname = 'invoices.zip'; // Name of our archive to download
-
-    // Initializing PHP class
-    $zip = new \ZipArchive();
-    $zip->open($zipname, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-
-    $bill = Bill::first();
-
-    $pdf = \PDF::loadView('letter.billPdf', [
-        'bill' => $bill
-    ]);
-
-    $prefix = $bill->project !== null ? $bill->project->invoice_prefix : 'BB';
-
-    $filename = 'Invoice-'.$prefix.'-'.$bill->id.'.pdf';
-
-    $output = $pdf->output();
-
-    file_put_contents($filename, $output);
-
-    $zip->addFile($filename);
-
-    $zip->close();
-    header('Content-Type: application/zip');
-    header('Content-Disposition: attachment; filename="'.$zipname.'"');
-    readfile($zipname);
-});
-
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
