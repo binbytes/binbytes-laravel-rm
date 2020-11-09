@@ -7,13 +7,14 @@ use App\Client;
 use App\Http\Requests\BillRequest;
 use App\Jobs\InvoicePdfDownload;
 use App\Project;
+use Gate;
 use Yajra\Datatables\Datatables;
 
 class BillController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Bill::class);
+        //$this->authorizeResource(Bill::class);
     }
 
     /**
@@ -44,9 +45,13 @@ class BillController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function (Bill $bill) {
                     $data = [
+                        'id' => $bill->id,
                         'target' => '_blank',
                         'billUrl' => route('download-bill', $bill),
                     ];
+
+                    $data['editUrl'] = route('invoice.edit', $bill);
+
 
                     return view('shared.dtAction', $data);
                 })
@@ -79,8 +84,33 @@ class BillController extends Controller
     public function store(BillRequest $request)
     {
         $data = $request->all();
+        $bill = Bill::orderBy('id', 'DESC')->first();
+
+        $data['id'] = $bill->id + 1;
 
         $bill = Bill::create($data);
+
+        return response()->json($bill);
+    }
+
+    public function show($id) {
+        $bill = Bill::find($id);
+
+        if (\request()->ajax()) {
+            return response()->json($bill);
+        }
+    }
+
+    public function edit(Bill $bill) {
+        $clients = Client::pluck('name', 'id');
+
+        return view('invoice.update', compact('clients', 'bill'));
+    }
+
+    public function update(Bill $bill, BillRequest $request) {
+        $data = $request->all();
+
+        $bill->fill($data)->save();
 
         return response()->json($bill);
     }

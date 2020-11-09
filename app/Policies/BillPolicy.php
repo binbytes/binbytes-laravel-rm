@@ -43,17 +43,6 @@ class BillPolicy
     }
 
     /**
-     * Determine whether the user can update the client.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function update(User $user)
-    {
-        return false;
-    }
-
-    /**
      * @param User $user
      * @return bool
      */

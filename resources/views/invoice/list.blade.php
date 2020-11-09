@@ -34,9 +34,8 @@
 
                             <button id="btn-filter" class="btn btn-primary px-4">Go</button>
                         </div>
-{{--                        @can('deleteAll', $account)--}}
-                            <button class="btn btn-primary download-all">Download All</button>
-{{--                        @endcan--}}
+
+                        <button class="btn btn-primary download-all">Download All</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -55,6 +54,7 @@
                 </div>
             </div>
         </div>
+        <transaction-bill-edit :clients="{{ $clients }}" ></transaction-bill-edit>
     </div>
 @endsection
 
@@ -97,6 +97,12 @@
             $('#btn-filter').click(function(){
                 dt.draw()
             });
+
+            $('#invoice-table').on('click', '.btn-edit', function (e) {
+                e.preventDefault()
+                $('#invoice-bill-id').val($(this).attr('rel'));
+                $('#invoice-bill-id')[0].dispatchEvent(new Event('input', { 'bubbles': true }))
+            })
 
             $('#transaction-table').on('click', '.select-all', function () {
                 $('.chk-transaction').attr('checked', this.checked);

@@ -28,6 +28,7 @@ Vue.component('transaction-edit', require('./components/TransactionEdit').defaul
 Vue.component('transaction-show', require('./components/TransactionShow').default);
 Vue.component('date-time-picker', require('./components/date-time-picker').default);
 Vue.component('transaction-bill', require('./components/TransactionBill').default);
+Vue.component('transaction-bill-edit', require('./components/TransactionBillEdit').default);
 
 const app = new Vue({
     el: '#app',
