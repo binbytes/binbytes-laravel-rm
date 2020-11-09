@@ -52,6 +52,7 @@ class BillController extends Controller
 
                     $data['editUrl'] = route('invoice.edit', $bill);
 
+                    $data['deleteUrl'] = route('invoice.destroy', $bill);
 
                     return view('shared.dtAction', $data);
                 })
@@ -113,6 +114,20 @@ class BillController extends Controller
         $bill->fill($data)->save();
 
         return response()->json($bill);
+    }
+
+    public function destroy($id)
+    {
+        $bill = Bill::find($id);
+        $bill->delete();
+
+        session()->flash('alert-danger', 'Invoice has been deleted.');
+
+        if (\request()->ajax()) {
+            return response()->json([]);
+        }
+
+        return back();
     }
 
     public function downloadBill($bill) {

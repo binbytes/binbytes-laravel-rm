@@ -119,6 +119,11 @@
                 window.location.href = '/download-all/invoice?' + url
                 dt.draw()
             })
+
+            @include('shared.dtDeleteScript', [
+                'dtTable' => 'invoice-table',
+                'dtVar' => 'dt'
+            ])
         });
     </script>
 @endpush

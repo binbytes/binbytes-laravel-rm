@@ -10,7 +10,7 @@
         </a>
     @endisset
     @isset($deleteUrl)
-        <button class="btn btn-white btn-delete" rel="{{ $id ?? '' }}" rel="{{ $deleteUrl }}">
+        <button class="btn btn-white btn-delete" rel="{{ $deleteUrl }}">
             <i class="material-icons">delete</i>
         </button>
     @endisset

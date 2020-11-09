@@ -32,12 +32,45 @@ class BillPolicy
     }
 
     /**
+     * Determine whether the user can view the client.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function view(User $user)
+    {
+        return false;
+    }
+
+    /**
      * Determine whether the user can create clients.
      *
      * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can update the client.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function update(User $user)
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can delete the client.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function delete(User $user)
     {
         return false;
     }

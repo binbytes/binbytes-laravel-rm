@@ -41,7 +41,9 @@ class AccountController extends Controller
 
             return Datatables::of($query)
                 ->addColumn('action', function (Account $account) {
-                    $data = [];
+                    $data = [
+                        'id' => $account->id
+                    ];
                     if (Gate::allows('show', $account)) {
                         $data['showUrl'] = route('accounts.show', $account);
                     }

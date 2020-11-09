@@ -32,7 +32,9 @@ class UserController extends Controller
                     return $user->name;
                 })
                 ->addColumn('action', function (User $user) {
-                    $data = [];
+                    $data = [
+                        'id' => $user->id,
+                    ];
                     if (Gate::allows('show', $user)) {
                         $data['showUrl'] = route('users.show', $user);
                     }
