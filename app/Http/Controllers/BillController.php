@@ -86,7 +86,7 @@ class BillController extends Controller
         $data = $request->all();
         $bill = Bill::orderBy('id', 'DESC')->first();
 
-        $data['id'] = $bill->id + 1;
+        $data['id'] = $bill ? $bill->id + 1 : 1;
 
         $bill = Bill::create($data);
 
