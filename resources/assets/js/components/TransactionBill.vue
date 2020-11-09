@@ -4,7 +4,7 @@
 
     <d-modal v-if="showModal" size="lg" @close="handleClose">
       <d-modal-header>
-        <d-modal-title>Transaction</d-modal-title>
+        <d-modal-title>Invoice</d-modal-title>
       </d-modal-header>
       <d-form v-if="form" @submit="handleOnSubmit" class="text-muted">
         <d-modal-body class="pb-0">
