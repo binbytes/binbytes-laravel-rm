@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Http\Requests\BillRequest;
 use Gate;
+use App\User;
+use App\Salary;
 use App\Account;
 use App\Transaction;
 use App\TransactionType;
+use App\Events\SalaryPaid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\Datatables\Datatables;
@@ -208,6 +211,29 @@ class TransactionController extends Controller
         }
 
         $transaction->fill($data)->save();
+
+        if ($data['transactional_id']) {
+            $user = User::find($transaction->transactional_id);
+            $date = $transaction->date->month.'-'.$transaction->date->year;
+            
+            $salary = Salary::whereMonth('paid_for', "12-2020")->where('user_id', $user->id)->get();
+            
+            if(!$salary && $user && $transaction->debit_amount > 0) {
+                $data = [
+                    'user_id' => $user->id,
+                    'base_salary' => $user->base_salary,
+                    'paid_for' => $transaction->date,
+                    'pf' => $user->tds_amount ? (int) $user->tds_amount : 0,
+                    'tds' => $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0,
+                    'paid_amount' => $transaction->debit_amount,
+                    'payment_method' => 'NetBanking',
+                ];
+
+                $salary = Salary::create($data);
+
+                event(new SalaryPaid($salary));
+            }
+        }
 
         if (request()->wantsJson()) {
             return response([], 200);

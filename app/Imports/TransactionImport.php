@@ -5,6 +5,10 @@ namespace App\Imports;
 use App\Account;
 use Carbon\Carbon;
 use App\Transaction;
+use App\User;
+use App\Salary;
+use App\Events\SalaryPaid;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -136,11 +140,35 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
 
         $cr=0;
         $dr=0;
+        $description = $row['description'];
+        $date = Carbon::createFromFormat('d/m/Y', $row['value_date']);
 
         if($row['crdr'] == 'DR') {
             $dr = amountStrToFloat($row['transaction_amountinr']);
         } else {
             $cr = amountStrToFloat($row['transaction_amountinr']);
+        }
+
+        if($this->account->company_account) {
+            User::all()->each(function ($user) use ($description, $dr, $date) {
+                $name = "{$user->first_name}{$user->last_name}";
+                $contains = Str::contains($description, $name);
+                if($contains && $dr > 0) {
+                    $data = [
+                        'user_id' => $user->id,
+                        'base_salary' => $user->base_salary,
+                        'paid_for' => $date,
+                        'pf' => $user->tds_amount ? (int) $user->tds_amount : 0,
+                        'tds' => $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0,
+                        'paid_amount' => $dr,
+                        'payment_method' => 'NetBanking',
+                    ];
+
+                    $salary = Salary::create($data);
+
+                    event(new SalaryPaid($salary));
+                }
+            });
         }
 
         return [

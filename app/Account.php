@@ -8,7 +8,7 @@ class Account extends Model
 {
     protected $fillable = [
         'user_id', 'name', 'bank_name', 'account_number', 'name_on_account', 'branch_of', 'address',
-        'ifsc_code', 'contact_number', 'statement_starting_line',
+        'ifsc_code', 'contact_number', 'company_account', 'statement_starting_line',
     ];
 
     /**

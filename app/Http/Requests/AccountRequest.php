@@ -38,6 +38,7 @@ class AccountRequest extends FormRequest
             'ifsc_code' => 'nullable',
             'contact_number' => 'nullable',
             'statement_starting_line' => 'required|numeric',
+            'company_account' => 'boolean',
         ];
     }
 }

@@ -90,6 +90,8 @@ class AccountController extends Controller
     {
         $data = $request->all();
 
+        $data['company_account'] = $request->has('company_account');
+
         Account::create($data);
 
         if (request()->wantsJson()) {
@@ -240,6 +242,7 @@ class AccountController extends Controller
     public function update(AccountRequest $request, Account $account)
     {
         $data = $request->all();
+        $data['company_account'] = $request->has('company_account');
 
         $account->fill($data)->save();
 
