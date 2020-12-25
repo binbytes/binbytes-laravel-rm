@@ -14,7 +14,7 @@ class AddIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('bills', function (Blueprint $table) {
-            $table->unsignedInteger('id')->first()->unique();
+            // $table->unsignedInteger('id')->first()->unique();
         });
     }
 
@@ -26,7 +26,7 @@ class AddIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('bills', function (Blueprint $table) {
-            $table->dropColumn('id');
+            // $table->dropColumn('id');
         });
     }
 }
