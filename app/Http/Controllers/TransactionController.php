@@ -216,7 +216,7 @@ class TransactionController extends Controller
             $user = User::find($transaction->transactional_id);
             $date = $transaction->date->month.'-'.$transaction->date->year;
             
-            $salary = Salary::whereMonth('paid_for', "12-2020")->where('user_id', $user->id)->get();
+            $salary = Salary::whereMonth('paid_for', "12-2020")->where('user_id', $user->id)->first();
             
             if(!$salary && $user && $transaction->debit_amount > 0) {
                 $data = [
