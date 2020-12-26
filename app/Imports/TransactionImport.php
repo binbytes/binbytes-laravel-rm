@@ -10,10 +10,12 @@ use App\Salary;
 use App\Events\SalaryPaid;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
-class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSettings
+class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, WithChunkReading, ShouldQueue
 {
     protected $account;
 
@@ -199,5 +201,10 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
         }
 
         return [];
+    }
+
+    public function chunkSize(): int
+    {
+        return 500;
     }
 }
