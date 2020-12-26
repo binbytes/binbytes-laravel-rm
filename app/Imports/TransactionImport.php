@@ -143,7 +143,7 @@ class TransactionImport implements ToModel, WithHeadingRow, WithCustomCsvSetting
         $cr=0;
         $dr=0;
         $description = $row['description'];
-        $date = Carbon::createFromFormat('d/m/Y', $row['value_date']);
+        $date = Carbon::createFromFormat('d/m/Y', $row['value_date'])->subMonth();
 
         if($row['crdr'] == 'DR') {
             $dr = amountStrToFloat($row['transaction_amountinr']);

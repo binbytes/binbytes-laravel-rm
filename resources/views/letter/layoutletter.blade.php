@@ -15,13 +15,16 @@
   <script src="{{ asset('js/app.js') }}" defer></script>
 
   <!-- Fonts -->
-{{--  <link rel="dns-prefetch" href="https://fonts.gstatic.com">--}}
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
   <style>
+      @page {
+        margin: 0cm 0cm;
+      }
     @font-face {
       font-family: 'Roboto';
       src: {{ storage_path('fonts/Roboto-Regular.ttf') }} format('truetype');
@@ -30,20 +33,63 @@
     }
 
     body {
+      font-family: 'Roboto' sans-serif;
+      background: white;
+      height: 100%;
       margin: 0;
       padding: 0;
-      font-size: 13px;
+      font-size: 15px;
       line-height: 160%;
       mso-line-height-rule: exactly;
       color: #434b4d;
       width: 100%;
-      font-weight: 400;
+      font-weight: 400 !important;
     }
 
     @media only screen and (max-width: 560px) {
       body {
-        font-size: 12px !important;
+        font-size: 13px !important;
       }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      padding: 10px 50px;
+      background-color: #ccc;
+      z-index: 1000;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    main {
+      padding: 10px 50px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 25px;
+      border-bottom: 20px solid rgba(149, 90, 195, 0.96);
+      z-index: 1000;
+    }
+
+    .details {
+      margin-top: 20px;
+      padding: 2px 0;
+      background: #ffffff;
+    }
+    
+    label {
+      font-weight: bold;
+      font-size: 15px;
     }
 
     b, th {
@@ -77,15 +123,9 @@
       text-align: left;
     }
 
-    .box {
-      background: #ffffff;
-      border-radius: 3px;
-      -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .box + .box {
-      margin-top: 24px;
+    .h-100 {
+      height: 100%;
+      margin: 0 !important;
     }
 
     .w-15 {
@@ -109,9 +149,8 @@
     }
 
     .logo {
-      width: 0.5%;
+      width: 0.6%;
       padding-left: 0 !important;
-      padding-right: 0 !important;
     }
 
     @media print {
@@ -144,15 +183,37 @@
       color: black !important;
       font-weight: 500 !important;
     }
+    .letter {
+      padding: 1rem !important;
+    }
+    .letter h6 {
+      font-size: 1.2em;
+      color: black;
+      margin-bottom: 0 !important;
+    }
+    .footer {
+      margin-top: 5rem !important;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .page-break:last-child {
+      page-break-before: avoid;
+    }
   </style>
 </head>
 <body>
-<div class="main-content" align="center">
-  <div class="box">
-    <table cellspacing="0" cellpadding="0">
-      @yield('data')
-    </table>
-  </div>
-</div>
+  <main>
+    <div class="details">
+      <table cellspacing="0" cellpadding="0">
+        <tbody>
+          @yield('data')
+        </tbody>
+          @yield('footer')
+      </table>
+    </div>
+  </main>
+  <footer>
+  </footer>
 </body>
 </html>

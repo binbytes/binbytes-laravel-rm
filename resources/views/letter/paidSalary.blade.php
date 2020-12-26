@@ -22,10 +22,8 @@
     </td>
   </tr>
   <tr>
-    <td class="px-3"><hr></td>
-  </tr>
-  <tr>
     <td class="p-3">
+    <div style="page-break-after:auto;">
       <table class="table table-bordered text-center">
         <thead>
           <tr>
@@ -40,6 +38,7 @@
           </tr>
         </thead>
         <tbody>
+        <!-- @php $num = 10; @endphp -->
         @forelse($salaries as $salary)
           <tr>
             <td>{{ $salary->user->name }}</td>
@@ -51,6 +50,10 @@
             <td>{{ number_format($salary->paid_amount) }}</td>
             <td>{{ $salary->payment_method }}</td>
           </tr>
+          <!-- @if($loop->index === $num)
+            @php $num = 10 + $num; @endphp
+            <div class="page-break"></div>
+          @endif -->
         @empty
           <tr>
             <td colspan="9" align="center">

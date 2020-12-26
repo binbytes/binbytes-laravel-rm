@@ -18,11 +18,8 @@
     </td>
   </tr>
   <tr>
-    <td class="px-3"><hr></td>
-  </tr>
-  <tr>
     <td class="p-3">
-      <h3 align="center" class="pb-4"><b>PROMOTE LETTER</b></h3>
+      <h3 align="center" class="pb-4"><b>PROMOTION LETTER</b></h3>
     </td>
   </tr>
   <tr>
@@ -35,10 +32,10 @@
         Please accept my hearty congratulations on your promotion.
       </p>
       <p>Please acknowledge receipt of this letter.</p>
-      <p class="mb-5">We wish all the best in all future endeavors.</p>
-      <h6>Warm Regards,</h6>
-      <p>BinBytes, Rajkot</p>
+      <p>We wish all the best in all future endeavors.</p>
     </td>
   </tr>
+@endsection
+@section('footer')
   @include('letter._footer')
 @endsection

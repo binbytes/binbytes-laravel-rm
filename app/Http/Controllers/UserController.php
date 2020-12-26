@@ -296,7 +296,7 @@ class UserController extends Controller
         if ($letter == 'promoteLetter') {
             $pdf = PDF::loadView('letter.promoteletter', compact('user'));
 
-            return $pdf->download($user->username.'promoteLatter.pdf');
+            return $pdf->download($user->username.'-promoteLatter.pdf');
         }
     }
 }

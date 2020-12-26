@@ -39,5 +39,7 @@
       <p>BinBytes, Rajkot</p>
     </td>
   </tr>
+@endsection
+@section
   @include('letter._footer')
 @endsection

@@ -6,8 +6,9 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TransactionExport implements FromCollection, WithHeadings, ShouldAutoSize
+class TransactionExport implements FromCollection, WithHeadings, ShouldAutoSize, ShouldQueue
 {
     use Exportable;
 

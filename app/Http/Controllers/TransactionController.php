@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Http\Requests\BillRequest;
 use Gate;
+use Carbon\Carbon;
 use App\User;
 use App\Salary;
 use App\Account;
@@ -222,7 +223,7 @@ class TransactionController extends Controller
                 $data = [
                     'user_id' => $user->id,
                     'base_salary' => $user->base_salary,
-                    'paid_for' => $transaction->date,
+                    'paid_for' => $transaction->date->subMonth(),
                     'pf' => $user->tds_amount ? (int) $user->tds_amount : 0,
                     'tds' => $user->professional_tax_amount ? (int) $user->professional_tax_amount : 0,
                     'paid_amount' => $transaction->debit_amount,
