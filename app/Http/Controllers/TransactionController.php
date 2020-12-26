@@ -213,11 +213,11 @@ class TransactionController extends Controller
 
         $transaction->fill($data)->save();
 
-        if ($data['transactional_id']) {
+        if ($data['transactional_id'] > 0 && auth()->user()->isAdmin()) {
             $user = User::find($transaction->transactional_id);
-            $date = $transaction->date->month.'-'.$transaction->date->year;
+            $date = $transaction->date->subMonth()->month.'-'.$transaction->date->subMonth()->year;
             
-            $salary = Salary::whereMonth('paid_for', "12-2020")->where('user_id', $user->id)->first();
+            $salary = Salary::whereMonth('paid_for', $date)->where('user_id', $user->id)->first();
             
             if(!$salary && $user && $transaction->debit_amount > 0) {
                 $data = [
