@@ -10,9 +10,9 @@ return [
         'kanetiya@gmail.com',
     ],
     'payment_methods' => [
-        'cheque' => 'Cheque',
-        'cash' => 'Cash',
-        'online transaction' => 'Online Transaction',
+        'Cheque' => 'Cheque',
+        'Cash' => 'Cash',
+        'Online Transaction' => 'Online Transaction',
     ],
     'banks' => [
         'HDFC' => 'HDFC',

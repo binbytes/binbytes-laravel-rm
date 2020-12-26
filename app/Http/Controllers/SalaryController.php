@@ -244,6 +244,6 @@ class SalaryController extends Controller
             'date' => $date,
         ]);
 
-        return $pdf->download($date.'.pdf');
+        return $pdf->setPaper('a4', 'landscape')->download($date.'.pdf');
     }
 }
