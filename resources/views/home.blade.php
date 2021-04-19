@@ -68,9 +68,9 @@
                             <a href="{{ route('day-attendance', [auth()->id(), today()->startOfWeek()->toDateString(), today()->endOfWeek()->toDateString()]) }}" class="btn btn-primary ml-auto">This week</a>
                         </div>
                     </div>
-                    <div class="card-body pt-0">
+                    <!-- <div class="card-body pt-0">
                         <canvas height="130" id="myChart" class="mt-3"></canvas>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -78,6 +78,6 @@
 </div>
 @endsection
 
-@notAdmin
+<!-- @notAdmin
     @include('shared.chart')
-@endadmin
+@endadmin -->
